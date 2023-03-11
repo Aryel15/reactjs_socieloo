@@ -15,6 +15,7 @@ import Comentarios from './Comentarios/Comentarios';
 import Avaliacao from './Avaliacao/Avaliacao';
 import Excluir_Cadastro from './Excluir_Cadastro/Excluir_Cadastro';
 import Alterar_Senha from './Alterar_Senha/Alterar_Senha';
+import Cadastro_Vol from './Cadastro_Vol/Cadastro_Vol';
 
 export default function Router() {
     return (
@@ -26,6 +27,7 @@ export default function Router() {
                 <Route path='/cadastro-moderador' element={<Cadastro_Mod />} />
                 <Route path='/cadastro-usuario' element={<Cadastro_User />} />
                 <Route path='/cadastro-ong' element={<Cadastro_Ong />} />
+                <Route path='/cadastro-voluntario' element={<Cadastro_Vol />} />
                 <Route path='/ong' element={<Ong />} />
                 <Route path='/faq' element={<Faq />} />
                 <Route path='/perfil' element={<Perfil_User />} />

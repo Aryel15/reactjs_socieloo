@@ -37,21 +37,21 @@ export default function Cadastro_Mod() {
                             <span className="legenda2">Permitir acesso</span>
                             <br />
                             <div className="form_grupo">
-                                <div className="check-btn">
-                                    <input type="checkbox" className="form_new_input" id='check1'/>
-                                    <label for="check1" className="form_label check_label">Exclusão de Cadastros</label>
+                                <div class="btn__container">
+                                    <input type="checkbox" id="exc-cad" class="checkbox-input"/>
+                                    <label for="exc-cad" class="checkbox-label">Exclusão de Cadastros</label>
                                 </div>
-                                <div className="check-btn">
-                                    <input type="checkbox" className="form_new_input" id='check2'/>
-                                    <label for="check2" className="form_label check_label">Edição de Página</label>
+                                <div class="btn__container">
+                                    <input type="checkbox" id="edit-page" class="checkbox-input"/>
+                                    <label for="edit-page" class="checkbox-label">Edição de Página</label>
                                 </div>
-                                <div className="check-btn">
-                                    <input type="checkbox" className="form_new_input" id='check3'/>
-                                    <label for="check3" className="form_label check_label">Exclusão de comentários</label>
+                                <div class="btn__container">
+                                    <input type="checkbox" id="exc-com" class="checkbox-input"/>
+                                    <label for="exc-com" class="checkbox-label">Exclusão de comentários</label>
                                 </div>
-                                <div className="check-btn">
-                                    <input type="checkbox" className="form_new_input" id='check4'/>
-                                    <label for="check4" className="form_label check_label">Exclusão de mídia</label>
+                                <div class="btn__container">
+                                    <input type="checkbox" id="exc-mid" class="checkbox-input"/>
+                                    <label for="exc-mid" class="checkbox-label">Exclusão de mídia</label>
                                 </div>
                                 <div className="form_grupo">
                                     <span className="legenda form_label">Confirmação de Senha</span>
