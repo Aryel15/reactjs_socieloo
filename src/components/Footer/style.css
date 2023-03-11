@@ -1,0 +1,11 @@
+/*footer*/
+footer{
+    background-color: rgb(192, 192, 192);
+    color: rgb(84, 84, 84);
+    top:40px;
+    width: 100%;
+    padding: 5px 0;
+    text-align: center;
+    font-size: 0.6em;
+    position:relative;
+}

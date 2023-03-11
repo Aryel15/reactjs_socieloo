@@ -1,0 +1,14 @@
+.botão a{
+    background-color: #00a1ff;
+    border: #00a1ff solid 1px;
+    padding: 5px 10px;
+    color: #fff;
+    border-radius: 5px;
+    transition: 0.7s;
+}
+.botão a:hover{
+    border: #00a1ff solid 1px;
+    color: #00a1ff;
+    background-color: #fff;
+    transition: 0.7s;
+}

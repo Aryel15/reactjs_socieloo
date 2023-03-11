@@ -1,0 +1,147 @@
+/*===== ROOT VARIABLES =====*/
+:root {
+    --hue: 204;
+    --brand: hsl(var(--hue), 97%, 54%);
+    --brand-dark: hsl(var(--hue), 97%, 44%);
+  }
+  
+  /*===== RESET CSS =====*/
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /*===== BASE =====*/
+  a {
+    text-decoration: none;
+  }
+  
+  /*===== STYLE CSS =====*/
+  
+  /* Main */
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    margin-bottom: 5vh;
+    margin-top: 5vh;
+  }
+  
+  section .itle {
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-align: center;
+  }
+  
+  section .form-container {
+    width: 34.25rem;
+    padding: 2.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  section .form-container .form-title {
+    font-size: 2em;
+    margin-bottom: 1rem;
+  }
+  
+  section .form-container > div {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  section .form-container .input-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+  
+  section .form-container .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  section .form-container .buttons .button-blue {
+    padding: 0.5rem 2rem;
+    background: var(--brand);
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    transition: all 0.7s;
+    border: #00a1ff solid 1px;
+  }
+  
+  section .form-container .buttons .button-blue:hover {
+    border: #00a1ff solid 1px;
+    color: #00a1ff;
+    background-color: #fff;
+  }
+  
+  section .form-container .buttons .button-white {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 600;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transition: box-shadow 0.3s;
+    background: #fff;
+    font-size: 1rem;
+  }
+  
+  section .form-container .buttons .button-white:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  }
+  
+  section .form-container .buttons .button-white .google-icon {
+    width: 1.5rem;
+  }
+  
+  section .form-container .input-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 0;
+    margin-bottom: 2rem;
+  }
+  
+  section .form-container .input-group .input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  a.button-white img {
+    width: 15px;
+  }
+  .input label:not(.check-label){
+    margin-bottom: 0;
+  }
+  @media screen and (max-width:580px){
+    section .form-container {
+      width: 90vw;
+      padding: 2.75rem;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }

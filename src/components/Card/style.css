@@ -1,0 +1,57 @@
+.card{
+    display: block;
+    margin:0 30px 30px 0;
+    padding-bottom: 10px;
+    width: 200px;
+    border-radius: 7px;
+    box-shadow:0px 5px 10px rgba(0, 0, 0, 0.226);
+    transition: 0.7s;
+}
+a:hover .card{
+    box-shadow:0px 3px 15px rgba(0, 0, 0, 0.550);
+    transition: 0.7s;
+}
+a .card h2{
+    text-decoration: none;
+}
+.card:hover{
+    cursor: pointer;
+}
+.card a:-webkit-any-link{
+    color: #000;
+    text-decoration: none;
+}
+.card h2{
+    padding: 5px 0px 7px 0px;
+    margin-left: 7px;
+    font-size: 0.8em;
+    color: #000;
+}
+.img{
+    border-radius: 7px 7px 0 0;
+    width: 100%;
+    padding: 20px 30px;
+    display: flex;
+}
+.img{
+    background-color: #00a1ff;
+}
+.img img{
+    margin: 0 auto;
+}
+.card .button{
+    background-color: #fff;
+    font-size: 0.6em;
+    border: rgb(86, 86, 86) 1px solid;
+    padding: 2px 6px;
+    border-radius: 2px;
+    color: rgb(86, 86, 86);
+    margin-left: 7px;
+    transition: 0.7s;
+}
+.card .button:hover{
+    background-color:rgb(86, 86, 86);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.7s;
+}

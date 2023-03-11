@@ -1,0 +1,138 @@
+nav{
+    border-bottom:rgba(128, 128, 128, 0.407) 1px solid;
+}
+#main-admin{
+    margin-top: -30px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 84.7vh;
+    justify-content:space-between;
+    align-content: space-between !important;
+    align-items: center;
+}
+#main-admin section{
+    float: left;
+}
+.imagem{
+    background-color: #00a1ff;
+    height: 87vh;
+    width: 50vw;
+    padding-top: 0px;
+}
+.imagem img{
+    height: 100%;
+}
+#main-admin aside{
+    padding-top: 100px;
+    float:right;
+    padding-left: 0;
+    margin-right: 15vw;
+    border: none;
+}
+#main-admin aside input:not(#lembrar){
+    width: 250px;
+    height: 30px;
+    margin: 5px 0;
+    font-size: 0.81em;
+}
+#main-admin aside p{
+    margin-bottom: 15px;
+}
+#main-admin aside a{
+    font-size: 0.81em;
+    color:#00a1ff;
+    float:right;
+}
+#main-admin aside label[for="lembrar"]{
+    font-size: 0.81em;
+    justify-content: baseline;
+}
+#admin label{
+    font-weight: normal;
+    margin-bottom: 0px !important;
+}
+#entrar{
+    cursor: pointer;
+    background-color: #00a1ff;
+    color: #fff;
+    border: #00a1ff;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+#entrar:hover{
+    border: #00a1ff solid 1px;
+    color: #00a1ff;
+    background-color: #fff;
+    transition: 0.5s;
+}
+#google{
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #000;
+    border: solid 1px #000;
+    color: #fff;
+    padding: 2px 0;
+    width: 250px;
+    height: 30px;
+    margin: 5px 0 100px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    font-size: 0.81em;
+
+}
+#google:hover{
+    background-color: #fff;
+    border: solid 1px gray;
+    color: rgb(37, 37, 37);
+    transition: 0.5s;
+}
+#google img{
+    width: 20px;
+    padding-right: 5px;
+}
+.cadastro{
+    margin-left: 0px;
+    font-size: 0.81em;
+}
+.cadastro a{
+    float: none;
+}
+.esqueceu_senha{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.lembrar {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+.lembrar label{
+    margin-left: 5px;
+    margin-bottom: 0px !important;
+}
+@media only screen and (max-width: 1140px){
+    aside {
+        display: flex;
+    }
+}
+
+@media screen and (max-width:850px){
+    #main-admin section{
+        display: none;
+    }
+    #main-admin{
+        align-content: center !important;
+        justify-content: center;
+    }
+    #main-admin aside{
+        padding-top: 100px;
+        float:center;
+        padding-left: 0;
+        margin-right: 0px;
+        border: none;
+    }
+}
