@@ -1,4 +1,4 @@
-main{
+.main-excad{
     width: 100vw;
     height: 74vh;
     background-image: url(../imgs/fundo.png);
@@ -7,7 +7,7 @@ main{
     background-size: cover;
     background-repeat: repeat-y;
 }
-main p {
+.main-excad p {
     font-weight: 400;
     height: max-content;
     text-align: justify;

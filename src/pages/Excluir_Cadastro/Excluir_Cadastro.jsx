@@ -8,7 +8,7 @@ export default function Excluir_Cadastro() {
   return (
     <>
       <Menu/>
-      <main>
+      <main className='main-excad'>
         <div className="painel">
             <div className="dados">
                 <p>Tipo de usuário: Ong</p>

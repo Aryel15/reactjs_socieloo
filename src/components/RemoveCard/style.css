@@ -44,7 +44,7 @@ a .card h2{
 .img img{
     margin: 0 auto;
 }
-.card .button{
+.cardR .buttonR{
     background-color: #fff;
     font-size: 0.6em;
     border: rgb(86, 86, 86) 1px solid;
@@ -54,7 +54,7 @@ a .card h2{
     margin-left: 7px;
     transition: 0.7s;
 }
-.card .button:hover{
+.cardR .buttonR:hover{
     background-color:rgb(86, 86, 86);
     color: #fff;
     cursor: pointer;
