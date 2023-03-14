@@ -27,9 +27,6 @@ export function Etapa1() {
     <section id="cadastro__section">
         <div className="section__form">
             <form>
-                <div className="bar">
-                    <div className="progress" style={{backgroundColor:"#000"}}></div>
-                </div>
                 <h1 className="section__title">Cadastre sua ONG</h1>
                 <section className="form__group">
                     <div className="group__text">

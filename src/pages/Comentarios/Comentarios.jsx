@@ -3,27 +3,12 @@ import './style.css'
 import Footer from '../../components/Footer/Footer'
 import Menu from '../../components/Menu/Menu'
 import Vlibras from '../../components/Vlibras/Vlibras';
-import Carousel from 'react-bootstrap/Carousel';
-import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Ong() {
 
   return (
     <>
       <Menu />
-      <div className="carrossel">
-        <Carousel>
-            <Carousel.Item>
-                <img className='d-block w-100' src="../imgs/fotosOng/fotos01.jpg" alt="Imagem da ong mostrando os integrantes"/>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img className='d-block w-100' src="../imgs/fotosOng/fotos02.jpg" alt="Imagem da ong mostrando os integrantes"/>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img className='d-block w-100' src="../imgs/fotosOng/fotos03.jpg" alt="Imagem da ong mostrando os integrantes"/>
-            </Carousel.Item>
-        </Carousel>
-      </div>
       <div class="title">
             <h1>Adote Sempre Cabe Mais Um - Zona Leste</h1>
             <div class="pos_botao">

@@ -29,7 +29,7 @@
     position: relative;
 }
 
-.form_grupo .legenda, label:not(.check_label) { 
+.form_grupo .legenda, .form_label { 
     width: 100%;
     float: left;
     margin-bottom: 15px;
@@ -91,11 +91,6 @@
     display: block;
 }
 
-.radio__options{
-    display: flex;
-    height: 30px;
-    align-items: center;
-}
 .options__checkbox {
     display: flex;
     align-items: center;
@@ -104,6 +99,9 @@
 label[for="termos"],
 #termos, label[for="termos2"] {
     font-size: .83em;
+}
+#termos {
+    margin-right: 0px;
 }
 .label_termos{
     margin: 0px;

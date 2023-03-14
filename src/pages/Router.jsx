@@ -16,6 +16,8 @@ import Avaliacao from './Avaliacao/Avaliacao';
 import Excluir_Cadastro from './Excluir_Cadastro/Excluir_Cadastro';
 import Alterar_Senha from './Alterar_Senha/Alterar_Senha';
 import Cadastro_Vol from './Cadastro_Vol/Cadastro_Vol';
+import Visita_Guiada from './Visita_Guiada/Visita_Guiada';
+import Editar_Ong from './Editar_Ong/Editar_Ong';
 
 export default function Router() {
     return (
@@ -37,6 +39,8 @@ export default function Router() {
                 <Route path='/avaliacao' element={<Avaliacao />} />
                 <Route path='/excluir-cadastro' element={<Excluir_Cadastro />} />
                 <Route path='/alterar-senha' element={<Alterar_Senha />} />
+                <Route path='/visita-guiada' element={<Visita_Guiada />} />
+                <Route path='/editar-ong' element={<Editar_Ong />} />
             </Routes>
         </BrowserRouter>
     )

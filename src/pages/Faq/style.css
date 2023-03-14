@@ -1,5 +1,5 @@
 
-  main .question-dropdown {
+  .main-faq .question-dropdown {
     background: none;
     text-align: left;
     font-weight: 600;
@@ -12,22 +12,22 @@
     
   }
   
-  main details{
+  .main-faq details{
     height: auto;
   }
 
-  main details,
-  main hr {
-    width: 100%;
+  .main-faq details,
+  .main-faq hr {
+    width: 100vw;
     margin: 40px 0;
   }
-  main summary{
+  .main-faq summary{
     font-weight: 600;
     margin-left: 2rem;
     height: max-content;
     margin-bottom: 10px;
   }
-  main p {
+  .main-faq p {
     font-weight: 400;
     margin-left: 2rem;
     height: max-content;

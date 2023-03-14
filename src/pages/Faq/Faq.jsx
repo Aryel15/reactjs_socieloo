@@ -8,7 +8,7 @@ export default function Faq() {
   return (
     <>
       <Menu/>
-      <main class="profile column">
+      <main class="profile column main-faq">
         <div>
             <h2 class="page-subtitle">FAQ</h2>
         </div>

@@ -3,8 +3,6 @@ import './style.css'
 import Footer from '../../components/Footer/Footer'
 import Menu from '../../components/Menu/Menu'
 import Vlibras from '../../components/Vlibras/Vlibras';
-import Carousel from 'react-bootstrap/Carousel';
-import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Ong() {
 
@@ -12,17 +10,32 @@ export default function Ong() {
     <>
       <Menu />
       <div className="carrossel">
-        <Carousel>
-            <Carousel.Item>
-                <img className='d-block w-100' src="../imgs/fotosOng/fotos01.jpg" alt="Imagem da ong mostrando os integrantes"/>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img className='d-block w-100' src="../imgs/fotosOng/fotos02.jpg" alt="Imagem da ong mostrando os integrantes"/>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img className='d-block w-100' src="../imgs/fotosOng/fotos03.jpg" alt="Imagem da ong mostrando os integrantes"/>
-            </Carousel.Item>
-        </Carousel>
+        <div id="carouselresponsive" className="carousel slide">
+            <div className="carousel-indicators">
+                <button type="button" data-bs-target="#carouselresponsive" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselresponsive" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselresponsive" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div className="carousel-inner">
+                <div className="carousel-item active">
+                    <img className='d-block w-100' src="../imgs/fotosOng/fotos01.jpg" alt="Imagem da ong mostrando os integrantes"/>
+                </div>
+                <div className="carousel-item">
+                    <img className='d-block w-100' src="../imgs/fotosOng/fotos02.jpg" alt="Imagem da ong mostrando os integrantes"/>
+                </div>
+                <div className="carousel-item">
+                    <img className='d-block w-100' src="../imgs/fotosOng/fotos03.jpg" alt="Imagem da ong mostrando os integrantes"/>
+                </div>
+            </div>
+            <button className="carousel-control-prev" type="button" data-bs-target="#carouselresponsive" data-bs-slide="prev">
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
+            </button>
+            <button className="carousel-control-next" type="button" data-bs-target="#carouselresponsive" data-bs-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
+            </button>
+        </div>
       </div>
       {/* Carrossel*/}
         <section className="section__ong">

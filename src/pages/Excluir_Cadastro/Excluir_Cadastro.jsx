@@ -13,8 +13,8 @@ export default function Excluir_Cadastro() {
             <div className="dados">
                 <p>Tipo de usuário: Ong</p>
                 <h1>Adote Sempre Cabe mais Um</h1>
-                <img src="../imgs/fotosOng/fotos01.jpg" className='imagem' alt="" />
-                <div>
+                <img src="../imgs/fotosOng/fotos01.jpg" className='img-ec' alt="" />
+                <div className='btns-ec'>
                     <a href="#" className="button">Proteção Animal</a>
                     <a href="#" className="button">Zona Leste</a>
                 </div>

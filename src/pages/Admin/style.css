@@ -18,9 +18,13 @@ nav{
     height: 87vh;
     width: 50vw;
     padding-top: 0px;
+    max-width: 50%;
+    height: auto;
+    position: relative;
+    top: 30px;
 }
 .imagem img{
-    height: 100%;
+    height: 87vh;
 }
 #main-admin aside{
     padding-top: 100px;
