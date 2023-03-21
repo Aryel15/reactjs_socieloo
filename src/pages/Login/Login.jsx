@@ -12,7 +12,7 @@ export default function Login() {
                 <section className="imagem">
                     <img src='./imgs/iconswhite.svg' alt="" />
                 </section>
-                <aside>
+                <aside className="aside_login">
                     <form id="login" action="">
                         <h2>Bem vindo!</h2>
                         <p>Faça login na sua conta</p>

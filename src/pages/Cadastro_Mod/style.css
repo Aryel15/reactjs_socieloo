@@ -3,7 +3,7 @@
 .container_form {
     width: 60vw;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 25vh;
     display: flex;
     flex-direction: column;
     background:#ffffff; 

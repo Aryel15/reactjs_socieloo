@@ -10,7 +10,7 @@ export default function Card(props) {
                         <img src={props.icon} alt="" />
                     </div>
                     <h2>{props.titulo}</h2>
-                    <div>
+                    <div className="btns_card">
                         <a href={props.categorias} className="button">{props.categoria}</a>
                         <a href={props.regioes} className="button">{props.regiao}</a>
                     </div>

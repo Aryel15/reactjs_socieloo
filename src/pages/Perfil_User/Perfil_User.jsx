@@ -43,7 +43,7 @@ export default function Perfil_User() {
                     <label for="bio">Biografia</label>
                     <input type="text" name="bio" id="bio" />
                 </div>
-                <button type="submit" class="button">Salvar alterações</button>
+                <button type="submit" class="button_perfil">Salvar alterações</button>
             </form>
             </div>
         </div>

@@ -1,4 +1,7 @@
 /*Banner*/
+.main_home{
+  height: 85vh;
+}
 .principal{
   background-image: url(./imgs/fundo_home.png);
   padding-top:0px;
@@ -31,6 +34,7 @@
   text-align: center;
   margin: 0 auto;
   background-color: none;
+  align-items: center;
 }
 .search{
   background-color: #00a1ff;
@@ -79,6 +83,7 @@
   flex-wrap: wrap;
   justify-content: center;
   margin: 20px;
+  gap: 20px;
 }
 @media screen and (max-width:550px) {
   .busca{

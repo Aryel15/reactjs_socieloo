@@ -5,6 +5,7 @@
     /*Para que a tela não fique com a barra lateral eu estou tirando todos os pixel de elementos fixados (header + footer)*/
     font-size: 1em;
     display: flex;
+    align-items: center;
 }
 #home-acess{
     z-index: 999;
@@ -37,7 +38,7 @@ aside img{
 
 /* Formulario */
 .section__form {
-    width: 100%;
+    width: auto;
     height: max-content;
     border: 1px solid black;
     box-shadow: 1px 2px 5px #00000070;
@@ -137,6 +138,7 @@ aside img{
     display: flex;
     align-items: baseline;
     margin-top: 10px;
+    gap: 0 5px;
 }
 label[for="termos"]>a {
     color: #00a1ff;
@@ -168,7 +170,7 @@ label[for="termos"],
 /* Três botões */
 .section__radio {
     position: absolute;
-    bottom: 10%;
+    bottom: -10%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
 }
@@ -376,7 +378,7 @@ input[type="checkbox"] {
         height: max-content;
     }
     .section__radio{
-        bottom: 0%;
+        bottom: -10%;
     }
 }
 

@@ -84,9 +84,9 @@ export default function Cadastro_Mod() {
             </div>
         </section>
 
+        <Footer />
         </main>
         <Controle_Cadastros />
-        <Footer />
         <Vlibras />
 
     </>

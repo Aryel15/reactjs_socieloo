@@ -115,8 +115,11 @@ nav{
     margin-left: 5px;
     margin-bottom: 0px !important;
 }
+.aside_login{
+    align-items: center;
+}
 @media only screen and (max-width: 1140px){
-    aside {
+    .aside_login {
         display: flex !important;
     }
 }

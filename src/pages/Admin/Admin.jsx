@@ -13,7 +13,7 @@ export default function Admin() {
                 <section className="imagem">
                     <img src="./imgs/iconswhite.svg" alt="" />
                 </section>
-                <aside>
+                <aside className="aside_admin">
                     <form id="admin" action="">
                         <h2>Admin</h2>
                         <label for="email">E-mail:</label><br />

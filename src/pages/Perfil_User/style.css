@@ -284,15 +284,20 @@
     outline: none;
   }
   
-  .button {
-    padding: 0.5rem 1rem;
-    width: max-content;
-    background: #00a1ff;
-    border: none;
-    font-weight: 500;
+  .button_perfil{
+    background-color: #00a1ff;
+    border: #00a1ff solid 1px;
+    padding: 5px 10px;
     color: #fff;
     border-radius: 5px;
-    cursor: pointer;
+    transition: 0.7s;
+  }
+  .button_perfil:hover{
+      border: #00a1ff solid 1px;
+      color: #00a1ff;
+      background-color: #fff;
+      transition: 0.7s;
+      cursor: pointer;
   }
   
   .circle {

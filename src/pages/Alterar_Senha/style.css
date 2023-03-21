@@ -9,7 +9,9 @@
   a {
     text-decoration: none;
   }
-  
+  .section__form-as {
+    height: 83vh;
+  }
   .profile {
     display: flex;
     gap: 5rem;

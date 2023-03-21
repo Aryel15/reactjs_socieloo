@@ -9,6 +9,7 @@ export default function Home() {
   return (
     <>
       <Menu />
+      <main className="main_home">
         <section className="principal">
           <div className="busca">
               <h1 id="title-index">Um ato de bondade pode ajudar muita gente!</h1>
@@ -40,7 +41,7 @@ export default function Home() {
               </div>
           </div>
       </section>
-      <main id="main-index">
+      <section id="main-index">
         <div className="section__cards">
         <Card categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='./imgs/cil_animal.png' regiao="Zona Leste" link="/ong"/>
         <Card categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='./imgs/cil_animal.png' regiao="Zona Leste" />
@@ -51,6 +52,7 @@ export default function Home() {
 
         </div>
         <Vlibras />
+      </section>
       </main>
       <Footer />
     </>

@@ -27,6 +27,9 @@ a .card h2{
     font-size: 0.8em;
     color: #000;
 }
+.btns_card{
+    display: flex;
+}
 .img{
     border-radius: 7px 7px 0 0;
     width: 100%;

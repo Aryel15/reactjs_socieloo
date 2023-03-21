@@ -26,28 +26,29 @@ nav{
 .imagem img{
     height: 87vh;
 }
-#main-admin aside{
+#main-admin .aside_admin{
     padding-top: 100px;
     float:right;
     padding-left: 0;
     margin-right: 15vw;
     border: none;
+    align-items: center;
 }
-#main-admin aside input:not(#lembrar){
+#main-admin .aside_admin input:not(#lembrar){
     width: 250px;
     height: 30px;
     margin: 5px 0;
     font-size: 0.81em;
 }
-#main-admin aside p{
+#main-admin .aside_admin p{
     margin-bottom: 15px;
 }
-#main-admin aside a{
+#main-admin .aside_admin a{
     font-size: 0.81em;
     color:#00a1ff;
     float:right;
 }
-#main-admin aside label[for="lembrar"]{
+#main-admin .aside_admin label[for="lembrar"]{
     font-size: 0.81em;
     justify-content: baseline;
 }
@@ -119,7 +120,7 @@ nav{
     margin-bottom: 0px !important;
 }
 @media only screen and (max-width: 1140px){
-    aside {
+    .aside_admin {
         display: flex;
     }
 }
@@ -132,7 +133,7 @@ nav{
         align-content: center !important;
         justify-content: center;
     }
-    #main-admin aside{
+    #main-admin .aside_admin{
         padding-top: 100px;
         float:center;
         padding-left: 0;

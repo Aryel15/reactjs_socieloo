@@ -151,7 +151,7 @@ export function Etapa4({step, setStep}) {
             <a href="javascript:void(0);" class="button-white" onClick={() => { setStep(step - 1);}}>
               Voltar
             </a>
-            <a href="javascript:void(0);" class="button-blue">
+            <a href="/perfil" class="button-blue">
               Finalizar
             </a>
           </div>
