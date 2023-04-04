@@ -27,12 +27,12 @@ nav{
     height: 87vh;
 }
 #main-admin .aside_admin{
-    padding-top: 100px;
     float:right;
     padding-left: 0;
     margin-right: 15vw;
     border: none;
     align-items: center;
+    z-index: 999;
 }
 #main-admin .aside_admin input:not(#lembrar){
     width: 250px;

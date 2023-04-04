@@ -11,6 +11,7 @@
   }
   .section__form-as {
     height: 83vh;
+    display: flex;
   }
   .profile {
     display: flex;

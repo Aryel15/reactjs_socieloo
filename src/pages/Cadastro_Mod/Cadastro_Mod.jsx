@@ -10,7 +10,7 @@ export default function Cadastro_Mod() {
   return (
     <>
         <Menu />
-        <main className="main_content container">
+        <main className="main_mod container">
         <section className="section-seu-codigo container">
             <div className="content">
                 <div id="box-artigo" className="box-artigo">
