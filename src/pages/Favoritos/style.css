@@ -1,17 +1,17 @@
 #main__fav {
     width: 100%;
-    height: 100%;
+    height: 80vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     margin-top: 0px;
     margin-bottom: 50px;
 }
-section {
+.section-fav {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 1rem;
     padding: 1rem 0;
@@ -44,7 +44,7 @@ section {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .fav__options select>optgroup {
@@ -60,7 +60,7 @@ section {
 .options__select {
     display: flex;
     flex-wrap: wrap;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
 }
 .options__select select{
@@ -101,7 +101,7 @@ section {
   }
 .options__search {
     position: relative;
-    height: 55px;
+    height: 40px;
     max-width: 250px;
     width: 100%;
     margin-right: 5px;

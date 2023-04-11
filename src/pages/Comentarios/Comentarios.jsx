@@ -9,87 +9,87 @@ export default function Ong() {
   return (
     <>
       <Menu />
-      <div class="title">
+      <div className="title">
             <h1>Adote Sempre Cabe Mais Um - Zona Leste</h1>
-            <div class="pos_botao">
-                <a href="../pages/ong.html" class="botao">Visão Geral da ONG</a>
+            <div className="pos_botao">
+                <a href="../pages/ong.html" className="botao">Visão Geral da ONG</a>
             </div>
       </div>
-      <section class="section__ong">
-            <section class="ong__imagens">
+      <section className="section__ong">
+            <section className="ong__imagens">
 
                 <ul id="imagens__container">
-                    <li class="container__item">
+                    <li className="container__item">
                         <img src="../imgs/fotosOng/fotos01.jpg" alt="Imagem da ong mostrando os integrantes"/>
                     </li>
 
-                    <li class="container__item">
+                    <li className="container__item">
                         <img src="../imgs/fotosOng/fotos02.jpg" alt="Imagem de um cachorro muito engraçado"/>
                     </li>
 
-                    <li class="container__item">
+                    <li className="container__item">
                         <img src="../imgs/fotosOng/fotos03.jpg" alt="Localização da Ong no Google Maps"/>
                     </li>
                 </ul>
             </section>
 
-            <section class="secao_coments">
-                <div class="informations__description">
+            <section className="secao_coments">
+                <div className="informations__description">
 
                     <div id="coment_usuario">         
                         <img src="../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>  
-                        <div class="texto">
+                        <div className="texto">
                             <h4>@User_logado</h4>
                             <p><i>Seu comentário</i></p>
-                            <div class="pos_editbotao">
-                                <button class="editbotao">Editar comentário</button>
-                                <button class="editbotao">Deletar comentário</button>
+                            <div className="pos_editbotao">
+                                <button className="editbotao">Editar comentário</button>
+                                <button className="editbotao">Deletar comentário</button>
                             </div><br/>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                         </div>
                     </div>
                 
-                    <div class="coments">
+                    <div className="coments">
                         <img src="../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>
-                        <div class="texto">
+                        <div className="texto">
                             <h4>@User</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                         </div>
                     </div>
                           
-                    <div class="coments">
+                    <div className="coments">
                         <div>
                             <img src="../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>
                         </div>
-                        <div class="texto">
+                        <div className="texto">
                             <h4>@User</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                         </div>
                     </div>
 
-                    <div class="coments">
+                    <div className="coments">
                         <div>
                             <img src="../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>
                         </div>
-                        <div class="texto">
+                        <div className="texto">
                             <h4>@User</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                         </div>
                     </div>
 
-                    <div class="coments">
+                    <div className="coments">
                         <div>
                             <img src="../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>
                         </div>
-                        <div class="texto">
+                        <div className="texto">
                             <h4>@User</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                         </div>
                     </div>
 
-                    <div class="informations__comments">
+                    <div className="informations__comments">
                         <textarea name="comments" id="comments" cols="100" rows="6" placeholder="Comente o que achou..."></textarea>
-                        <button class="botao">Enviar</button>
+                        <button className="botao">Enviar</button>
                     </div>
                 </div>
             </section>

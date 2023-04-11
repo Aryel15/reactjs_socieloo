@@ -11,6 +11,8 @@
   height: 420px;
   background-repeat: no-repeat;
   background-size: cover; 
+  display: flex;
+  align-items: flex-end;
 }
 #title-index{
   padding: 0 10px;
@@ -73,8 +75,9 @@
 #main-index{
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   margin: 20px auto;
+  width: 70vw;
 }
 
 .section__cards{

@@ -14,7 +14,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     margin-top: 50px;
     font-size: 1em;
     flex-direction: row;
@@ -39,7 +39,6 @@ ul {
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
-    margin-top:-9%;
 }
 
 .ong__imagens #imagens__container .container__item img {
@@ -195,12 +194,12 @@ ul {
         margin-top: 70px;
         height: 100vh;
     }
-
-    .ong__imagens {
-        display: none;
+    #imagens__container{
+        display: flex;
+        align-items: center;
     }
-    .carrossel{
-        display: block;
+    .ong__imagens #imagens__container .container__item+.container__item{
+        margin-top: 0;
     }
 
     .ong__informations {

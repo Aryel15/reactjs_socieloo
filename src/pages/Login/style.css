@@ -21,6 +21,7 @@ nav{
 }
 .imagem img{
     height: 100%;
+    z-index: 1;
 }
 #main-login aside{
     padding-top: 100px;
@@ -28,6 +29,7 @@ nav{
     padding-left: 0;
     margin-right: 15vw;
     border: none;
+    z-index: 999;
 }
 #main-login aside input:not(#lembrar){
     width: 250px;

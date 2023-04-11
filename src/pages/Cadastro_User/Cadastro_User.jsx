@@ -27,7 +27,7 @@ export default function Cadastro_User() {
 
 export function Etapa1({step, setStep}){
   return(
-    <section>
+    <section className="section-user">
       <form action="#" method="post" className="form-container">
         <h2 className="form-title">Faça seu cadastro</h2>
         <div>
@@ -46,7 +46,7 @@ export function Etapa1({step, setStep}){
 }
 export function Etapa2({step, setStep}){
   return(
-    <section>
+    <section className="section-user">
           <form action="#" method="post" class="form-container">
             <h1 class="section__title">
               Deseja selecionar uma região de preferência?
@@ -58,7 +58,7 @@ export function Etapa2({step, setStep}){
               </div>
               <div class="input">
                 <input type="checkbox" name="south" id="south" title="Zona Sul" />
-                <label for="north">Zona Sul</label>
+                <label for="south">Zona Sul</label>
               </div>
               <div class="input">
                 <input type="checkbox" name="east" id="east" title="Zona Leste" />
@@ -84,7 +84,7 @@ export function Etapa2({step, setStep}){
 
 export function Etapa3({step, setStep}) {
   return (
-    <section>
+    <section className="section-user">
         <form action="#" method="post" class="form-container">
             <h1 class="section__title">
                 Selecione seus segmentos favoritos

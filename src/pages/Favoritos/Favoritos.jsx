@@ -10,13 +10,13 @@ export default function Favoritos() {
     <>
         <Menu/>
         <main id="main__fav">
-            <section>
-                <div class="fav__text">
+            <section className="section-fav">
+                <div className="fav__text">
                     <h1>Favoritos</h1>
                     <p>Todas as suas ONGs e projetos favoritos </p>
                 </div>
-                <div class="fav__options">
-                    <div class="options__select">
+                <div className="fav__options">
+                    <div className="options__select">
                         <select name="Segmentos" id="segmentos">
                                 <option value="Cidadania">Cidadania</option>
                                 <option value="Cultura e Esportes">Cultura e Esportes</option>
@@ -35,10 +35,10 @@ export default function Favoritos() {
                                 <option value="Zona Sul">Zona Sul</option>
                                 <option value="Região" selected disabled>Região</option>
                             </select>
-                            <div class="options__search">
+                            <div className="options__search">
                                 <input type="search" placeholder="Pesquisar"/>
-                                <span class="search__icon__container">
-                                    <img src="../assets/search.svg" alt="icone de pesquisa" class="search__icon"/>
+                                <span className="search__icon__container">
+                                    <img src="../assets/search.svg" alt="icone de pesquisa" className="search__icon"/>
                                 </span>
                             </div>
                             <div className="search">
@@ -49,12 +49,12 @@ export default function Favoritos() {
                     </div>
                 </div>
             </section>
-            <section class="fav__cards" id="conteudo">
-                <div class="cards__title">
+            <section className="fav__cards" id="conteudo">
+                <div className="cards__title">
                     <h2>Proteção Animal</h2>
                 </div>
 
-                <div class="card__conteiner">
+                <div className="card__conteiner">
                     <RemoveCard categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='./imgs/cil_animal.png' regiao="Zona Leste" link="/ong"/>
                     <RemoveCard categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='./imgs/cil_animal.png' regiao="Zona Leste" link="/ong"/>
 

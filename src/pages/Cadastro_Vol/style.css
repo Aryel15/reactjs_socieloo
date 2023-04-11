@@ -1,5 +1,7 @@
 /*HEADER*/
-
+.section-vol{
+    justify-content: flex-start;
+}
 .container_form {
     width: 60vw;
     margin: auto;
