@@ -73,6 +73,9 @@
 .options__submit:hover {
     background: rgba(0, 162, 255, 0.856);
 }
+.button-vg{
+    opacity: 0;
+}
 /* Segunda página */
 .horarios{
     margin-top: 5vh;
@@ -106,7 +109,7 @@
     user-select: none;
     font-size: 0.75rem;
 }
-.button:checked + .button-label{
+.button-vg:checked + .button-label{
     border: 2px solid rgba(0, 162, 255, 0.856);
     color: rgba(0, 162, 255, 0.856);  
     background-color: rgba(207, 237, 255, 0.856);

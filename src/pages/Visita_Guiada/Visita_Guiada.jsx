@@ -70,15 +70,15 @@ export function Etapa2({step, setStep}) {
             <form className='forms' action="javascript:void(0)">
                 <div className="checks">
                   <div>
-                    <input type="radio" name="data" id="button-1" className="button"/>
+                    <input type="radio" name="data" id="button-1" className="button-vg"/>
                     <label for="button-1" className="button-label">16/09 - 16:00 às 18:00</label>
-                    <input type="radio" name="data" id="button-2" className="button"/>
+                    <input type="radio" name="data" id="button-2" className="button-vg"/>
                     <label for="button-2" className="button-label">17/09 - 12:00 às 17:00</label>
                   </div><br />
                   <div>
-                    <input type="radio" name="data" id="button-3" className="button"/>
+                    <input type="radio" name="data" id="button-3" className="button-vg"/>
                     <label for="button-3" className="button-label">18/09 - 12:00 às 18:00</label>
-                    <input type="radio" name="data" id="button-4" className="button"/>
+                    <input type="radio" name="data" id="button-4" className="button-vg"/>
                     <label for="button-4" className="button-label">24/09 - 16:00 às 18:00</label>
                   </div>
                 </div>
