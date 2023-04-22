@@ -6,6 +6,11 @@ import Controle_Cadastros from '../../components/Controle_Cadastros/Controle_Cad
 import Vlibras from '../../components/Vlibras/Vlibras'
 
 export default function Cadastro_Ong() {
+    const [step, setStep] = React.useState(0);
+    const pages = [
+      <Etapa1 step={step} setStep={setStep}/>, 
+      <Etapa2 step={step} setStep={setStep} />
+    ];
   return (
     <>
       <Menu />
@@ -13,7 +18,7 @@ export default function Cadastro_Ong() {
             <aside className='aside'>
                 <img src="../imgs/icons.svg" alt=""/>
             </aside>
-            <Etapa1 />
+            {pages[step]}
         </main>
       <Controle_Cadastros />
       <Vlibras />
@@ -22,11 +27,11 @@ export default function Cadastro_Ong() {
   )
 }
 
-export function Etapa1() {
+export function Etapa1({step, setStep}) {
   return (
     <section id="cadastro__section">
         <div className="section__form">
-            <form>
+            <form action="#" method="post">
                 <h1 className="section__title">Cadastre sua ONG</h1>
                 <section className="form__group">
                     <div className="group__text">
@@ -93,7 +98,7 @@ export function Etapa1() {
                             <input type="checkbox" name="termos" id="termos"/>
                             <label for="termos">Eu concordo com os <a href="#">termos e condições</a></label>
                         </div>
-                        <button className="options__submit">Avançar</button>
+                        <a href="javascript:void(0);" className="options__submit" onClick={() => { setStep(step + 1);}}>Avançar</a>
                     </div>
                 </section>
             </form>
@@ -101,11 +106,55 @@ export function Etapa1() {
         <div className="section__radio">
             <ul className="radio__group">
                 <li><input className="radio__input" name="process" id="radio-one" type='radio' checked/><span className="radio__span-one"></span></li>
-                <li><input className="radio__input" name="process" id="radio-two" type='radio'/><span className="radio__span-two"></span></li>
-                <li><input className="radio__input" name="process" id="radio-three" type='radio'/></li>
+                <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { setStep(step + 1);}}/><span className="radio__span-two"></span></li>
+                <li><input className="radio__input" name="process" id="radio-three" type='radio'onClick={() => { setStep(step + 2);}}/></li>
             </ul>
         </div>
     </section>
   )
+}
+export function Etapa2({step, setStep}) {
+    return (
+        <section id="cadastro__section">
+            <div className="section__form 2">
+                <h1 className="section__title">Cadastre sua ONG</h1>
+                <form action="" className='form-2'>
+                    <div className="collum">
+                        <label for="cnpj">CNPJ</label>
+                        <input type="text" id="cnpj" name="cnpj" required/>
+                        <div className="banco">
+                            <div className="agencia">
+                                <label for="agencia">Agência</label>
+                                <input type="text" id="agencia" name="agencia" required/>
+                            </div>
+                            <div className="conta">
+                                <label for="conta">Conta</label>
+                                <input type="text" id="conta" name="conta" required/>
+                            </div>
+                        </div>
+                        <label for="pix">Pix</label>
+                        <input type="text" id="pix" name="pix" required/>
+                        <label htmlFor="imagens">Imagens</label>
+                        <input type="file" name="imagens" id="imagens" />
+                    </div>
+                    <div className="collum">
+                        <label for="desc">Descrição</label>
+                        <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
+                    </div>
+                </form>
+                <div className="buttons-form2">
+                    <a href="javascript:void(0);" className="voltar" onClick={() => { setStep(step - 1);}}>Voltar</a>
+                    <a href="javascript:void(0);" className="options__submit" onClick={() => { setStep(step + 1);}}>Avançar</a>
+                </div>
+            </div>
+            <div className="section__radio">
+                <ul className="radio__group">
+                    <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { setStep(step - 1);}}/><span className="radio__span-one"></span></li>
+                    <li><input className="radio__input" name="process" id="radio-two" type='radio' checked/><span className="radio__span-two"></span></li>
+                    <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { setStep(step + 1);}}/></li>
+                </ul>
+            </div>
+        </section>
+    )
 }
 

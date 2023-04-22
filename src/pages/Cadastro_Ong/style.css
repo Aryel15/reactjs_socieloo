@@ -24,13 +24,13 @@ aside img{
     width: 100%;
     height: fit-content;
     display: flex;
-    justify-content: center;
     /* justify-content: flex-end; */
     align-items: center;
     position: relative;
     margin-top: 0;
     background-color: #fff;
     /* padding-right: 2%; */
+    flex-wrap: wrap;
 }
 #cadastro__section div img {
     width: 400px;
@@ -161,10 +161,75 @@ label[for="termos"],
     cursor: pointer;
     border-radius: 3px;
     outline: none;
+    text-align: center;
 }
 
 .options__submit:hover {
     background: rgba(0, 162, 255, 0.856)
+}
+/* Form 2*/
+.form-2 {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+}
+.form-2 label::before{
+    content: "* ";
+    color: #00a1ff;
+    margin-bottom: 10px;
+}
+.form-2 input:not([type="file"]){
+    width: 100%;
+    outline: none;
+    border: 1px solid black;
+    font-size: .9em;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.form-2 input[type="file"]{
+    width: 200px;
+}
+.form-2 a{
+    text-align: center;
+}
+.buttons-form2{
+    display: flex;
+    gap: 5px;
+    text-align: center;
+}
+.collum {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+}
+.form-2 textarea{
+    height: 88%;
+    outline: none;
+    border: 1px solid black;
+    font-size: .9em;
+    padding: 10px;
+    border-radius: 5px;
+}
+.voltar{
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 600;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transition: box-shadow 0.3s;
+    background: #fff;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 15px;
+}
+.banco{
+    display: flex;
+    gap: 2px;
 }
 
 /* Três botões */
