@@ -109,7 +109,7 @@
     margin-bottom: 5px;
 }
 
-.content__form input,
+.content__form input:not([type="file"]),
 .content__form textarea {
     width: 100%;
     padding: 14px;
@@ -154,7 +154,7 @@
     background-color: #fff;
 }
 /* Alterar Senha*/
-label::after{
+.edit__content label::after{
     content:":";
 }
 .senha{
@@ -216,6 +216,7 @@ label::after{
     cursor: pointer;
     transition: 0.7s all;
 }
+/*Criar Conta*/
 
 @media screen and (max-width: 1100px) {
     .edit__conteiner {

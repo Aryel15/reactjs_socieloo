@@ -5,7 +5,7 @@ import Footer from '../../components/Footer/Footer'
 import Vlibras from '../../components/Vlibras/Vlibras'
 
 export default function Perfil_Ong() {
-    const [ong, setOng] = useState(true);
+    const [ong, setOng] = useState(false);
     const [stepC, setCStep] = React.useState("Editar_Perfil");
     const [stepE, setEStep] = React.useState(0);
     const editar = {
@@ -40,7 +40,7 @@ export default function Perfil_Ong() {
             </aside>
 
             <section className="edit__content">
-                {ong === true ? editar[stepE] : criar[stepC]}
+                {ong === true ? editar[stepE] : <Criar_Conta />}
             </section>
         </section>
     </main>
@@ -112,6 +112,84 @@ function Deletar_Conta({stepE, setEStep}){
                     <a className="button-as" href="/perfil-ong">Não</a>
                 </div>
                 {deletar === true ? <a className="button-as delete">Deletar conta</a> : ""}
+            </form>
+        </>
+    )
+}
+function Criar_Conta(){
+    return(
+        <>
+        <form action="#" method="post">
+                <h1 className="section__title">Cadastre sua ONG</h1>
+                <section className="form__group">
+                    <div className="group__text">
+                        <label for="regiao">Região</label>
+                        <div id="group__select">
+                            <select name="regiao" id="regiao" required>
+                                <option value="#" selected disabled>Selecione uma opção</option>
+                                <option value="norte">Zona Norte</option>
+                                <option value="sul">Zona Sul</option>
+                                <option value="centro">Centro</option>
+                                <option value="leste">Zona Leste</option>
+                                <option value="oeste">Zona Oeste</option>
+                            </select>
+                        </div>
+                        <div className="banco">
+                            <div className="agencia">
+                                <label for="agencia">Agência</label>
+                                <input type="text" id="agencia" name="agencia" required/>
+                            </div>
+                            <div className="conta">
+                                <label for="conta">Conta</label>
+                                <input type="text" id="conta" name="conta" required/>
+                            </div>
+                        </div>
+                        <label for="pix">Pix</label>
+                        <input type="text" id="pix" name="pix" required/>
+                        <label htmlFor="imagens">Imagens</label>
+                        <input type="file" name="imagens" id="imagens" />
+                        <label for="desc">Descrição</label>
+                        <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
+                    </div>
+
+                    <div className="group__about">
+                        <div className="about__radios">
+                            <p>Qual a causa da sua ONG?</p>
+                            <div className="radio__options">
+                                <input type="radio" id="saude" name="causa"/>
+                                <label for="saude">Saúde</label>
+                            </div>
+                            <div className="radio__options">
+                                <input type="radio" id="educacao" name="causa"/>
+                                <label for="educacao">Educação</label>
+                            </div>
+                            <div className="radio__options">
+                                <input type="radio" id="cidadania" name="causa"/>
+                                <label for="cidadania">Cidadania</label>
+                            </div>
+                            <div className="radio__options">
+                                <input type="radio" id="culturaOuEsporte" name="causa"/>
+                                <label for="culturaOuEsporte">Cultura ou esporte</label>
+                            </div>
+                            <div className="radio__options">
+                                <input type="radio" id="generoOudiversidade" name="causa"/>
+                                <label for="generoOudiversidade">Gênero e diversidade</label>
+                            </div>
+                            <div className="radio__options">
+                                <input type="radio" id="meioAmbiente" name="causa"/>
+                                <label for="meioAmbiente">Meio ambiente</label>
+                            </div>
+                            <div className="radio__options">
+                                <input type="radio" id="protecaoAmbiental" name="causa"/>
+                                <label for="protecaoAmbiental">Proteção Ambiental</label>
+                            </div>
+                            <div className="radio__options">
+                                <input type="radio" id="outro" name="causa"/>
+                                <label for="outro">Outro</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </form>
         </>
     )

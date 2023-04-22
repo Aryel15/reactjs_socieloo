@@ -85,7 +85,7 @@ aside img{
     width: 40%;
 }
 
-.form__group .group__text label+input,
+.form__group .group__text label+input:not([type="file"]),
 .form__group .group__text #group__select>select {
     width: 100%;
     outline: none;

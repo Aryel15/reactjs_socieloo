@@ -25,6 +25,10 @@ export default function Cadastro() {
             <br />
             <input type="email" name="email" id="email" required />
             <br />
+            <label for="telefone">Telefone</label>
+            <br />
+            <input type="text" id="telefone" name="telefone" required placeholder="+55 (11) 98765-4321"/>
+            <br />
             <label for="senha">Senha:</label>
             <br />
             <input type="password" name="senha" id="senha" />
