@@ -231,6 +231,21 @@ label[for="termos"],
     display: flex;
     gap: 2px;
 }
+/* Form 3*/
+.form-3 label::before{
+    content: "* ";
+    color: #00a1ff;
+    margin-bottom: 10px;
+}
+.form-3 input{
+    width: 100%;
+    outline: none;
+    border: 1px solid black;
+    font-size: .9em;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
 
 /* Três botões */
 .section__radio {

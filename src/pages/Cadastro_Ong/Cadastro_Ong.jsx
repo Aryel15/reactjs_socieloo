@@ -9,7 +9,8 @@ export default function Cadastro_Ong() {
     const [step, setStep] = React.useState(0);
     const pages = [
       <Etapa1 step={step} setStep={setStep}/>, 
-      <Etapa2 step={step} setStep={setStep} />
+      <Etapa2 step={step} setStep={setStep} />,
+      <Etapa3 step={step} setStep={setStep} />,
     ];
   return (
     <>
@@ -113,7 +114,7 @@ export function Etapa1({step, setStep}) {
     </section>
   )
 }
-export function Etapa2({step, setStep}) {
+function Etapa2({step, setStep}) {
     return (
         <section id="cadastro__section">
             <div className="section__form 2">
@@ -158,3 +159,29 @@ export function Etapa2({step, setStep}) {
     )
 }
 
+function Etapa3({step, setStep}) {
+    return(
+        <section id="cadastro__section">
+            <div className="section__form 2">
+            <h1 className="section__title">Cadastre sua ONG</h1>
+            <form action="" className='form-3'>
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" required/>
+                <label for="confirmsenha">Confirmar senha</label>
+                <input type="password" id="confirmsenha" name="confirmsenha" required/>
+                <div className="buttons-form2">
+                    <a href="javascript:void(0);" className="voltar" onClick={() => { setStep(step - 1);}}>Voltar</a>
+                    <a href="/" className="options__submit">Seja Bem-Vindo</a>
+                </div>
+            </form>
+            </div>
+            <div className="section__radio">
+                <ul className="radio__group">
+                    <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { setStep(step - 2);}}/><span className="radio__span-one"></span></li>
+                    <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { setStep(step - 1);}}/><span className="radio__span-two"></span></li>
+                    <li><input className="radio__input" name="process" id="radio-three" type='radio' checked/></li>
+                </ul>
+            </div>
+        </section>
+    )
+}
