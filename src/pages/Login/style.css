@@ -49,7 +49,7 @@ nav{
     font-size: 0.81em;
     justify-content: baseline;
 }
-#login label{
+label{
     font-weight: normal;
     margin-bottom: 0px !important;
 }

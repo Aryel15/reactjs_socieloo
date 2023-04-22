@@ -6,6 +6,7 @@ import Login from './Login/Login'
 import Cadastro_Mod from './Cadastro_Mod/Cadastro_Mod';
 import Cadastro_User from './Cadastro_User/Cadastro_User';
 import Cadastro_Ong from './Cadastro_Ong/Cadastro_Ong';
+import Cadastro from './Cadastro/Cadastro';
 import Ong from './Ong/Ong';
 import Perfil_User from './Perfil_User/Perfil_User';
 import Faq from './Faq/Faq';
@@ -17,7 +18,7 @@ import Excluir_Cadastro from './Excluir_Cadastro/Excluir_Cadastro';
 import Alterar_Senha from './Alterar_Senha/Alterar_Senha';
 import Cadastro_Vol from './Cadastro_Vol/Cadastro_Vol';
 import Visita_Guiada from './Visita_Guiada/Visita_Guiada';
-import Editar_Ong from './Editar_Ong/Editar_Ong';
+import Perfil_Ong from './Perfil_Ong/Perfil_Ong';
 
 export default function Router() {
     return (
@@ -28,8 +29,9 @@ export default function Router() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/cadastro-moderador' element={<Cadastro_Mod />} />
                 <Route path='/cadastro-usuario' element={<Cadastro_User />} />
-                <Route path='/cadastro-ong' element={<Cadastro_Ong />} />
+                <Route path='/cadastro' element={<Cadastro_Ong />} />
                 <Route path='/cadastro-voluntario' element={<Cadastro_Vol />} />
+                <Route path='/cadastro-ong' element={<Cadastro />} />
                 <Route path='/ong' element={<Ong />} />
                 <Route path='/faq' element={<Faq />} />
                 <Route path='/perfil' element={<Perfil_User />} />
@@ -40,7 +42,7 @@ export default function Router() {
                 <Route path='/excluir-cadastro' element={<Excluir_Cadastro />} />
                 <Route path='/alterar-senha' element={<Alterar_Senha />} />
                 <Route path='/visita-guiada' element={<Visita_Guiada />} />
-                <Route path='/editar-ong' element={<Editar_Ong />} />
+                <Route path='/perfil-ong' element={<Perfil_Ong />} />
             </Routes>
         </BrowserRouter>
     )
