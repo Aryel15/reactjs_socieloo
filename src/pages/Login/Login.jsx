@@ -1,6 +1,5 @@
 import './style.css';
 import Vlibras from '../../components/Vlibras/Vlibras';
-import Footer from '../../components/Footer/Footer';
 import Menu from '../../components/Menu/Menu';
 
 export default function Login() {
@@ -34,7 +33,6 @@ export default function Login() {
                 </aside>
             </main>
             <Vlibras />
-            <Footer />
         </>
     )
 }

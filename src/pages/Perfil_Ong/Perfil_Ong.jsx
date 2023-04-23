@@ -1,20 +1,18 @@
 import React, {useState} from 'react'
 import './style.css'
 import Menu from '../../components/Menu/Menu'
-import Footer from '../../components/Footer/Footer'
 import Vlibras from '../../components/Vlibras/Vlibras'
 
 export default function Perfil_Ong() {
-    const [ong, setOng] = useState(false);
-    const [stepC, setCStep] = React.useState("Editar_Perfil");
-    const [stepE, setEStep] = React.useState(0);
+    const [ong, setOng] = useState(true);
+    const [stepE, setEStep] = React.useState("Editar_Perfil");
     const editar = {
         Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep}/>, 
         Alterar_Senha: <Alterar_Senha step={stepE} setStep={setEStep} />,
+        Alterar_Email: <Alterar_Email step={stepE} setStep={setEStep} />,
         Deletar_Conta: <Deletar_Conta step={stepE} setStep={setEStep} />,
     }
 
-    const criar = [];
   return (
     <>
     <Menu/>
@@ -32,6 +30,7 @@ export default function Perfil_Ong() {
                     <>
                         <li className={stepE === "Editar_Perfil" ? "select": ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Editar_Perfil")}><i className='bx bx-pencil'></i> Editar perfil</a></li>
                         <li className={stepE === "Alterar_Senha" ? "select": ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Senha")}><i className='bx bxs-lock-alt'></i> Alterar senha</a></li>
+                        <li className={stepE === "Alterar_Email" ? "select": ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Email")}><i className='bx bxs-lock-alt'></i> Alterar email</a></li>
                         <li className={stepE === "Deletar_Conta" ? "select": ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Deletar_Conta")}><i className='bx bxs-message-square-x'></i> Deletar conta</a></li>
                     </>:""
                     }
@@ -44,7 +43,6 @@ export default function Perfil_Ong() {
             </section>
         </section>
     </main>
-    <Footer/>
     <Vlibras/>
     </>
   )
@@ -56,9 +54,6 @@ function Editar_Perfil({stepE, setEStep}){
             <form action="#" className="content__form">
                 <label for="nome">Nome</label>
                 <input type="text" id="nome" name="nome" value="Adote Sempre Cabe Mais Um"/>
-
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="noobmaster69@hotmail.com"/>
 
                 <label for="telefone">Telefone</label>
                 <input type="tel" id="telefone" name="telefone" value="+55 (11) 98765-4321"/>
@@ -76,11 +71,25 @@ function Editar_Perfil({stepE, setEStep}){
         </>
     )
 }
-function Alterar_Senha({stepE, setEStep}){
+function Alterar_Email ({stepE, setEStep}){
     return(
         <>
             <form action="#" className="content__form senha">
                 <h2>Alterar senha</h2>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="noobmaster69@hotmail.com"/>
+                <label for="email">Email novo</label>
+                <input type="email" id="email" name="email"/>
+                <button type="submit" className="button-as">Alterar</button>
+            </form>
+        </>
+    )
+}
+function Alterar_Senha({stepE, setEStep}){
+    return(
+        <>
+            <form action="#" className="content__form senha">
+                <h2>Alterar email</h2>
                 <div>
                 <label for="name">Senha atual</label>
                 <input type="text" name="name" id="name" />
@@ -106,6 +115,7 @@ function Deletar_Conta({stepE, setEStep}){
     return(
         <>
             <form action="#" className="content__form senha">
+                <h2>Deletar Conta</h2>
                 <p>Tem certeza que deseja deletar sua conta?</p>
                 <div className="buttons-delete">
                     <a className="button-s" onClick={() => setDeletar(true)}>Sim</a>
@@ -187,6 +197,9 @@ function Criar_Conta(){
                                 <input type="radio" id="outro" name="causa"/>
                                 <label for="outro">Outro</label>
                             </div>
+                        </div>
+                        <div className="form__button">
+                            <button>Finalizar Cadstro</button>
                         </div>
                     </div>
                 </section>

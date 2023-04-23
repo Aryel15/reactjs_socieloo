@@ -1,6 +1,5 @@
 import './style.css';
 import Vlibras from '../../components/Vlibras/Vlibras';
-import Footer from '../../components/Footer/Footer';
 import Menu from '../../components/Menu/Menu';
 import Card from '../../components/Card/Card';
 
@@ -54,7 +53,6 @@ export default function Home() {
         <Vlibras />
       </section>
       </main>
-      <Footer />
     </>
   )
 }

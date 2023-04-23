@@ -1,5 +1,4 @@
 import React from 'react'
-import Footer from '../../components/Footer/Footer'
 import Menu from '../../components/Menu/Menu'
 import Vlibras from '../../components/Vlibras/Vlibras'
 import "./style.css"
@@ -59,7 +58,6 @@ export default function Faq() {
             </details>
         </div>
       </main>
-      <Footer/>
       <Vlibras/>
     </>
   )

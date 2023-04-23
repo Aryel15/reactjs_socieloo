@@ -1,7 +1,6 @@
 import React from 'react'
 import './style.css'
 import Menu from '../../components/Menu/Menu'
-import Footer from '../../components/Footer/Footer'
 import Controle_Cadastros from '../../components/Controle_Cadastros/Controle_Cadastros'
 import Vlibras from '../../components/Vlibras/Vlibras'
 
@@ -23,7 +22,6 @@ export default function Cadastro_Ong() {
         </main>
       <Controle_Cadastros />
       <Vlibras />
-      <Footer />
     </>
   )
 }

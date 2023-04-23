@@ -1,6 +1,5 @@
 import React from 'react'
 import Menu from '../../components/Menu/Menu'
-import Footer from '../../components/Footer/Footer'
 import Vlibras from '../../components/Vlibras/Vlibras'
 import './style.css'
 
@@ -38,7 +37,6 @@ export default function Alterar_Senha() {
         </main>
         <script src="../js/user.js"></script>
       </div>
-      <Footer/>
       <Vlibras/>
     </>
   )

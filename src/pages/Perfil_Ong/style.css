@@ -8,7 +8,7 @@
 /*  ----------------------- Estrutura da página --------------------------- */
 #edit {
     width: 100%;
-    height: max-content;
+    height: 100vh;
     margin: 0px auto;
     display: flex;
     place-content: center;
@@ -33,7 +33,7 @@
 .edit__options {
     background: #fff;
     width: 25%;
-    height: auto;
+    height: 100vh;
     font-size: 1rem;
     text-align: center;
     border-right: 2px solid #00a1ff;
@@ -53,7 +53,9 @@
     display: block;
     margin-top: 30px;
 }
-
+.options__photos h1{
+    padding:5px
+}
 .options__photos img {
     width: 200px;
     height: 200px;
@@ -95,6 +97,7 @@
 /*  ----------------------- main content --------------------------- */
 .edit__content {
     padding: 30px;
+    height: 100vh;
 }
 
 .edit__content h2 {
@@ -117,7 +120,9 @@
     border: .4px solid black;
     font-size: 16px;
 }
-
+input[type="file"]{
+    width:100%;
+}
 .content__form input+label {
     margin-top: 25px;
 }
@@ -133,7 +138,11 @@
     width: 100%;
     text-align: center;
 }
-.content__form button{
+.group__about .form__button {
+    width:fit-content;
+    text-align: center;
+}
+.form__button button{
     padding: 9px 30px;
     border: none;
     outline: none;
@@ -148,7 +157,7 @@
     cursor: pointer;
     transition: 0.7s all;
 }
-.content__form button:hover{
+.form__button button:hover{
     border: #00a1ff solid 1px;
     color: #00a1ff;
     background-color: #fff;
@@ -190,6 +199,7 @@
 .delete{
     background-color: #cd0101;
     border: #cd0101 solid 1px;
+    margin:5px 0;
 }
 .delete:hover{
     border: #cd0101 solid 1px;

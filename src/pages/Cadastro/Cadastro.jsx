@@ -1,7 +1,7 @@
 import React from "react";
-import Footer from "../../components/Footer/Footer";
 import Menu from "../../components/Menu/Menu";
 import Vlibras from "../../components/Vlibras/Vlibras";
+import Controle_Cadastros from '../../components/Controle_Cadastros/Controle_Cadastros'
 import "./style.css";
 
 export default function Cadastro() {
@@ -37,7 +37,7 @@ export default function Cadastro() {
           </form>
         </div>
       </main>
-      <Footer />
+      <Controle_Cadastros/>
       <Vlibras />
     </>
   );

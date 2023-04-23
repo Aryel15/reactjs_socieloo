@@ -2,7 +2,6 @@ import React from 'react'
 import './style.css'
 import Menu from '../../components/Menu/Menu'
 import Controle_Cadastros from '../../components/Controle_Cadastros/Controle_Cadastros'
-import Footer from '../../components/Footer/Footer'
 import Vlibras from '../../components/Vlibras/Vlibras'
 
 
@@ -18,7 +17,7 @@ export default function Cadastro_User() {
     <>
       <Menu />
         {pages[step]}
-        <Controle_Cadastros /><Footer /><Vlibras />
+        <Controle_Cadastros /><Vlibras />
     </>
   )
 

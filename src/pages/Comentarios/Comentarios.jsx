@@ -1,6 +1,5 @@
 import React from 'react'
 import './style.css'
-import Footer from '../../components/Footer/Footer'
 import Menu from '../../components/Menu/Menu'
 import Vlibras from '../../components/Vlibras/Vlibras';
 
@@ -94,7 +93,6 @@ export default function Ong() {
                 </div>
             </section>
       </section>
-      <Footer/>
       <Vlibras/>
     </>
   )

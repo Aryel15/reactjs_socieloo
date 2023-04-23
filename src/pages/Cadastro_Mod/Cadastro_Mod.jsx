@@ -1,7 +1,6 @@
 import './style.css';
 import React from 'react';
 import Controle_Cadastros from '../../components/Controle_Cadastros/Controle_Cadastros';
-import Footer from '../../components/footer/Footer';
 import Menu from '../../components/Menu/Menu';
 import Vlibras from '../../components/Vlibras/Vlibras';
 
@@ -84,7 +83,6 @@ export default function Cadastro_Mod() {
             </div>
         </section>
 
-        <Footer />
         </main>
         <Controle_Cadastros />
         <Vlibras />

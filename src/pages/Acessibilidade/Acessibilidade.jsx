@@ -1,5 +1,4 @@
 import React from 'react'
-import Footer from '../../components/Footer/Footer'
 import Menu from '../../components/Menu/Menu'
 import Vlibras from '../../components/Vlibras/Vlibras'
 import './style.css'
@@ -96,7 +95,6 @@ export default function Acessibilidade() {
             <p className="content__text-acess">- Para traduzir, basta clicar sobre o ícone e selecionar o texto que deseja traduzir.
             </p>
         </section>
-      <Footer/>
       <Vlibras/>
     </>
   )

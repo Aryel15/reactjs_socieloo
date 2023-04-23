@@ -1,8 +1,7 @@
 import './style.css';
 import React from 'react';
 import Menu from '../../components/Menu/Menu';
-import Vlibras from '../../components/vlibras/Vlibras';
-import Footer from '../../components/footer/Footer';
+import Vlibras from '../../components/Vlibras/Vlibras';
 
 export default function Admin() {
 
@@ -32,7 +31,6 @@ export default function Admin() {
                 </aside>
             </main>
             <Vlibras />
-            <Footer />
         </>
     )
 }
