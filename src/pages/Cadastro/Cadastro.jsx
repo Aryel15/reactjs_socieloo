@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import Menu from "../../components/Menu/Menu";
 import Vlibras from "../../components/Vlibras/Vlibras";
 import Controle_Cadastros from '../../components/Controle_Cadastros/Controle_Cadastros'
@@ -21,7 +21,11 @@ export default function Cadastro() {
     let regex = /\W|_/;
     console.log(regex.test(cadastro.senha));
     console.log(cadastro);
-    Axios.post("http://localhost:8080/api/v1/ong",{
+    Axios.get("https://servicodados.ibge.gov.br/api/v2/cnae")
+    .then((response) =>{
+      console.log(response)
+    })
+    /*Axios.post("http://localhost:8080/api/v1/ong",{
       nome: cadastro.nome,
       cnpj: cadastro.cnpj,
       email: cadastro.email,
@@ -29,7 +33,8 @@ export default function Cadastro() {
       senha: cadastro.senha
     }).then((response) => {
       localStorage.setItem("id", response.data.id);
-    })};
+    })*/
+  };
   
   return (
     <>

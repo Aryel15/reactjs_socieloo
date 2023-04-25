@@ -43,6 +43,7 @@ export default function Router() {
                 <Route path='/alterar-senha' element={<Alterar_Senha />} />
                 <Route path='/visita-guiada' element={<Visita_Guiada />} />
                 <Route path='/perfil-ong' element={<Perfil_Ong />} />
+                
             </Routes>
         </BrowserRouter>
     )
