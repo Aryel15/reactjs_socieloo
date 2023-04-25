@@ -3,6 +3,7 @@ import Menu from "../../components/Menu/Menu";
 import Vlibras from "../../components/Vlibras/Vlibras";
 import Controle_Cadastros from '../../components/Controle_Cadastros/Controle_Cadastros'
 import Axios from 'axios'
+import { IMaskInput } from "react-imask";
 import "./style.css";
 
 export default function Cadastro() {
@@ -17,16 +18,18 @@ export default function Cadastro() {
 
   const handleClickCadastro = async e =>{
     e.preventDefault();
+    let regex = /\W|_/;
+    console.log(regex.test(cadastro.senha));
     console.log(cadastro);
-    /*Axios.post("",{
+    Axios.post("http://localhost:8080/api/v1/ong",{
       nome: cadastro.nome,
       cnpj: cadastro.cnpj,
       email: cadastro.email,
       telefone: cadastro.telefone,
       senha: cadastro.senha
     }).then((response) => {
-      console.log(response);
-    })*/};
+      localStorage.setItem("id", response.data.id);
+    })};
   
   return (
     <>
@@ -37,12 +40,12 @@ export default function Cadastro() {
             <div className="titulo-cad">
               <h1>Cadastre sua Ong</h1>
             </div>
-            <label for="name">Nome:</label>
+            <label for="nome">Nome:</label>
             <br />
-            <input type="text" name="name" id="name" onChange={valorCadastro} required />
+            <input type="text" name="nome" id="nome" onChange={valorCadastro} required />
             <label for="cnpj">CNPJ:</label>
             <br />
-            <input type="text" name="cnpj" id="cnpj" onChange={valorCadastro} required />
+            <IMaskInput mask="000.000.000-00" placeholder="Digite o seu CPF" name="cnpj" id="cnpj" onChange={valorCadastro} required/>
             <br />
             <label for="email">E-mail:</label>
             <br />
@@ -50,7 +53,7 @@ export default function Cadastro() {
             <br />
             <label for="telefone">Telefone</label>
             <br />
-            <input type="text" id="telefone" name="telefone" onChange={valorCadastro} required placeholder="+55 (11) 98765-4321"/>
+            <IMaskInput mask="+00(00)00000-0000" name="telefone" id="telefone" onChange={valorCadastro} required/>
             <br />
             <label for="senha">Senha:</label>
             <br />
@@ -64,4 +67,5 @@ export default function Cadastro() {
       <Vlibras />
     </>
   );
-  }
+}
+

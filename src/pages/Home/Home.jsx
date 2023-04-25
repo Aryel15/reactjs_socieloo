@@ -1,9 +1,18 @@
+import React, { useState, useEffect } from 'react';
 import './style.css';
 import Vlibras from '../../components/Vlibras/Vlibras';
 import Menu from '../../components/Menu/Menu';
 import Card from '../../components/Card/Card';
+import Axios from 'axios';
 
 export default function Home() {
+  const [data, setData] = useState([])
+  useEffect(() =>{
+    Axios.get("http://localhost:8080/api/v1/ong")
+    .then((response) =>{
+        setData(response.data);
+    })
+},[])
 
   return (
     <>
@@ -42,12 +51,11 @@ export default function Home() {
       </section>
       <section id="main-index">
         <div className="section__cards">
-        <Card categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='./imgs/cil_animal.png' regiao="Zona Leste" link="/ong"/>
-        <Card categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='./imgs/cil_animal.png' regiao="Zona Leste" />
-        <Card categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='./imgs/cil_animal.png' regiao="Zona Leste" />
-        <Card categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='./imgs/cil_animal.png' regiao="Zona Leste" />
-        <Card categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='./imgs/cil_animal.png' regiao="Zona Leste" />
-        <Card categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='./imgs/cil_animal.png' regiao="Zona Leste" />
+        {
+          data.map(ong => (
+            <Card categoria="Proteção Animal" titulo={ong.nome} icon='./imgs/cil_animal.png' regiao="Zona Leste" link=""/>
+          ))
+        }
 
         </div>
         <Vlibras />
