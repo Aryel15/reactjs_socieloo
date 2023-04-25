@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './style.css'
 import Menu from '../../components/Menu/Menu'
 import Vlibras from '../../components/Vlibras/Vlibras'
+import Axios from 'axios'
 
 export default function Perfil_Ong() {
     const [ong, setOng] = useState(true);
@@ -12,6 +13,12 @@ export default function Perfil_Ong() {
         Alterar_Email: <Alterar_Email step={stepE} setStep={setEStep} />,
         Deletar_Conta: <Deletar_Conta step={stepE} setStep={setEStep} />,
     }
+    useEffect(() =>{
+        Axios.get("")
+        .then((response) =>{
+            console.log(response);
+        })
+    })
 
   return (
     <>
@@ -61,7 +68,7 @@ function Editar_Perfil({stepE, setEStep}){
                 <label for="endereço">Endereço</label>
                 <input type="text" id="endereço" name="endereço" value="R. das Alamandas - Jardim Estancia Brasil"/>
 
-                <label for="Sobre">Sobre</label>
+                <label for="Sobre">Descrição</label>
                 <textarea name="Sobre" id="Sobre"></textarea>
 
                 <div className="form__button">
