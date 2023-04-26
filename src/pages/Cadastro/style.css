@@ -43,7 +43,7 @@
     max-width: 500px;
     display: block;
 }
-.senha-fraca{
+.invalido{
     color: rgb(201, 17, 17);
     font-size: small;
 }

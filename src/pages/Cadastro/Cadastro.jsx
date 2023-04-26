@@ -8,19 +8,31 @@ import "./style.css";
 
 export default function Cadastro() {
   const [senha, setSenha] = useState("")
-  const [email, setEmail] = useState("")
+  const [cnae, setCnae] = useState("")
   const [cadastro, setCadastro] = useState({
     nome:'',
     cnae:'',
+    cnaeNumeros:'',
     email:'',
     telefone:'',
     senha:''
   })
-  const valorCadastro = e => setCadastro({...cadastro, [e.target.name]: e.target.value});
-  const emailValido = (email) => {
-    const regex = /^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+\\.([a-z]+)?$/i;
-    return regex.test(email);
-  }
+  const valorCadastro = e => {
+    const { name, value } = e.target;
+    if (name === 'cnae') {
+      const cnaeNumeros = value.replace(/[^\d]/g, '').substring(0, 5);
+      setCadastro({
+        ...cadastro,
+        cnae: value,
+        cnaeNumeros: cnaeNumeros,
+      });
+    } else {
+      setCadastro({
+        ...cadastro,
+        [name]: value
+      });
+    }
+  };
   const senhaForte = (senha) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     return regex.test(senha);
@@ -28,29 +40,37 @@ export default function Cadastro() {
 
   const handleClickCadastro = async e =>{
     e.preventDefault();
-    if (!emailValido(cadastro.email)) {
-      setEmail('Email inválido');
-      return;
-    }else{
-      setEmail('');
-    }
     if (!senhaForte(cadastro.senha)) {
       setSenha('Senha fraca');
       return;
     }else{
       setSenha('');
     }
-    console.log(cadastro);
-
-    Axios.post("http://localhost:8080/api/v1/ong",{
-      nome: cadastro.nome,
-      cnae: cadastro.cnae,
-      email: cadastro.email,
-      telefone: cadastro.telefone,
-      senha: cadastro.senha
-    }).then((response) => {
-      localStorage.setItem("id", response.data.id);
+    console.log(cadastro.cnaeNumeros);
+    Axios.get("https://servicodados.ibge.gov.br/api/v2/cnae/classes/" + cadastro.cnaeNumeros)
+    .then((response) =>{
+      if(response.data.length > 0) {
+        setCnae("");
+        console.log(response.data);
+        Axios.post("http://localhost:8080/api/v1/ong",{
+          nome: cadastro.nome,
+          cnae: cadastro.cnae,
+          email: cadastro.email,
+          telefone: cadastro.telefone,
+          senha: cadastro.senha
+        }).then((response) => {
+          localStorage.setItem("id", response.data.id);
+          console.log(response.data);
+        })
+        window.location.pathname = "/perfil-ong"
+      } else {
+        console.log(response.data);
+        setCnae("Cnae inválido");
+        return;
+      }
     })
+
+    /**/
   };
 
   
@@ -70,11 +90,11 @@ export default function Cadastro() {
             <br />
             <IMaskInput mask="0000-0/00" name="cnae" id="cnae" onChange={valorCadastro} required/>
             <br />
+            <p className="invalido">{cnae}</p>
             <label for="email">E-mail:</label>
             <br />
             <input type="email" name="email" id="email" onChange={valorCadastro} required />
             <br />
-            <p className="senha-fraca">{email}</p>
             <label for="telefone">Telefone</label>
             <br />
             <IMaskInput mask="+00(00)00000-0000" name="telefone" id="telefone" onChange={valorCadastro} required/>
@@ -83,7 +103,7 @@ export default function Cadastro() {
             <br />
             <input type="password" name="senha" id="senha" onChange={valorCadastro} />
             <br />
-            <p className="senha-fraca">{senha}</p>
+            <p className="invalido">{senha}</p>
             <button>Cadastre</button>
           </form>
         </div>
