@@ -1,12 +1,13 @@
-import React, { Component, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Menu from "../../components/Menu/Menu";
 import Vlibras from "../../components/Vlibras/Vlibras";
 import Controle_Cadastros from '../../components/Controle_Cadastros/Controle_Cadastros'
 import Axios from 'axios'
-import { IMaskInput } from "react-imask";
+import { IMaskInput } from 'react-imask'
 import "./style.css";
 
 export default function Cadastro() {
+  const [senha, setSenha] = useState("")
   const [cadastro, setCadastro] = useState({
     nome:'',
     cnpj:'',
@@ -16,15 +17,21 @@ export default function Cadastro() {
   })
   const valorCadastro = e => setCadastro({...cadastro, [e.target.name]: e.target.value});
 
+  const senhaForte = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    return regex.test(password);
+  };
+
   const handleClickCadastro = async e =>{
     e.preventDefault();
-    let regex = /\W|_/;
-    console.log(regex.test(cadastro.senha));
+    if (!senhaForte(cadastro.senha)) {
+      setSenha('Senha fraca');
+      return;
+    }else{
+      setSenha('');
+    }
     console.log(cadastro);
-    Axios.get("https://servicodados.ibge.gov.br/api/v2/cnae")
-    .then((response) =>{
-      console.log(response)
-    })
+
     /*Axios.post("http://localhost:8080/api/v1/ong",{
       nome: cadastro.nome,
       cnpj: cadastro.cnpj,
@@ -35,6 +42,7 @@ export default function Cadastro() {
       localStorage.setItem("id", response.data.id);
     })*/
   };
+
   
   return (
     <>
@@ -64,6 +72,7 @@ export default function Cadastro() {
             <br />
             <input type="password" name="senha" id="senha" onChange={valorCadastro} />
             <br />
+            <p className="senha-fraca">{senha}</p>
             <button>Cadastre</button>
           </form>
         </div>

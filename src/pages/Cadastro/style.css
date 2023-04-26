@@ -43,6 +43,10 @@
     max-width: 500px;
     display: block;
 }
+.senha-fraca{
+    color: rgb(201, 17, 17);
+    font-size: small;
+}
 
 .formcad label::before{
     content: "* ";
