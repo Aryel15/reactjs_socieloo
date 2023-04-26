@@ -7,7 +7,7 @@ import Axios from 'axios'
 export default function Perfil_Ong() {
     const id = localStorage.getItem("id")
     const [data, setData] = useState()
-    const [ong, setOng] = useState(true);
+    const [ong, setOng] = useState(false);
     const [stepE, setEStep] = React.useState("Editar_Perfil");
     const editar = {
         Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep} data={data}/>, 
@@ -48,7 +48,7 @@ export default function Perfil_Ong() {
             </aside>
 
             <section className="edit__content">
-                {ong === true ? editar[stepE] : <Criar_Conta />}
+                {ong === true ? editar[stepE] : <Criar_Conta data={data} />}
             </section>
         </section>
     </main>
@@ -143,22 +143,32 @@ function Deletar_Conta({stepE, setEStep, data, id}){
         </>
     )
 }
-function Criar_Conta(){
+function Criar_Conta({data}){
+
     const [cadastro, setCadastro] = useState({
-        regiao:'',
-        agencia:'',
-        conta:'',
-        pix:'',
-        imagens:'',
-        descrição:'',
-        segmento:''
+    nome:data.nome,
+    cnae:data.cnae,
+    email:data.email,
+    telefone:data.telefone,
+    senha:data.senha,
+    regiao:'',
+    agencia:'',
+    conta:'',
+    pix:'',
+    imagens:'',
+    descrição:'',
+    segmento:''
     })
-    function handleClickCadastro(){
-        console.log(cadastro);
+
+    const handleClickCadastro = e =>{
+        e.preventDefault()
+        console.log(cadastro.email);
     }
+    const valorCadastro = e => setCadastro({...cadastro, [e.target.name]: e.target.value});
+
     return(
         <>
-        <form action="#" method="post" onSubmit={handleClickCadastro}>
+        <form action="" method="post" onSubmit={handleClickCadastro}>
                 <h1 className="section__title">Cadastre sua ONG</h1>
                 <section className="form__group">
                     <div className="group__text">
@@ -195,35 +205,35 @@ function Criar_Conta(){
                         <div className="about__radios">
                             <p>Qual a causa da sua ONG?</p>
                             <div className="radio__options">
-                                <input type="radio" id="saude" name="causa"/>
+                                <input type="radio" id="saude" name="segmento" onChange={valorCadastro}/>
                                 <label for="saude">Saúde</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="educacao" name="causa"/>
+                                <input type="radio" id="educacao" name="segmento" onChange={valorCadastro}/>
                                 <label for="educacao">Educação</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="cidadania" name="causa"/>
+                                <input type="radio" id="cidadania" name="segmento" onChange={valorCadastro}/>
                                 <label for="cidadania">Cidadania</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="culturaOuEsporte" name="causa"/>
+                                <input type="radio" id="culturaOuEsporte" name="segmento" onChange={valorCadastro}/>
                                 <label for="culturaOuEsporte">Cultura ou esporte</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="generoOudiversidade" name="causa"/>
+                                <input type="radio" id="generoOudiversidade" name="segmento" onChange={valorCadastro}/>
                                 <label for="generoOudiversidade">Gênero e diversidade</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="meioAmbiente" name="causa"/>
+                                <input type="radio" id="meioAmbiente" name="segmento" onChange={valorCadastro}/>
                                 <label for="meioAmbiente">Meio ambiente</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="protecaoAmbiental" name="causa"/>
+                                <input type="radio" id="protecaoAmbiental" name="segmento" onChange={valorCadastro}/>
                                 <label for="protecaoAmbiental">Proteção Ambiental</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="outro" name="causa"/>
+                                <input type="radio" id="outro" name="segmento" onChange={valorCadastro}/>
                                 <label for="outro">Outro</label>
                             </div>
                         </div>
