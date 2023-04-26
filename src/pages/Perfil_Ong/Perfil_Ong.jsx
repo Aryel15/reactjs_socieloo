@@ -158,7 +158,7 @@ function Criar_Conta({data, id}){
     const handleClickCadastro = e =>{
         e.preventDefault()
         console.log(cadastro);
-        /*Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
+        Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
             regiao: cadastro.regiao,
             agencia: cadastro.agencia,
             conta: cadastro.conta,
@@ -169,7 +169,7 @@ function Criar_Conta({data, id}){
         }).then((response) => {
             localStorage.setItem("id", response.data.id);
             console.log(response.data);
-        })*/
+        })
     }
     const valorCadastro = e => setCadastro({...cadastro, [e.target.name]: e.target.value});
 
