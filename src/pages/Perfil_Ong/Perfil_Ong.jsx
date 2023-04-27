@@ -7,7 +7,7 @@ import Axios from 'axios'
 export default function Perfil_Ong() {
     const id = localStorage.getItem("id")
     const [data, setData] = useState()
-    const [ong, setOng] = useState(false);
+    const [ong, setOng] = useState(true);
     const [stepE, setEStep] = React.useState("Editar_Perfil");
     const editar = {
         Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep} data={data}/>, 
@@ -56,6 +56,7 @@ export default function Perfil_Ong() {
     </>
   )
 }
+
 function Editar_Perfil({stepE, setEStep, data}){
     return(
         <>
@@ -80,6 +81,7 @@ function Editar_Perfil({stepE, setEStep, data}){
         </>
     )
 }
+
 function Alterar_Email ({stepE, setEStep, data}){
     return(
         <>
@@ -119,6 +121,7 @@ function Alterar_Senha({stepE, setEStep, data}){
         </>
     )
 }
+
 function Deletar_Conta({stepE, setEStep, data, id}){
     function Delete(){
         Axios.delete("http://localhost:8080/api/v1/ong/" + id)

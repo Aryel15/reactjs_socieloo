@@ -8,72 +8,52 @@ import "./style.css";
 
 export default function Cadastro() {
   const [senha, setSenha] = useState("")
-  const [cnae, setCnae] = useState("")
+  const [email, setEmail] = useState("")
   const [cadastro, setCadastro] = useState({
-    nome:'',
-    cnae:'',
-    cnaeNumeros:'',
-    email:'',
-    telefone:'',
-    senha:''
+    nome: '',
+    cnae: '',
+    email: '',
+    telefone: '',
+    senha: ''
   })
-  const valorCadastro = e => {
-    const { name, value } = e.target;
-    if (name === 'cnae') {
-      const cnaeNumeros = value.replace(/[^\d]/g, '').substring(0, 5);
-      setCadastro({
-        ...cadastro,
-        cnae: value,
-        cnaeNumeros: cnaeNumeros,
-      });
-    } else {
-      setCadastro({
-        ...cadastro,
-        [name]: value
-      });
-    }
-  };
+  const valorCadastro = e => setCadastro({ ...cadastro, [e.target.name]: e.target.value });
+  // const emailValido = (email) => {
+  //   const regex = /^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+\\.([a-z]+)?$/i;
+  //   return regex.test(email);
+  // }
   const senhaForte = (senha) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     return regex.test(senha);
   };
 
-  const handleClickCadastro = async e =>{
+  const handleClickCadastro = async e => {
     e.preventDefault();
+    // if (!emailValido(cadastro.email)) {
+    //   setEmail('Email inválido');
+    //   return;
+    // }else{
+    //   setEmail('');
+    // }
     if (!senhaForte(cadastro.senha)) {
       setSenha('Senha fraca');
       return;
-    }else{
+    } else {
       setSenha('');
     }
-    console.log(cadastro.cnaeNumeros);
-    Axios.get("https://servicodados.ibge.gov.br/api/v2/cnae/classes/" + cadastro.cnaeNumeros)
-    .then((response) =>{
-      if(response.data.length > 0) {
-        setCnae("");
-        console.log(response.data);
-        Axios.post("http://localhost:8080/api/v1/ong",{
-          nome: cadastro.nome,
-          cnae: cadastro.cnae,
-          email: cadastro.email,
-          telefone: cadastro.telefone,
-          senha: cadastro.senha
-        }).then((response) => {
-          localStorage.setItem("id", response.data.id);
-          console.log(response.data);
-        })
-        window.location.pathname = "/perfil-ong"
-      } else {
-        console.log(response.data);
-        setCnae("Cnae inválido");
-        return;
-      }
-    })
+    console.log(cadastro);
 
-    /**/
+    Axios.post("http://localhost:8080/api/v1/ong", {
+      nome: cadastro.nome,
+      cnae: cadastro.cnae,
+      email: cadastro.email,
+      telefone: cadastro.telefone,
+      senha: cadastro.senha
+    }).then((response) => {
+      localStorage.setItem("id", response.data.id);
+    })
   };
 
-  
+
   return (
     <>
       <Menu />
@@ -88,27 +68,28 @@ export default function Cadastro() {
             <input type="text" name="nome" id="nome" onChange={valorCadastro} required />
             <label for="cnae">Cnae:</label>
             <br />
-            <IMaskInput mask="0000-0/00" name="cnae" id="cnae" onChange={valorCadastro} required/>
+            {/* <IMaskInput mask="0000-0|00" name="cnae" id="cnae" onChange={valorCadastro} required/> */}
+            <input type="text" name="cnae" id="cnae" onChange={valorCadastro} required />
             <br />
-            <p className="invalido">{cnae}</p>
             <label for="email">E-mail:</label>
             <br />
             <input type="email" name="email" id="email" onChange={valorCadastro} required />
             <br />
+            <p className="senha-fraca">{email}</p>
             <label for="telefone">Telefone</label>
             <br />
-            <IMaskInput mask="+00(00)00000-0000" name="telefone" id="telefone" onChange={valorCadastro} required/>
+            <IMaskInput mask="+00(00)00000-0000" name="telefone" id="telefone" onChange={valorCadastro} required />
             <br />
             <label for="senha">Senha:</label>
             <br />
             <input type="password" name="senha" id="senha" onChange={valorCadastro} />
             <br />
-            <p className="invalido">{senha}</p>
+            <p className="senha-fraca">{senha}</p>
             <button>Cadastre</button>
           </form>
         </div>
       </main>
-      <Controle_Cadastros/>
+      <Controle_Cadastros />
       <Vlibras />
     </>
   );
