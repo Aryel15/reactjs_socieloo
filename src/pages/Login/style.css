@@ -5,7 +5,7 @@ nav{
     margin-top: -30px;
     display: flex;
     flex-wrap: wrap;
-    height: 84.7vh;
+    height: auto;
     justify-content:space-between;
     align-content: space-between !important;
     align-items: center;
@@ -15,7 +15,7 @@ nav{
 }
 .imagem{
     background-color: #00a1ff;
-    height: 87vh;
+    height: 90.5vh;
     width: 50vw;
     padding-top: 0px;
 }
@@ -95,11 +95,11 @@ label{
     padding-right: 5px;
     height: auto;
 }
-.cadastro{
+.cadastro-login{
     margin-left: 0px;
-    font-size: 0.81em;
+    font-size: 14px;
 }
-.cadastro a{
+.cadastro-login a{
     float: none;
 }
 .esqueceu_senha{
