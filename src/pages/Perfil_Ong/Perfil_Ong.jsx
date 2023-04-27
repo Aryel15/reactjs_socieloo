@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.css'
 import Menu from '../../components/Menu/Menu'
 import Vlibras from '../../components/Vlibras/Vlibras'
@@ -10,66 +10,66 @@ export default function Perfil_Ong() {
     const [ong, setOng] = useState(true);
     const [stepE, setEStep] = React.useState("Editar_Perfil");
     const editar = {
-        Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep} data={data}/>, 
-        Alterar_Senha: <Alterar_Senha step={stepE} setStep={setEStep} data={data}/>,
-        Alterar_Email: <Alterar_Email step={stepE} setStep={setEStep} data={data}/>,
-        Deletar_Conta: <Deletar_Conta step={stepE} setStep={setEStep} data={data} id={id}/>,
+        Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep} data={data} />,
+        Alterar_Senha: <Alterar_Senha step={stepE} setStep={setEStep} data={data} id={id}  />,
+        Alterar_Email: <Alterar_Email step={stepE} setStep={setEStep} data={data} id={id}  />,
+        Deletar_Conta: <Deletar_Conta step={stepE} setStep={setEStep} data={data} id={id} />,
     }
-    useEffect(() =>{
+    useEffect(() => {
         Axios.get("http://localhost:8080/api/v1/ong/" + id)
-        .then((response) =>{
-            setData(response.data);
-        })
-    },[])
+            .then((response) => {
+                setData(response.data);
+            })
+    }, [])
 
-  return (
-    <>
-    <Menu/>
-    <main id="edit" >
-        <section className="edit__conteiner" id="conteudo" >
+    return (
+        <>
+            <Menu />
+            <main id="edit" >
+                <section className="edit__conteiner" id="conteudo" >
 
-            <aside className="edit__options">
-                <div className="options__photos">
-                    {ong === true ? <img src="../imgs/fotosOng/fotos01.jpg" alt="foto de perfil escolhida pela ong"/> :""}
-                    <h1>{data?.nome}</h1>
-                </div>
+                    <aside className="edit__options">
+                        <div className="options__photos">
+                            {ong === true ? <img src="../imgs/fotosOng/fotos01.jpg" alt="foto de perfil escolhida pela ong" /> : ""}
+                            <h1>{data?.nome}</h1>
+                        </div>
 
-                <ul className="options__itens">
-                    {ong === true ? 
-                    <>
-                        <li className={stepE === "Editar_Perfil" ? "select": ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Editar_Perfil")}><i className='bx bx-pencil'></i> Editar perfil</a></li>
-                        <li className={stepE === "Alterar_Senha" ? "select": ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Senha")}><i className='bx bxs-lock-alt'></i> Alterar senha</a></li>
-                        <li className={stepE === "Alterar_Email" ? "select": ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Email")}><i className='bx bxs-lock-alt'></i> Alterar email</a></li>
-                        <li className={stepE === "Deletar_Conta" ? "select": ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Deletar_Conta")}><i className='bx bxs-message-square-x'></i> Deletar conta</a></li>
-                    </>:""
-                    }
-                </ul>
+                        <ul className="options__itens">
+                            {ong === true ?
+                                <>
+                                    <li className={stepE === "Editar_Perfil" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Editar_Perfil")}><i className='bx bx-pencil'></i> Editar perfil</a></li>
+                                    <li className={stepE === "Alterar_Senha" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Senha")}><i className='bx bxs-lock-alt'></i> Alterar senha</a></li>
+                                    <li className={stepE === "Alterar_Email" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Email")}><i className='bx bxs-lock-alt'></i> Alterar email</a></li>
+                                    <li className={stepE === "Deletar_Conta" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Deletar_Conta")}><i className='bx bxs-message-square-x'></i> Deletar conta</a></li>
+                                </> : ""
+                            }
+                        </ul>
 
-            </aside>
+                    </aside>
 
-            <section className="edit__content">
-                {ong === true ? editar[stepE] : <Criar_Conta data={data} id={id}/>}
-            </section>
-        </section>
-    </main>
-    <Vlibras/>
-    </>
-  )
+                    <section className="edit__content">
+                        {ong === true ? editar[stepE] : <Criar_Conta data={data} id={id} />}
+                    </section>
+                </section>
+            </main>
+            <Vlibras />
+        </>
+    )
 }
 
-function Editar_Perfil({stepE, setEStep, data}){
-    return(
+function Editar_Perfil({ stepE, setEStep, data }) {
+    return (
         <>
             <h2>Editar perfil</h2>
             <form action="#" className="content__form">
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" value={data?.nome}/>
+                <input type="text" id="nome" name="nome" value={data?.nome} />
 
                 <label for="telefone">Telefone</label>
-                <input type="tel" id="telefone" name="telefone" value={data?.telefone}/>
+                <input type="tel" id="telefone" name="telefone" value={data?.telefone} />
 
                 <label for="endereço">Endereço</label>
-                <input type="text" id="endereço" name="endereço" value={data?.endereco}/>
+                <input type="text" id="endereço" name="endereço" value={data?.endereco} />
 
                 <label for="Sobre">Descrição</label>
                 <textarea name="Sobre" id="Sobre" value={data?.descrição}></textarea>
@@ -82,38 +82,66 @@ function Editar_Perfil({stepE, setEStep, data}){
     )
 }
 
-function Alterar_Email ({stepE, setEStep, data}){
-    return(
+function Alterar_Email({ stepE, setEStep, data, id }) {
+
+    const [email, setEmail] = useState("")
+
+    const handleClickAlterarEmail = e =>{
+        e.preventDefault()
+        console.log(email);
+        Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
+            email: email,
+        }).then((response) => {
+            console.log(response);
+        })
+    }
+
+    return (
         <>
-            <form action="#" className="content__form senha">
-                <h2>Alterar senha</h2>
+            <form action="#" className="content__form senha" onSubmit={handleClickAlterarEmail}>
+                <h2>Alterar Email</h2>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value={data?.email}/>
+                <input type="email" id="email" name="email" value={data?.email} />
                 <label for="newEmail">Email novo</label>
-                <input type="email" id="newEmail" name="newEmail"/>
+                <input type="email" id="newEmail" name="newEmail" onChange={e => setEmail(e.target.value)}/>
                 <button type="submit" className="button-as">Alterar</button>
             </form>
         </>
     )
 }
-function Alterar_Senha({stepE, setEStep, data}){
-    return(
+function Alterar_Senha({ stepE, setEStep, data, id}) {
+
+
+    const [senha, setSenha] = useState("")
+
+    const handleClickAlterarSenha = e => {
+        e.preventDefault()
+        console.log(senha);
+        Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
+            senha: senha,
+        }).then((response) => {
+            console.log(response);
+        })
+    }
+
+
+    return (
         <>
-            <form action="#" className="content__form senha">
-                <h2>Alterar email</h2>
+            <form action="#" className="content__form senha" onSubmit={handleClickAlterarSenha}>
+                <h2>Alterar Senha</h2>
                 <div>
-                <label for="senha">Senha atual</label>
-                <input type="password" name="senha" id="senha" value={data?.senha}/>
+                    <label for="senha">Senha atual</label>
+                    <input type="password" name="senha" id="senha" value={data?.senha} />
                 </div>
 
                 <div>
-                <label for="novaSenha">Nova senha</label>
-                <input type="password" name="novaSenha" id="novaSenha" />
+                    <label for="novaSenha">Nova senha</label>
+                    <input type="password" name="novaSenha" id="novaSenha" />
                 </div>
 
                 <div>
-                <label for="repeteSenha">Repita nova senha</label>
-                <input type="password" name="repeteSenha" id="repeteSenha" />
+                    <label for="repeteSenha">Repita nova senha</label>
+                    <input type="password" name="repeteSenha" id="repeteSenha" onChange={e => setSenha(e.target.value)}/>
                 </div>
 
                 <button type="submit" className="button-as">Salvar alterações</button>
@@ -122,17 +150,17 @@ function Alterar_Senha({stepE, setEStep, data}){
     )
 }
 
-function Deletar_Conta({stepE, setEStep, data, id}){
-    function Delete(){
+function Deletar_Conta({ stepE, setEStep, data, id }) {
+    function Delete() {
         Axios.delete("http://localhost:8080/api/v1/ong/" + id)
-        .then((response) =>{
-            console.log(response.data);
-        })
+            .then((response) => {
+                console.log(response.data);
+            })
         localStorage.removeItem("id");
         window.location.pathname = "/";
     }
     const [deletar, setDeletar] = useState(false)
-    return(
+    return (
         <>
             <form action="#" className="content__form senha">
                 <h2>Deletar Conta</h2>
@@ -146,22 +174,22 @@ function Deletar_Conta({stepE, setEStep, data, id}){
         </>
     )
 }
-function Criar_Conta({data, id}){
+function Criar_Conta({ data, id }) {
 
     const [cadastro, setCadastro] = useState({
-    regiao:'',
-    agencia:'',
-    conta:'',
-    pix:'',
-    imagens:'',
-    descrição:'',
-    segmento:''
+        regiao: '',
+        agencia: '',
+        conta: '',
+        pix: '',
+        imagens: '',
+        descrição: '',
+        segmento: ''
     })
 
-    const handleClickCadastro = e =>{
+    const handleClickCadastro = e => {
         e.preventDefault()
         console.log(cadastro);
-        Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
+        Axios.put(`http://localhost:8080/api/v1/ong/${id}`, {
             regiao: cadastro.regiao,
             agencia: cadastro.agencia,
             conta: cadastro.conta,
@@ -174,11 +202,11 @@ function Criar_Conta({data, id}){
             console.log(response.data);
         })
     }
-    const valorCadastro = e => setCadastro({...cadastro, [e.target.name]: e.target.value});
+    const valorCadastro = e => setCadastro({ ...cadastro, [e.target.name]: e.target.value });
 
-    return(
+    return (
         <>
-        <form action="" method="post" onSubmit={handleClickCadastro}>
+            <form action="" method="post" onSubmit={handleClickCadastro}>
                 <h1 className="section__title">Cadastre sua ONG</h1>
                 <section className="form__group">
                     <div className="group__text">
@@ -196,15 +224,15 @@ function Criar_Conta({data, id}){
                         <div className="banco">
                             <div className="agencia">
                                 <label for="agencia">Agência</label>
-                                <input type="text" id="agencia" name="agencia" onChange={valorCadastro} required/>
+                                <input type="text" id="agencia" name="agencia" onChange={valorCadastro} required />
                             </div>
                             <div className="conta">
                                 <label for="conta">Conta</label>
-                                <input type="text" id="conta" name="conta" onChange={valorCadastro} required/>
+                                <input type="text" id="conta" name="conta" onChange={valorCadastro} required />
                             </div>
                         </div>
                         <label for="pix">Pix</label>
-                        <input type="text" id="pix" name="pix" onChange={valorCadastro} required/>
+                        <input type="text" id="pix" name="pix" onChange={valorCadastro} required />
                         <label htmlFor="imagens">Imagens</label>
                         <input type="file" name="imagens" id="imagens" onChange={valorCadastro} />
                         <label for="desc">Descrição</label>
@@ -215,35 +243,35 @@ function Criar_Conta({data, id}){
                         <div className="about__radios">
                             <p>Qual a causa da sua ONG?</p>
                             <div className="radio__options">
-                                <input type="radio" id="saude" name="segmento" value="saude" onChange={valorCadastro}/>
+                                <input type="radio" id="saude" name="segmento" value="saude" onChange={valorCadastro} />
                                 <label for="saude">Saúde</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="educacao" value="educacao" name="segmento" onChange={valorCadastro}/>
+                                <input type="radio" id="educacao" value="educacao" name="segmento" onChange={valorCadastro} />
                                 <label for="educacao">Educação</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="cidadania" value="cidadania" name="segmento" onChange={valorCadastro}/>
+                                <input type="radio" id="cidadania" value="cidadania" name="segmento" onChange={valorCadastro} />
                                 <label for="cidadania">Cidadania</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="culturaOuEsporte" value="culturaOuEsporte" name="segmento" onChange={valorCadastro}/>
+                                <input type="radio" id="culturaOuEsporte" value="culturaOuEsporte" name="segmento" onChange={valorCadastro} />
                                 <label for="culturaOuEsporte">Cultura ou esporte</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="generoOudiversidade" value="generoOudiversidade" name="segmento" onChange={valorCadastro}/>
+                                <input type="radio" id="generoOudiversidade" value="generoOudiversidade" name="segmento" onChange={valorCadastro} />
                                 <label for="generoOudiversidade">Gênero e diversidade</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="meioAmbiente" value="meioAmbiente" name="segmento" onChange={valorCadastro}/>
+                                <input type="radio" id="meioAmbiente" value="meioAmbiente" name="segmento" onChange={valorCadastro} />
                                 <label for="meioAmbiente">Meio ambiente</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="protecaoAmbiental" value="protecaoAmbiental" name="segmento" onChange={valorCadastro}/>
+                                <input type="radio" id="protecaoAmbiental" value="protecaoAmbiental" name="segmento" onChange={valorCadastro} />
                                 <label for="protecaoAmbiental">Proteção Ambiental</label>
                             </div>
                             <div className="radio__options">
-                                <input type="radio" id="outro" value="outro" name="segmento" onChange={valorCadastro}/>
+                                <input type="radio" id="outro" value="outro" name="segmento" onChange={valorCadastro} />
                                 <label for="outro">Outro</label>
                             </div>
                         </div>

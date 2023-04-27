@@ -16,7 +16,25 @@ export default function Cadastro() {
     telefone: '',
     senha: ''
   })
-  const valorCadastro = e => setCadastro({ ...cadastro, [e.target.name]: e.target.value });
+  // const valorCadastro = e => setCadastro({ ...cadastro, [e.target.name]: e.target.value });
+
+  const valorCadastro = e => {
+    const { name, value } = e.target;
+    if (name === 'telefone') {
+      const telefone_int = value.replace(/[^\d]/g, '');
+      setCadastro({
+        ...cadastro,
+        telefone: telefone_int,
+      });
+    } else {
+      setCadastro({
+        ...cadastro,
+        [name]: value
+      });
+    }
+  };
+
+
   // const emailValido = (email) => {
   //   const regex = /^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+\\.([a-z]+)?$/i;
   //   return regex.test(email);
@@ -28,12 +46,15 @@ export default function Cadastro() {
 
   const handleClickCadastro = async e => {
     e.preventDefault();
+    console.log(cadastro.telefone.replace(/[^\d]/g, ''));
+
     // if (!emailValido(cadastro.email)) {
     //   setEmail('Email inválido');
     //   return;
     // }else{
     //   setEmail('');
     // }
+
     if (!senhaForte(cadastro.senha)) {
       setSenha('Senha fraca');
       return;
@@ -79,7 +100,7 @@ export default function Cadastro() {
             <p className="senha-fraca">{email}</p>
             <label for="telefone">Telefone</label>
             <br />
-            <IMaskInput mask="00000000000" name="telefone" id="telefone" onChange={valorCadastro} required />
+            <IMaskInput mask="00000000" name="telefone" id="telefone" onChange={valorCadastro} required />
             <br />
             <label for="senha">Senha:</label>
             <br />
