@@ -27,6 +27,10 @@
     line-height:  1.9rem;
     margin-bottom: 10px;
 }
+.mensagem-cad{
+    color:rgb(0, 207, 0);
+    text-align: center;
+}
 
 .formcad{
     margin-top: 5vh;

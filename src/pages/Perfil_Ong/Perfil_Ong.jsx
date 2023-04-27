@@ -7,7 +7,7 @@ import Axios from 'axios'
 export default function Perfil_Ong() {
     const id = localStorage.getItem("id")
     const [data, setData] = useState()
-    const [ong, setOng] = useState(true);
+    const [ong, setOng] = useState();
     const [stepE, setEStep] = React.useState("Editar_Perfil");
     const editar = {
         Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep} data={data} />,
@@ -19,6 +19,11 @@ export default function Perfil_Ong() {
         Axios.get("http://localhost:8080/api/v1/ong/" + id)
             .then((response) => {
                 setData(response.data);
+                if(data.descricao === undefined){
+                    setOng(false)
+                }else{
+                    setOng(true)
+                }
             })
     }, [])
 
@@ -48,7 +53,7 @@ export default function Perfil_Ong() {
                     </aside>
 
                     <section className="edit__content">
-                        {ong === true ? editar[stepE] : <Criar_Conta data={data} id={id} />}
+                        {ong === true ? editar[stepE] : <Criar_Conta data={data} id={id} setOng={setOng}/>}
                     </section>
                 </section>
             </main>
@@ -72,7 +77,7 @@ function Editar_Perfil({ stepE, setEStep, data }) {
                 <input type="text" id="endereço" name="endereço" value={data?.endereco} />
 
                 <label for="Sobre">Descrição</label>
-                <textarea name="Sobre" id="Sobre" value={data?.descrição}></textarea>
+                <textarea name="Sobre" id="Sobre" value={data?.descricao}></textarea>
 
                 <div className="form__button">
                     <button>Salvar edição</button>
@@ -83,7 +88,7 @@ function Editar_Perfil({ stepE, setEStep, data }) {
 }
 
 function Alterar_Email({ stepE, setEStep, data, id }) {
-
+    const [msg, setMsg] = useState("")
     const [email, setEmail] = useState("")
 
     const handleClickAlterarEmail = e =>{
@@ -93,6 +98,10 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
             email: email,
         }).then((response) => {
             console.log(response);
+            setMsg("✔ Você mudou seu email")
+            setTimeout(() => {
+                window.location.pathname = "/perfil-ong"
+            }, 2000); 
         })
     }
 
@@ -100,6 +109,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
         <>
             <form action="#" className="content__form senha" onSubmit={handleClickAlterarEmail}>
                 <h2>Alterar Email</h2>
+                <p className="mensagem-as">{msg}</p>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" value={data?.email} />
                 <label for="newEmail">Email novo</label>
@@ -111,7 +121,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
 }
 function Alterar_Senha({ stepE, setEStep, data, id}) {
 
-
+    const [msg, setMsg] = useState("")
     const [senha, setSenha] = useState("")
 
     const handleClickAlterarSenha = e => {
@@ -121,6 +131,10 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
             senha: senha,
         }).then((response) => {
             console.log(response);
+            setMsg("✔ Você mudou sua senha")
+            setTimeout(() => {
+                window.location.pathname = "/perfil-ong"
+            }, 2000); 
         })
     }
 
@@ -129,6 +143,7 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
         <>
             <form action="#" className="content__form senha" onSubmit={handleClickAlterarSenha}>
                 <h2>Alterar Senha</h2>
+                <p className="mensagem-as">{msg}</p>
                 <div>
                     <label for="senha">Senha atual</label>
                     <input type="password" name="senha" id="senha" value={data?.senha} />
@@ -157,9 +172,14 @@ function Deletar_Conta({ stepE, setEStep, data, id }) {
                 console.log(response.data);
             })
         localStorage.removeItem("id");
-        window.location.pathname = "/";
+        setMsg("Sua Ong foi deletada")
+        setTimeout(() => {
+            window.location.pathname = "/"
+        }, 2000); 
+        
     }
     const [deletar, setDeletar] = useState(false)
+    const [msg, setMsg] = useState("")
     return (
         <>
             <form action="#" className="content__form senha">
@@ -170,19 +190,20 @@ function Deletar_Conta({ stepE, setEStep, data, id }) {
                     <a className="button-as" href="/perfil-ong">Não</a>
                 </div>
                 {deletar === true ? <a className="button-as delete" onClick={Delete}>Deletar conta</a> : ""}
+                <p className="mensagem">{msg}</p>
             </form>
         </>
     )
 }
-function Criar_Conta({ data, id }) {
-
+function Criar_Conta({ data, id, setOng }) {
+    const [msg, setMsg] = useState("")
     const [cadastro, setCadastro] = useState({
         regiao: '',
         agencia: '',
         conta: '',
         pix: '',
         imagens: '',
-        descrição: '',
+        descricao: '',
         segmento: ''
     })
 
@@ -190,16 +211,20 @@ function Criar_Conta({ data, id }) {
         e.preventDefault()
         console.log(cadastro);
         Axios.put(`http://localhost:8080/api/v1/ong/${id}`, {
-            regiao: cadastro.regiao,
+            endereco: cadastro.regiao,
             agencia: cadastro.agencia,
             conta: cadastro.conta,
             pix: cadastro.pix,
             imagens: cadastro.imagens,
-            descrição: cadastro.descrição,
+            descricao: cadastro.descricao,
             segmento: cadastro.segmento
         }).then((response) => {
             localStorage.setItem("id", response.data.id);
             console.log(response.data);
+            setMsg("✔ Você completou o cadastro")
+            setTimeout(() => {
+                setOng(true);
+            }, 2000); 
         })
     }
     const valorCadastro = e => setCadastro({ ...cadastro, [e.target.name]: e.target.value });
@@ -208,6 +233,7 @@ function Criar_Conta({ data, id }) {
         <>
             <form action="" method="post" onSubmit={handleClickCadastro}>
                 <h1 className="section__title">Cadastre sua ONG</h1>
+                <p className="mensagem-cad">{msg}</p>
                 <section className="form__group">
                     <div className="group__text">
                         <label for="regiao">Região</label>
@@ -235,8 +261,8 @@ function Criar_Conta({ data, id }) {
                         <input type="text" id="pix" name="pix" onChange={valorCadastro} required />
                         <label htmlFor="imagens">Imagens</label>
                         <input type="file" name="imagens" id="imagens" onChange={valorCadastro} />
-                        <label for="desc">Descrição</label>
-                        <textarea name="desc" id="desc" cols="30" rows="10" onChange={valorCadastro} ></textarea>
+                        <label for="descricao">Descrição</label>
+                        <textarea name="descricao" id="descricao" cols="30" rows="10" onChange={valorCadastro} ></textarea>
                     </div>
 
                     <div className="group__about">

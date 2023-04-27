@@ -8,7 +8,7 @@ import "./style.css";
 
 export default function Cadastro() {
   const [senha, setSenha] = useState("")
-  const [email, setEmail] = useState("")
+  const [msg, setMsg] = useState("")
   const [cadastro, setCadastro] = useState({
     nome: '',
     cnae: '',
@@ -35,10 +35,7 @@ export default function Cadastro() {
   };
 
 
-  // const emailValido = (email) => {
-  //   const regex = /^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+\\.([a-z]+)?$/i;
-  //   return regex.test(email);
-  // }
+
   const senhaForte = (senha) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     return regex.test(senha);
@@ -47,13 +44,6 @@ export default function Cadastro() {
   const handleClickCadastro = async e => {
     e.preventDefault();
     console.log(cadastro.telefone.replace(/[^\d]/g, ''));
-
-    // if (!emailValido(cadastro.email)) {
-    //   setEmail('Email inválido');
-    //   return;
-    // }else{
-    //   setEmail('');
-    // }
 
     if (!senhaForte(cadastro.senha)) {
       setSenha('Senha fraca');
@@ -71,7 +61,10 @@ export default function Cadastro() {
       senha: cadastro.senha
     }).then((response) => {
       localStorage.setItem("id", response.data.id);
-      window.location.pathname = "/perfil-ong"
+      setMsg("✔ Sua Ong foi cadastrada")
+      setTimeout(() => {
+        window.location.pathname = "/perfil-ong"
+      }, 3000); 
     })
   };
 
@@ -83,6 +76,7 @@ export default function Cadastro() {
         <div className="formulario">
           <form className="formcad" id="login" action="javascript:void(0)" onSubmit={handleClickCadastro}>
             <div className="titulo-cad">
+              <p className="mensagem-cad">{msg}</p>
               <h1>Cadastre sua Ong</h1>
             </div>
             <label for="nome">Nome:</label>
@@ -97,7 +91,6 @@ export default function Cadastro() {
             <br />
             <input type="email" name="email" id="email" onChange={valorCadastro} required />
             <br />
-            <p className="senha-fraca">{email}</p>
             <label for="telefone">Telefone</label>
             <br />
             <IMaskInput mask="00000000" name="telefone" id="telefone" onChange={valorCadastro} required />
