@@ -50,6 +50,7 @@ export default function Cadastro() {
       senha: cadastro.senha
     }).then((response) => {
       localStorage.setItem("id", response.data.id);
+      window.location.pathname = "/perfil-ong"
     })
   };
 
@@ -78,7 +79,7 @@ export default function Cadastro() {
             <p className="senha-fraca">{email}</p>
             <label for="telefone">Telefone</label>
             <br />
-            <IMaskInput mask="+00(00)00000-0000" name="telefone" id="telefone" onChange={valorCadastro} required />
+            <IMaskInput mask="00000000000" name="telefone" id="telefone" onChange={valorCadastro} required />
             <br />
             <label for="senha">Senha:</label>
             <br />
