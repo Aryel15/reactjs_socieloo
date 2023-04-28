@@ -122,20 +122,39 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
 function Alterar_Senha({ stepE, setEStep, data, id}) {
 
     const [msg, setMsg] = useState("")
+    const [senhaFraca, setSenhaFraca] = useState("")
     const [senha, setSenha] = useState("")
+    const [senhaDiferente, setSenhaDiferente] = useState("")
+    const [novaSenha, setNovaSenha] = useState("")
+
+    const senhaForte = (senha) => {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+        return regex.test(senha);
+    };
 
     const handleClickAlterarSenha = e => {
         e.preventDefault()
-        console.log(senha);
-        Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
-            senha: senha,
-        }).then((response) => {
-            console.log(response);
-            setMsg("✔ Você mudou sua senha")
-            setTimeout(() => {
-                window.location.pathname = "/perfil-ong"
-            }, 2000); 
-        })
+        if (!senhaForte(senha)) {
+            setSenhaFraca('Senha fraca');
+            return;
+        } else {
+            if (senha !== novaSenha) {
+                setSenhaFraca('');
+                setSenhaDiferente('As senhas são diferentes');
+                return;
+            } else {
+                setSenhaDiferente('');
+                Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
+                    senha: senha,
+                }).then((response) => {
+                    console.log(response);
+                    setMsg("✔ Você mudou sua senha")
+                    setTimeout(() => {
+                        window.location.pathname = "/perfil-ong"
+                    }, 2000); 
+                })
+            }
+        }
     }
 
 
@@ -151,12 +170,14 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
 
                 <div>
                     <label for="novaSenha">Nova senha</label>
-                    <input type="password" name="novaSenha" id="novaSenha" />
+                    <input type="password" name="novaSenha" id="novaSenha" onChange={e => setNovaSenha(e.target.value)}/>
+                    <p className="senha-fraca">{senhaFraca}</p>
                 </div>
 
                 <div>
                     <label for="repeteSenha">Repita nova senha</label>
                     <input type="password" name="repeteSenha" id="repeteSenha" onChange={e => setSenha(e.target.value)}/>
+                    <p className="senha-fraca">{senhaDiferente}</p>
                 </div>
 
                 <button type="submit" className="button-as">Salvar alterações</button>
@@ -210,7 +231,8 @@ function Criar_Conta({ data, id, setOng }) {
     const handleClickCadastro = e => {
         e.preventDefault()
         console.log(cadastro);
-        Axios.put(`http://localhost:8080/api/v1/ong/${id}`, {
+        setOng(true);
+        /*Axios.put(`http://localhost:8080/api/v1/ong/${id}`, {
             endereco: cadastro.regiao,
             agencia: cadastro.agencia,
             conta: cadastro.conta,
@@ -225,7 +247,7 @@ function Criar_Conta({ data, id, setOng }) {
             setTimeout(() => {
                 setOng(true);
             }, 2000); 
-        })
+        })*/
     }
     const valorCadastro = e => setCadastro({ ...cadastro, [e.target.name]: e.target.value });
 
