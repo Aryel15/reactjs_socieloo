@@ -111,7 +111,7 @@ function Cadastrar({step, setStep, cadastro, setCadastro}){
             <br />
             <label for="telefone">Telefone</label>
             <br />
-            <IMaskInput mask="00000000" name="telefone" id="telefone" onChange={valorCadastro} required />
+            <IMaskInput mask="00(00)000000000" name="telefone" id="telefone" onChange={valorCadastro} required />
             <br />
             <label for="senha">Senha:</label>
             <br />

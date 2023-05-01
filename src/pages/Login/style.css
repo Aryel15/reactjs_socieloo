@@ -120,6 +120,12 @@ label{
 .aside_login{
     align-items: center;
 }
+.error{
+    display: none;
+}
+.show{
+    display: block;
+}
 @media only screen and (max-width: 1140px){
     .aside_login {
         display: flex !important;
