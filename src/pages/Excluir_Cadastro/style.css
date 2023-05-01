@@ -1,11 +1,8 @@
 .main-excad{
     width: 100vw;
     height: 74vh;
-    background-image: url(../imgs/fundo.png);
     display: flex;
     justify-content: center;
-    background-size: cover;
-    background-repeat: repeat-y;
 }
 .main-excad p {
     font-weight: 400;

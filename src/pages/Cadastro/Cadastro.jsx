@@ -72,14 +72,13 @@ function Cadastrar({step, setStep, cadastro, setCadastro}){
       return;
     } else {
       setSenha('');
-      sessionStorage.setItem("dados", cadastro)
       sessionStorage.setItem("codigo", codigo)
 
       emailjs.init("user_J1drGGzW0lBRJmiE0X9Kg");
-      emailjs.send("serviceID", "templateID", {
+      emailjs.send("serviceID", "template_xwxib2d", {
         to_email: cadastro.email,
         codigo: codigo.toString(),
-      }, "public_key")
+      }, "QSlqTSkhTipqcM7El")
       .then((response) => {
         console.log("SUCCESS!", response.status, response.text);
         setStep(step+1);
@@ -137,6 +136,7 @@ function ValidaEmail({cadastro}){
       const codigoArmazenado = sessionStorage.getItem("codigo");
       if (codigo === codigoArmazenado) {
         console.log(cadastro)
+        window.sessionStorage.removeItem("codigo")
         Axios.post("http://localhost:8080/api/v1/ong", {
           nome: cadastro.nome,
           cnae: cadastro.cnae,

@@ -139,7 +139,7 @@ export function Etapa3({step, setStep}) {
 }
 export function Etapa4({step, setStep}) {
   return (
-    <section>
+    <section className="section-user">
         <form action="#" method="post" class="form-container">
           <h1 class="section__title">
             Digite o código enviado pelo e-mail

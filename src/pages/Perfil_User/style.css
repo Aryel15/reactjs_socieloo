@@ -154,11 +154,14 @@
     display: flex;
     gap: 5rem;
     margin: 6.75rem 6.375rem;
+    
   }
   
   .profile.column {
     flex-direction: column;
+    display: flex;
     gap: 0;
+    justify-content: flex-start;
   }
   
   .profile .container {

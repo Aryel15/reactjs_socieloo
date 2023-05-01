@@ -19,7 +19,7 @@ export default function Perfil_Ong() {
         Axios.get("http://localhost:8080/api/v1/ong/" + id)
             .then((response) => {
                 setData(response.data);
-                if(data.descricao === undefined){
+                if(data.descricao === null){
                     setOng(false)
                 }else{
                     setOng(true)
@@ -77,7 +77,7 @@ function Editar_Perfil({ stepE, setEStep, data }) {
                 <input type="text" id="endereço" name="endereço" value={data?.endereco} />
 
                 <label for="Sobre">Descrição</label>
-                <textarea name="Sobre" id="Sobre" value={data?.descricao}></textarea>
+                <textarea name="Sobre" id="Sobre">{data?.descricao}</textarea>
 
                 <div className="form__button">
                     <button>Salvar edição</button>
@@ -232,14 +232,8 @@ function Criar_Conta({ data, id, setOng }) {
         e.preventDefault()
         console.log(cadastro);
         setOng(true);
-        /*Axios.put(`http://localhost:8080/api/v1/ong/${id}`, {
-            endereco: cadastro.regiao,
-            agencia: cadastro.agencia,
-            conta: cadastro.conta,
-            pix: cadastro.pix,
-            imagens: cadastro.imagens,
-            descricao: cadastro.descricao,
-            segmento: cadastro.segmento
+        Axios.put(`http://localhost:8080/api/v1/ong/${id}`, {
+            descricao: cadastro.descricao
         }).then((response) => {
             localStorage.setItem("id", response.data.id);
             console.log(response.data);
@@ -247,7 +241,7 @@ function Criar_Conta({ data, id, setOng }) {
             setTimeout(() => {
                 setOng(true);
             }, 2000); 
-        })*/
+        })
     }
     const valorCadastro = e => setCadastro({ ...cadastro, [e.target.name]: e.target.value });
 
@@ -324,7 +318,7 @@ function Criar_Conta({ data, id, setOng }) {
                             </div>
                         </div>
                         <div className="form__button">
-                            <button>Finalizar Cadstro</button>
+                            <button>Finalizar Cadastro</button>
                         </div>
                     </div>
                 </section>

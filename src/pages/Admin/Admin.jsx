@@ -10,7 +10,6 @@ export default function Admin() {
             <Menu />
             <main id="main-admin">
                 <section className="imagem">
-                    <img src="./imgs/iconswhite.svg" alt="" />
                 </section>
                 <aside className="aside_admin">
                     <form id="admin" action="">

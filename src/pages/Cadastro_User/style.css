@@ -129,6 +129,9 @@
     align-items: center;
     gap: 1rem;
   }
+  .section-user .form-container p{
+    text-align: center;
+  }
   a.button-white img {
     width: 15px;
   }

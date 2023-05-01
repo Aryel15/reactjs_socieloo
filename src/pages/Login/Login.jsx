@@ -9,7 +9,6 @@ export default function Login() {
             <Menu />
             <main id="main-login">
                 <section className="imagem">
-                    <img src='./imgs/iconswhite.svg' alt="" />
                 </section>
                 <aside className="aside_login">
                     <form id="login" action="">

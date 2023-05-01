@@ -13,10 +13,6 @@
     display: flex;
     place-content: center;
     background: #00a1ff;
-    background-image: url('../imgs/iconswhite.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
 }
 
 .edit__conteiner {
