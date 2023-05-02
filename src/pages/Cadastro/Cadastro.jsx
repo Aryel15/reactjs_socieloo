@@ -14,7 +14,14 @@ export default function Cadastro() {
     cnae: '',
     email: '',
     telefone: '',
-    senha: ''
+    senha: '',
+    regiao: '',
+    agencia: '',
+    conta: '',
+    pix: '',
+    imagens: '',
+    descricao: '',
+    segmento: ''
   })
   const pages = [
     <Cadastrar step={step} setStep={setStep} setCadastro={setCadastro} cadastro={cadastro}/>, 
@@ -97,27 +104,92 @@ function Cadastrar({step, setStep, cadastro, setCadastro}){
             <div className="titulo-cad">
               <h1>Cadastre sua Ong</h1>
             </div>
-            <label for="nome">Nome:</label>
-            <br />
-            <input type="text" name="nome" id="nome" onChange={valorCadastro} required />
-            <label for="cnae">Cnae:</label>
-            <br />
-            {/* <IMaskInput mask="0000-0|00" name="cnae" id="cnae" onChange={valorCadastro} required/> */}
-            <input type="text" name="cnae" id="cnae" onChange={valorCadastro} required />
-            <br />
-            <label for="email">E-mail:</label>
-            <br />
-            <input type="email" name="email" id="email" onChange={valorCadastro} required />
-            <br />
-            <label for="telefone">Telefone</label>
-            <br />
-            <IMaskInput mask="00(00)000000000" name="telefone" id="telefone" onChange={valorCadastro} required />
-            <br />
-            <label for="senha">Senha:</label>
-            <br />
-            <input type="password" name="senha" id="senha" onChange={valorCadastro} />
-            <br />
-            <p className="senha-fraca">{senha}</p>
+            <main className="form-cad">
+              <section className="form__group">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" onChange={valorCadastro} required />
+                <label for="cnae">Cnae:</label>
+                {/* <IMaskInput mask="0000-0|00" name="cnae" id="cnae" onChange={valorCadastro} required/> */}
+                <input type="text" name="cnae" id="cnae" onChange={valorCadastro} required />
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" id="email" onChange={valorCadastro} required />
+                <label for="telefone">Telefone</label>
+                <IMaskInput mask="00(00)000000000" name="telefone" id="telefone" onChange={valorCadastro} required />
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" onChange={valorCadastro} />
+                <p className="senha-fraca">{senha}</p>
+              </section>
+
+              <section className="form__group">
+                  <label for="regiao">Região</label>
+                  <div id="group__select">
+                    <select name="regiao" id="regiao" onChange={valorCadastro} className="cad-select" required>
+                      <option value="#" selected disabled>Selecione uma opção</option>
+                      <option value="norte">Zona Norte</option>
+                      <option value="sul">Zona Sul</option>
+                      <option value="centro">Centro</option>
+                      <option value="leste">Zona Leste</option>
+                      <option value="oeste">Zona Oeste</option>
+                    </select>
+                  </div>
+                  <div className="banco">
+                    <div className="agencia">
+                      <label for="agencia">Agência</label>
+                      <input type="text" id="agencia" name="agencia" onChange={valorCadastro} required />
+                    </div>
+                    <div className="conta">
+                      <label for="conta">Conta</label>
+                      <input type="text" id="conta" name="conta" onChange={valorCadastro} required />
+                    </div>
+                  </div>
+                  <label for="pix">Pix</label>
+                  <input type="text" id="pix" name="pix" onChange={valorCadastro} required />
+                  <label htmlFor="imagens">Imagens</label>
+                  <input type="file" name="imagens" id="imagens" onChange={valorCadastro} />
+              </section>
+
+              <section className="form__group">
+              <div className="group__about">
+                  <div className="about__radios">
+                    <label className="radio-label">Qual a causa da sua ONG?</label>
+                    <div className="radio__options">
+                      <input type="radio" id="saude" name="segmento" value="saude" onChange={valorCadastro} />
+                      <label for="saude" className="radio__option">Saúde</label>
+                    </div>
+                    <div className="radio__options">
+                      <input type="radio" id="educacao" value="educacao" name="segmento" onChange={valorCadastro} />
+                      <label for="educacao" className="radio__option">Educação</label>
+                    </div>
+                    <div className="radio__options">
+                      <input type="radio" id="cidadania" value="cidadania" name="segmento" onChange={valorCadastro} />
+                      <label for="cidadania" className="radio__option">Cidadania</label>
+                    </div>
+                    <div className="radio__options">
+                      <input type="radio" id="culturaOuEsporte" value="culturaOuEsporte" name="segmento" onChange={valorCadastro} />
+                      <label for="culturaOuEsporte" className="radio__option">Cultura ou esporte</label>
+                    </div>
+                    <div className="radio__options">
+                      <input type="radio" id="generoOudiversidade" value="generoOudiversidade" name="segmento" onChange={valorCadastro} />
+                      <label for="generoOudiversidade" className="radio__option">Gênero e diversidade</label>
+                    </div>
+                    <div className="radio__options">
+                      <input type="radio" id="meioAmbiente" value="meioAmbiente" name="segmento" onChange={valorCadastro} />
+                      <label for="meioAmbiente" className="radio__option">Meio ambiente</label>
+                    </div>
+                    <div className="radio__options">
+                      <input type="radio" id="protecaoAmbiental" value="protecaoAmbiental" name="segmento" onChange={valorCadastro} />
+                      <label for="protecaoAmbiental" className="radio__option">Proteção Ambiental</label>
+                    </div>
+                    <div className="radio__options">
+                      <input type="radio" id="outro" value="outro" name="segmento" onChange={valorCadastro} />
+                      <label for="outro" className="radio__option">Outro</label>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </main>
+            <label for="descricao">Descrição</label>
+            <textarea name="descricao" id="descricao" cols="30" rows="10" onChange={valorCadastro} ></textarea>
             <button>Cadastre</button>
           </form>
         </div>

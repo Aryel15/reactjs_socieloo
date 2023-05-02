@@ -5,7 +5,6 @@ import Admin from './Admin/Admin';
 import Login from './Login/Login'
 import Cadastro_Mod from './Cadastro_Mod/Cadastro_Mod';
 import Cadastro_User from './Cadastro_User/Cadastro_User';
-import Cadastro_Ong from './Cadastro_Ong/Cadastro_Ong';
 import Cadastro from './Cadastro/Cadastro';
 import Ong from './Ong/Ong';
 import Perfil_User from './Perfil_User/Perfil_User';
@@ -29,7 +28,6 @@ export default function Router() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/cadastro-moderador' element={<Cadastro_Mod />} />
                 <Route path='/cadastro-usuario' element={<Cadastro_User />} />
-                <Route path='/cadastro' element={<Cadastro_Ong />} />
                 <Route path='/cadastro-voluntario' element={<Cadastro_Vol />} />
                 <Route path='/cadastro-ong' element={<Cadastro />} />
                 <Route path='/ong' element={<Ong />} />
