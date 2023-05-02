@@ -11,7 +11,7 @@
     border-radius: 50px 50px;
     box-shadow: 5px 3px 5px #00000070;
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
 }
 
 #title-acess {

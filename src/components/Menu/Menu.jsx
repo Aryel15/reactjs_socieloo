@@ -8,7 +8,6 @@ export default function Menu() {
                 <ul id="atalhos">
                     <li className="atalho"><a href="#conteudo" accesskey="1" title="Ir para o conteúdo">Conteúdo[1]↓</a></li>
                     <li className="atalho"><a href="#menu" accesskey="2" title="Ir para o menu de navegação">Menu[2]↓</a></li>
-                    <li className="atalho"><a href="#rodape" accesskey="3" title="Ir para o rodapé">Rodapé[3]↓</a></li>
                     <li className="fonte"><a href="javascript:void(0)" id="ddiminuir" title="Diminuir fonte">A-</a></li>
                     <li className="fonte"><a href="javascript:void(0)" id="aaumentar" title="Aumentar fonte">A+</a></li>
                     <li className="contraste s"><a href="javascript:void(0);" id="ssemcontraste" title="Sem contraste">○</a></li>
