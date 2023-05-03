@@ -24,18 +24,18 @@ export default function Cadastro() {
     segmento: ''
   })
   const pages = [
-    <Cadastrar step={step} setStep={setStep} setCadastro={setCadastro} cadastro={cadastro}/>, 
-    <ValidaEmail step={step} setStep={setStep} cadastro={cadastro}/>, 
+    <Cadastrar step={step} setStep={setStep} setCadastro={setCadastro} cadastro={cadastro} />,
+    <ValidaEmail step={step} setStep={setStep} cadastro={cadastro} />,
   ];
   return (
     <>
       <Menu />
-        {pages[step]}
+      {pages[step]}
     </>
   )
 }
 
-function Cadastrar({step, setStep, cadastro, setCadastro}){
+function Cadastrar({ step, setStep, cadastro, setCadastro }) {
   const [senha, setSenha] = useState("")
 
   // const valorCadastro = e => setCadastro({ ...cadastro, [e.target.name]: e.target.value });
@@ -86,12 +86,12 @@ function Cadastrar({step, setStep, cadastro, setCadastro}){
         to_email: cadastro.email,
         codigo: codigo.toString(),
       }, "QSlqTSkhTipqcM7El")
-      .then((response) => {
-        console.log("SUCCESS!", response.status, response.text);
-        setStep(step+1);
-      }, (err) => {
+        .then((response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          setStep(step + 1);
+        }, (err) => {
           console.log("FAILED...", err);
-      });
+        });
     }
   };
 
@@ -121,35 +121,35 @@ function Cadastrar({step, setStep, cadastro, setCadastro}){
               </section>
 
               <section className="form__group">
-                  <label for="regiao">Região</label>
-                  <div id="group__select">
-                    <select name="regiao" id="regiao" onChange={valorCadastro} className="cad-select" required>
-                      <option value="#" selected disabled>Selecione uma opção</option>
-                      <option value="norte">Zona Norte</option>
-                      <option value="sul">Zona Sul</option>
-                      <option value="centro">Centro</option>
-                      <option value="leste">Zona Leste</option>
-                      <option value="oeste">Zona Oeste</option>
-                    </select>
+                <label for="regiao">Região</label>
+                <div id="group__select">
+                  <select name="regiao" id="regiao" onChange={valorCadastro} className="cad-select" required>
+                    <option value="#" selected disabled>Selecione uma opção</option>
+                    <option value="norte">Zona Norte</option>
+                    <option value="sul">Zona Sul</option>
+                    <option value="centro">Centro</option>
+                    <option value="leste">Zona Leste</option>
+                    <option value="oeste">Zona Oeste</option>
+                  </select>
+                </div>
+                <div className="banco">
+                  <div className="agencia">
+                    <label for="agencia">Agência</label>
+                    <input type="text" id="agencia" name="agencia" onChange={valorCadastro} required />
                   </div>
-                  <div className="banco">
-                    <div className="agencia">
-                      <label for="agencia">Agência</label>
-                      <input type="text" id="agencia" name="agencia" onChange={valorCadastro} required />
-                    </div>
-                    <div className="conta">
-                      <label for="conta">Conta</label>
-                      <input type="text" id="conta" name="conta" onChange={valorCadastro} required />
-                    </div>
+                  <div className="conta">
+                    <label for="conta">Conta</label>
+                    <input type="text" id="conta" name="conta" onChange={valorCadastro} required />
                   </div>
-                  <label for="pix">Pix</label>
-                  <input type="text" id="pix" name="pix" onChange={valorCadastro} required />
-                  <label htmlFor="imagens">Imagens</label>
-                  <input type="file" name="imagens" id="imagens" onChange={valorCadastro} />
+                </div>
+                <label for="pix">Pix</label>
+                <input type="text" id="pix" name="pix" onChange={valorCadastro} required />
+                <label htmlFor="imagens">Imagens</label>
+                <input type="file" name="imagens" id="imagens" onChange={valorCadastro} />
               </section>
 
               <section className="form__group">
-              <div className="group__about">
+                <div className="group__about">
                   <div className="about__radios">
                     <label className="radio-label">Qual a causa da sua ONG?</label>
                     <div className="radio__options">
@@ -199,35 +199,35 @@ function Cadastrar({step, setStep, cadastro, setCadastro}){
     </>
   );
 }
-function ValidaEmail({cadastro}){
-    const [msg, setMsg] = useState("")
-    const [codigo, setCodigo] = useState("")
+function ValidaEmail({ cadastro }) {
+  const [msg, setMsg] = useState("")
+  const [codigo, setCodigo] = useState("")
 
-    const handleClickCadastro = e =>{
-      e.preventDefault()
-      const codigoArmazenado = sessionStorage.getItem("codigo");
-      if (codigo === codigoArmazenado) {
-        console.log(cadastro)
-        window.sessionStorage.removeItem("codigo")
-        Axios.post("http://localhost:8080/api/v1/ong", {
-          nome: cadastro.nome,
-          cnae: cadastro.cnae,
-          email: cadastro.email,
-          telefone: cadastro.telefone,
-          senha: cadastro.senha
-        }).then((response) => {
-          localStorage.setItem("id", response.data.id);
-          setMsg("✔ Sua Ong foi cadastrada")
-          setTimeout(() => {
-            window.location.pathname = "/perfil-ong"
-          }, 3000); 
-        })
-      }else{
-        alert("Código inválido");
-      }
+  const handleClickCadastro = e => {
+    e.preventDefault()
+    const codigoArmazenado = sessionStorage.getItem("codigo");
+    if (codigo === codigoArmazenado) {
+      console.log(cadastro)
+      window.sessionStorage.removeItem("codigo")
+      Axios.post("http://localhost:8080/api/v1/ong", {
+        nome: cadastro.nome,
+        cnae: cadastro.cnae,
+        email: cadastro.email,
+        telefone: cadastro.telefone,
+        senha: cadastro.senha
+      }).then((response) => {
+        localStorage.setItem("id", response.data.id);
+        setMsg("✔ Sua Ong foi cadastrada")
+        setTimeout(() => {
+          window.location.pathname = "/perfil-ong"
+        }, 3000);
+      })
+    } else {
+      alert("Código inválido");
     }
+  }
 
-    return (
+  return (
     <>
       <main className="cadastro">
         <div className="formulario">
