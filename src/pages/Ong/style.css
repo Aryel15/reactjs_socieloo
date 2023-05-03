@@ -165,6 +165,20 @@ ul {
     vertical-align: 5px;
 }
 
+.description__adress__bank{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.description__adress__bank > .description__bank > p:nth-child(1){
+    margin-bottom: 10px;
+}
+
+.description__adress__bank > .description__bank > p:nth-child(1), .description__adress__bank > .description__bank > p:nth-child(2), .description__adress__bank > .description__bank > p:nth-child(4), .description__adress__bank > .description__bank > br + p{
+    font-weight: bold;
+}
+
 /* Responsividade */
 @media screen and (max-width:1700px) {
     .buttons__container {
