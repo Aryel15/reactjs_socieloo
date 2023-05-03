@@ -1,7 +1,13 @@
 import './style.css'
-
+import React from 'react';
 
 export default function Menu() {
+    const id = localStorage.getItem("id")
+    const sair = e =>{
+        e.preventDefault()
+        localStorage.removeItem("id");
+        window.location.pathname = "/login"
+    }
     return (
         <>
             <div id="acessibilidade">
@@ -66,8 +72,24 @@ export default function Menu() {
                                 title="Manual de acessibilidade">Acessibilidade</a></li>
                         </ul>
                     </li>
-                    <li className="links login"><a href='/login' accesskey="5">Fazer login</a></li>
-                    <li className="links botão"><a href='/cadastro-ong' accesskey="6">Cadastre-se</a></li>
+                    {
+                        id == null &&  window.location.pathname != "/perfil-ong" && window.location.pathname != "/ong" ? 
+                        <>
+                            <li className="links login"><a href='/login' accesskey="5">Fazer login</a></li>
+                            <li className="links botão"><a href='/cadastro-ong' accesskey="6">Cadastre-se</a></li>
+                        </> : 
+                        <>
+                            <li className="links">
+                                <a href="" className='perfil'><i class="fa-solid fa-user"></i>Minha Ong</a>
+                                <ul>
+                                    <li className="links"><a href='/ong' accesskey="5">Minha Ong</a></li>
+                                    <li className="links"><a href='/perfil-ong' accesskey="5">Editar Ong</a></li>
+                                    <li className="links"><a href='javascript:void(0)' className='sair' onclick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                                </ul>
+                            </li>
+                        </> 
+                        
+                    }
                 </ul>
             </nav>
         </>

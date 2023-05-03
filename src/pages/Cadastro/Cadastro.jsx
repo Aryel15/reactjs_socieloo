@@ -19,7 +19,6 @@ export default function Cadastro() {
     agencia: '',
     conta: '',
     pix: '',
-    imagens: '',
     descricao: '',
     segmento: ''
   })
@@ -37,6 +36,7 @@ export default function Cadastro() {
 
 function Cadastrar({ step, setStep, cadastro, setCadastro }) {
   const [senha, setSenha] = useState("")
+  const [cnae, setCnae] = useState("")
 
   // const valorCadastro = e => setCadastro({ ...cadastro, [e.target.name]: e.target.value });
 
@@ -73,7 +73,17 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
     e.preventDefault();
 
     let codigo = gerarCodigo();
-
+    Axios.get("https://servicodados.ibge.gov.br/api/v2/cnae/classes/" + cadastro.cnaeNumeros)
+    .then((response) =>{
+      if(response.data.length > 0) {
+        setCnae("");
+        console.log(response.data);
+      } else {
+        console.log(response.data);
+        setCnae("Cnae inválido");
+        return;
+      }
+    })
     if (!senhaForte(cadastro.senha)) {
       setSenha('Senha fraca');
       return;
@@ -99,17 +109,15 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
   return (
     <>
       <main className="cadastro">
-        <div className="formulario">
           <form className="formcad" id="login" action="javascript:void(0)" onSubmit={handleClickCadastro}>
             <div className="titulo-cad">
               <h1>Cadastre sua Ong</h1>
             </div>
-            <main className="form-cad">
+            <div className="form-cad">
               <section className="form__group">
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" id="nome" onChange={valorCadastro} required />
                 <label for="cnae">Cnae:</label>
-                {/* <IMaskInput mask="0000-0|00" name="cnae" id="cnae" onChange={valorCadastro} required/> */}
                 <input type="text" name="cnae" id="cnae" onChange={valorCadastro} required />
                 <label for="email">E-mail:</label>
                 <input type="email" name="email" id="email" onChange={valorCadastro} required />
@@ -187,12 +195,11 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
                   </div>
                 </div>
               </section>
-            </main>
+            </div>
             <label for="descricao">Descrição</label>
             <textarea name="descricao" id="descricao" cols="30" rows="10" onChange={valorCadastro} ></textarea>
             <button>Cadastre</button>
           </form>
-        </div>
       </main>
       <Controle_Cadastros />
       <Vlibras />
@@ -214,14 +221,20 @@ function ValidaEmail({ cadastro }) {
         cnae: cadastro.cnae,
         email: cadastro.email,
         telefone: cadastro.telefone,
-        senha: cadastro.senha
+        senha: cadastro.senha,
+        regiao: cadastro.regiao,
+        agencia: cadastro.agencia,
+        contaCorrente: cadastro.conta,
+        pix: cadastro.pix,
+        descricao: cadastro.descricao,
+        segmento: cadastro.segmento
       }).then((response) => {
         localStorage.setItem("id", response.data.id);
         setMsg("✔ Sua Ong foi cadastrada")
         setTimeout(() => {
           window.location.pathname = "/perfil-ong"
         }, 3000);
-      })
+      }).catch((err) => console.log(err))
     } else {
       alert("Código inválido");
     }

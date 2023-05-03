@@ -1,7 +1,7 @@
 .cadastro{
     display: flex;
     justify-content: center;
-    height: 85vh;
+    height: auto;
 }
 .cadastro p{
     margin: 0;
@@ -35,6 +35,7 @@
     display: flex;
     gap:10px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .form__group{
     flex-direction: column;
@@ -52,11 +53,11 @@
 
 
 .formcad{
-    margin-top: 10vh;
+    margin:10vh 20px 20px 20px;
     background-color: #fff;
     box-shadow: 1px 2px 5px #00000070;
     padding: 20px 30px;
-    min-width: 930px;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
 }
@@ -90,8 +91,14 @@
     border-radius: 3px;
     border:rgb(49, 49, 49) solid 1px;
 }
+.formcad input[type="file"]{
+    border: none;
+}
 .cad-select{
     width: 100%;
+}
+.form-cad section{
+    width: 300px;
 }
 .formcad button{
     margin-top: 10px;

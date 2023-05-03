@@ -59,13 +59,38 @@ nav ul{
 }
 .links{
     margin: 0 10px;
-    height: 60px;
+    height: 100%;
     padding: 20px 0;
 }
 .links a{
     text-decoration: none;
     color: #000;
-    height: 60px;
+    height: 100%;
+}
+.perfil{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.perfil i{
+    font-size: 1.5rem;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    background-color: #00a1ff;
+    color: #fff;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+.sair{
+    display: flex;
+    gap: 5px;
+    align-items: center;  
+}
+.sair i{
+    color: #fff;
+    font-size: 1rem;
 }
 .links ul{
     position: absolute;
@@ -97,8 +122,10 @@ nav ul{
     transition: 0.7s;
 }
 .links ul li a{
-    color: #fff;
+    display: flex;
     transition: 0.7s;
+    align-items: center;
+    color: #fff;
 }
 .botão a{
     background-color: #00a1ff;
@@ -193,7 +220,7 @@ nav ul{
 .links a{
     text-decoration: none;
     color: #000;
-    height: 60px;
+    height: 100%;
 }
 .links ul{
     position: absolute;

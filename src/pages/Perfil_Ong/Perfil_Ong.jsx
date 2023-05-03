@@ -7,7 +7,6 @@ import Axios from 'axios'
 export default function Perfil_Ong() {
     const id = localStorage.getItem("id")
     const [data, setData] = useState()
-    const [ong, setOng] = useState();
     const [stepE, setEStep] = React.useState("Editar_Perfil");
     const editar = {
         Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep} data={data} />,
@@ -16,15 +15,14 @@ export default function Perfil_Ong() {
         Deletar_Conta: <Deletar_Conta step={stepE} setStep={setEStep} data={data} id={id} />,
     }
     useEffect(() => {
-        Axios.get("http://localhost:8080/api/v1/ong/" + id)
+        if(id === null){
+            window.location.pathname = "/login"
+        }else{
+            Axios.get("http://localhost:8080/api/v1/ong/" + id)
             .then((response) => {
                 setData(response.data);
-                if(data.descricao === null){
-                    setOng(false)
-                }else{
-                    setOng(true)
-                }
             })
+        }
     }, [])
 
     return (
@@ -35,25 +33,21 @@ export default function Perfil_Ong() {
 
                     <aside className="edit__options">
                         <div className="options__photos">
-                            {ong === true ? <img src="../imgs/fotosOng/fotos01.jpg" alt="foto de perfil escolhida pela ong" /> : ""}
+                            <img src="../imgs/fotosOng/fotos01.jpg" alt="foto de perfil escolhida pela ong" />
                             <h1>{data?.nome}</h1>
                         </div>
 
                         <ul className="options__itens">
-                            {ong === true ?
-                                <>
-                                    <li className={stepE === "Editar_Perfil" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Editar_Perfil")}><i className='bx bx-pencil'></i> Editar perfil</a></li>
-                                    <li className={stepE === "Alterar_Senha" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Senha")}><i className='bx bxs-lock-alt'></i> Alterar senha</a></li>
-                                    <li className={stepE === "Alterar_Email" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Email")}><i className='bx bxs-lock-alt'></i> Alterar email</a></li>
-                                    <li className={stepE === "Deletar_Conta" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Deletar_Conta")}><i className='bx bxs-message-square-x'></i> Deletar conta</a></li>
-                                </> : ""
-                            }
+                            <li className={stepE === "Editar_Perfil" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Editar_Perfil")}><i className='bx bx-pencil'></i> Editar perfil</a></li>
+                            <li className={stepE === "Alterar_Senha" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Senha")}><i className='bx bxs-lock-alt'></i> Alterar senha</a></li>
+                            <li className={stepE === "Alterar_Email" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Email")}><i className='bx bxs-lock-alt'></i> Alterar email</a></li>
+                            <li className={stepE === "Deletar_Conta" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Deletar_Conta")}><i className='bx bxs-message-square-x'></i> Deletar conta</a></li>
                         </ul>
 
                     </aside>
 
                     <section className="edit__content">
-                        {ong === true ? editar[stepE] : <Criar_Conta data={data} id={id} setOng={setOng}/>}
+                        {editar[stepE]}
                     </section>
                 </section>
             </main>
@@ -212,116 +206,6 @@ function Deletar_Conta({ stepE, setEStep, data, id }) {
                 </div>
                 {deletar === true ? <a className="button-as delete" onClick={Delete}>Deletar conta</a> : ""}
                 <p className="mensagem">{msg}</p>
-            </form>
-        </>
-    )
-}
-function Criar_Conta({ data, id, setOng }) {
-    const [msg, setMsg] = useState("")
-    const [cadastro, setCadastro] = useState({
-        regiao: '',
-        agencia: '',
-        conta: '',
-        pix: '',
-        imagens: '',
-        descricao: '',
-        segmento: ''
-    })
-
-    const handleClickCadastro = e => {
-        e.preventDefault()
-        console.log(cadastro);
-        setOng(true);
-        Axios.put(`http://localhost:8080/api/v1/ong/${id}`, {
-            descricao: cadastro.descricao
-        }).then((response) => {
-            localStorage.setItem("id", response.data.id);
-            console.log(response.data);
-            setMsg("✔ Você completou o cadastro")
-            setTimeout(() => {
-                setOng(true);
-            }, 2000); 
-        })
-    }
-    const valorCadastro = e => setCadastro({ ...cadastro, [e.target.name]: e.target.value });
-
-    return (
-        <>
-            <form action="" method="post" onSubmit={handleClickCadastro}>
-                <h1 className="section__title">Cadastre sua ONG</h1>
-                <p className="mensagem-cad">{msg}</p>
-                <section className="form__group">
-                    <div className="group__text">
-                        <label for="regiao">Região</label>
-                        <div id="group__select">
-                            <select name="regiao" id="regiao" onChange={valorCadastro} required>
-                                <option value="#" selected disabled>Selecione uma opção</option>
-                                <option value="norte">Zona Norte</option>
-                                <option value="sul">Zona Sul</option>
-                                <option value="centro">Centro</option>
-                                <option value="leste">Zona Leste</option>
-                                <option value="oeste">Zona Oeste</option>
-                            </select>
-                        </div>
-                        <div className="banco">
-                            <div className="agencia">
-                                <label for="agencia">Agência</label>
-                                <input type="text" id="agencia" name="agencia" onChange={valorCadastro} required />
-                            </div>
-                            <div className="conta">
-                                <label for="conta">Conta</label>
-                                <input type="text" id="conta" name="conta" onChange={valorCadastro} required />
-                            </div>
-                        </div>
-                        <label for="pix">Pix</label>
-                        <input type="text" id="pix" name="pix" onChange={valorCadastro} required />
-                        <label htmlFor="imagens">Imagens</label>
-                        <input type="file" name="imagens" id="imagens" onChange={valorCadastro} />
-                        <label for="descricao">Descrição</label>
-                        <textarea name="descricao" id="descricao" cols="30" rows="10" onChange={valorCadastro} ></textarea>
-                    </div>
-
-                    <div className="group__about">
-                        <div className="about__radios">
-                            <p>Qual a causa da sua ONG?</p>
-                            <div className="radio__options">
-                                <input type="radio" id="saude" name="segmento" value="saude" onChange={valorCadastro} />
-                                <label for="saude">Saúde</label>
-                            </div>
-                            <div className="radio__options">
-                                <input type="radio" id="educacao" value="educacao" name="segmento" onChange={valorCadastro} />
-                                <label for="educacao">Educação</label>
-                            </div>
-                            <div className="radio__options">
-                                <input type="radio" id="cidadania" value="cidadania" name="segmento" onChange={valorCadastro} />
-                                <label for="cidadania">Cidadania</label>
-                            </div>
-                            <div className="radio__options">
-                                <input type="radio" id="culturaOuEsporte" value="culturaOuEsporte" name="segmento" onChange={valorCadastro} />
-                                <label for="culturaOuEsporte">Cultura ou esporte</label>
-                            </div>
-                            <div className="radio__options">
-                                <input type="radio" id="generoOudiversidade" value="generoOudiversidade" name="segmento" onChange={valorCadastro} />
-                                <label for="generoOudiversidade">Gênero e diversidade</label>
-                            </div>
-                            <div className="radio__options">
-                                <input type="radio" id="meioAmbiente" value="meioAmbiente" name="segmento" onChange={valorCadastro} />
-                                <label for="meioAmbiente">Meio ambiente</label>
-                            </div>
-                            <div className="radio__options">
-                                <input type="radio" id="protecaoAmbiental" value="protecaoAmbiental" name="segmento" onChange={valorCadastro} />
-                                <label for="protecaoAmbiental">Proteção Ambiental</label>
-                            </div>
-                            <div className="radio__options">
-                                <input type="radio" id="outro" value="outro" name="segmento" onChange={valorCadastro} />
-                                <label for="outro">Outro</label>
-                            </div>
-                        </div>
-                        <div className="form__button">
-                            <button>Finalizar Cadastro</button>
-                        </div>
-                    </div>
-                </section>
             </form>
         </>
     )
