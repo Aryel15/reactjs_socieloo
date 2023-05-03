@@ -3,7 +3,7 @@
     line-height: 18px;
     width: 100%;
     background-color: #ebebeb;
-    color:#43555f ;
+    color:#43555f;
 }
 #acessibilidade a{
     color: #43555f; 
@@ -56,41 +56,21 @@ nav ul{
     list-style: none;
     align-items: center;
     z-index:99;
+    font-size: 1em;
 }
 .links{
     margin: 0 10px;
     height: 100%;
     padding: 20px 0;
+    font-size: 1em;
+
 }
 .links a{
     text-decoration: none;
     color: #000;
-    height: 100%;
-}
-.perfil{
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
-.perfil i{
-    font-size: 1.5rem;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    background-color: #00a1ff;
-    color: #fff;
-    border-radius: 50%;
-    align-items: center;
-    justify-content: center;
-}
-.sair{
-    display: flex;
-    gap: 5px;
-    align-items: center;  
-}
-.sair i{
-    color: #fff;
-    font-size: 1rem;
+    height: 60px;
+    font-size: 1em;
+
 }
 .links ul{
     position: absolute;
@@ -98,6 +78,8 @@ nav ul{
     display: none;
     background-color: #00a1ff;
     margin: 0;
+    font-size: 1em;
+
 }
 /**Exibe submenu**/
 .links:hover ul{ 

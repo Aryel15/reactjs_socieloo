@@ -36,7 +36,7 @@ ul {
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
-  margin-top: -9%;
+  /* margin-top: -9%; */
 }
 
 .ong__imagens #imagens__container .container__item img {

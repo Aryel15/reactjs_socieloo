@@ -14,8 +14,8 @@ export default function Menu() {
                 <ul id="atalhos">
                     <li className="atalho"><a href="#conteudo" accesskey="1" title="Ir para o conteúdo">Conteúdo[1]↓</a></li>
                     <li className="atalho"><a href="#menu" accesskey="2" title="Ir para o menu de navegação">Menu[2]↓</a></li>
-                    <li className="fonte"><a href="javascript:void(0)" id="ddiminuir" title="Diminuir fonte" onClick={fonte}>A-</a></li>
-                    <li className="fonte"><a href="javascript:void(0)" id="aaumentar" title="Aumentar fonte" onClick={fonte}>A+</a></li>
+                    <li className="fonte"><a href="javascript:void(0)" id="ddiminuir" title="Diminuir fonte" onClick={fonte()}>A-</a></li>
+                    <li className="fonte"><a href="javascript:void(0)" id="aaumentar" title="Aumentar fonte" onClick={fonte()}>A+</a></li>
                     <li className="contraste s"><a href="javascript:void(0);" id="ssemcontraste" title="Sem contraste">○</a></li>
                     <li className="contraste c"><a href="javascript:void(0);" id="ccontraste" title="Contraste">●</a></li>
                     <li id="pgacess"><a href="/acessibilidade" title="acessibilidade">Acessibilidade</a></li>
@@ -232,13 +232,13 @@ function fonte() {
         $('#aumentar').click(function () {
             if (fonte < 22) {
                 fonte++
-                $('body').css({ 'font-size': fonte + 'px' })
+                $('#root').css({ 'font-size': fonte + 'px' })
             }
         })
         $('#diminuir').click(function () {
             if (fonte > 13) {
                 fonte--
-                $('body').css({ 'font-size': fonte + 'px' })
+                $('#root').css({ 'font-size': fonte + 'px' })
             }
         })
     })
@@ -247,13 +247,13 @@ function fonte() {
         $('#aaumentar').click(function () {
             if (fonte < 22) {
                 fonte++
-                $('body').css({ 'font-size': fonte + 'px' })
+                $('#root').css({ 'font-size': fonte + 'px' })
             }
         })
         $('#ddiminuir').click(function () {
             if (fonte > 13) {
                 fonte--
-                $('body').css({ 'font-size': fonte + 'px' })
+                $('#root').css({ 'font-size': fonte + 'px' })
             }
         })
     })
