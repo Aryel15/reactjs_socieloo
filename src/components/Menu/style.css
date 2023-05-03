@@ -3,7 +3,7 @@
     line-height: 18px;
     width: 100%;
     background-color: #ebebeb;
-    color:#43555f ;
+    color:#43555f;
 }
 #acessibilidade a{
     color: #43555f; 
@@ -56,16 +56,21 @@ nav ul{
     list-style: none;
     align-items: center;
     z-index:99;
+    font-size: 1em;
 }
 .links{
     margin: 0 10px;
     height: 60px;
     padding: 20px 0;
+    font-size: 1em;
+
 }
 .links a{
     text-decoration: none;
     color: #000;
     height: 60px;
+    font-size: 1em;
+
 }
 .links ul{
     position: absolute;
@@ -73,6 +78,8 @@ nav ul{
     display: none;
     background-color: #00a1ff;
     margin: 0;
+    font-size: 1em;
+
 }
 /**Exibe submenu**/
 .links:hover ul{ 
