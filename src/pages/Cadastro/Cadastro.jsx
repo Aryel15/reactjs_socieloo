@@ -120,6 +120,7 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
                 <input type="text" name="nome" id="nome" onChange={valorCadastro} required />
                 <label for="cnae">Cnae:</label>
                 <input type="text" name="cnae" id="cnae" onChange={valorCadastro} required />
+                <p className="senha-fraca">{cnae}</p>
                 <label for="email">E-mail:</label>
                 <input type="email" name="email" id="email" onChange={valorCadastro} required />
                 <label for="telefone">Telefone</label>
