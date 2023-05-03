@@ -9,15 +9,15 @@ export default function Ong() {
     const id = localStorage.getItem("id")
     const [ong, setOng] = useState(id != null ? true : false);
     const [data, setData] = useState()
-    let descricao;
+
+    const descricao_padrao = "Animais de rua são vistos cada vez com mais frequência por moradores da Zona Leste, pensando nisso, Abghail Deaij Carluci, protetora de animais há 18 anos, fundadora e presidente da ONG “Adote sempre cabe mais um”, em que 70% dos animais resgatados são da região leste. Os animais são doados já castrados, vacinados, vermifugados e entregues na residência do adotante. Atualmente a fundadora Abghail alocou um espaço para poder cuidar dos animais abandonados e proporcionar maior conforto a eles. Porém, a verba das doações ainda é baixa em compensação ao número de animais abrigados. Para completar a renda, Abigail oferece projetos vinculados com seu projeto com da ONG, como hospedagem para cães e gatos, táxi dog e decoração para festas."
     
     useEffect(() => {
         Axios.get("http://localhost:8080/api/v1/ong/" + id)
         .then((response) => {
            setOng(true)
            setData(response.data)
-           descricao = response.data.descricao
-           console.log(response);
+           console.log(descricao);
         },(err) => {
             setOng(false)
             console.log(err);
@@ -51,29 +51,17 @@ export default function Ong() {
                 <div className="informations__description">
                     <h1>{ong ? data?.nome : "Adote Sempre Cabe Mais Um - Zona Leste" }</h1>
 
+                    <br/>
                     <div id="description__container">
 
                         <div className="description__about">
                             <span>Descrição:</span>
-                            <p>Animais de rua são vistos cada vez com mais frequência por moradores da Zona Leste,
-                                pensando
-                                nisso, Abghail Deaij Carluci, protetora de animais há 18 anos, fundadora e presidente da
-                                ONG
-                                “Adote sempre cabe mais um”, em que 70% dos animais resgatados são da região leste. Os
-                                animais
-                                são doados já castrados, vacinados, vermifugados e entregues na residência do adotante.
-                            </p>
-                            <br/>
-                            <p>Atualmente a fundadora Abghail alocou um espaço para poder cuidar dos animais abandonados
-                                e
-                                proporcionar maior conforto a eles. Porém, a verba das doações ainda é baixa em
-                                compensação ao
-                                número de animais abrigados. Para completar a renda, Abigail oferece projetos vinculados
-                                com seu
-                                projeto com da ONG, como hospedagem para cães e gatos, táxi dog e decoração para festas.
+                            <p>
+                                {ong ? data?.descricao : descricao_padrao}
                             </p>
                         </div>
 
+                        <br/>
                         <div className="description__contact">
                             <span>Contato:</span>
                             <ul id="description__social">

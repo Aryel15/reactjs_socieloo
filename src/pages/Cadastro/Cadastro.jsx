@@ -66,6 +66,7 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
     for (let i = 0; i < 5; i++) {
       codigo += Math.floor(Math.random() * 10);
     }
+    console.log(codigo);
     return codigo;
   }
 
