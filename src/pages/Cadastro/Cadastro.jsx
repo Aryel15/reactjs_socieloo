@@ -79,31 +79,32 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
       if(response.data.length > 0) {
         setCnae("");
         console.log(response.data);
+        
+        if (!senhaForte(cadastro.senha)) {
+          setSenha('Senha fraca');
+          return;
+        } else {
+          setSenha('');
+          sessionStorage.setItem("codigo", codigo)
+
+          emailjs.init("user_J1drGGzW0lBRJmiE0X9Kg");
+          emailjs.send("serviceID", "template_xwxib2d", {
+            to_email: cadastro.email,
+            codigo: codigo.toString(),
+          }, "QSlqTSkhTipqcM7El")
+            .then((response) => {
+              console.log("SUCCESS!", response.status, response.text);
+              setStep(step + 1);
+            }, (err) => {
+              console.log("FAILED...", err);
+            });
+        }
       } else {
         console.log(response.data);
         setCnae("Cnae inválido");
         return;
       }
     })
-    if (!senhaForte(cadastro.senha)) {
-      setSenha('Senha fraca');
-      return;
-    } else {
-      setSenha('');
-      sessionStorage.setItem("codigo", codigo)
-
-      emailjs.init("user_J1drGGzW0lBRJmiE0X9Kg");
-      emailjs.send("serviceID", "template_xwxib2d", {
-        to_email: cadastro.email,
-        codigo: codigo.toString(),
-      }, "QSlqTSkhTipqcM7El")
-        .then((response) => {
-          console.log("SUCCESS!", response.status, response.text);
-          setStep(step + 1);
-        }, (err) => {
-          console.log("FAILED...", err);
-        });
-    }
   };
 
 
