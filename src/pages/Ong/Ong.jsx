@@ -1,10 +1,29 @@
-import React from 'react'
-import './style.css'
-import Menu from '../../components/Menu/Menu'
+import React, { useState, useEffect } from 'react';
+import './style.css';
+import Menu from '../../components/Menu/Menu';
 import Vlibras from '../../components/Vlibras/Vlibras';
+import Axios from 'axios';
+
 
 export default function Ong() {
-
+    const id = localStorage.getItem("id")
+    const [ong, setOng] = useState(id != null ? true : false);
+    const [data, setData] = useState()
+    let descricao;
+    
+    useEffect(() => {
+        Axios.get("http://localhost:8080/api/v1/ong/" + id)
+        .then((response) => {
+           setOng(true)
+           setData(response.data)
+           descricao = response.data.descricao
+           console.log(response);
+        },(err) => {
+            setOng(false)
+            console.log(err);
+        })
+    }, [])
+    
   return (
     <>
       <Menu />
@@ -30,7 +49,7 @@ export default function Ong() {
 
             <section className="ong__informations">
                 <div className="informations__description">
-                    <h1>Adote Sempre Cabe Mais Um - Zona Leste</h1>
+                    <h1>{ong ? data?.nome : "Adote Sempre Cabe Mais Um - Zona Leste" }</h1>
 
                     <div id="description__container">
 
