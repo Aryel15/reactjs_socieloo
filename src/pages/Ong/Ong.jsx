@@ -65,7 +65,7 @@ export default function Ong() {
                             <div className='description__adress__bank'>
                                 <div className="description__adress">
                                     <span>Endereço:</span>
-                                    <p>Av. Miguel Ignácio Curi, 111 - Artur Alvim, São Paulo - SP, {ong ? data?.cep : "08295-005"}</p>
+                                    <p>{ong ? data?.endereco :"Av. Miguel Ignácio Curi"}, 111 - Artur Alvim, São Paulo - SP, {ong ? data?.cep : "08295-005"}</p>
                                 </div>
 
                                 <div className="description__bank">
