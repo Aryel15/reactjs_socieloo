@@ -79,11 +79,16 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
       if(response.data.length > 0) {
         setCnae("");
         console.log(response.data);
-        
-        if (!senhaForte(cadastro.senha)) {
+      } else {
+        console.log(response.data);
+        setCnae("Cnae inválido");
+        return;
+      }
+    })
+    if (!senhaForte(cadastro.senha)) {
           setSenha('Senha fraca');
           return;
-        } else {
+    } else {
           setSenha('');
           sessionStorage.setItem("codigo", codigo)
 
@@ -97,14 +102,8 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
               setStep(step + 1);
             }, (err) => {
               console.log("FAILED...", err);
-            });
-        }
-      } else {
-        console.log(response.data);
-        setCnae("Cnae inválido");
-        return;
-      }
-    })
+          });
+     }
   };
 
 
@@ -121,7 +120,6 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
                 <input type="text" name="nome" id="nome" onChange={valorCadastro} required />
                 <label for="cnae">Cnae:</label>
                 <input type="text" name="cnae" id="cnae" onChange={valorCadastro} required />
-                <p className="senha-fraca">{cnae}</p>
                 <label for="email">E-mail:</label>
                 <input type="email" name="email" id="email" onChange={valorCadastro} required />
                 <label for="telefone">Telefone</label>
