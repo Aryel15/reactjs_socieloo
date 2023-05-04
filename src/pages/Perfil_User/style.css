@@ -91,15 +91,13 @@
     list-style: none;
   }
   
-  .links {
+  .links_P {
     margin: 0 10px;
     height: 60px;
     padding: 20px 0;
   }
-  links
   
-  
-  .links ul {
+  .links_P ul {
     position: absolute;
     top: 63px;
     display: none;

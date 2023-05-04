@@ -2,10 +2,11 @@ import './style.css'
 import React from 'react';
 
 export default function Menu() {
-    const id = localStorage.getItem("id")
+    const tipo = localStorage.getItem("tipo")
     const sair = e =>{
         e.preventDefault()
         localStorage.removeItem("id");
+        localStorage.removeItem("tipo");
         window.location.pathname = "/login"
     }
     return (
@@ -29,7 +30,7 @@ export default function Menu() {
                 <input type="checkbox" id="bt_menu" />
                 <ul id="menu">
                     <li className="links">
-                        <a href="#" accesskey="2">Segmentos▾</a>
+                        <a href="#" className="link" accesskey="2">Segmentos▾</a>
                         <ul>
                             <li className="sublink"><a href="">Cidadania</a></li>
                             <li className="sublink"><a href="">Cultura e Esportes</a></li>
@@ -41,7 +42,7 @@ export default function Menu() {
                         </ul>
                     </li>
                     <li className="links">
-                        <a href="#" accesskey="3">Região▾</a>
+                        <a href="#" className="link" accesskey="3">Região▾</a>
                         <ul>
                             <li className="sublink"><a href="">Zona Leste</a></li>
                             <li className="sublink"><a href="">Zona Norte</a></li>
@@ -73,23 +74,26 @@ export default function Menu() {
                         </ul>
                     </li>
                     {
-                        id == null &&  window.location.pathname != "/perfil-ong" && window.location.pathname != "/ong" ? 
+                        !tipo ?
                         <>
-                            <li className="links login"><a href='/login' accesskey="5">Fazer login</a></li>
-                            <li className="links botão"><a href='/cadastro-ong' accesskey="6">Cadastre-se</a></li>
-                        </> : 
+                            <li className="links login"><a className="link" href='/login' accesskey="5">Fazer login</a></li>
+                            <li className="links botão"><a className="link" href='/cadastro-ong' accesskey="6">Cadastre-se</a></li>
+                        </> : ""
+                    }
+                    {
+                        tipo == "ong" ? 
                         <>
                             <li className="links">
-                                <a href="" className='perfil'><i class="fa-solid fa-user"></i>Minha Ong</a>
+                                <a href="" className='perfil link'><i class="fa-solid fa-user"></i>Minha Ong</a>
                                 <ul>
                                     <li className="links"><a href='/ong' accesskey="5">Minha Ong</a></li>
                                     <li className="links"><a href='/perfil-ong' accesskey="5">Editar Ong</a></li>
-                                    <li className="links"><a href='javascript:void(0)' className='sair' onclick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                                    <li className="links"><a href='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
                                 </ul>
                             </li>
-                        </> 
-                        
+                        </> : ""
                     }
+                    
                 </ul>
             </nav>
         </>

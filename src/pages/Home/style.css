@@ -43,7 +43,7 @@
   width: 40px;
   height: 40px;
   border-radius: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   transition: 0.7s;
 }
 .search:hover{

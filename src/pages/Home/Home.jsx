@@ -7,6 +7,7 @@ import Axios from 'axios';
 
 export default function Home() {
   const [data, setData] = useState([])
+  const [filter, setFilter] = useState("todas")
   useEffect(() =>{
     Axios.get("http://localhost:8080/api/v1/ong")
     .then((response) =>{
@@ -53,7 +54,7 @@ export default function Home() {
         <div className="section__cards">
         {
           data.map(ong => (
-            <Card categoria="Proteção Animal" titulo={ong.nome} icon='./imgs/cil_animal.png' regiao="Zona Leste" link=""/>
+            <Card categoria="Proteção Animal" titulo={ong.nome} icon='./imgs/cil_animal.png' regiao={ong.regiao} segmento={ong.segmento} link=""/>
           ))
         }
 

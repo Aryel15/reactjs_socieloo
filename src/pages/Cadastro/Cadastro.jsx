@@ -138,11 +138,11 @@ function Cadastrar({step, setStep, cadastro, setCadastro}){
                   <div id="group__select">
                     <select name="regiao" id="regiao" onChange={valorCadastro} className="cad-select" required>
                       <option value="#" selected disabled>Selecione uma opção</option>
-                      <option value="norte">Zona Norte</option>
-                      <option value="sul">Zona Sul</option>
-                      <option value="centro">Centro</option>
-                      <option value="leste">Zona Leste</option>
-                      <option value="oeste">Zona Oeste</option>
+                      <option value="Zona Norte">Zona Norte</option>
+                      <option value="Zona Sul">Zona Sul</option>
+                      <option value="Centro">Centro</option>
+                      <option value="Zona Leste">Zona Leste</option>
+                      <option value="Zona Oeste">Zona Oeste</option>
                     </select>
                   </div>
                   <div className="banco">
@@ -166,31 +166,31 @@ function Cadastrar({step, setStep, cadastro, setCadastro}){
                   <div className="about__radios">
                     <label className="radio-label">Qual a causa da sua ONG?</label>
                     <div className="radio__options">
-                      <input type="radio" id="saude" name="segmento" value="saude" onChange={valorCadastro} />
+                      <input type="radio" id="saude" name="segmento" value="Saúde" onChange={valorCadastro} />
                       <label for="saude" className="radio__option">Saúde</label>
                     </div>
                     <div className="radio__options">
-                      <input type="radio" id="educacao" value="educacao" name="segmento" onChange={valorCadastro} />
+                      <input type="radio" id="educacao" value="Educação" name="segmento" onChange={valorCadastro} />
                       <label for="educacao" className="radio__option">Educação</label>
                     </div>
                     <div className="radio__options">
-                      <input type="radio" id="cidadania" value="cidadania" name="segmento" onChange={valorCadastro} />
+                      <input type="radio" id="cidadania" value="Cidadania" name="segmento" onChange={valorCadastro} />
                       <label for="cidadania" className="radio__option">Cidadania</label>
                     </div>
                     <div className="radio__options">
-                      <input type="radio" id="culturaOuEsporte" value="culturaOuEsporte" name="segmento" onChange={valorCadastro} />
+                      <input type="radio" id="culturaOuEsporte" value="Cultura e Esportes" name="segmento" onChange={valorCadastro} />
                       <label for="culturaOuEsporte" className="radio__option">Cultura ou esporte</label>
                     </div>
                     <div className="radio__options">
-                      <input type="radio" id="generoOudiversidade" value="generoOudiversidade" name="segmento" onChange={valorCadastro} />
+                      <input type="radio" id="generoOudiversidade" value="Gênero e Diversidade" name="segmento" onChange={valorCadastro} />
                       <label for="generoOudiversidade" className="radio__option">Gênero e diversidade</label>
                     </div>
                     <div className="radio__options">
-                      <input type="radio" id="meioAmbiente" value="meioAmbiente" name="segmento" onChange={valorCadastro} />
+                      <input type="radio" id="meioAmbiente" value="Meio Ambiente" name="segmento" onChange={valorCadastro} />
                       <label for="meioAmbiente" className="radio__option">Meio ambiente</label>
                     </div>
                     <div className="radio__options">
-                      <input type="radio" id="protecaoAmbiental" value="protecaoAmbiental" name="segmento" onChange={valorCadastro} />
+                      <input type="radio" id="protecaoAmbiental" value="Proteção Animal" name="segmento" onChange={valorCadastro} />
                       <label for="protecaoAmbiental" className="radio__option">Proteção Ambiental</label>
                     </div>
                     <div className="radio__options">
@@ -237,6 +237,7 @@ function ValidaEmail({cadastro}){
         segmento: cadastro.segmento
       }).then((response) => {
         localStorage.setItem("id", response.data.id);
+        localStorage.setItem("tipo", "ong");
         setMsg("✔ Sua Ong foi cadastrada")
         setTimeout(() => {
           window.location.pathname = "/perfil-ong"
