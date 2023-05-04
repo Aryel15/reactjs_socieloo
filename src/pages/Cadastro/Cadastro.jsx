@@ -212,55 +212,60 @@ function Cadastrar({step, setStep, cadastro, setCadastro}){
     </>
   );
 }
+
 function ValidaEmail({cadastro}){
-    const [msg, setMsg] = useState("")
-    const [codigo, setCodigo] = useState("")
+  const [msg, setMsg] = useState("")
+  const [codigo, setCodigo] = useState("")
 
-    const handleClickCadastro = e =>{
-      e.preventDefault()
-      const codigoArmazenado = sessionStorage.getItem("codigo");
-      if (codigo === codigoArmazenado) {
-        console.log(cadastro)
-        window.sessionStorage.removeItem("codigo")
-        Axios.post("http://localhost:8080/api/v1/ong", {
-          nome: cadastro.nome,
-          cnae: cadastro.cnae,
-          email: cadastro.email,
-          telefone: cadastro.telefone,
-          senha: cadastro.senha
-        }).then((response) => {
-          localStorage.setItem("id", response.data.id);
-          setMsg("✔ Sua Ong foi cadastrada")
-          setTimeout(() => {
-            window.location.pathname = "/perfil-ong"
-          }, 3000); 
-        })
-      }else{
-        alert("Código inválido");
-      }
+  const handleClickCadastro = e =>{
+    e.preventDefault()
+    const codigoArmazenado = sessionStorage.getItem("codigo");
+    if (codigo === codigoArmazenado) {
+      console.log(cadastro)
+      window.sessionStorage.removeItem("codigo")
+      Axios.post("http://localhost:8080/api/v1/ong", {
+        nome: cadastro.nome,
+        cnae: cadastro.cnae,
+        email: cadastro.email,
+        telefone: cadastro.telefone,
+        senha: cadastro.senha,
+        regiao: cadastro.regiao,
+        agencia: cadastro.agencia,
+        contaCorrente: cadastro.contaCorrente,
+        pix: cadastro.pix,
+        descricao: cadastro.descricao,
+        segmento: cadastro.segmento
+      }).then((response) => {
+        localStorage.setItem("id", response.data.id);
+        setMsg("✔ Sua Ong foi cadastrada")
+        setTimeout(() => {
+          window.location.pathname = "/perfil-ong"
+        }, 3000); 
+      })
+    }else{
+      alert("Código inválido");
     }
-  
-    return (
-    <>
-      <main className="cadastro">
-        <div className="formulario">
-          <form className="formcad" id="login" action="javascript:void(0)" onSubmit={handleClickCadastro}>
-            <div className="titulo-cad">
-              <p className="mensagem-cad">{msg}</p>
-              <h1>Validação de Email</h1>
-              <p>Digite o código que foi enviado para o seu email</p>
-              <br />
-            </div>
-            <label for="codigo">Código:</label>
+  }
+
+  return (
+  <>
+    <main className="cadastro">
+      <div className="formulario">
+        <form className="formcad" id="login" action="javascript:void(0)" onSubmit={handleClickCadastro}>
+          <div className="titulo-cad">
+            <p className="mensagem-cad">{msg}</p>
+            <h1>Validação de Email</h1>
+            <p>Digite o código que foi enviado para o seu email</p>
             <br />
-            <input type="text" name="codigo" id="codigo" onChange={(e) => setCodigo(e.target.value)} required />
-            <button>Cadastre</button>
-          </form>
-        </div>
-      </main>
-      <Vlibras />
-    </>
-  );
-
-
+          </div>
+          <label for="codigo">Código:</label>
+          <br />
+          <input type="text" name="codigo" id="codigo" onChange={(e) => setCodigo(e.target.value)} required />
+          <button>Cadastre</button>
+        </form>
+      </div>
+    </main>
+    <Vlibras />
+  </>
+);
 }

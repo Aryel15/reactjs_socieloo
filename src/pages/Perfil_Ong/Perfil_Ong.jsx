@@ -5,45 +5,29 @@ import Vlibras from '../../components/Vlibras/Vlibras'
 import Axios from 'axios'
 
 export default function Perfil_Ong() {
-    const email = localStorage.getItem("email");
-    let id;
+    let id  = localStorage.getItem("id");
 
     var name;
     const [data, setData] = useState()
     const [stepE, setEStep] = React.useState("Editar_Perfil");
     const editar = {
         Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep} data={data}/>,
-        Alterar_Senha: <Alterar_Senha step={stepE} setStep={setEStep} data={data} id={email}  />,
-        Alterar_Email: <Alterar_Email step={stepE} setStep={setEStep} data={data} id={email}  />,
-        Deletar_Conta: <Deletar_Conta step={stepE} setStep={setEStep} data={data} id={email} />,
+        Alterar_Senha: <Alterar_Senha step={stepE} setStep={setEStep} data={data} id={id}  />,
+        Alterar_Email: <Alterar_Email step={stepE} setStep={setEStep} data={data} id={id}  />,
+        Deletar_Conta: <Deletar_Conta step={stepE} setStep={setEStep} data={data} id={id} />,
     }
-    //useEffect(() => {
-       // if(id === null){
-        //    window.location.pathname = "/perfil-ong"
-      //  }else{
-          //  Axios.get("http://localhost:8080/api/v1/ong/" + id)
-         //   .then((response) => {
-            //    setData(response.data);
-         //   })
-  //      }
-   // }, [])
-  useEffect(() => {      
-    Axios.get("http://localhost:8080/api/v1/ong/email/"+email)
-         .then((response) => {
-            console.log(response);
-            localStorage.setItem("id", response.data.id);
-            console.log(localStorage.getItem("id"))
-           
-            localStorage.setItem("nome", response.data.nome);
-            localStorage.setItem("telefone", response.data.telefone);
-            localStorage.setItem("descricao", response.data.descricao);
-            localStorage.setItem("endereco", response.data.endereco);
-            localStorage.setItem("agencia", response.data.agencia);
-            localStorage.setItem("conta", response.data.contaCorrente);
-            localStorage.setItem("pix", response.data.pix);
-    })
-    
-}, [])
+    useEffect(() => {
+       if(id === null){
+           window.location.pathname = "/perfil-ong"
+       }else{
+           Axios.get("http://localhost:8080/api/v1/ong/" + id)
+           .then((response) => {
+               setData(response.data);
+               console.log(response.data);
+           })
+       }
+   }, [])
+
     return (
         <>
             <Menu />
@@ -81,25 +65,25 @@ function Editar_Perfil({ stepE, setEStep, data }) {
             <h2>Editar perfil</h2>
             <form action="#" className="content__form">
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" value={localStorage.getItem("nome")} />
+                <input type="text" id="nome" name="nome" value={data?.nome} />
 
                 <label for="telefone">Telefone</label>
-                <input type="tel" id="telefone" name="telefone" value={localStorage.getItem("telefone")} />
+                <input type="tel" id="telefone" name="telefone" value={data?.telefone} />
 
                 <label for="endereço">Endereço</label>
-                <input type="text" id="endereço" name="endereço" value={localStorage.getItem("endereco")} />
+                <input type="text" id="endereço" name="endereço" value={data?.endereco} />
 
-                <label for="Sobre">Descrição</label>
-                <textarea name="Sobre" id="Sobre">{localStorage.getItem("descricao")}</textarea>
+                <label for="descricao">Descrição</label>
+                <textarea name="descricao" id="descricao" value={data?.descricao}></textarea>
                 
                 <label for="agencia">Agência</label>
-                <input type="text" id="agencia" name="agencia" value={localStorage.getItem("agencia")} />
+                <input type="text" id="agencia" name="agencia" value={data?.agencia} />
 
-                <label for="conta">Conta</label>
-                <input type="text" id="conta" name="conta" value={localStorage.getItem("conta")} />
+                <label for="contaCorrente">Conta</label>
+                <input type="text" id="contaCorrente" name="contaCorrente" value={data?.contaCorrente} />
 
                 <label for="pix">Pix</label>
-                <input type="text" id="pix" name="pix" value={localStorage.getItem("pix")} />
+                <input type="text" id="pix" name="pix" value={data?.pix} />
                 <div className="form__button">
                     <button>Salvar edição</button>
                 </div>
@@ -115,7 +99,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
     const handleClickAlterarEmail = e =>{
         e.preventDefault()
         console.log(email);
-        Axios.put(`http://localhost:8080/api/v1/ong/1`,{
+        Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
             email: email,
         }).then((response) => {
             console.log(response);
@@ -132,7 +116,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
                 <h2>Alterar Email</h2>
                 <p className="mensagem-as">{msg}</p>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value={localStorage.getItem("email")} />
+                <input type="email" id="email" name="email" value={data?.email} />
                 <label for="newEmail">Email novo</label>
                 <input type="email" id="newEmail" name="newEmail" onChange={e => setEmail(e.target.value)}/>
                 <button type="submit" className="button-as">Alterar</button>
@@ -140,6 +124,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
         </>
     )
 }
+
 function Alterar_Senha({ stepE, setEStep, data, id}) {
 
     const [msg, setMsg] = useState("")
@@ -165,7 +150,7 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                 return;
             } else {
                 setSenhaDiferente('');
-                Axios.put(`http://localhost:8080/api/v1/ong/1`,{
+                Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
                     senha: senha,
                 }).then((response) => {
                     console.log(response);
@@ -207,24 +192,17 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
     )
 }
 
-function Deletar_Conta({ stepE, setEStep, data}) {
-
+function Deletar_Conta({ stepE, setEStep, data, id }) {
     function Delete() {
-        Axios.delete("http://localhost:8080/api/v1/ong/"+localStorage.getItem("id")).then((response) => {
+        Axios.delete("http://localhost:8080/api/v1/ong/" + id)
+            .then((response) => {
                 console.log(response.data);
-        })
-        
-
-       if(!localStorage.getItem("id")){
-        alert("BOBO");
-       } 
-       else{
+            })
         localStorage.removeItem("id");
         setMsg("Sua Ong foi deletada")
         setTimeout(() => {
             window.location.pathname = "/"
         }, 2000); 
-       } 
         
     }
     const [deletar, setDeletar] = useState(false)
