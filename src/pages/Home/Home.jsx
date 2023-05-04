@@ -8,20 +8,26 @@ import Axios from 'axios';
 export default function Home() {
   const [data, setData] = useState([])
   const [filter, setFilter] = useState({
-    regiao: "",
-    segmento: "",
+    regiao: "Todas",
+    segmento: "Todas",
   })
-  const [regiao, setRegiao] = useState("todas")
-  const [segmento, setSegmento] = useState("todas")
+  const [regiao, setRegiao] = useState("Todas")
+  const [segmento, setSegmento] = useState("Todas")
   useEffect(() =>{
+    handleClickSearch();
     Axios.get("http://localhost:8080/api/v1/ong")
     .then((response) =>{
         setData(response.data);
     })
-  },[])
+  },[regiao, segmento])
   function handleClickSearch(){
-    setRegiao(filter.regiao);
-    setSegmento(filter.segmento);
+    if (filter.regiao !== regiao || filter.segmento !== segmento) {
+      setRegiao(filter.regiao);
+      setSegmento(filter.segmento);
+    } else if (filter.regiao === "Todas" && filter.segmento === "Todas") {
+      setRegiao("Todas");
+      setSegmento("Todas");
+    }
   }
 
   return (
@@ -64,7 +70,11 @@ export default function Home() {
       <section id="main-index">
         <div className="section__cards">
         {
-          data.filter((ong) => (regiao === 'Todas' && segmento === 'Todas') || (regiao === ong.regiao && segmento === ong.segmento) ||  (regiao === ong.regiao && segmento === 'Todas') || (regiao === 'Todas' && segmento === ong.segmento)).map(ong => (
+          data.filter(
+            ong =>
+              (regiao === 'Todas' || ong.regiao.toLowerCase() === regiao.toLowerCase()) &&
+              (segmento === 'Todas' || ong.segmento.toLowerCase() === segmento.toLowerCase())
+          ).map(ong => (
             <Card categoria="Proteção Animal" titulo={ong.nome} regiao={ong.regiao} segmento={ong.segmento} link=""/>
           ))
         }
