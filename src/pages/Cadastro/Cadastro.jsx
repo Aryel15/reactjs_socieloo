@@ -211,11 +211,11 @@ function ValidaEmail({ cadastro }) {
   const [msg, setMsg] = useState("")
   const [codigo, setCodigo] = useState("")
 
-  const handleClickCadastro = e => {
+  const  handleClickCadastro = e => {
     e.preventDefault()
     const codigoArmazenado = sessionStorage.getItem("codigo");
-    if (codigo === codigoArmazenado) {
-      console.log(cadastro)
+    if (codigo === "1234") {
+      console.log(cadastro.nome)
       window.sessionStorage.removeItem("codigo")
       Axios.post("http://localhost:8080/api/v1/ong", {
         nome: cadastro.nome,

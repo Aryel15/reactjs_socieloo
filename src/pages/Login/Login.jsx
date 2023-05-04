@@ -15,7 +15,8 @@ export default function Login() {
         e.preventDefault()
         console.log(email);
         console.log(senha);
-
+        localStorage.setItem("email", email)
+       
         Axios.post(`http://localhost:8080/api/v1/ong/login`, {
             senha: senha,
             email: email
