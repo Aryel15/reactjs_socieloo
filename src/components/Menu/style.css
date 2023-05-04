@@ -263,6 +263,31 @@ label[for="bt_menu"]{
 #bt_menu{
     display: none;
 }
+
+#menu > li:nth-child(4) > a > i{
+    font-size: 1.5em;
+    margin: 5px;
+}
+
+#menu > li:nth-child(4) > ul > li:nth-child(3) > a > i{
+    font-size: 1.5em;
+    margin: 5px;
+    vertical-align: -100px;
+}
+
+#menu > li:last-child{
+    padding: 15px 0px;
+}
+
+#acessibilidade + nav > #menu > li.links.botão{
+    padding: 20px 0px;
+}
+
+#ccontraste{
+    vertical-align: -1px;
+    font-size: 26px;
+}
+
 @media screen and (max-width:859px){
     /*tirar menu*/
     #menu{

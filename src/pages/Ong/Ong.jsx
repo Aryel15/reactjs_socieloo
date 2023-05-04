@@ -71,12 +71,12 @@ export default function Ong() {
                                 <div className="description__bank">
                                     <p>Dados bancários:</p>
                                     <p>Agência:</p>
-                                    <p>exemplopix@gmail.com</p>
+                                    <p>{ong ? data?.agencia : "1234"}</p>
                                     <p>Conta corrente:</p>
-                                    <p> exemplopix@gmail.com</p>
+                                    <p>{ong ? data?.contaCorrente : "12345678-9"}</p>
                                     <br />
                                     <p>Pix:</p>
-                                    <p>exemplopix@gmail.com</p>
+                                    <p>{ong ? data?.pix : "adotemaisumPix@gmail.com"}</p>
                                 </div>
                             </div>
 
