@@ -169,6 +169,7 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .description__adress__bank > .description__bank > p:nth-child(1){

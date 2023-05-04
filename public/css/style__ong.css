@@ -223,45 +223,6 @@ ul {
   .container__subtle + .section__cards {
     margin: 20px auto;
   }
-
-  /* Criar carrossel */
-  #dvSlider {
-    display: block;
-  }
-
-  #dvSlider {
-    width: 90vw;
-    height: 450px;
-    border: 1px solid black;
-    margin: 0 auto;
-    background-size: cover;
-    background-position: center;
-    transition: 0.5s background ease;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-image: url("../imgs/fotosOng/fotos01.jpg");
-  }
-
-  .btSlider {
-    background-color: #00a1ff;
-    width: 50px;
-    height: 70px;
-    color: #fff;
-    cursor: pointer;
-    outline: none;
-    margin: 10px;
-    border: none;
-  }
-
-  #imagens__container {
-    display: flex;
-    padding: 20px;
-    display: none;
-
-    /*         
- */
-  }
 }
 
 @media screen and (max-width: 800px) {
@@ -270,7 +231,7 @@ ul {
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 1025px) {
   .section__ong {
     height: 115vh;
     font-size: 13px;
