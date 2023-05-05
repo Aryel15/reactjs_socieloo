@@ -24,18 +24,18 @@ export default function Cadastro() {
     segmento: ''
   })
   const pages = [
-    <Cadastrar step={step} setStep={setStep} setCadastro={setCadastro} cadastro={cadastro}/>, 
-    <ValidaEmail step={step} setStep={setStep} cadastro={cadastro}/>, 
+    <Cadastrar step={step} setStep={setStep} setCadastro={setCadastro} cadastro={cadastro} />,
+    <ValidaEmail step={step} setStep={setStep} cadastro={cadastro} />,
   ];
   return (
     <>
       <Menu />
-        {pages[step]}
+      {pages[step]}
     </>
   )
 }
 
-function Cadastrar({step, setStep, cadastro, setCadastro}){
+function Cadastrar({ step, setStep, cadastro, setCadastro }) {
   const [senha, setSenha] = useState("")
   const [cnae, setCnae] = useState("")
 
@@ -80,49 +80,58 @@ function Cadastrar({step, setStep, cadastro, setCadastro}){
         setCnae("");
         console.log("Válido:" + response.data);*/
 
-        if (!senhaForte(cadastro.senha)) {
-          setSenha('Senha fraca');
-          return;
-        } else {
-          setSenha('');
-          sessionStorage.setItem("codigo", codigo)
-    
-          emailjs.init("user_J1drGGzW0lBRJmiE0X9Kg");
-          emailjs.send("serviceID", "template_xwxib2d", {
-            to_email: cadastro.email,
-            codigo: codigo.toString(),
-          }, "QSlqTSkhTipqcM7El")
-          .then((response) => {
-            console.log("SUCCESS!", response.status, response.text);
-            setStep(step+1);
-          }, (err) => {
-              console.log("FAILED...", err);
-          }).catch((error) => {console.log(error)});
-        }
-      /*} else {
-        console.log("Inválido:" + response.data);
-        setCnae("Cnae inválido");
-        return;
-      }
-    }).catch((error) => {console.log(error)});*/
+    if (!senhaForte(cadastro.senha)) {
+      setSenha('Senha fraca');
+      return;
+    } else {
+      setSenha('');
+      sessionStorage.setItem("codigo", codigo)
+
+      emailjs.init("user_J1drGGzW0lBRJmiE0X9Kg");
+      emailjs.send("serviceID", "template_xwxib2d", {
+        to_email: cadastro.email,
+        codigo: codigo.toString(),
+      }, "QSlqTSkhTipqcM7El")
+        .then((response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          setStep(step + 1);
+        }, (err) => {
+          console.log("FAILED...", err);
+        }).catch((error) => { console.log(error) });
+    }
+    /*} else {
+      console.log("Inválido:" + response.data);
+      setCnae("Cnae inválido");
+      return;
+    }
+  }).catch((error) => {console.log(error)});*/
   };
 
 
   return (
     <>
       <main className="cadastro">
-        <div className="formulario">
+        <img src="./imgs/cadeirarodas.png"/>
           <form className="formcad" id="login" action="javascript:void(0)" onSubmit={handleClickCadastro}>
             <div className="titulo-cad">
               <h1>Cadastre sua Ong</h1>
             </div>
             <main className="form-cad">
-              <section className="form__group">
+              <section className="form__group-1">
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" id="nome" onChange={valorCadastro} required />
                 <label for="cnae">Cnae:</label>
                 {/* <IMaskInput mask="0000-0|00" name="cnae" id="cnae" onChange={valorCadastro} required/> */}
-                <input type="text" name="cnae" id="cnae" placeholder="0000-0|00" onChange={valorCadastro} required />
+                <select name="cnae" id="cnae" onChange={valorCadastro} className="select-regiao" required>
+                  <option value="#" selected disabled>Selecione uma opção</option>
+                  <option value="9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS">9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS</option>
+                  <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE</option>
+                  <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS</option>
+                  <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS</option>
+                  <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS</option>
+                  <option value="9430-8/00 - ATIVIDADE DE OPERAÇÃO DE CENTRAIS DE DISQUE DENUNCIA QUANDO REALIZADO POR ENTIDADES SEM FINS LUCRATIVOS">9430-8/00 - ATIVIDADE DE OPERAÇÃO DE CENTRAIS DE DISQUE DENUNCIA QUANDO REALIZADO POR ENTIDADES SEM FINS LUCRATIVOS</option>
+                  <option value="Outro">Outro</option>
+                </select>
                 <p className="senha-fraca">{cnae}</p>
                 <label for="email">E-mail:</label>
                 <input type="email" name="email" id="email" onChange={valorCadastro} required />
@@ -131,81 +140,46 @@ function Cadastrar({step, setStep, cadastro, setCadastro}){
                 <label for="senha">Senha:</label>
                 <input type="password" name="senha" id="senha" onChange={valorCadastro} />
                 <p className="senha-fraca">{senha}</p>
-              </section>
-
-              <section className="form__group">
-                  <label for="regiao">Região</label>
-                  <div id="group__select">
-                    <select name="regiao" id="regiao" onChange={valorCadastro} className="cad-select" required>
-                      <option value="#" selected disabled>Selecione uma opção</option>
-                      <option value="Zona Norte">Zona Norte</option>
-                      <option value="Zona Sul">Zona Sul</option>
-                      <option value="Centro">Centro</option>
-                      <option value="Zona Leste">Zona Leste</option>
-                      <option value="Zona Oeste">Zona Oeste</option>
-                    </select>
+                <label for="regiao">Região</label>
+                <select name="regiao" id="regiao" onChange={valorCadastro} className="cad-select" required>
+                  <option value="#" selected disabled>Selecione uma opção</option>
+                  <option value="Zona Norte">Zona Norte</option>
+                  <option value="Zona Sul">Zona Sul</option>
+                  <option value="Centro">Centro</option>
+                  <option value="Zona Leste">Zona Leste</option>
+                  <option value="Zona Oeste">Zona Oeste</option>
+                </select>
+                <label for="select-regiao"className="select-label">Qual a causa da sua ONG?</label>
+                <select name="segmento" id="segmento" onChange={valorCadastro} className="select-regiao" required>
+                  <option value="#" selected disabled>Selecione uma opção</option>
+                  <option value="Saúde">Saúde</option>
+                  <option value="Educação">Educação</option>
+                  <option value="Cidadania">Cidadania</option>
+                  <option value="Cultura ou esporte">Cultura ou esporte</option>
+                  <option value="Gênero e diversidade">Gênero e diversidade</option>
+                  <option value="Meio ambiente">Meio ambiente</option>
+                  <option value="Proteção Ambiental">Proteção Ambiental</option>
+                  <option value="Outro">Outro</option>
+                </select>
+                <div className="banco">
+                  <div className="agencia">
+                    <label for="agencia">Agência</label>
+                    <input type="text" id="agencia" name="agencia" onChange={valorCadastro} required />
                   </div>
-                  <div className="banco">
-                    <div className="agencia">
-                      <label for="agencia">Agência</label>
-                      <input type="text" id="agencia" name="agencia" onChange={valorCadastro} required />
-                    </div>
-                    <div className="conta">
-                      <label for="conta">Conta</label>
-                      <input type="text" id="conta" name="conta" onChange={valorCadastro} required />
-                    </div>
-                  </div>
-                  <label for="pix">Pix</label>
-                  <input type="text" id="pix" name="pix" onChange={valorCadastro} required />
-                  <label htmlFor="imagens">Imagens</label>
-                  <input type="file" name="imagens" id="imagens" onChange={valorCadastro} />
-              </section>
-
-              <section className="form__group">
-              <div className="group__about">
-                  <div className="about__radios">
-                    <label className="radio-label">Qual a causa da sua ONG?</label>
-                    <div className="radio__options">
-                      <input type="radio" id="saude" name="segmento" value="Saúde" onChange={valorCadastro} />
-                      <label for="saude" className="radio__option">Saúde</label>
-                    </div>
-                    <div className="radio__options">
-                      <input type="radio" id="educacao" value="Educação" name="segmento" onChange={valorCadastro} />
-                      <label for="educacao" className="radio__option">Educação</label>
-                    </div>
-                    <div className="radio__options">
-                      <input type="radio" id="cidadania" value="Cidadania" name="segmento" onChange={valorCadastro} />
-                      <label for="cidadania" className="radio__option">Cidadania</label>
-                    </div>
-                    <div className="radio__options">
-                      <input type="radio" id="culturaOuEsporte" value="Cultura e Esportes" name="segmento" onChange={valorCadastro} />
-                      <label for="culturaOuEsporte" className="radio__option">Cultura ou esporte</label>
-                    </div>
-                    <div className="radio__options">
-                      <input type="radio" id="generoOudiversidade" value="Gênero e Diversidade" name="segmento" onChange={valorCadastro} />
-                      <label for="generoOudiversidade" className="radio__option">Gênero e diversidade</label>
-                    </div>
-                    <div className="radio__options">
-                      <input type="radio" id="meioAmbiente" value="Meio Ambiente" name="segmento" onChange={valorCadastro} />
-                      <label for="meioAmbiente" className="radio__option">Meio ambiente</label>
-                    </div>
-                    <div className="radio__options">
-                      <input type="radio" id="protecaoAmbiental" value="Proteção Animal" name="segmento" onChange={valorCadastro} />
-                      <label for="protecaoAmbiental" className="radio__option">Proteção Ambiental</label>
-                    </div>
-                    <div className="radio__options">
-                      <input type="radio" id="outro" value="outro" name="segmento" onChange={valorCadastro} />
-                      <label for="outro" className="radio__option">Outro</label>
-                    </div>
+                  <div className="conta">
+                    <label for="conta">Conta</label>
+                    <input type="text" id="conta" name="conta" onChange={valorCadastro} required />
                   </div>
                 </div>
+                <label for="pix">Pix</label>
+                <input type="text" id="pix" name="pix" onChange={valorCadastro} required />
               </section>
             </main>
             <label for="descricao">Descrição</label>
             <textarea name="descricao" id="descricao" cols="30" rows="10" onChange={valorCadastro} ></textarea>
             <button>Cadastre</button>
           </form>
-        </div>
+          <img src="./imgs/gestora.png" />
       </main>
       <Controle_Cadastros />
       <Vlibras />
@@ -213,11 +187,11 @@ function Cadastrar({step, setStep, cadastro, setCadastro}){
   );
 }
 
-function ValidaEmail({cadastro}){
+function ValidaEmail({ cadastro }) {
   const [msg, setMsg] = useState("")
   const [codigo, setCodigo] = useState("")
 
-  const handleClickCadastro = e =>{
+  const handleClickCadastro = e => {
     e.preventDefault()
     const codigoArmazenado = sessionStorage.getItem("codigo");
     if (codigo === codigoArmazenado) {
@@ -240,33 +214,33 @@ function ValidaEmail({cadastro}){
         localStorage.setItem("tipo", "ong");
         setMsg("✔ Sua Ong foi cadastrada")
         setTimeout(() => {
-          window.location.pathname = "/perfil-ong"
-        }, 3000); 
+          window.location.pathname = "/gerenciamento-ong"
+        }, 3000);
       })
-    }else{
+    } else {
       alert("Código inválido");
     }
   }
 
   return (
-  <>
-    <main className="cadastro">
-      <div className="formulario">
-        <form className="formcad" id="login" action="javascript:void(0)" onSubmit={handleClickCadastro}>
-          <div className="titulo-cad">
-            <p className="mensagem-cad">{msg}</p>
-            <h1>Validação de Email</h1>
-            <p>Digite o código que foi enviado para o seu email</p>
+    <>
+      <main className="cadastro">
+        <div className="formulario">
+          <form className="formcad" id="login" action="javascript:void(0)" onSubmit={handleClickCadastro}>
+            <div className="titulo-cad">
+              <p className="mensagem-cad">{msg}</p>
+              <h1>Validação de Email</h1>
+              <p>Digite o código que foi enviado para o seu email</p>
+              <br />
+            </div>
+            <label for="codigo">Código:</label>
             <br />
-          </div>
-          <label for="codigo">Código:</label>
-          <br />
-          <input type="text" name="codigo" id="codigo" onChange={(e) => setCodigo(e.target.value)} required />
-          <button>Cadastre</button>
-        </form>
-      </div>
-    </main>
-    <Vlibras />
-  </>
-);
+            <input type="text" name="codigo" id="codigo" onChange={(e) => setCodigo(e.target.value)} required />
+            <button>Cadastre</button>
+          </form>
+        </div>
+      </main>
+      <Vlibras />
+    </>
+  );
 }

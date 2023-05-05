@@ -23,7 +23,7 @@ export default function Login() {
         }).then((response) => {
             console.log(response);
             setTimeout(() => {
-                window.location.pathname = "/perfil-ong"
+                window.location.pathname = "/gerenciamento-ong"
             }, 1000);
         },(err) => {
             setError(false)

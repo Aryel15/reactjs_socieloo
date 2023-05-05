@@ -87,7 +87,20 @@ export default function Menu() {
                                 <a href="" className='perfil link'><i class="fa-solid fa-user"></i>Minha Ong</a>
                                 <ul>
                                     <li className="links"><a href='/ong' accesskey="5">Minha Ong</a></li>
-                                    <li className="links"><a href='/perfil-ong' accesskey="5">Editar Ong</a></li>
+                                    <li className="links"><a href='/gerenciamento-ong' accesskey="5">Editar Ong</a></li>
+                                    <li className="links"><a href='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                                </ul>
+                            </li>
+                        </> : ""
+                    }
+                    {
+                        tipo == "usuario" ? 
+                        <>
+                            <li className="links">
+                                <a href="" className='perfil link'><i class="fa-solid fa-user"></i>Minha Ong</a>
+                                <ul>
+                                    <li className="links"><a href='/ong' accesskey="5">Favoritos</a></li>
+                                    <li className="links"><a href='/gerenciamento-ong' accesskey="5">Editar Ong</a></li>
                                     <li className="links"><a href='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
                                 </ul>
                             </li>

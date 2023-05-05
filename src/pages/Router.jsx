@@ -18,6 +18,7 @@ import Alterar_Senha from './Alterar_Senha/Alterar_Senha';
 import Cadastro_Vol from './Cadastro_Vol/Cadastro_Vol';
 import Visita_Guiada from './Visita_Guiada/Visita_Guiada';
 import Perfil_Ong from './Perfil_Ong/Perfil_Ong';
+import Cadastro_Ong from './Cadastro_Ong/Cadastro_Ong';
 
 export default function Router() {
     return (
@@ -30,6 +31,7 @@ export default function Router() {
                 <Route path='/cadastro-usuario' element={<Cadastro_User />} />
                 <Route path='/cadastro-voluntario' element={<Cadastro_Vol />} />
                 <Route path='/cadastro-ong' element={<Cadastro />} />
+                <Route path='/cadastro' element={<Cadastro_Ong />} />
                 <Route path='/ong' element={<Ong />} />
                 <Route path='/faq' element={<Faq />} />
                 <Route path='/perfil' element={<Perfil_User />} />
@@ -40,7 +42,7 @@ export default function Router() {
                 <Route path='/excluir-cadastro' element={<Excluir_Cadastro />} />
                 <Route path='/alterar-senha' element={<Alterar_Senha />} />
                 <Route path='/visita-guiada' element={<Visita_Guiada />} />
-                <Route path='/perfil-ong' element={<Perfil_Ong />} />
+                <Route path='/gerenciamento-ong' element={<Perfil_Ong />} />
                 
             </Routes>
         </BrowserRouter>

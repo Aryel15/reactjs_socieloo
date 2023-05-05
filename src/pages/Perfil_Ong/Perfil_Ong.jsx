@@ -18,7 +18,7 @@ export default function Perfil_Ong() {
     }
     useEffect(() => {
        if(id === null){
-           window.location.pathname = "/perfil-ong"
+           window.location.pathname = "/gerenciamento-ong"
        }else{
            Axios.get("http://localhost:8080/api/v1/ong/" + id)
            .then((response) => {
@@ -105,7 +105,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
             console.log(response);
             setMsg("✔ Você mudou seu email")
             setTimeout(() => {
-                window.location.pathname = "/perfil-ong"
+                window.location.pathname = "/gerenciamento-ong"
             }, 2000); 
         })
     }
@@ -156,7 +156,7 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                     console.log(response);
                     setMsg("✔ Você mudou sua senha")
                     setTimeout(() => {
-                        window.location.pathname = "/perfil-ong"
+                        window.location.pathname = "/gerenciamento-ong"
                     }, 2000); 
                 })
             }
@@ -214,7 +214,7 @@ function Deletar_Conta({ stepE, setEStep, data, id }) {
                 <p>Tem certeza que deseja deletar sua conta?</p>
                 <div className="buttons-delete">
                     <a className="button-s" onClick={() => setDeletar(true)}>Sim</a>
-                    <a className="button-as" href="/perfil-ong">Não</a>
+                    <a className="button-as" href="/gerenciamento-ong">Não</a>
                 </div>
                 {deletar === true ? <a className="button-as delete" onClick={Delete}>Deletar conta</a> : ""}
                 <p className="mensagem">{msg}</p>
