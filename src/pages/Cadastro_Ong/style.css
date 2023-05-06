@@ -1,7 +1,7 @@
 /* Tag gerals */
 #cadastro {
     width: 100%;
-    height: calc(100vh - 113px); 
+    height: 110vh; 
     /*Para que a tela não fique com a barra lateral eu estou tirando todos os pixel de elementos fixados (header + footer)*/
     font-size: 1em;
     display: flex;
@@ -42,7 +42,6 @@ aside img{
 
 /* Formulario */
 .section__form {
-    width: auto;
     height: max-content;
     box-shadow: 1px 2px 7px #00000070;
     padding: 30px;
@@ -270,6 +269,82 @@ label[for="termos"],
     display: flex;
     gap: 2px;
 }
+/* Mensagens */
+.mensagem{
+    height: 20px;
+    width: 100%;
+    text-align: center;
+    color: #c90000;
+    font-size: 1em;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 5px;
+}
+.mensagem i{
+    height: 20px;
+    color: #c90000;
+    font-size: 1em;
+}
+.err-senha{
+    height: 20px;
+    width: 100%;
+    text-align: center;
+    color: #c90000;
+    font-size: 1em;
+}
+.popup{
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #00000073;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.boxpopup{
+    background-color: #fff;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 10px #00000070;
+    padding: 5px;
+}
+.boxpopup i{
+    color: #0080C9;
+    font-size: 5em;
+}
+.boxpopup p{
+    font-weight: 500;
+    color: #323232;
+    padding: 10px;
+}
+@keyframes progressBar {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+.progress-bar {
+    height: 7px;
+    border-radius: 15px;
+    background-color: #0080C9;
+    left: 0;
+    top: 0;
+    animation: progressBar 2s linear forwards;
+    margin: 5px;
+}
 /* Form 3*/
 .form-3 label::before{
     content: "* ";
@@ -363,17 +438,8 @@ input[type="checkbox"] {
 }
 
 /* Responvidade */
-@media only screen and (max-width: 1700px) {
-    .section__form {
-        width: 80%;
-    }
-}
 
 @media only screen and (max-width: 1440px) {
-    .section__form {
-        width: 40vw;
-    }
-
     #cadastro__section div img {
         width: 300px;
     }
@@ -398,11 +464,6 @@ input[type="checkbox"] {
     .aside{
         display: none !important;
     }
-    .section__form {
-        width: 80%;
-        margin-top: 5%;
-    }
-
     #cadastro__section {
         flex-direction: column-reverse;
         margin-top: 2%;
@@ -416,16 +477,17 @@ input[type="checkbox"] {
         font-size: 0.88em;
     }
 }
+@media screen and (max-width:1050px) {
+    #cadastro img{
+        height: 170px;
+    }
+}
 @media screen and (max-width:800px) {
     #cadastro img{
         display: none;
     }
 }
 @media screen and (max-width:800px) {
-    .section__form {
-        width: 95%;
-        margin: 0 10px;
-    }
 
     .form__group {
         justify-content: center;
@@ -443,11 +505,8 @@ input[type="checkbox"] {
     #cadastro__section div img {
         display: none;
     }
-    .section__form {
-        height: 85%;
-    }
     .group__text,.group__about  {
-        width: 90%;
+        width: 100%;
     }
     .radio__span-two:before, .radio__span-two:after{
         width: 15%;
@@ -484,18 +543,9 @@ input[type="checkbox"] {
     .radio__span-one:before, .radio__span-one:after{
         left: 73px;
     }
-    .section__radio{
-        display: none;
-    }
-    .section__form{
-        margin-top: 30vh;
-    }
 }
 
 @media screen and (max-height:880px) {
-    .section__form {
-        height: max-content;
-    }
     .section__radio{
         bottom: -10%;
     }
@@ -503,7 +553,7 @@ input[type="checkbox"] {
 
 @media screen and (max-height:750px) {
     #cadastro__section{
-        align-items: flex-start;
+        align-items: center;
     }
 }
 

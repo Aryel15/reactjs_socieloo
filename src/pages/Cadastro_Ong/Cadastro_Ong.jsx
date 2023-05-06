@@ -1,17 +1,69 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import './style.css'
 import Menu from '../../components/Menu/Menu'
 import Controle_Cadastros from '../../components/Controle_Cadastros/Controle_Cadastros'
 import Vlibras from '../../components/Vlibras/Vlibras'
+import emailjs from "emailjs-com";
+import Axios from 'axios'
 
 export default function Cadastro_Ong() {
-    const [step, setStep] = React.useState(0);
+    const [step, setStep] = useState(0);
+
+    const [cadastro, setCadastro] = useState({
+      nome: '',
+      cnae: '',
+      cnpj: '',
+      email: '',
+      telefone: '',
+      senha: '',
+      regiao: '',
+      agencia: '',
+      conta: '',
+      pix: '',
+      descricao: '',
+      segmento: ''
+    })
+    const [senha, setSenha] = useState("")
+    const [cnae, setCnae] = useState("")
+  
+    // const valorCadastro = e => setCadastro({ ...cadastro, [e.target.name]: e.target.value });
+
+    const valorCadastro = e => {
+      const { name, value } = e.target;
+          if (name === 'telefone') {
+            const telefone_int = value.replace(/[^\d]/g, '');
+            setCadastro({
+              ...cadastro,
+              telefone: telefone_int,
+            });
+          } else {
+            setCadastro({
+              ...cadastro,
+              [name]: value
+            });
+          }
+    };
+  
+    const senhaForte = (senha) => {
+      const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+      return regex.test(senha);
+    };
+  
+    function gerarCodigo() {
+      let codigo = "";
+      for (let i = 0; i < 5; i++) {
+        codigo += Math.floor(Math.random() * 10);
+      }
+      return codigo;
+    }
+  
     const pages = [
-      <Etapa1 step={step} setStep={setStep}/>, 
-      <Etapa2 step={step} setStep={setStep} />,
-      <Etapa3 step={step} setStep={setStep} />,
-      <Etapa4 step={step} setStep={setStep} />,
+      <Etapa1 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro} />, 
+      <Etapa2 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro}/>,
+      <Etapa3 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro}/>,
+      <Etapa4 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro} gerarCodigo={gerarCodigo} senhaForte={senhaForte}/>,
+      <ValidaEmail cadastro={cadastro} />,
     ];
   return (
     <>
@@ -27,37 +79,37 @@ export default function Cadastro_Ong() {
   )
 }
 
-export function Etapa1({step, setStep}) {
-    const valorCadastro = e => {
-        const { name, value } = e.target;
-        if (name === 'telefone') {
-          const telefone_int = value.replace(/[^\d]/g, '');
-          setCadastro({
-            ...cadastro,
-            telefone: telefone_int,
-          });
-        } else {
-          setCadastro({
-            ...cadastro,
-            [name]: value
-          });
+export function Etapa1({ step, setStep, cadastro, valorCadastro }) {
+    const [mensagem, setMensagem] = useState('');
+    const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
+    const HandleClickAvançar = (e)=>{
+        e.preventDefault()
+        if((cadastro.nome !== '') && (cadastro.email !== '') && (cadastro.telefone !== '') && (cadastro.cnpj !== '') && (cadastro.cnae !== '')){
+          setStep(step + 1)
+        }else{
+          setMensagem(msg)
+          console.log(cadastro);
         }
-      };
+    }
   return (
     <section id="cadastro__section">
         <div className="section__form">
             <form action="#" method="post">
+                <p className='mensagem'>{mensagem}</p>
                 <h1 className="section__title">Cadastre sua ONG</h1>
                 <section className="form__group">
                     <div className="group__text">
                         <label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome" required placeholder="Socieloo"/>
+                        <input type="text" id="nome" name="nome" value={cadastro?.nome} required placeholder="Socieloo" onChange={valorCadastro}/>
 
                         <label for="email">Email</label>
-                        <input type="text" id="email" name="email" required placeholder="noobmaster69@hotmail.com"/>
+                        <input type="text" id="email" name="email" value={cadastro?.email} required placeholder="noobmaster69@hotmail.com" onChange={valorCadastro}/>
 
                         <label for="telefone">Telefone</label>
-                        <input type="text" id="telefone" name="telefone" required placeholder="+55 (11) 98765-4321"/>
+                        <input type="text" id="telefone" name="telefone" value={cadastro?.telefone} required placeholder="+55 (11) 98765-4321" onChange={valorCadastro}/>
+
+                        <label for="cnpj">CNPJ:</label>
+                        <input type="text" name="cnpj" id="cnpj" value={cadastro?.cnpj} placeholder="000.000.000-00" onChange={valorCadastro} required/>
 
                         <label for="cnae">Cnae</label>
                         <select name="cnae" id="cnae" onChange={valorCadastro} className="select-regiao" required>
@@ -72,7 +124,7 @@ export function Etapa1({step, setStep}) {
                         </select>
 
                     </div>
-                    <a href="javascript:void(0);" className="options__submit" onClick={() => { setStep(step + 1);}}>Avançar</a>
+                    <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Avançar</a>
                 </section>
             </form>
         </div>
@@ -87,25 +139,21 @@ export function Etapa1({step, setStep}) {
     </section>
   )
 }
-  function Etapa2({step, setStep}) {
-    const valorCadastro = e => {
-        const { name, value } = e.target;
-        if (name === 'telefone') {
-          const telefone_int = value.replace(/[^\d]/g, '');
-          setCadastro({
-            ...cadastro,
-            telefone: telefone_int,
-          });
-        } else {
-          setCadastro({
-            ...cadastro,
-            [name]: value
-          });
-        }
-      };
+function Etapa2({ step, setStep, cadastro, valorCadastro }) {
+      const [mensagem, setMensagem] = useState('');
+      const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
+      const HandleClickAvançar = (e)=>{
+          e.preventDefault()
+          if((cadastro.regiao !== '') && (cadastro.segmento !== '') && (cadastro.descricao !== '')){
+              setStep(step + 1)
+          }else{
+            setMensagem(msg)
+          }
+      }
       return (
           <section id="cadastro__section">
               <div className="section__form 2">
+                  <p className='mensagem'>{mensagem}</p>
                   <h1 className="section__title">Cadastre sua Ong</h1>
                   <form action="" className='form-2'>
                       <div className="collum">
@@ -132,11 +180,11 @@ export function Etapa1({step, setStep}) {
                         </select>
                       </div>
                       <label for="descricao">Descrição</label>
-                      <textarea name="descricao" id="descricao" cols="30" rows="10" onChange={valorCadastro} ></textarea>
+                      <textarea name="descricao" id="descricao" cols="30" rows="10" value={cadastro?.descricao} onChange={valorCadastro} ></textarea>
                   </form>
                   <div className="buttons-form2">
                       <a href="javascript:void(0);" className="voltar" onClick={() => { setStep(step - 1);}}>Voltar</a>
-                      <a href="javascript:void(0);" className="options__submit" onClick={() => { setStep(step + 1);}}>Avançar</a>
+                      <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Avançar</a>
                   </div>
               </div>
               <div className="section__radio">
@@ -151,28 +199,39 @@ export function Etapa1({step, setStep}) {
       )
   }
 
-  function Etapa3({step, setStep}) {
+  function Etapa3({ step, setStep, cadastro, valorCadastro }) {
+      const [mensagem, setMensagem] = useState('');
+      const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
+      const HandleClickAvançar = (e)=>{
+          e.preventDefault()
+          if((cadastro.agencia !== '') && (cadastro.conta !== '') && (cadastro.pix !== '')){
+              setStep(step + 1)
+          }else{
+            setMensagem(msg)
+          }
+      }
       return (
           <section id="cadastro__section">
               <div className="section__form 2">
+                  <p className='mensagem'>{mensagem}</p>
                   <h1 className="section__title">Dados Bancários</h1>
                   <form action="" className='form-2'>
                       <div className="collum">
                           <div className="agencia">
                               <label for="agencia">Agência</label>
-                              <input type="text" id="agencia" name="agencia" required/>
+                              <input type="text" id="agencia" name="agencia" required value={cadastro?.agencia} onChange={valorCadastro}/>
                           </div>
                           <div className="conta">
                               <label for="conta">Conta</label>
-                              <input type="text" id="conta" name="conta" required/>
+                              <input type="text" id="conta" name="conta" required value={cadastro?.conta} onChange={valorCadastro}/>
                           </div>
                           <label for="pix">Pix</label>
-                          <input type="text" id="pix" name="pix" required/>
+                          <input type="text" id="pix" name="pix" required value={cadastro?.pix} onChange={valorCadastro}/>
                       </div>
                   </form>
                   <div className="buttons-form2">
                       <a href="javascript:void(0);" className="voltar" onClick={() => { setStep(step - 1);}}>Voltar</a>
-                      <a href="javascript:void(0);" className="options__submit" onClick={() => { setStep(step + 1);}}>Avançar</a>
+                      <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Avançar</a>
                   </div>
               </div>
               <div className="section__radio">
@@ -187,23 +246,99 @@ export function Etapa1({step, setStep}) {
       )
   }
 
-function Etapa4({step, setStep}) {
+function Etapa4({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodigo }) {
+    const [senhaDiferente, setSenhaDiferente] = useState("")
+    const [msgsenhaDiferente, setMsgSenhaDiferente] = useState("")
+    const [mensagem, setMensagem] = useState('');
+    const [senhaFraca, setSenhaFraca] = useState("")
+    const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
+    const popBox = (
+      <section className="popup">
+        <div className="boxpopup">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <p>Preencha todos os campos!</p>
+          <div className="progress-bar"></div>
+        </div>
+      </section>
+    )
+    const [popUp, setPopUp] = useState("")
+
+    function enviarEmail(destinatario, codigo) {
+      return emailjs.send("serviceID", "template_xwxib2d", {
+        to_email: destinatario,
+        codigo: codigo.toString(),
+      }, "QSlqTSkhTipqcM7El");
+    }
+
+    const isCadastroValido = () => {
+      for (let campo in cadastro) {
+        if (cadastro[campo] === '' || cadastro[campo] === null) {
+          setPopUp(popBox);
+          setTimeout(() => {
+            setPopUp("");
+          }, 2000); 
+          return;
+        }
+      }
+      let codigo = gerarCodigo();
+      setMsgSenhaDiferente('');
+      sessionStorage.setItem("codigo", codigo);
+    
+      enviarEmail(cadastro.email, codigo)
+        .then(() => {
+          setStep(step + 1);
+        })
+        .catch((error) => {
+          console.log(error);
+      });
+    }
+
+    const HandleClickAvançar = (e) => {
+      e.preventDefault();
+    
+      if (cadastro.senha === '' || senhaDiferente === '') {
+        setMensagem(msg);
+        console.log("não tem senha");
+        console.log(cadastro);
+        return;
+      }
+    
+      if (!senhaForte(cadastro.senha)) {
+        setMensagem('');
+        setSenhaFraca('Senha fraca');
+        console.log("senha fraca");
+        return;
+      }
+    
+      if (cadastro.senha !== senhaDiferente) {
+        setSenhaFraca('');
+        setMsgSenhaDiferente('As senhas são diferentes');
+        console.log('As senhas são diferentes');
+        return;
+      }
+    
+      isCadastroValido();
+    };
+
     return(
         <section id="cadastro__section">
             <div className="section__form 2">
+            <p className='mensagem'>{mensagem}</p>
             <h1 className="section__title">Cadastre sua ONG</h1>
             <form action="" className='form-3'>
                 <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" required/>
+                <input type="password" id="senha" name="senha" onChange={valorCadastro} required/>
+                <p className='err-senha'>{senhaFraca}</p>
                 <label for="confirmsenha">Confirmar senha</label>
-                <input type="password" id="confirmsenha" name="confirmsenha" required/>
+                <input type="password" id="confirmsenha" name="confirmsenha" required onChange={(e) => setSenhaDiferente(e.target.value)}/>
+                <p className='err-senha'>{msgsenhaDiferente}</p>
                 <div className="options__checkbox">
                     <input type="checkbox" name="termos" id="termos"/>
                     <label for="termos">Eu concordo com os <a href="#">termos e condições</a></label>
                 </div>
                 <div className="buttons-form2">
                     <a href="javascript:void(0);" className="voltar" onClick={() => { setStep(step - 1);}}>Voltar</a>
-                    <a href="/" className="options__submit">Seja Bem-Vindo</a>
+                    <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Finalizar Cadastro</a>
                 </div>
             </form>
             </div>
@@ -215,6 +350,77 @@ function Etapa4({step, setStep}) {
                     <li><input className="radio__input" name="process" id="radio-three" type='radio' checked/></li>
                 </ul>
             </div>
+            {popUp}
+
         </section>
     )
 }
+function ValidaEmail({ cadastro }) {
+    const [msg, setMsg] = useState("")
+    const [codigo, setCodigo] = useState("")
+    
+    const popBox = (
+      <section className="popup">
+        <div className="boxpopup">
+          <i class="fa-solid fa-circle-check"></i>
+          <p>Sua Ong foi cadastrada com sucesso!</p>
+          <div className="progress-bar"></div>
+        </div>
+      </section>
+    )
+    const [popUp, setPopUp] = useState("")
+  
+    const handleClickCadastro = e => {
+      e.preventDefault()
+      const codigoArmazenado = sessionStorage.getItem("codigo");
+      if (codigo === codigoArmazenado) {
+        console.log(cadastro)
+        window.sessionStorage.removeItem("codigo")
+        Axios.post("http://localhost:8080/api/v1/ong", {
+          nome: cadastro.nome,
+          cnae: cadastro.cnae,
+          cnpj: cadastro.cnpj,
+          email: cadastro.email,
+          telefone: cadastro.telefone,
+          senha: cadastro.senha,
+          regiao: cadastro.regiao,
+          agencia: cadastro.agencia,
+          contaCorrente: cadastro.contaCorrente,
+          pix: cadastro.pix,
+          descricao: cadastro.descricao,
+          segmento: cadastro.segmento
+        }).then((response) => {
+          localStorage.setItem("id", response.data.id);
+          localStorage.setItem("tipo", "ong");
+          setPopUp(popBox);
+          console.log(cadastro);
+          setTimeout(() => {
+            window.location.pathname = "/gerenciamento-ong"
+          }, 2000); 
+        })
+      } else {
+        alert("Código inválido");
+      }
+    }
+  
+    return (
+      <>
+        <main className="cadastro">
+          <div className="formulario">
+            <form className="formcad" id="login" action="javascript:void(0)" onSubmit={handleClickCadastro}>
+              <div className="titulo-cad">
+                <p className="mensagem-cad">{msg}</p>
+                <h1>Validação de Email</h1>
+                <p>Digite o código que foi enviado para o seu email</p>
+                <br />
+              </div>
+              <label for="codigo">Código:</label>
+              <input type="text" name="codigo" id="codigo" onChange={(e) => setCodigo(e.target.value)} required />
+              <button>Cadastre</button>
+            </form>
+          </div>
+          {popUp}
+        </main>
+      </>
+    );
+  }
