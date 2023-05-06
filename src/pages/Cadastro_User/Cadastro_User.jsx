@@ -16,7 +16,11 @@ export default function Cadastro_User() {
   return (
     <>
       <Menu />
+      <main className='cad-user'>
+        <img src="../imgs/doacaoAnimal.png" alt=""/>
         {pages[step]}
+        <img src="../imgs/cadeirarodas.png" alt=""/>
+      </main>
         <Controle_Cadastros /><Vlibras />
     </>
   )

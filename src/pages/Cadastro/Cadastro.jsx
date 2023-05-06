@@ -74,12 +74,6 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
     e.preventDefault();
 
     let codigo = gerarCodigo();
-    /*Axios.get("https://servicodados.ibge.gov.br/api/v2/cnae/classes/" + cadastro.cnae)
-    .then((response) =>{
-      if(typeof response.data === "object") {
-        setCnae("");
-        console.log("Válido:" + response.data);*/
-
     if (!senhaForte(cadastro.senha)) {
       setSenha('Senha fraca');
       return;
@@ -99,13 +93,9 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
           console.log("FAILED...", err);
         }).catch((error) => { console.log(error) });
     }
-    /*} else {
-      console.log("Inválido:" + response.data);
-      setCnae("Cnae inválido");
-      return;
-    }
-  }).catch((error) => {console.log(error)});*/
   };
+
+  
 
 
   return (
@@ -120,6 +110,8 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
               <section className="form__group-1">
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" id="nome" onChange={valorCadastro} required />
+                <label for="cnpj">Cnpj:</label>
+                <input type="text" name="cnpj" id="cnpj" onChange={valorCadastro} required />
                 <label for="cnae">Cnae:</label>
                 {/* <IMaskInput mask="0000-0|00" name="cnae" id="cnae" onChange={valorCadastro} required/> */}
                 <select name="cnae" id="cnae" onChange={valorCadastro} className="select-regiao" required>
