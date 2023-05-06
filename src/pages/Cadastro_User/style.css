@@ -29,6 +29,11 @@
   .cad-user > img{
     height: 250px;
   }
+  .radio-group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .section-user {
     display: flex;
     flex-direction: column;
@@ -60,6 +65,7 @@
   .section-user .form-container .form-title {
     font-size: 2em;
     margin-bottom: 1rem;
+    text-align:center;
   }
   
   .section-user .form-container > div {
@@ -126,10 +132,13 @@
   }
   
   .section-user .form-container .input-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem 0;
+    display: flex;
+    gap: 1rem 0;
     margin-bottom: 2rem;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: fit-content;
   }
   
   .section-user .form-container .input-group .input {
@@ -146,6 +155,25 @@
   .input label:not(.check-label){
     margin-bottom: 0;
   }
+
+  /* Mensagens */
+.mensagem{
+  height: 20px;
+  width: 100%;
+  text-align: center;
+  color: #c90000;
+  font-size: 1em;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0px 5px;
+}
+.mensagem i{
+  height: 20px;
+  color: #c90000;
+  font-size: 1em;
+}
   @media screen and (max-width:580px){
     .section-user .form-container {
       width: 90vw;

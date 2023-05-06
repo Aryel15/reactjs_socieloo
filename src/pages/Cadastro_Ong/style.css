@@ -243,6 +243,15 @@ label[for="termos"],
     display: flex;
     gap: 2px;
 }
+.row{
+    display: flex;
+    gap: 2px;
+    width: 100%;
+}
+.row .cep, .bairro{
+    width: 90%;
+}
+
 /* Mensagens */
 .mensagem{
     height: 20px;
@@ -308,7 +317,7 @@ label[for="termos"],
     100% {
       width: 100%;
     }
-  }
+}
   
 .progress-bar {
     height: 7px;
@@ -456,7 +465,7 @@ input[type="checkbox"] {
         height: 170px;
     }
 }
-@media screen and (max-width:800px) {
+@media screen and (max-width:900px) {
     #cadastro img{
         display: none;
     }
@@ -487,6 +496,9 @@ input[type="checkbox"] {
     }
     #cadastro_section{
         justify-content:flex-start;
+    }
+    .section__form {
+        width: 95vw;
     }
 
 }

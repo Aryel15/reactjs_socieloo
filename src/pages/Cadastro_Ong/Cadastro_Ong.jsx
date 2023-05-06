@@ -62,7 +62,8 @@ export default function Cadastro_Ong() {
       <Etapa1 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro} />, 
       <Etapa2 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro}/>,
       <Etapa3 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro}/>,
-      <Etapa4 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro} gerarCodigo={gerarCodigo} senhaForte={senhaForte}/>,
+      <Etapa4 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro}/>,
+      <Etapa5 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro} gerarCodigo={gerarCodigo} senhaForte={senhaForte}/>,
       <ValidaEmail cadastro={cadastro} />,
     ];
   return (
@@ -133,7 +134,8 @@ export function Etapa1({ step, setStep, cadastro, valorCadastro }) {
                 <li><input className="radio__input" name="process" id="radio-one" type='radio' checked/></li>
                 <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { setStep(step + 1);}}/></li>
                 <li><input className="radio__input" name="process" id="radio-three" type='radio'onClick={() => { setStep(step + 2);}}/></li>
-                <li><input className="radio__input" name="process" id="radio-three" type='radio'onClick={() => { setStep(step + 3);}}/></li>
+                <li><input className="radio__input" name="process" id="radio-four" type='radio'onClick={() => { setStep(step + 3);}}/></li>
+                <li><input className="radio__input" name="process" id="radio-five" type='radio'onClick={() => { setStep(step + 4);}}/></li>
             </ul>
         </div>
     </section>
@@ -192,7 +194,8 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                       <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { setStep(step - 1);}}/></li>
                       <li><input className="radio__input" name="process" id="radio-two" type='radio' checked/></li>
                       <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { setStep(step + 1);}}/></li>
-                      <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { setStep(step + 2);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-four" type='radio' onClick={() => { setStep(step + 2);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-five" type='radio' onClick={() => { setStep(step + 3);}}/></li>
                   </ul>
               </div>
           </section>
@@ -214,7 +217,76 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
           <section id="cadastro__section">
               <div className="section__form 2">
                   <p className='mensagem'>{mensagem}</p>
-                  <h1 className="section__title">Dados Bancários</h1>
+                  <h1 className="section__title">Cadastre sua Ong</h1>
+                  <form action="" className='form-2'>
+                      <div className="collum">
+                          <div className="row">
+                            <div className="cep">
+                                <label for="cep">CEP</label>
+                                <input type="text" id="cep" name="cep" required/>
+                            </div>
+                            <div className="n">
+                                <label for="n">N°</label>
+                                <input type="text" id="n" name="n" required/>
+                            </div>
+                          </div>
+                          <div className="complemento">
+                              <label for="complemento">Complemento</label>
+                              <input type="text" id="complemento" name="complemento" required/>
+                          </div>
+                          <div className="logradouro">
+                              <label for="logradouro">Logradouro</label>
+                              <input type="text" id="logradouro" name="logradouro" required/>
+                          </div>
+                          <div className="endereco">
+                              <label for="endereco">Endereco</label>
+                              <input type="text" id="endereco" name="endereco" required/>
+                          </div>
+                          <div className="row">
+                            <div className="bairro">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" id="bairro" name="bairro" required/>
+                            </div>
+                            <div className="uf">
+                                <label for="uf">UF</label>
+                                <input type="text" id="uf" name="uf" required/>
+                            </div>
+                          </div>
+                      </div>
+                  </form>
+                  <div className="buttons-form2">
+                      <a href="javascript:void(0);" className="voltar" onClick={() => { setStep(step - 1);}}>Voltar</a>
+                      <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Avançar</a>
+                  </div>
+              </div>
+              <div className="section__radio">
+                  <ul className="radio__group">
+                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { setStep(step - 2);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { setStep(step - 1);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-three" type='radio' checked/></li>
+                      <li><input className="radio__input" name="process" id="radio-four" type='radio' onClick={() => { setStep(step + 1);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-five" type='radio' onClick={() => { setStep(step + 2);}}/></li>
+                  </ul>
+              </div>
+          </section>
+      )
+  }
+  function Etapa4({ step, setStep, cadastro, valorCadastro }) {
+      const [mensagem, setMensagem] = useState('');
+      const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
+      const HandleClickAvançar = (e)=>{
+          e.preventDefault()
+          if((cadastro.agencia !== '') && (cadastro.conta !== '') && (cadastro.pix !== '')){
+              setStep(step + 1)
+          }else{
+            setMensagem(msg)
+          }
+      }
+      return (
+          <section id="cadastro__section">
+              <div className="section__form 2">
+                  <p className='mensagem'>{mensagem}</p>
+                  <h1 className="section__title">Cadastre sua Ong</h1>
                   <form action="" className='form-2'>
                       <div className="collum">
                           <div className="agencia">
@@ -236,17 +308,18 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
               </div>
               <div className="section__radio">
                   <ul className="radio__group">
-                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { setStep(step - 2);}}/></li>
-                      <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { setStep(step - 1);}}/></li>
-                      <li><input className="radio__input" name="process" id="radio-three" type='radio' checked/></li>
-                      <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { setStep(step + 1);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { setStep(step - 3);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { setStep(step - 2);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { setStep(step - 1);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-four" type='radio' checked/></li>
+                      <li><input className="radio__input" name="process" id="radio-five" type='radio' onClick={() => { setStep(step + 1);}}/></li>
                   </ul>
               </div>
           </section>
       )
   }
 
-function Etapa4({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodigo }) {
+function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodigo }) {
     const [senhaDiferente, setSenhaDiferente] = useState("")
     const [msgsenhaDiferente, setMsgSenhaDiferente] = useState("")
     const [mensagem, setMensagem] = useState('');
@@ -344,10 +417,11 @@ function Etapa4({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
             </div>
             <div className="section__radio">
                 <ul className="radio__group">
-                    <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { setStep(step - 3);}}/></li>
-                    <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { setStep(step - 2);}}/></li>
-                    <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { setStep(step - 1);}}/></li>
-                    <li><input className="radio__input" name="process" id="radio-three" type='radio' checked/></li>
+                    <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { setStep(step - 4);}}/></li>
+                    <li><input className="radio__input" name="process" id="radio-two" type='radio'  onClick={() => { setStep(step - 3);}}/></li>
+                    <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { setStep(step - 2);}}/></li>
+                    <li><input className="radio__input" name="process" id="radio-four" type='radio' onClick={() => { setStep(step - 1);}}/></li>
+                    <li><input className="radio__input" name="process" id="radio-five" type='radio' checked/></li>
                 </ul>
             </div>
             {popUp}
