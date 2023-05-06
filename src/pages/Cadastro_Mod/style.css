@@ -1,5 +1,9 @@
 /*HEADER*/
-
+#root > main > .section-seu-codigo, .section-seu-codigo > .content, .section-seu-codigo > .content #box-artigo, .content, .section-seu-codigo > .content #box-artigo > div > form,
+#box-artigo > div > form > .form_grupo, #box-artigo > div > form > .form_grupo label, #box-artigo > div > form > .form_grupo input, #box-artigo > div > form > span,
+#box-artigo > div > form > .form_grupo, #box-artigo > div > form > .form_grupo > .btn__container, #box-artigo > div > form > .form_grupo .btn__container label, #box-artigo > div > form > .form_grupo > .btn__container input, #box-artigo > div > form > div:nth-child(6) > div.form_grupo, #box-artigo > div > form > div:nth-child(6) > div.form_grupo > span, #box-artigo > div > form > div:nth-child(6) > div.form_message, #box-artigo > div > form > div:nth-child(6) > div.form_message label, #box-artigo > div > form > div:nth-child(6) > div.form_message textarea, #box-artigo > div > form > div:nth-child(6) > div.form_message > div, #box-artigo > div > form > div:nth-child(6) > div.form_message > div > label > a, #box-artigo > div > form > div:nth-child(6) > div.submit,#box-artigo > div > form > div:nth-child(6) > div.form_grupo > div > button{
+    font-size: 1em;
+}
 .container_form {
     width: 60vw;
     margin: auto;
@@ -10,7 +14,7 @@
     box-shadow: 0px 0px 1.2px 0px #aeaeae; 
     border-radius:3px; 
     padding:3em;
-
+    font-size: 1em;
 }
 .main_mod {
     display: flex;
@@ -22,6 +26,7 @@
     height: 84vh;
     justify-content: flex-start;
     margin-top: 6.5vh;
+    font-size: 1em;
 }
 
 .container_form h1 {
@@ -59,7 +64,7 @@
 
 .submit { width:100%; float:left; }
 
-.submit_btn {
+#box-artigo > div > form > div:nth-child(6) > div.submit > button {
     float: left;
     display: block;
     padding: 5px 30px;
@@ -68,7 +73,7 @@
     background-color: #00a1ff;
     color: #fff;
     font-family: inherit;
-    font-size: 1.5rem;
+    font-size: 1.5em;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border-radius: 6px;
     margin: 20px auto;
@@ -77,7 +82,6 @@
     font-weight: 500;
     border: #00a1ff solid 2px;
 }
-
 .submit_btn:hover {
     border: #00a1ff solid 2px;
     color: #00a1ff;
@@ -131,6 +135,7 @@ label[for="termos"],
 .inputsenha{
     display: inline-flex;
     align-items: center;
+    font-size: 1em;
 }
 
 .options__checkbox {

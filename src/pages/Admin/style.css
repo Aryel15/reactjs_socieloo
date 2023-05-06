@@ -9,6 +9,7 @@ nav{
     justify-content:space-between;
     align-content: space-between !important;
     align-items: center;
+    font-size: 1em;
 }
 #main-admin section{
     float: left;
@@ -26,6 +27,12 @@ nav{
 .imagem img{
     height: 87vh;
 }
+#admin{
+    width: 260px;
+}
+#admin,#admin h2, #admin label {
+    font-size: 1em;
+}
 #main-admin .aside_admin{
     float:right;
     padding-left: 0;
@@ -33,9 +40,10 @@ nav{
     border: none;
     align-items: center;
     z-index: 999;
+    font-size: 1em;
 }
 #main-admin .aside_admin input:not(#lembrar){
-    width: 250px;
+    width: 260px;
     height: 30px;
     margin: 5px 0;
     font-size: 0.81em;
@@ -108,17 +116,22 @@ nav{
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
+    font-size: 1em;
+    flex-wrap: wrap;
 }
 .lembrar {
     display: flex;
     justify-content: center;
     flex-direction: row;
     align-items: center;
+    font-size: 1em;
 }
 .lembrar label{
     margin-left: 5px;
     margin-bottom: 0px !important;
 }
+
+
 @media only screen and (max-width: 1140px){
     .aside_admin {
         display: flex;

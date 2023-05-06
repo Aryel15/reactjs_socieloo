@@ -34,6 +34,7 @@ aside img{
     margin-top: 0;
     background-color: #fff;
     flex-wrap: wrap;
+    font-size: 1em;
 }
 #cadastro__section div img {
     width: 400px;
@@ -49,6 +50,7 @@ aside img{
     margin: 0px;
     border-radius: 10px;
     width: 600px;
+    font-size: 1em;
 }
 
 .section__title {
@@ -56,6 +58,10 @@ aside img{
     text-align: center;
     font-size: 2em;
     margin: 10px 0px;
+}
+
+#cadastro__section > div.section__form > form{
+    font-size: 1em;
 }
 
 .form__group {
@@ -66,15 +72,24 @@ aside img{
     justify-content: space-around;
     align-items: flex-start;
     margin: 0px;
+    font-size: 1em;
 }
+
 .form__group select{
     width: 100%;
+}
+
+.form__group .group__text{
+    font-size: 1em;
+
 }
 
 .form__group .group__text label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    font-size: 1em;
+
 }
 
 .form__group .group__text label::before,
@@ -150,6 +165,7 @@ aside img{
 }
 label[for="termos"]>a {
     color: #00a1ff;
+    text-decoration: underline;
 }
 
 label[for="termos"],
@@ -163,7 +179,7 @@ label[for="termos"],
 .options__submit {
     width: 100%;
     padding: 8px 10px;
-    font-size: 15px;
+    font-size: 1em;
     border: 0;
     background: #00a1ff;
     color: #fff;
@@ -207,14 +223,20 @@ label[for="termos"],
     display: flex;
     gap: 5px;
     text-align: center;
+    font-size: 1em;
 }
 .collum {
     display: flex;
     flex-direction: column;
     width: 100%;
+    font-size: 1em;
 }
 .collum select{
     width: 100%;
+    font-size: 1em;
+}
+#cadastro__section > div.section__form.\32  > form > div > label, #cadastro__section > div.section__form.\32  > form > #descricao, #cadastro__section > div.section__form.\32  > form > label{
+    font-size: 1em;
 }
 .form-2 textarea{
     height: 88%;
@@ -232,7 +254,7 @@ label[for="termos"],
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     transition: box-shadow 0.3s;
     background: #fff;
-    font-size: 1rem;
+    font-size: 1em;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -240,6 +262,10 @@ label[for="termos"],
     padding: 8px 10px;
     font-size: 15px;
 }
+#cadastro__section > div.section__form.\32  > div > a.voltar,#cadastro__section > div.section__form.\32  > form > div.buttons-form2 > a.voltar, #cadastro__section > div.section__form.\32  > form > div > div.agencia, #cadastro__section > div.section__form.\32  > form > div > div.conta, #cadastro__section > div.section__form.\32  > form > div > div.agencia label, #cadastro__section > div.section__form.\32  > form > div > div.conta label, #cadastro__section > div.section__form.\32  > form > div.options__checkbox > label > a{
+    font-size: 1em;
+}
+
 .banco{
     display: flex;
     gap: 2px;

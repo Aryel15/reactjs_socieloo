@@ -2,13 +2,17 @@
     display: flex;
     justify-content: center;
     height: 85vh;
+    font-size: 1em;
+
 }
 .visita p{
     margin: 0;
     text-align: center;
+    font-size: 1em;
 }
 .titulo{
     text-align: center;
+    font-size: 1em;
 }
 .titulo p{
     font-size: 0.80em;
@@ -17,7 +21,7 @@
 .titulo h1{
     color: #00a1ff;
     font-size: 1.8rem;
-    line-height:  1.9rem;
+    line-height:  1.9em;
     margin-bottom: 10px;
 }
 
@@ -28,6 +32,7 @@
     padding: 20px 30px;
     max-width: 400px;
     display: block;
+    font-size: 1em;
 }
 .forms{
     margin: 0 auto;
@@ -35,6 +40,7 @@
     padding: 20px 30px;
     max-width: 400px;
     display: block;
+    font-size: 1em;
 }
 
 .formvis label::before{
@@ -60,7 +66,7 @@
     margin-bottom: 10px;
     width: 100%;
     padding: 8px 10px;
-    font-size: 15px;
+    font-size: .94em;
     border: 0;
     background: #00a1ff;
     color: #fff;
@@ -84,17 +90,26 @@
     text-align: center;
     width: fit-content;
     height: fit-content;
+    font-size: 1em;
 }
 .hdidisponiveis{
     display: flex;
+    font-size: 1em;
 }
 .hdidisponiveis .checks{
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
     gap:10px;
+    font-size: 1em;
+}
+.hdidisponiveis .checks div{
+    font-size: 1em;
 }
 
+.hdidisponiveis .checks div label{
+    font-size: 1em;
+}
 .button-label {
     display: inline-block;
     padding: 0.5em 1em;

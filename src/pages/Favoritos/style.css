@@ -7,6 +7,7 @@
     flex-direction: column;
     margin-top: 0px;
     margin-bottom: 50px;
+    font-size: 1em;
 }
 .section-fav {
     display: flex;
@@ -16,22 +17,24 @@
     gap: 1rem;
     padding: 1rem 0;
     margin: 0;
+    font-size: 1em;
 }
 
 
 /* Texto das páginas */
 .fav__text {
     text-align: center;
+    font-size: 1em;
 }
 
 .fav__text>h1 {
-    font-size: 40px;
+    font-size: 2.5em;
     margin-bottom: 30px;
 
 }
 
 .fav__text>p {
-    font-size: 18px;
+    font-size: 1.13em;
     margin-bottom: 30px;
 }
 
@@ -45,16 +48,21 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: flex-start;
+    font-size: 1em;
 }
 
 .fav__options select>optgroup {
     border: 0;
     cursor: pointer;
+    font-size: 1em;
+
 }
 
 .fav__options select>optgroup>option {
     line-height: 1;
     cursor: pointer;
+    font-size: 1em;
+
 }
 
 .options__select {
@@ -62,6 +70,8 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    font-size: 1em;
+
 }
 .options__select select{
     background-color: #fff;
@@ -73,6 +83,8 @@
     border-radius: 3px;
     margin-right: 7px;
     margin-bottom: 5px;
+    font-size: 1em;
+
   }
   .search{
     background-color: #00a1ff;
@@ -83,6 +95,7 @@
     justify-content: center;
     align-items: stretch;
     display: flex;
+    font-size: 1em;
   }
   .search:hover{
     border: #00a1ff solid 1px;
@@ -108,6 +121,7 @@
     border-radius: 5px;
     background-color: #fff;
     display: inline-block;
+    font-size: 1em;
 }
 
 .fav__options .options__search input {
@@ -118,6 +132,7 @@
     padding: 0 15px 0px 30px;
     outline: none;
     color: #333;
+    font-size: 1em;
 }
 
 .fav__options .options__search .search__icon__container {
@@ -140,14 +155,17 @@
 
 .fav__cards {
     margin-top: 50px;
+    font-size: 1em;
 }
 
 .fav__cards .cards__title {
     margin-bottom: 30px;
+    font-size: 1em;
 }
 
 .fav__cards h2 {
     text-align: center;
+    font-size: 1em;
 }
 
 .item-custom{

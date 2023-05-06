@@ -144,7 +144,7 @@ export function Etapa4({step, setStep}) {
           <h1 class="section__title">
             Digite o código enviado pelo e-mail
           </h1>
-          <p>Um email de confirmação foi enviado para: <br/> <a href="#">******@email.com</a></p>
+          <p>Um email de confirmação foi enviado para: <br/> <label>******@email.com</label></p>
           <input class="input-field" type="text" id="code" name="code" placeholder="Código" required />
           <div class="buttons">
             <a href="javascript:void(0);" class="button-white" onClick={() => { setStep(step - 1);}}>
