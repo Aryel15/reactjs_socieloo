@@ -11,7 +11,7 @@ export default function Perfil_Ong() {
     const [data, setData] = useState()
     const [stepE, setEStep] = React.useState("Editar_Perfil");
     const editar = {
-        Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep} data={data}/>,
+        Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep} data={data} id={id} />,
         Alterar_Senha: <Alterar_Senha step={stepE} setStep={setEStep} data={data} id={id}  />,
         Alterar_Email: <Alterar_Email step={stepE} setStep={setEStep} data={data} id={id}  />,
         Deletar_Conta: <Deletar_Conta step={stepE} setStep={setEStep} data={data} id={id} />,
@@ -59,31 +59,65 @@ export default function Perfil_Ong() {
     )
 }
 
-function Editar_Perfil({ stepE, setEStep, data }) {
+function Editar_Perfil({ stepE, setEStep, data, id }) {
+    
+    useEffect(_=> {
+        setNome(data?.nome||"")
+        setTelefone(data?.telefone||"")
+        setCep(data?.cep||"")
+        setDescricao(data?.descricao||"")
+        setAgencia(data?.agencia||"")
+        setContaCorrente(data?.contaCorrente||"")
+        setPix(data?.pix||"")
+    },[data])
+
+    const [nome, setNome] = useState("")
+    const [telefone, setTelefone] = useState("")
+    const [cep, setCep] = useState("")
+    const [descricao, setDescricao] = useState("")
+    const [agencia, setAgencia] = useState("")
+    const [contaCorrente, setContaCorrente] = useState("")
+    const [pix, setPix] = useState("")
+
+    const handleClickEditar_Perfil = e =>{
+        e.preventDefault()
+        Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
+            nome: nome,
+            telefone: telefone,
+            cep: cep,
+            descricao: descricao,
+            agencia: agencia,
+            contaCorrente: contaCorrente,
+            pix: pix
+        }).then((response) => {
+            console.log(response);
+        })
+    }
+
     return (
         <>
             <h2>Editar perfil</h2>
-            <form action="#" className="content__form">
+            <form action="#" className="content__form" onSubmit={handleClickEditar_Perfil}>
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" value={data?.nome} />
+                <input type="text" id="nome" name="nome" value={nome} onChange={e=> setNome(e.target.value)} />
 
                 <label for="telefone">Telefone</label>
-                <input type="tel" id="telefone" name="telefone" value={data?.telefone} />
+                <input type="tel" id="telefone" name="telefone" value={telefone} onChange={e=> setTelefone(e.target.value)} />
 
-                <label for="endereço">Endereço</label>
-                <input type="text" id="endereço" name="endereço" value={data?.endereco} />
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" name="cep" value={cep} onChange={e=> setCep(e.target.value)} />
 
                 <label for="descricao">Descrição</label>
-                <textarea name="descricao" id="descricao" value={data?.descricao}></textarea>
+                <textarea name="descricao" id="descricao" value={descricao} onChange={e=> setDescricao(e.target.value)} ></textarea>
                 
                 <label for="agencia">Agência</label>
-                <input type="text" id="agencia" name="agencia" value={data?.agencia} />
+                <input type="text" id="agencia" name="agencia" value={agencia} onChange={e=> setAgencia(e.target.value)} />
 
                 <label for="contaCorrente">Conta</label>
-                <input type="text" id="contaCorrente" name="contaCorrente" value={data?.contaCorrente} />
+                <input type="text" id="contaCorrente" name="contaCorrente" value={contaCorrente} onChange={e=> setContaCorrente(e.target.value)} />
 
                 <label for="pix">Pix</label>
-                <input type="text" id="pix" name="pix" value={data?.pix} />
+                <input type="text" id="pix" name="pix" value={pix} onChange={e=> setPix(e.target.value)} />
                 <div className="form__button">
                     <button>Salvar edição</button>
                 </div>
