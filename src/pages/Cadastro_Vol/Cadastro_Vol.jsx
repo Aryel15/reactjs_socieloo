@@ -7,7 +7,7 @@ export default function Cadastro_Vol() {
   return (
     <>
     <Menu/>
-      <main className="main_content container">
+      <main className="main_content_voluntario container">
         <section className="section-seu-codigo container section-vol">
             <div className="content">
                 <div id="box-artigo" className="box-artigo">
@@ -40,11 +40,11 @@ export default function Cadastro_Vol() {
                             </div>
 							
 							<div className="form_grupo">
-                            <form>
+                            <div className='form_grupo_sexo'>
                                 <label for="sexo" className="form_label">Sexo:</label>
                                     <input type="radio" name="sexo" value="M" id="sexo_masc"/> M<br/>
                                     <input type="radio" name="sexo" value="F" id="sexo_fem"/> F
-                            </form>
+                            </div>
 							</div>
 
                             <div className="form_grupo">

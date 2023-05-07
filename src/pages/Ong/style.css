@@ -18,6 +18,7 @@
     margin-top: 50px;
     font-size: 1em;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 #dvSlider {
@@ -39,6 +40,7 @@ ul {
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
+    font-size: 1em;
 }
 
 .ong__imagens #imagens__container .container__item img {
@@ -57,6 +59,7 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    font-size: 1em;
 }
 
 #description__container {
@@ -65,8 +68,12 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    font-size: 1em;
 }
+#description__container > div.description__about{
+    font-size: 1em;
 
+}
 .informations__description h1 {
     font-size: 1.3em;
 }
@@ -99,6 +106,7 @@ ul {
     width: 100%;
     display: flex;
     flex-direction: column;
+    font-size: 1em;
 }
 
 .informations__botons > .informations__donation > input[type='button'],
@@ -127,11 +135,13 @@ ul {
     justify-content: space-between;
     align-items: left;
     width: 100%;
+    font-size: 1em;
 }
-#comments {
+div.informations__comments > #comments {
     width: 82%;
     resize: none;
     border: 1px solid black;
+    font-size: 1em;
 }
 #comments::placeholder{
     padding-top: 2px;
@@ -143,6 +153,7 @@ ul {
 .buttons__container {
     width: 17%;
     margin-left: 50px;
+    font-size: 1em;
 }
 
 .buttons__container button {
@@ -150,6 +161,7 @@ ul {
     display: block;
     margin: 0 auto;
     font-weight: bold;
+    font-size: 1em;
 }
 
 .buttons__container button+button {
@@ -163,6 +175,7 @@ ul {
 .buttons__container button p {
     display: inline;
     vertical-align: 5px;
+    font-size: 1em;
 }
 
 .description__adress__bank{
@@ -170,10 +183,16 @@ ul {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    font-size: 1em;
+}
+
+.description__adress, .description__bank, .description__adress p{
+    font-size: 1em;
 }
 
 .description__adress__bank > .description__bank > p:nth-child(1){
     margin-bottom: 10px;
+    font-size: 1em;
 }
 
 .description__adress__bank > .description__bank > p:nth-child(1), .description__adress__bank > .description__bank > p:nth-child(2), .description__adress__bank > .description__bank > p:nth-child(4), .description__adress__bank > .description__bank > br + p{
@@ -222,6 +241,7 @@ ul {
         padding: 50px;
         margin: 0%;
         margin-bottom: 50px;
+        font-size: 1em;
     }
 
     .informations__comments {

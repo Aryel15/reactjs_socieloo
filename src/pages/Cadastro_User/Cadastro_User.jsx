@@ -240,10 +240,10 @@ export function Etapa4({step, setStep, cadastro}) {
           <h1 className="section__title">
             Digite o código enviado pelo e-mail
           </h1>
-          <p>Um email de confirmação foi enviado para: <br/> <a href="#">{formatEmail(cadastro?.email)}</a></p>
-          <input className="input-field" type="text" id="code" name="code" placeholder="Código" required />
-          <div className="buttons">
-            <a href="javascript:void(0);" className="button-white" onClick={() => setStep(step - 1)}>
+          <p>Um email de confirmação foi enviado para: <br/> <a href="#">******@email.com</a></p>
+          <input class="input-field" type="text" id="code" name="code" placeholder="Código" required />
+          <div class="buttons">
+            <a href="javascript:void(0);" class="button-white" onClick={() => { setStep(step - 1);}}>
               Voltar
             </a>
             <a href="javascript:void(0);" className="button-blue" onClick={mostraCadastro}>

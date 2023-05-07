@@ -9,6 +9,7 @@ nav{
     justify-content:space-between;
     align-content: space-between !important;
     align-items: center;
+    font-size: 1em;
 }
 #main-login section{
     float: left;
@@ -29,10 +30,17 @@ nav{
     padding-left: 0;
     margin-right: 15vw;
     border: none;
-
+    font-size: 1em;
+}
+#main-login> .imagem + .aside_login> #login{
+    width: 260px;
+    font-size: 1em;
+}
+#main-login> .imagem + .aside_login> #login h2, #main-login> .imagem + .aside_login> #login h2 + p{
+    font-size: 1em;
 }
 #main-login aside input:not(#lembrar){
-    width: 250px;
+    width: 260px;
     height: 30px;
     margin: 5px 0;
     font-size: 0.81em;
@@ -74,7 +82,7 @@ label{
     border: solid 1px #000;
     color: #fff;
     padding: 2px 0;
-    width: 250px;
+    width: 260px;
     height: 30px;
     margin: 5px 0 100px 0;
     display: flex;
@@ -97,15 +105,18 @@ label{
 }
 .cadastro-login{
     margin-left: 0px;
-    font-size: 14px;
+    font-size: 0.88em;
 }
 .cadastro-login a{
     float: none;
+    text-decoration: underline;
+    margin-top: 2.5px;
 }
 .esqueceu_senha{
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
+    flex-wrap: wrap;
 }
 .lembrar {
     display: flex;

@@ -54,8 +54,8 @@ export default function Favoritos() {
                 </div>
 
                 <div className="card__conteiner">
-                    <RemoveCard categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='./imgs/cil_animal.png' regiao="Zona Leste" link="/ong"/>
-                    <RemoveCard categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='./imgs/cil_animal.png' regiao="Zona Leste" link="/ong"/>
+                    <RemoveCard categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='public\imgs\icons\Cidadania.png' regiao="Zona Leste" link="/ong"/>
+                    <RemoveCard categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='public\imgs\icons\Proteção animal.png' regiao="Zona Leste" link="/ong"/>
 
                 </div>
             </section>

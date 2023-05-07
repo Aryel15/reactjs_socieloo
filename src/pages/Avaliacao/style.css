@@ -12,13 +12,12 @@
     padding: 1rem 0;
     margin: 0;
     height: 84vh;
+    font-size: 1em;
 }
-
 .avaliacao {
     display: flex;
     padding-left: 0;
 }
-
 .star-icon {
     list-style-type: none;
     border: 1px solid #fff;
@@ -27,7 +26,6 @@
     font-size: 40px;
     /* alterar o tamanho das estrelas */
 }
-
 .star-icon::before {
     content: "\2605";
 }
@@ -49,4 +47,7 @@
     display: flex;
     position: relative;
     flex-direction: column;
+}
+#box-artigo > div > form > div:nth-child(3) > div.form_message,#box-artigo > div > form > div:nth-child(3) > div.options__checkbox > label > a,#box-artigo > div > form > div:nth-child(3) > div.submit, #box-artigo > div > form > div:nth-child(3) > div.submit button {
+    font-size: 1em;
 }
