@@ -79,6 +79,9 @@ footer {
 .search {
   background-color: #fff;
 }
+.search:hover {
+ border-color: #000;
+}
 .search img {
   filter: contrast(0);
 }
@@ -99,7 +102,12 @@ a:hover .card {
 #title-index {
   color: #fff;
 }
-
+.search i{
+  color: #000;
+}
+.search:hover i {
+  color: #000;
+}
 /* --------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* acessibilidade */
 #content {
@@ -195,4 +203,232 @@ code {
 }
 #main__fav .card h2 {
   color: #000;
+}
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/*ADMIN*/
+#main-admin .aside_admin {
+  color: white;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/*Cadastro do moderador*/
+#root > main.main_mod.container > section .content #box-artigo > div{
+  background-color: #000;
+  color: #fff;
+}
+
+.container_form h1 {
+  color: #fff;
+}
+.btn__container > .checkbox-input:checked +.checkbox-label{
+  color: yellow;
+}
+br + .form_grupo .btn__container > .checkbox-input:checked{
+  background-color: yellow;
+}
+#box-artigo > div > form > div:nth-child(6) > div.form_grupo > div > button,#box-artigo > div > form > div:nth-child(6) > div.submit > button{
+  background-color: white;
+  color: #000;
+  border: #000 solid 1px;
+}
+#box-artigo > div > form > div:nth-child(6) > div.form_grupo > div > button.confirm_btn:hover{
+  border: #fff solid 1px;
+  color: #fff;
+  background-color: #000;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/*Menu cadastro*/
+.cadastros .ativado{
+  background-color: #000;
+}
+
+.cadastros .link:hover{
+  background-color: #000;
+}
+.cadastros .link:hover a{
+  color: #fff;
+}
+.cadastros .ativado:hover{
+  background-color: #4b4b4b7a;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* Cadastro user*/
+
+.section-user .form-container{
+    color: white;
+    box-shadow: 1px 2px 7px #f1f1f13f;
+}
+#root > main > section > form > div.buttons > a.button-blue{
+  background-color: #fff;
+  color: #000;
+  border: #000 solid 1px;
+}
+#root > main > section > form > div.buttons > a.button-blue:hover {
+  border: #fff solid 1px;
+  color: #fff;
+  background-color: #000;
+}
+#root > main > section > form.form-container > h1.section__title + p > a{
+  color: yellow;
+}
+input[type="radio"], input[type="checkbox"]{
+  accent-color: yellow;
+}
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* Cadastro voluntario */
+
+#box-artigo > div.container_form{
+  background: #000;
+  color: white;
+}
+.form_label:not(.check_label):before{
+  color: yellow;
+}
+.btn__container > .checkbox-input:checked{
+  background-color: yellow;
+}
+#box-artigo > div > form > div.submit > button{
+  background-color: #fff;
+  color: #000;
+  border: #000 solid 1px;
+}
+#box-artigo > div > form > div.submit > button:hover {
+  border: #fff solid 1px;
+  color: #fff;
+  background-color: #000;
+}
+#box-artigo > div > form > div:nth-child(12) > label > a{
+  color: yellow;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* Cadastro ONG */
+.titulo-cad h1{
+  color: white;
+}
+main.cadastro > .formcad{
+  background-color: #000;
+  color: white;
+}
+.formcad label:not(.radio__option):before{
+  color: yellow;
+}
+.formcad button{
+  background-color: #fff;
+  color: #000;
+}
+.formcad button:hover {
+  background: #ffffffcc
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* Cadastro ONG */
+
+.form__group .group__text label::before, .about__radios p::before, .form-3 label::before, .form-2 label::before {
+  color: yellow;
+}
+.radio__input{
+  border: 3px solid yellow;
+}
+.radio__input:before{
+  background: yellow;
+}
+.options__submit{
+  background-color: #fff;
+  color: #000;
+}
+.options__submit:hover {
+  background: #ffffffcc
+}
+label[for="termos"]>a{
+  color: yellow;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* faq */
+.profile.column.main-faq{
+  color: white;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* perfil */
+.profile.column{
+  color: white;
+}
+#root > main > div > div.container > form > button.button_perfil{
+  background-color: #fff;
+  color: #000;
+  border: #000 solid 1px;
+}
+#root > main > div > div.container > form > button.button_perfil:hover{
+  border: #fff solid 1px;
+  color: #fff;
+  background-color: #000;
+}
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* comentarios */
+.title{
+  color: #fff;
+}
+.botao,.editbotao,.submit_btn, .btn, .button-as, .form__button button, .button-s{
+  background-color: #fff;
+  color: #000;
+  border: #000 solid 1px;
+}
+.botao:hover,.editbotao:hover,.submit_btn:hover, .btn:hover, .button-as:hover, .form__button button:hover, .button-s:hover{
+  border: #fff solid 1px;
+  color: #fff;
+  background-color: #000;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* excluir cadastro */
+.painel{
+  background-color: #000;
+  color: #fff;
+  box-shadow: 1px 2px 5px #ffffffde;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* alterar senha*/
+.profile{
+  color: white;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*visita guiada*/
+.formvis,.horarios, .forms {
+  background-color: #000;
+  color: #fff;
+  box-shadow: 1px 2px 5px #ffffffde;
+}
+.titulo h1{
+  color: #fff;
+}
+.formvis label::before{
+  color: yellow;
+}
+.hdidisponiveis .checks div label{
+  color: white;
+}
+.button-label{
+  border: 2px solid #fff;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*gerenciar perfil*/
+#edit, .options__itens li:hover:before, .select::before{
+  background-color: #000;
+}
+
+.edit__options{
+  border-right: 2px solid #000;
 }

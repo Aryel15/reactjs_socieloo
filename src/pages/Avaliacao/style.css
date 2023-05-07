@@ -20,7 +20,6 @@
 }
 .star-icon {
     list-style-type: none;
-    border: 1px solid #fff;
     cursor: pointer;
     color: #ffe500;
     font-size: 40px;
