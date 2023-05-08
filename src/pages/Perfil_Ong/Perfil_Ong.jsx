@@ -32,13 +32,13 @@ export default function Perfil_Ong() {
         <>
             <Menu />
             <main id="edit" >
+                <div className="options__photos">
+                    <img src="../imgs/fotosOng/fotos01.jpg" alt="foto de perfil escolhida pela ong" />
+                    <h1>{data?.nome}</h1>
+                </div>
                 <section className="edit__conteiner" id="conteudo" >
 
                     <aside className="edit__options">
-                        <div className="options__photos">
-                            <img src="../imgs/fotosOng/fotos01.jpg" alt="foto de perfil escolhida pela ong" />
-                            <h1>{data?.nome}</h1>
-                        </div>
 
                         <ul className="options__itens">
                             <li className={stepE === "Editar_Perfil" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Editar_Perfil")}><i className='bx bx-pencil'></i> Editar perfil</a></li>
@@ -69,6 +69,11 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
         setAgencia(data?.agencia||"")
         setContaCorrente(data?.contaCorrente||"")
         setPix(data?.pix||"")
+        setEmail(data?.email||"")
+        setCnpj(data?.cnpj||"")
+        setCnae(data?.cnae||"")
+        setRegiao(data?.cnae||"")
+        setSegmento(data?.cnae||"")
     },[data])
 
     const [nome, setNome] = useState("")
@@ -78,6 +83,11 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
     const [agencia, setAgencia] = useState("")
     const [contaCorrente, setContaCorrente] = useState("")
     const [pix, setPix] = useState("")
+    const [email, setEmail] = useState("")
+    const [cnpj, setCnpj] = useState("")
+    const [cnae, setCnae] = useState("")
+    const [regiao, setRegiao] = useState("")
+    const [segmento, setSegmento] = useState("")
 
     const handleClickEditar_Perfil = e =>{
         e.preventDefault()
@@ -98,28 +108,73 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
         <>
             <h2>Editar perfil</h2>
             <form action="#" className="content__form" onSubmit={handleClickEditar_Perfil}>
-                <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" value={nome} onChange={e=> setNome(e.target.value)} />
+                <div className="collum">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" value={nome} onChange={e=> setNome(e.target.value)} />
 
-                <label for="telefone">Telefone</label>
-                <input type="tel" id="telefone" name="telefone" value={telefone} onChange={e=> setTelefone(e.target.value)} />
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone" value={telefone} onChange={e=> setTelefone(e.target.value)} />
 
-                <label for="cep">CEP</label>
-                <input type="text" id="cep" name="cep" value={cep} onChange={e=> setCep(e.target.value)} />
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" name="cep" value={cep} onChange={e=> setCep(e.target.value)} />
 
-                <label for="descricao">Descrição</label>
-                <textarea name="descricao" id="descricao" value={descricao} onChange={e=> setDescricao(e.target.value)} ></textarea>
-                
-                <label for="agencia">Agência</label>
-                <input type="text" id="agencia" name="agencia" value={agencia} onChange={e=> setAgencia(e.target.value)} />
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value={email} />
 
-                <label for="contaCorrente">Conta</label>
-                <input type="text" id="contaCorrente" name="contaCorrente" value={contaCorrente} onChange={e=> setContaCorrente(e.target.value)} />
+                    <label for="cnpj">CNPJ:</label>
+                    <input type="text" name="cnpj" id="cnpj" value={cnpj} onChange={e=> setCnpj(e.target.value)} required/>
 
-                <label for="pix">Pix</label>
-                <input type="text" id="pix" name="pix" value={pix} onChange={e=> setPix(e.target.value)} />
-                <div className="form__button">
-                    <button>Salvar edição</button>
+                    <label for="cnae">Cnae</label>
+                    <input type="text" name="cnae" list="cnae" value={cnae} onChange={e=> setCnae(e.target.value)} required/>
+                    <datalist name="cnae" id="cnae" className="select-regiao">
+                        <option value="#" selected disabled>Selecione uma opção</option>
+                        <option value="9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS">9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS</option>
+                        <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE</option>
+                        <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS</option>
+                        <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS</option>
+                        <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS</option>
+                        <option value="9430-8/00 - ATIVIDADE DE OPERAÇÃO DE CENTRAIS DE DISQUE DENUNCIA QUANDO REALIZADO POR ENTIDADES SEM FINS LUCRATIVOS">9430-8/00 - ATIVIDADE DE OPERAÇÃO DE CENTRAIS DE DISQUE DENUNCIA QUANDO REALIZADO POR ENTIDADES SEM FINS LUCRATIVOS</option>
+                        <option value="Outro">Outro</option>
+                    </datalist>
+                    <label for="regiao">Região</label>
+                    <input type="text" name="regiao" list="regiao" value={regiao} onChange={e=> setRegiao(e.target.value)} required/>
+                    <datalist name="regiao" id="regiao" className="cad-select" >
+                        <option value="#" selected disabled>Selecione uma opção</option>
+                        <option value="Zona Norte">Zona Norte</option>
+                        <option value="Zona Sul">Zona Sul</option>
+                        <option value="Centro">Centro</option>
+                        <option value="Zona Leste">Zona Leste</option>
+                        <option value="Zona Oeste">Zona Oeste</option>
+                    </datalist>
+                </div>
+
+                <div className="collum">
+                    <label for="select-regiao"className="select-label">Qual a causa da sua ONG?</label>
+                    <input type="text" name="segmento" list="segmento" value={segmento} onChange={e=> setSegmento(e.target.value)} required/>
+                    <datalist name="segmento" id="segmento" className="select-regiao" >
+                        <option value="#" selected disabled>Selecione uma opção</option>
+                        <option value="Saúde">Saúde</option>
+                        <option value="Educação">Educação</option>
+                        <option value="Cidadania">Cidadania</option>
+                        <option value="Cultura ou esporte">Cultura ou esporte</option>
+                        <option value="Gênero e diversidade">Gênero e diversidade</option>
+                        <option value="Meio ambiente">Meio ambiente</option>
+                        <option value="Proteção Ambiental">Proteção Ambiental</option>
+                        <option value="Outro">Outro</option>
+                    </datalist>
+                    <label for="descricao">Descrição</label>
+                    <textarea name="descricao" id="descricao" value={descricao} onChange={e=> setDescricao(e.target.value)} ></textarea>
+                    <label for="agencia" className="agencia">Agência</label>
+                    <input type="text" id="agencia" name="agencia" value={agencia} onChange={e=> setAgencia(e.target.value)} />
+
+                    <label for="contaCorrente">Conta</label>
+                    <input type="text" id="contaCorrente" name="contaCorrente" value={contaCorrente} onChange={e=> setContaCorrente(e.target.value)} />
+
+                    <label for="pix">Pix</label>
+                    <input type="text" id="pix" name="pix" value={pix} onChange={e=> setPix(e.target.value)} />
+                    <div className="form__button">
+                        <button>Salvar edição</button>
+                    </div>
                 </div>
             </form>
         </>

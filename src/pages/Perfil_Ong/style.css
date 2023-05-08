@@ -69,17 +69,6 @@
     font-size: 20px;
 }
 
-.options__itens li:hover:before, .select::before {
-    content: "";
-    height: 100%;
-    position: absolute;
-    left: 0px;
-    width: 5px;
-    bottom: 0px;
-    background-color: #00a1ff;
-    border-radius: 0px 10px 10px 0px;
-}
-
 
 .options__item {
     text-decoration: none;
@@ -115,12 +104,6 @@
     border-radius: 5px;
     border: .4px solid black;
     font-size: 16px;
-}
-input[type="file"]{
-    width:100%;
-}
-.content__form input+label {
-    margin-top: 25px;
 }
 
 #Sobre {
@@ -235,17 +218,170 @@ input[type="file"]{
     cursor: pointer;
     transition: 0.7s all;
 }
-/*Criar Conta*/
 
-@media screen and (max-width: 1100px) {
-    .edit__conteiner {
-        width: 100%;
+/*----------------  Novo ----*/
+.options__photos{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 98vw;
+    background-image: url(../../../public/imgs/Cenario.png);
+    background-repeat: repeat-x;
+    background-size: contain;
+    padding-left: 10vw;
+}
+#edit {
+    width: 98vw;
+    height: auto;
+    margin: 0px auto;
+    display: flex;
+    background-color: #fff;
+    place-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5vh;
+}
+.options__itens{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0px 5px;
+}
+.options__itens li{
+    background-color: #00a1ff;
+    border: none;
+    border-radius: 5px 5px 0px 0px;
+    padding: 10px 25px;
+    transition: 0.7s all;
+}
+.options__itens li .options__item{
+    transition: 0.7s all;
+    color: #fff;
+}
+.options__itens li:not(.select):hover{
+    background-color: #0086d3;
+}
+.options__itens .select{
+    background-color: #000;
+}
+
+.edit__options {
+    background: #fff;
+    width: 78vw;
+    height: fit-content;
+    font-size: 1rem;
+    text-align: center;
+    border-right: none;
+    display: flex;
+    flex-direction: column;
+    
+}
+.edit__conteiner {
+    width: 90vw;
+    height: 100%;
+    display: flex;
+    place-content: center;
+    background: transparent;
+    flex-direction: column;
+    align-items: center;
+}
+.options__photos img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 25px 0px;
+    z-index: 999;
+    border: 2px solid #00a1ff;
+}
+.options__photos h1 {
+    background-color: #00a1ff;
+    color: #fff;
+    padding:10px 15px;
+    padding-left: 30px;
+    border-radius: 0px 10px 10px 0px;
+    margin-left: -15px;
+}
+.edit__content{
+    box-shadow: 1px 2px 7px #00000070;
+    border-radius: 10px;
+    z-index: 999;
+    width: 80vw;
+    height: auto;
+
+}
+.content__form {
+    display: flex;
+    gap: 10px;
+}
+#descricao {
+    width: 100%;
+    padding: 14px;
+    border-radius: 5px;
+    border: .4px solid black;
+    font-size: 16px;
+    height: 155px;
+}
+.agencia{
+    margin-top: 25px;
+}
+
+.content__form input+label {
+    margin-top: 25px;
+}
+.content__form datalist+label {
+    margin-top: 25px;
+}
+.form__button button {
+    padding: 9px 30px;
+    border: none;
+    outline: none;
+    background-color: #00a1ff;
+    border: #00a1ff solid 1px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 51px;
+    border-radius: 6px;
+    margin: 10px auto;
+    cursor: pointer;
+    transition: 0.7s all;
+    width: 100%;
+    margin-top: 50px;
+}
+
+/*------------ Media ---*/
+
+@media screen and (max-width: 1000px) {
+    .content__form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
 }
-@media screen and (max-width: 900px) {
-    .options__photos img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
+@media screen and (max-width: 860px) {
+    .options__itens li a{
+        font-size: 1rem;
+    }
+    .options__photos{
+        width: 95vw;
+    }
+    .options__photos h1 {
+        font-size: 1.2rem;
+    }
+    #edit {
+        width: 95vw;
+    }
+}
+@media screen and (max-width: 750px) {
+    .options__itens li a{
+        font-size: 0.8rem;
+    }
+    .options__itens li{
+        background-color: #00a1ff;
+        border: none;
+        border-radius: 5px 5px 0px 0px;
+        padding: 5px 7px;
+        transition: 0.7s all;
     }
 }
