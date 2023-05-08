@@ -10,8 +10,8 @@
     display: none;
 }
 .section__ong {
-    width: 100%;
-    height: 100%;
+    width: 80vw;
+    height: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,6 +19,9 @@
     font-size: 1em;
     flex-direction: row;
     flex-wrap: wrap;
+    box-shadow: 1px 2px 7px #00000070;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 #dvSlider {
@@ -197,6 +200,23 @@ div.informations__comments > #comments {
 
 .description__adress__bank > .description__bank > p:nth-child(1), .description__adress__bank > .description__bank > p:nth-child(2), .description__adress__bank > .description__bank > p:nth-child(4), .description__adress__bank > .description__bank > br + p{
     font-weight: bold;
+}
+/*--- Novo ---*/
+.options__photos{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 98vw;
+    background-image: url(../../../public/imgs/Cenario.png);
+    background-repeat: repeat-x;
+    background-size: contain;
+    padding-left: 10vw;
+}
+.OngPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 /* Responsividade */
