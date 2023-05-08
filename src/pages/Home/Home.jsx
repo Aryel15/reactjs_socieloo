@@ -29,6 +29,9 @@ export default function Home() {
       setSegmento("Todas");
     }
   }
+  function NomeOngLink(nome) {
+    return nome.toLowerCase().replace(/\s+/g, '-');
+  }
 
   return (
     <>
@@ -75,7 +78,7 @@ export default function Home() {
               (regiao === 'Todas' || ong.regiao.toLowerCase() === regiao.toLowerCase()) &&
               (segmento === 'Todas' || ong.segmento.toLowerCase() === segmento.toLowerCase())
           ).map(ong => (
-            <Card categoria="Proteção Animal" titulo={ong.nome} regiao={ong.regiao} segmento={ong.segmento} link=""/>
+            <Card categoria="Proteção Animal" titulo={ong.nome} regiao={ong.regiao} segmento={ong.segmento} link={`/ong/${NomeOngLink(ong.nome)}`} id={ong.id}/>
           ))
         }
 

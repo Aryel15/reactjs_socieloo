@@ -15,13 +15,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-bottom: 50px;
     font-size: 1em;
     flex-direction: row;
     flex-wrap: wrap;
     box-shadow: 1px 2px 7px #00000070;
     border-radius: 10px;
     padding: 20px;
+    z-index: 999;
 }
 
 #dvSlider {
@@ -57,6 +58,7 @@ ul {
 }
 
 .informations__description {
+    margin-top: 20px;
     width: 100%;
     height: 70%;
     display: flex;
@@ -155,7 +157,7 @@ div.informations__comments > #comments {
 }
 .buttons__container {
     width: 17%;
-    margin-left: 50px;
+    margin: 10px 0px;
     font-size: 1em;
 }
 
@@ -184,9 +186,10 @@ div.informations__comments > #comments {
 .description__adress__bank{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     font-size: 1em;
+    flex-direction: column;
 }
 
 .description__adress, .description__bank, .description__adress p{
@@ -218,6 +221,20 @@ div.informations__comments > #comments {
     align-items: center;
     flex-direction: column;
 }
+.ong__imagens{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.ong__image{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+.btns_card{
+    margin-top: 20px;
+}
 
 /* Responsividade */
 @media screen and (max-width:1700px) {
@@ -242,38 +259,11 @@ div.informations__comments > #comments {
     }
 }
 
-@media screen and (max-width:1025px) {
+@media screen and (max-width:925px) {
     .section__ong {
         flex-direction: column;
         margin-top: 70px;
         height: 100vh;
-    }
-    #imagens__container{
-        display: flex;
-        align-items: center;
-    }
-    .ong__imagens #imagens__container .container__item+.container__item{
-        margin-top: 0;
-    }
-
-    .ong__informations {
-        width: 100%;
-        padding: 50px;
-        margin: 0%;
-        margin-bottom: 50px;
-        font-size: 1em;
-    }
-
-    .informations__comments {
-        justify-content: space-around;
-    }
-
-    .container__subtle {
-        margin: 50px 0px;
-    }
-
-    .container__subtle+.section__cards {
-        margin: 20px auto;
     }
 
 }

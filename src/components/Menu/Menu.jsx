@@ -3,6 +3,13 @@ import React from 'react';
 
 export default function Menu() {
     const tipo = localStorage.getItem("tipo")
+    let logoSocieloo;
+  
+    if (window.location.pathname.startsWith('/ong/')) {
+        logoSocieloo = '../imgs/Socieloo 1.png';
+    } else {
+        logoSocieloo = './imgs/Socieloo 1.png';
+    }
     const sair = e =>{
         e.preventDefault()
         localStorage.removeItem("id");
@@ -24,7 +31,7 @@ export default function Menu() {
             </div>
             <nav>
                 <a href="/" accesskey="1">
-                    <img src="./imgs/Socieloo 1.png" alt="Logo Socieloo nas cores preto e azul" title="Logo" />
+                    <img src={logoSocieloo} alt="Logo Socieloo nas cores preto e azul" title="Logo" />
                 </a>
                 <label for="bt_menu"><img src="./imgs/menu.png" alt="menu" /></label>
                 <input type="checkbox" id="bt_menu" />
