@@ -276,6 +276,89 @@ div.informations__comments > #comments {
 .btns_card{
     margin-top: 20px;
 }
+/* Comentários */
+.secao_coments {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    padding-bottom: 50px;
+    font-size: 1em;
+}
+#coment_usuario{
+    height: auto;
+    border-top: 2px solid #ebebeb;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-right: 250px;
+    padding-top: 10px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+#img-feed{
+    width: 100px;
+    border-radius: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.texto{
+    width: 40vw;
+    margin-left: 30px;
+    text-align: justify;
+    font-size: 1em;
+}
+
+.texto h4, .texto p, .texto p i{
+    font-size: 1em;
+}
+.pos_editbotao{
+    text-align: right;
+    margin-top: -40px;
+    margin-bottom: -10px;
+    font-size: 1em;
+}
+.pos_editbotao{
+    text-align: right;
+    margin-top: -40px;
+    margin-bottom: -10px;
+    font-size: 1em;
+}
+
+.editbotao{
+    text-align: right;
+    text-decoration: dashed;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    border: #00a1ff solid 1px;
+    background-color: #fff;
+    color: #00a1ff;
+    font-size: 1em;
+}
+
+.editbotao:hover{
+    color: #fff;
+    background-color: #00a1ff;
+}
+.coments{
+    height: auto;
+    border-top: 2px solid #ebebeb;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-right: 250px;
+    padding-top: 10px;
+    width:  100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 1em;
+}
+
+/* Avaliar */
 
 /* Responsividade */
 
