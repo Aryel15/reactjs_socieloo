@@ -14,16 +14,50 @@ nav{
 #main-login section{
     float: left;
 }
-.imagem{
-    background-color: #00a1ff;
-    height: 90.5vh;
-    width: 50vw;
-    padding-top: 0px;
+.form__login #login > h2{
+    text-align: center;
+    font-size: 2em;
+    text-transform: uppercase;
 }
-.imagem img{
-    height: 100%;
-    z-index: 1;
+
+.form__login #login > p{
+    text-align: center;
 }
+
+.form__login #login > #email, .form__login #login > #senha {
+    width: 100%;
+    outline: none;
+    border: 1px solid black;
+    font-size: .9em;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.form__login #login > #entrar{
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 1em;
+    border: 0;
+    background: #00a1ff;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+    text-align: center;
+}
+
+.form__login #login > #google{
+    width: 100%;
+    padding: 18px 10px;
+    font-size: 1em;
+    border: 0;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+    text-align: center;
+}
+
 #main-login aside{
     padding-top: 100px;
     float:right;
@@ -85,6 +119,7 @@ label{
     width: 260px;
     height: 30px;
     margin: 5px 0 100px 0;
+    margin-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,7 +133,7 @@ label{
     color: rgb(37, 37, 37);
     transition: 0.5s;
 }
-#google img{
+#entrar + br + #google > img{
     width: 20px;
     padding-right: 5px;
     height: auto;
@@ -137,6 +172,12 @@ label{
 .show{
     display: block;
 }
+#cadastro__section > div > div.form__login{
+    width: 500px;
+    display: block;
+    margin: 0 auto;
+}
+
 @media only screen and (max-width: 1140px){
     .aside_login {
         display: flex !important;
