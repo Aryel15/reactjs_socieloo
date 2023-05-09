@@ -1,5 +1,5 @@
 import React from 'react'
-import Menu from '../../components/Menu/Menu'
+import Menu from "../../components/Menu/Menu";
 import Vlibras from '../../components/Vlibras/Vlibras'
 import "./style.css"
 

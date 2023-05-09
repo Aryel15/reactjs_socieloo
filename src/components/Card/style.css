@@ -41,6 +41,7 @@ a .card h2{
 }
 .img img{
     margin: 0 auto;
+    width: 100px;
 }
 .card .button{
     background-color: #fff;

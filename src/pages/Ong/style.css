@@ -67,7 +67,12 @@ ul {
     flex-direction: column;
     justify-content: space-between;
     font-size: 1em;
-    margin-left: 0px;
+    margin-left: -10%;
+
+}
+#comentarioLogado{
+    text-align: left;
+    color: rgb(168, 176, 173);
 }
 
 #description__container {
@@ -95,6 +100,10 @@ ul {
 .informations__description span {
     font-size: 1em;
     font-weight: bold;
+}
+
+.description__bank span{
+    text-align: center;
 }
 
 .informations__description p {
@@ -177,6 +186,7 @@ div.informations__comments > #comments {
     margin: 0 auto;
     font-weight: bold;
     font-size: 1em;
+    margin-left: -10%;
 }
 
 .buttons__container button+button {
@@ -213,12 +223,15 @@ div.informations__comments > #comments {
     border-radius: 10px;
     border: 1px solid #00a1ff;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
     
 
 .description__adress, .description__bank, .description__adress p{
     font-size: 1em;
-    word-wrap:break-word;
+    /* word-wrap:break-word; */
     /* text-align: center; */
 }
 
@@ -226,9 +239,10 @@ div.informations__comments > #comments {
     margin-bottom: 0px;
     font-size: 1em;
     font-weight: bold;
-    word-wrap:break-word;
+    /* word-wrap:break-word; */
     
 }
+
 
 /* .description__adress__bank > .description__bank > p:nth-child(1), .description__adress__bank > .description__bank > p:nth-child(2), .description__adress__bank > .description__bank > p:nth-child(4), .description__adress__bank > .description__bank > br + p{
     font-weight: bold;

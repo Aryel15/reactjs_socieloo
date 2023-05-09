@@ -48,7 +48,7 @@ export default function Ong() {
                 </aside>
                 <section className="section__ong">
                     <section className="ong__imagens">
-                        <img src="../imgs/fotosOng/fotos01.jpg" class="ong__image" alt="Imagem da ong mostrando os integrantes" />
+                        <img src={`../imgs/icons/${data?.segmento}.png`} class="ong__image" alt="Imagem da ong mostrando os integrantes" />
                         <div className="btns_card">
                             <a href={data?.segmento} className="button">{data?.segmento}</a>
                             <a href={data?.regiao} className="button">{data?.regiao}</a>
@@ -131,8 +131,9 @@ function Comentarios({ step, setStep, data, id }){
                 <div id="coment_usuario">         
                     <img src="../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>  
                     <div className="texto">
+                    <p id="comentarioLogado"><i>Seu comentário</i></p>
                         <h4>@User_logado</h4>
-                        <p><i>Seu comentário</i></p>
+                       
                         <div className="pos_editbotao">
                             <button className="editbotao">Editar comentário</button>
                             <button className="editbotao">Deletar comentário</button>
