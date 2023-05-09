@@ -32,6 +32,7 @@ export default function Router() {
                 <Route path='/cadastro-voluntario' element={<Cadastro_Vol />} />
                 <Route path='/cadastro' element={<Cadastro />} />
                 <Route path='/cadastro-ong' element={<Cadastro_Ong />} />
+                <Route path='/ong/:nome' element={<Ong />} />
                 <Route path='/ong' element={<Ong />} />
                 <Route path='/faq' element={<Faq />} />
                 <Route path='/perfil' element={<Perfil_User />} />

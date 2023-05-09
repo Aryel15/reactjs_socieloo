@@ -3,6 +3,7 @@ import './style.css'
 import Menu from '../../components/Menu/Menu'
 import Controle_Cadastros from '../../components/Controle_Cadastros/Controle_Cadastros'
 import Vlibras from '../../components/Vlibras/Vlibras'
+import Axios from 'axios'
 
 
 export default function Cadastro_User() {
@@ -71,16 +72,27 @@ export default function Cadastro_User() {
 
 export function Etapa1({step, setStep, cadastro, valorCadastro}){
   const [mensagem, setMensagem] = useState('');
+  const [senhaFraca, setSenhaFraca] = useState('');
   const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
   const HandleClickAvançar = (e)=>{
       e.preventDefault()
       if((cadastro.nome !== '') && (cadastro.email !== '') && (cadastro.sobrenome !== '') && (cadastro.senha !== '')){
-        setStep(step + 1)
+        if (!senhaForte(cadastro.senha)) {
+          setSenhaFraca('Senha fraca');
+          console.log("senha fraca");
+          return;
+        }else{
+          setStep(step + 1)
+        }
       }else{
         setMensagem(msg)
         console.log(cadastro);
       }
   }
+  const senhaForte = (senha) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    return regex.test(senha);
+  };
   return(
     <section className="section-user">
       <form action="#" method="post" className="form-container">
@@ -92,6 +104,7 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
         </div>
         <input className='input-field' type="email" id="email" name="email" placeholder="E-mail" value={cadastro?.email} onChange={valorCadastro}/>
         <input className="input-field" type="password" id="password" name="senha" placeholder="Senha" onChange={valorCadastro}/>
+        <p className="mensagem">{senhaFraca}</p>
         <div className="buttons">
           <a href="#" className="button-white" ><img src='./imgs/google.png' alt="" />Cadastrar-se com Google</a>
           <a href="javascript:void(0);" className="button-blue" onClick={HandleClickAvançar}>Próximo</a>
@@ -159,15 +172,43 @@ export function Etapa2({step, setStep, cadastro, valorCadastro}){
 export function Etapa3({step, setStep, cadastro, handleCheckboxChange}) {
   const [mensagem, setMensagem] = useState('');
   const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Selecione no minimo uma das opções</>)
-  const HandleClickAvançar = (e)=>{
-      e.preventDefault()
-      if((cadastro.segmentos.length > 0)){
-        setStep(step + 1)
-      }else{
-        setMensagem(msg)
-        console.log(cadastro);
-      }
+
+  function gerarCodigo() {
+    let codigo = "";
+    for (let i = 0; i < 5; i++) {
+      codigo += Math.floor(Math.random() * 10);
+    }
+    return codigo;
   }
+  function enviarEmail(destinatario, codigo) {
+    return emailjs.send("serviceID", "template_xwxib2d", {
+      to_email: destinatario,
+      codigo: codigo.toString(),
+    }, "QSlqTSkhTipqcM7El");
+  }
+  function ValidaEmail(){
+    let codigo = gerarCodigo();
+    sessionStorage.setItem("codigo", codigo);
+  
+    enviarEmail(cadastro.email, codigo)
+      .then(() => {
+        setStep(step + 1);
+      })
+      .catch((error) => {
+        console.log(error);
+    });
+  }
+  const HandleClickAvançar = (e)=>{
+    e.preventDefault()
+    if((cadastro.segmentos.length > 0)){
+      setStep(step + 1)
+      ValidaEmail()
+    }else{
+      setMensagem(msg)
+      console.log(cadastro);
+    }
+  }
+  
   return (
     <section className="section-user">
         <form action="#" method="post" className="form-container">
@@ -225,33 +266,72 @@ export function Etapa3({step, setStep, cadastro, handleCheckboxChange}) {
   )
 }
 export function Etapa4({step, setStep, cadastro}) {
-  function mostraCadastro(){
-    console.log(cadastro);
-  }
-  const formatEmail = email => {
+
+  const formatEmail = (email) => {
     const atIndex = email.indexOf('@');
     const domain = email.slice(atIndex);
     const maskedUsername = email.slice(0, 2) + '*'.repeat(atIndex - 3) + email.slice(atIndex - 1, atIndex);
     return maskedUsername + domain;
   };
+
+  const popBox = (
+    <section className="popup">
+      <div className="boxpopup">
+        <i class="fa-solid fa-circle-check"></i>
+        <p>Você foi cadastrado com sucesso!</p>
+        <div className="progress-bar"></div>
+      </div>
+    </section>
+  )
+  const [popUp, setPopUp] = useState("")
+  const [codigo, setCodigo] = useState("")
+  const codigoArmazenado = sessionStorage.getItem("codigo");
+  function handleClickCadastro(){
+    if (codigo) {
+      console.log(cadastro)
+      window.sessionStorage.removeItem("codigo")
+        Axios.post("http://localhost:8080/api/v1/user", {
+          nome: cadastro.nome,
+          sobrenome: cadastro.sobrenome,
+          email: cadastro.email,
+          senha: cadastro.senha,
+        }).then((response) => {
+          console.log(response.data);
+          /*localStorage.removeItem("tipo")
+          localStorage.removeItem("id")
+          localStorage.setItem("id", response.data.id);
+          localStorage.setItem("tipo", "user");*/
+          setPopUp(popBox);
+          /*setTimeout(() => {
+            window.location.pathname = "/gerenciamento-ong"
+          }, 2000); */
+        }).catch((err) => console.log(err))
+      } else {
+        alert("Código inválido");
+      }
+    }
+
+  
+  
   return (
     <section className="section-user">
         <form action="#" method="post" className="form-container">
           <h1 className="section__title">
             Digite o código enviado pelo e-mail
           </h1>
-          <p>Um email de confirmação foi enviado para: <br/> <a href="#">******@email.com</a></p>
-          <input class="input-field" type="text" id="code" name="code" placeholder="Código" required />
+          <p>Um email de confirmação foi enviado para: <br/> <a href="#">{formatEmail(cadastro.email)}</a></p>
+          <input class="input-field" type="text" id="code" name="code" placeholder="Código" required onChange={e => setCodigo(e.target.value)} />
           <div class="buttons">
             <a href="javascript:void(0);" class="button-white" onClick={() => { setStep(step - 1);}}>
               Voltar
             </a>
-            <a href="javascript:void(0);" className="button-blue" onClick={mostraCadastro}>
+            <a href="javascript:void(0);" className="button-blue" onClick={handleClickCadastro}>
               Finalizar
             </a>
           </div>
         </form>
+        {popUp}
     </section>
   )
-}
 
+}

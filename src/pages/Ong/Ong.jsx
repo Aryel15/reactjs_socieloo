@@ -6,7 +6,7 @@ import Axios from 'axios';
 
 
 export default function Ong() {
-    const id = localStorage.getItem("id")
+    const id = localStorage.getItem("idPage")
     const [ong, setOng] = useState(id != null ? true : false);
     const [data, setData] = useState()
 
@@ -23,7 +23,7 @@ export default function Ong() {
                 console.log(err);
             })
     }, [])
-    const [step, setStep] = React.useState("Editar_Perfil");
+    const [step, setStep] = React.useState("Ong");
     const pages = {
         Ong: <OngInfo ong={ong} step={step} setStep={setStep} data={data} id={id} />,
         Comentarios: <Comentarios step={step} setStep={setStep} data={data} id={id}  />,
@@ -47,9 +47,13 @@ export default function Ong() {
                     </ul>
                 </aside>
                 <section className="section__ong">
-                    {/* <section className="ong__imagens">
-
-                        <ul id="imagens__container">
+                    <section className="ong__imagens">
+                        <img src="../imgs/fotosOng/fotos01.jpg" class="ong__image" alt="Imagem da ong mostrando os integrantes" />
+                        <div className="btns_card">
+                            <a href={data?.segmento} className="button">{data?.segmento}</a>
+                            <a href={data?.regiao} className="button">{data?.regiao}</a>
+                        </div>
+                        {/*<ul id="imagens__container">
                             <li className="container__item">
                                 <img src="../imgs/fotosOng/fotos01.jpg" alt="Imagem da ong mostrando os integrantes" />
                             </li>
@@ -61,9 +65,9 @@ export default function Ong() {
                             <li className="container__item">
                                 <img src="../imgs/fotosOng/fotos03.jpg" alt="Localização da Ong no Google Maps" />
                             </li>
-                        </ul>
+                        </ul>*/}
 
-                    </section> */}
+                    </section>
                     {pages[step]}
                     
                 </section>
@@ -76,7 +80,6 @@ function OngInfo({ ong, step, setStep, data, id }){
     return(
         <section className="ong__informations">
                     <div className="informations__description">
-                        
 
                         <br />
                         <div id="description__container">
@@ -97,7 +100,7 @@ function OngInfo({ ong, step, setStep, data, id }){
                             <div className="description__about">
                                 <span>Descrição:</span>
                                 <p>
-                                    {ong ? data?.descricao : descricao_padrao}
+                                    {data?.descricao}
                                 </p>
                             </div>
 
