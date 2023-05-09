@@ -151,6 +151,29 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
           }else{
             setMensagem(msg)
           }
+          const definirIcone = function (e) {
+            switch (data?.segmento) {
+                case "Proteção Animal":
+                    return './././public/imgs/icons/Proteção Animal.png';
+                case "Saúde":
+                    return './././public/imgs/icons/Saúde.png';
+                case "Educação":
+                    return './././public/imgs/icons/Educação.png';
+                case "Cidadania":
+                    return './././public/imgs/icons/Cidadania.png';
+                case "Cultura ou esporte":
+                    return './././public/imgs/icons/Cultura ou esporte.png';
+                case "Gênero e diversidade":
+                    return './././public/imgs/icons/Gênero e diversidade.png';
+                case "Meio ambiente":
+                    return './././public/imgs/icons/Meio ambientepng';
+                case "Proteção Ambiental":
+                    return './././public/imgs/icons/Proteção Ambiental.png';
+                default:
+                    return '#'
+            }
+            definirIcone(e);
+        }
       }
       return (
           <section id="cadastro__section">
@@ -207,7 +230,7 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
       const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
       const HandleClickAvançar = (e)=>{
           e.preventDefault()
-          if((cadastro.agencia !== '') && (cadastro.conta !== '') && (cadastro.pix !== '')){
+          if((cadastro.cep !== '') && (cadastro.n !== '') && (cadastro.complemento !== '') && (cadastro.uf !=='') && (cadastro.logradouro !=='')){
               setStep(step + 1)
           }else{
             setMensagem(msg)
@@ -234,10 +257,10 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                               <label for="complemento">Complemento</label>
                               <input type="text" id="complemento" name="complemento" required/>
                           </div>
-                          <div className="logradouro">
+                          {/* <div className="logradouro">
                               <label for="logradouro">Logradouro</label>
                               <input type="text" id="logradouro" name="logradouro" required/>
-                          </div>
+                          </div> */}
                           <div className="endereco">
                               <label for="endereco">Endereco</label>
                               <input type="text" id="endereco" name="endereco" required/>

@@ -24,6 +24,7 @@
     padding: 20px;
 }
 
+
 #dvSlider {
     display: none;
 }
@@ -63,32 +64,50 @@ ul {
     flex-direction: column;
     justify-content: space-between;
     font-size: 1em;
+    margin-left: -90px;
 }
 
 #description__container {
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: flex-start;
     font-size: 1em;
+    margin-left: -90px;
 }
 #description__container > div.description__about{
-    font-size: 1em;
+    font-size: 1.2em;
+    padding: 100px 300px 300px 300px;
+    border-radius: 50px;
+    border: 1px solid #00a1ff;
+    /* margin-left: 190px;
+    padding: 100px; */
 
-}
+} 
 .informations__description h1 {
     font-size: 1.3em;
+    text-align: center;
+    margin: 20px;
 }
 
 .informations__description span {
     font-size: 1em;
     font-weight: bold;
 }
+#description__container > div.description__nomeSeg{
+    border-radius: 50px;
+    border: 1px solid #00a1ff;
+    font-size: 1.2em;
+    padding: 80px 50px 50px 50px;
+    width: 100%;
+    height: 30%;
+    margin-left: -150px;
+    margin-right: 100px;
+}
 
 .informations__description p {
     font-weight: 500;
-    text-align: justify;
+    text-align: center;
     font-size: 1em;
 }
 
@@ -145,6 +164,7 @@ div.informations__comments > #comments {
     resize: none;
     border: 1px solid black;
     font-size: 1em;
+    margin-left: 100px;
 }
 #comments::placeholder{
     padding-top: 2px;
@@ -182,25 +202,47 @@ div.informations__comments > #comments {
 }
 
 .description__adress__bank{
-    display: flex;
+    
+    /* display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    font-size: 1em;
+    flex-wrap: wrap;*/
+    font-size: 1.2em; 
+    margin-left: 100px;
 }
+.description__adress{
+    padding: 80px;
+    border-radius: 50px;
+    border: 1px solid #00a1ff;
+    margin-bottom: 10px;
+    
+}
+.description__bank{
+    border-radius: 50px;
+    border: 1px solid #00a1ff;
+    padding: 80px;
+}
+    
 
 .description__adress, .description__bank, .description__adress p{
     font-size: 1em;
+    word-wrap:break-word;
+    /* text-align: center; */
 }
 
 .description__adress__bank > .description__bank > p:nth-child(1){
     margin-bottom: 10px;
     font-size: 1em;
+    font-weight: bold;
+    word-wrap:break-word;
+    
 }
 
-.description__adress__bank > .description__bank > p:nth-child(1), .description__adress__bank > .description__bank > p:nth-child(2), .description__adress__bank > .description__bank > p:nth-child(4), .description__adress__bank > .description__bank > br + p{
+/* .description__adress__bank > .description__bank > p:nth-child(1), .description__adress__bank > .description__bank > p:nth-child(2), .description__adress__bank > .description__bank > p:nth-child(4), .description__adress__bank > .description__bank > br + p{
     font-weight: bold;
-}
+    word-wrap:break-word;
+    text-align: center;
+} */
 /*--- Novo ---*/
 .options__photos{
     display: flex;
@@ -211,6 +253,9 @@ div.informations__comments > #comments {
     background-repeat: repeat-x;
     background-size: contain;
     padding-left: 10vw;
+}
+.options__photos img{
+    width: 98px;
 }
 .OngPage{
     display: flex;

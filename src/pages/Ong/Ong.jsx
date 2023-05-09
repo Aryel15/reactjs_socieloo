@@ -36,7 +36,7 @@ export default function Ong() {
             <main className="OngPage">
                 {/* Carrossel*/}
                 <div className="options__photos">
-                    <img src="../imgs/fotosOng/fotos01.jpg" alt="foto de perfil escolhida pela ong" />
+                    <img src={`../imgs/icons/${data?.segmento}.png`} alt="foto de perfil escolhida pela ong" />
                     <h1>{data?.nome}</h1>
                 </div>
                 <aside className="edit__options">
@@ -47,7 +47,7 @@ export default function Ong() {
                     </ul>
                 </aside>
                 <section className="section__ong">
-                    <section className="ong__imagens">
+                    {/* <section className="ong__imagens">
 
                         <ul id="imagens__container">
                             <li className="container__item">
@@ -63,7 +63,7 @@ export default function Ong() {
                             </li>
                         </ul>
 
-                    </section>
+                    </section> */}
                     {pages[step]}
                     
                 </section>
@@ -76,10 +76,23 @@ function OngInfo({ ong, step, setStep, data, id }){
     return(
         <section className="ong__informations">
                     <div className="informations__description">
-                        <h1>{ong ? data?.nome : "Adote Sempre Cabe Mais Um - Zona Leste"}</h1>
+                        
 
                         <br />
                         <div id="description__container">
+
+                             <div className="description__nomeSeg">
+                        <span>
+                            Nome: 
+                            <p>{ong ? data?.nome : "Adote Sempre Cabe Mais Um - Zona Leste"}</p>
+                        </span>
+                                                                
+                                <br />                                
+                                <span>
+                                    Segmento:
+                                     <p>{ong ? data?.segmento : "Saúde" }</p></span>  
+                                </div>
+                        
 
                             <div className="description__about">
                                 <span>Descrição:</span>
@@ -91,18 +104,21 @@ function OngInfo({ ong, step, setStep, data, id }){
                             <br />
                             <div className='description__adress__bank'>
                                 <div className="description__adress">
-                                    <span>Endereço:</span>
-                                    <p>{ong ? data?.endereco :"Av. Miguel Ignácio Curi"}, 111 - Artur Alvim, São Paulo - SP, {ong ? data?.cep : "08295-005"}</p>
+                                   <p> <span>Endereço:</span> {ong ? data?.endereco :"Av. Miguel Ignácio Curi"} </p> 
+                                    <p>  111 - Artur Alvim, São Paulo - SP </p>
+                                <p> {ong ? data?.cep : "08295-005"} </p>
                                 </div>
 
                                 <div className="description__bank">
                                     <p>Dados bancários:</p>
-                                    <p>Agência:</p>
+                                    <br />
+                                    <span>Agência:</span>
                                     <p>{ong ? data?.agencia : "1234"}</p>
-                                    <p>Conta corrente:</p>
+                                    <br />
+                                    <span>Conta corrente:</span>                                       
                                     <p>{ong ? data?.contaCorrente : "12345678-9"}</p>
                                     <br />
-                                    <p>Pix:</p>
+                                    <span>Pix</span>
                                     <p>{ong ? data?.pix : "adotemaisumPix@gmail.com"}</p>
                                 </div>
                             </div>

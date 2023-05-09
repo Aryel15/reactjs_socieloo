@@ -33,7 +33,7 @@ export default function Perfil_Ong() {
             <Menu />
             <main id="edit" >
                 <div className="options__photos">
-                    <img src="../imgs/fotosOng/fotos01.jpg" alt="foto de perfil escolhida pela ong" />
+                <img src={`../imgs/icons/${data?.segmento}.png`} alt="foto de perfil escolhida pela ong" />
                     <h1>{data?.nome}</h1>
                 </div>
                 <section className="edit__conteiner" id="conteudo" >
