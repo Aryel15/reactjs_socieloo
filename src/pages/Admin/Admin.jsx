@@ -8,10 +8,13 @@ export default function Admin() {
     return (
         <>
             <Menu />
-            <main id="main-admin">
-                <section className="imagem">
-                </section>
-                <aside className="aside_admin">
+            <main id="cadastro">
+            <img src="../imgs/gestora.png" alt="" />
+            
+                <section id="cadastro__section">
+                
+                <div className="section__form">
+                <div className="form__admin">
                     <form id="admin" action="">
                         <h2>Admin</h2>
                         <label for="email">E-mail:</label><br />
@@ -27,7 +30,10 @@ export default function Admin() {
                         </div>
                         <input type="button" value="Entrar" id="entrar" /><br />
                     </form>
-                </aside>
+                </div>
+                </div>
+                </section>
+                <img src="../imgs/vase.png" alt="" />
             </main>
             <Vlibras />
         </>
