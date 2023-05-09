@@ -19,10 +19,16 @@ export default function Cadastro_Ong() {
       senha: '',
       regiao: '',
       agencia: '',
-      conta: '',
+      contaCorrente: '',
       pix: '',
       descricao: '',
-      segmento: ''
+      segmento: '',
+      cep:'',
+      endereco:'',
+      complemento:'',
+      n:'',
+      uf:'',
+      bairro:''
     })
     const [senha, setSenha] = useState("")
     const [cnae, setCnae] = useState("")
@@ -61,7 +67,7 @@ export default function Cadastro_Ong() {
     const pages = [
       <Etapa1 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro} />, 
       <Etapa2 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro}/>,
-      <Etapa3 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro}/>,
+      <Etapa3 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro} setCadastro={setCadastro}/>,
       <Etapa4 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro}/>,
       <Etapa5 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro} gerarCodigo={gerarCodigo} senhaForte={senhaForte}/>,
       <ValidaEmail cadastro={cadastro} />,
@@ -151,29 +157,6 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
           }else{
             setMensagem(msg)
           }
-          const definirIcone = function (e) {
-            switch (data?.segmento) {
-                case "Proteção Animal":
-                    return './././public/imgs/icons/Proteção Animal.png';
-                case "Saúde":
-                    return './././public/imgs/icons/Saúde.png';
-                case "Educação":
-                    return './././public/imgs/icons/Educação.png';
-                case "Cidadania":
-                    return './././public/imgs/icons/Cidadania.png';
-                case "Cultura ou esporte":
-                    return './././public/imgs/icons/Cultura ou esporte.png';
-                case "Gênero e diversidade":
-                    return './././public/imgs/icons/Gênero e diversidade.png';
-                case "Meio ambiente":
-                    return './././public/imgs/icons/Meio ambientepng';
-                case "Proteção Ambiental":
-                    return './././public/imgs/icons/Proteção Ambiental.png';
-                default:
-                    return '#'
-            }
-            definirIcone(e);
-        }
       }
       return (
           <section id="cadastro__section">
@@ -200,7 +183,7 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                         <option value="Cultura ou esporte">Cultura ou esporte</option>
                         <option value="Gênero e diversidade">Gênero e diversidade</option>
                         <option value="Meio ambiente">Meio ambiente</option>
-                        <option value="Proteção Ambiental">Proteção Ambiental</option>
+                        <option value="Proteção Animal">Proteção Animal</option>
                         <option value="Outro">Outro</option>
                         </select>
                       </div>
@@ -225,17 +208,26 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
       )
   }
 
-  function Etapa3({ step, setStep, cadastro, valorCadastro }) {
+  function Etapa3({ step, setStep, cadastro, valorCadastro, setCadastro }) {
       const [mensagem, setMensagem] = useState('');
+      const [dataCep, setDataCep] = useState()
       const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
       const HandleClickAvançar = (e)=>{
           e.preventDefault()
-          if((cadastro.cep !== '') && (cadastro.n !== '') && (cadastro.complemento !== '') && (cadastro.uf !=='') && (cadastro.logradouro !=='')){
+          if((cadastro.cep !== '') && (cadastro.n !== '') && (cadastro.complemento !== '') && (dataCep.uf !=='') && (dataCep.endereco !=='') && (dataCep.bairro !=='')){
               setStep(step + 1)
           }else{
             setMensagem(msg)
           }
       }
+      Axios.get(`https://viacep.com.br/ws/${cadastro.cep}/json`)
+      .then((response) => {
+        if(response.data !== undefined){
+          setDataCep(response.data)
+          setCadastro({...cadastro, endereco: dataCep.logradouro, bairro: dataCep.bairro, uf: dataCep.uf})
+        }
+      })
+      .catch((err) => console.log(err))
       return (
           <section id="cadastro__section">
               <div className="section__form 2">
@@ -246,16 +238,16 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                           <div className="row">
                             <div className="cep">
                                 <label for="cep">CEP</label>
-                                <input type="text" id="cep" name="cep" required/>
+                                <input type="text" id="cep" name="cep" value={cadastro?.cep} onChange={valorCadastro} required/>
                             </div>
                             <div className="n">
                                 <label for="n">N°</label>
-                                <input type="text" id="n" name="n" required/>
+                                <input type="text" id="n" name="n"  value={cadastro?.n} onChange={valorCadastro} required/>
                             </div>
                           </div>
                           <div className="complemento">
                               <label for="complemento">Complemento</label>
-                              <input type="text" id="complemento" name="complemento" required/>
+                              <input type="text" id="complemento" name="complemento" value={cadastro?.complemento} onChange={valorCadastro} required/>
                           </div>
                           {/* <div className="logradouro">
                               <label for="logradouro">Logradouro</label>
@@ -263,16 +255,16 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                           </div> */}
                           <div className="endereco">
                               <label for="endereco">Endereco</label>
-                              <input type="text" id="endereco" name="endereco" required/>
+                              <input type="text" id="endereco" name="endereco"  value={dataCep?.logradouro} onChange={valorCadastro} required/>
                           </div>
                           <div className="row">
                             <div className="bairro">
                                 <label for="bairro">Bairro</label>
-                                <input type="text" id="bairro" name="bairro" required/>
+                                <input type="text" id="bairro" name="bairro"  value={dataCep?.bairro} onChange={valorCadastro} required/>
                             </div>
                             <div className="uf">
                                 <label for="uf">UF</label>
-                                <input type="text" id="uf" name="uf" required/>
+                                <input type="text" id="uf" name="uf"  value={dataCep?.uf} onChange={valorCadastro} required/>
                             </div>
                           </div>
                       </div>
@@ -299,7 +291,7 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
       const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
       const HandleClickAvançar = (e)=>{
           e.preventDefault()
-          if((cadastro.agencia !== '') && (cadastro.conta !== '') && (cadastro.pix !== '')){
+          if((cadastro.agencia !== '') && (cadastro.contaCorrente !== '') && (cadastro.pix !== '')){
               setStep(step + 1)
           }else{
             setMensagem(msg)
@@ -317,8 +309,8 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                               <input type="text" id="agencia" name="agencia" required value={cadastro?.agencia} onChange={valorCadastro}/>
                           </div>
                           <div className="conta">
-                              <label for="conta">Conta</label>
-                              <input type="text" id="conta" name="conta" required value={cadastro?.conta} onChange={valorCadastro}/>
+                              <label for="contaCorrente">Conta</label>
+                              <input type="text" id="contaCorrente" name="contaCorrente" required value={cadastro?.contaCorrente} onChange={valorCadastro}/>
                           </div>
                           <label for="pix">Pix</label>
                           <input type="text" id="pix" name="pix" required value={cadastro?.pix} onChange={valorCadastro}/>
@@ -370,6 +362,7 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
       for (let campo in cadastro) {
         if (cadastro[campo] === '' || cadastro[campo] === null) {
           setPopUp(popBox);
+          console.log(cadastro);
           setTimeout(() => {
             setPopUp("");
           }, 2000); 
@@ -485,7 +478,13 @@ function ValidaEmail({ cadastro }) {
           contaCorrente: cadastro.contaCorrente,
           pix: cadastro.pix,
           descricao: cadastro.descricao,
-          segmento: cadastro.segmento
+          segmento: cadastro.segmento,
+          cep: cadastro.cep,
+          endereco: cadastro.endereco,
+          complemento: cadastro.complemento,
+          //n: cadastro.n,
+          //uf: cadastro.uf,
+          //bairro: cadastro.bairro
         }).then((response) => {
           localStorage.setItem("id", response.data.id);
           localStorage.setItem("tipo", "ong");

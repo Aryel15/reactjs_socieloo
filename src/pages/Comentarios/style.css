@@ -165,11 +165,6 @@
     padding-left: 5px;
 }
 
-.buttons__container {
-    width: 17%;
-    margin-left: 50px;
-}
-
 .buttons__container button {
     width: 100%;
     display: block;
@@ -206,7 +201,7 @@
         padding-left: 20px;
     }
     footer{
-        bottom: -250vh !important;
+        bottom: -250vh ;
     }
     .informations__comments {
         display: flex;
@@ -216,21 +211,6 @@
         flex-wrap: wrap;
         flex-direction: column;
     }
-    #comments, .buttons__container {
-        width: 90% !important;
-    }
-}
-@media screen and (max-width:645px){
-    h1{
-        font-size: 2rem;
-    }
-    .ong__imagens {
-        position: relative !important;;
-        margin-top: 50% !important;
-    }
-    .informations__description{
-        height: 0%;
-    }
 }
 @media screen and (max-width:560px){
     .texto{
@@ -239,7 +219,7 @@
         text-align: justify;
     }
     .title h1{
-        font-size: 1.5rem !important;
+        font-size: 1.5rem ;
         padding: 0 10px;
     }
 }

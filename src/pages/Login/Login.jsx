@@ -22,9 +22,11 @@ export default function Login() {
             email: email
         }).then((response) => {
             console.log(response);
-            setTimeout(() => {
+            localStorage.setItem("id", response.data.id);
+            localStorage.setItem("tipo", "ong");
+            /*setTimeout(() => {
                 window.location.pathname = "/gerenciamento-ong"
-            }, 1000);
+            }, 1000);*/
         },(err) => {
             setError(false)
             console.log(err);

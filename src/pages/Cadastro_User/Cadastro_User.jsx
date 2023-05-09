@@ -297,14 +297,14 @@ export function Etapa4({step, setStep, cadastro}) {
           senha: cadastro.senha,
         }).then((response) => {
           console.log(response.data);
-          /*localStorage.removeItem("tipo")
+          localStorage.removeItem("tipo")
           localStorage.removeItem("id")
           localStorage.setItem("id", response.data.id);
-          localStorage.setItem("tipo", "user");*/
+          localStorage.setItem("tipo", "usuario");
           setPopUp(popBox);
-          /*setTimeout(() => {
-            window.location.pathname = "/gerenciamento-ong"
-          }, 2000); */
+          setTimeout(() => {
+            window.location.pathname = "/"
+          }, 2000);
         }).catch((err) => console.log(err))
       } else {
         alert("Código inválido");

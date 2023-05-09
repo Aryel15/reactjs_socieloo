@@ -81,21 +81,7 @@ function OngInfo({ ong, step, setStep, data, id }){
         <section className="ong__informations">
                     <div className="informations__description">
 
-                        <br />
                         <div id="description__container">
-
-                             <div className="description__nomeSeg">
-                        <span>
-                            Nome: 
-                            <p>{ong ? data?.nome : "Adote Sempre Cabe Mais Um - Zona Leste"}</p>
-                        </span>
-                                                                
-                                <br />                                
-                                <span>
-                                    Segmento:
-                                     <p>{ong ? data?.segmento : "Saúde" }</p></span>  
-                                </div>
-                        
 
                             <div className="description__about">
                                 <span>Descrição:</span>
@@ -103,8 +89,6 @@ function OngInfo({ ong, step, setStep, data, id }){
                                     {data?.descricao}
                                 </p>
                             </div>
-
-                            <br />
                             <div className='description__adress__bank'>
                                 <div className="description__adress">
                                    <p> <span>Endereço:</span> {ong ? data?.endereco :"Av. Miguel Ignácio Curi"} </p> 
@@ -165,26 +149,6 @@ function Comentarios({ step, setStep, data, id }){
                     </div>
                 </div>
                     
-                <div className="coments">
-                    <div>
-                        <img src="../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>
-                    </div>
-                    <div className="texto">
-                        <h4>@User</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </div>
-                </div>
-
-                <div className="coments">
-                    <div>
-                        <img src="../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>
-                    </div>
-                    <div className="texto">
-                        <h4>@User</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </div>
-                </div>
-
                 <div className="coments">
                     <div>
                         <img src="../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>

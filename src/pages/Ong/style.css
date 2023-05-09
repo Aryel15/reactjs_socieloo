@@ -13,7 +13,7 @@
     width: 80vw;
     height: fit-content;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     margin-bottom: 50px;
     font-size: 1em;
@@ -23,6 +23,7 @@
     border-radius: 10px;
     padding: 20px;
     z-index: 999;
+    gap: 30px;
 }
 
 
@@ -35,12 +36,12 @@ ul {
 }
 
 .ong__imagens {
-    width: 30%;
+    width: fit-content;
 }
 
 .ong__informations {
-    width: 50%;
-    height: 100%;
+    width: auto;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -59,32 +60,31 @@ ul {
 }
 
 .informations__description {
-    margin-top: 20px;
-    width: 100%;
-    height: 70%;
+    margin-top: 0px;
+    max-width: 700px;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     font-size: 1em;
-    margin-left: -90px;
+    margin-left: 0px;
 }
 
 #description__container {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
     display: flex;
     justify-content: flex-start;
+    flex-direction: column;
     font-size: 1em;
-    margin-left: -90px;
+    margin-left: 0;
+    gap: 10px;
 }
 #description__container > div.description__about{
     font-size: 1.2em;
-    padding: 100px 300px 300px 300px;
-    border-radius: 50px;
+    padding: 10px;
+    border-radius: 10px;
     border: 1px solid #00a1ff;
-    /* margin-left: 190px;
-    padding: 100px; */
-
 } 
 .informations__description h1 {
     font-size: 1.3em;
@@ -95,16 +95,6 @@ ul {
 .informations__description span {
     font-size: 1em;
     font-weight: bold;
-}
-#description__container > div.description__nomeSeg{
-    border-radius: 50px;
-    border: 1px solid #00a1ff;
-    font-size: 1.2em;
-    padding: 80px 50px 50px 50px;
-    width: 100%;
-    height: 30%;
-    margin-left: -150px;
-    margin-right: 100px;
 }
 
 .informations__description p {
@@ -176,9 +166,9 @@ div.informations__comments > #comments {
     padding-left: 0;
 }
 .buttons__container {
-    width: 17%;
     margin: 10px 0px;
     font-size: 1em;
+    width: 100%;
 }
 
 .buttons__container button {
@@ -210,19 +200,19 @@ div.informations__comments > #comments {
     align-items: center;
     flex-wrap: wrap;*/
     font-size: 1.2em; 
-    margin-left: 100px;
+    margin-left: 0px;
 }
 .description__adress{
-    padding: 80px;
-    border-radius: 50px;
+    padding: 10px;
+    border-radius: 10px;
     border: 1px solid #00a1ff;
     margin-bottom: 10px;
     
 }
 .description__bank{
-    border-radius: 50px;
+    border-radius: 10px;
     border: 1px solid #00a1ff;
-    padding: 80px;
+    padding: 10px;
 }
     
 
@@ -233,7 +223,7 @@ div.informations__comments > #comments {
 }
 
 .description__adress__bank > .description__bank > p:nth-child(1){
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     font-size: 1em;
     font-weight: bold;
     word-wrap:break-word;
@@ -256,8 +246,15 @@ div.informations__comments > #comments {
     background-size: contain;
     padding-left: 10vw;
 }
-.options__photos img{
-    width: 98px;
+.options__photos img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 20px;
+    margin: 25px 0px;
+    z-index: 999;
+    border: 2px solid #00a1ff;
+    background-color: #00a1ff;
 }
 .OngPage{
     display: flex;
@@ -281,11 +278,6 @@ div.informations__comments > #comments {
 }
 
 /* Responsividade */
-@media screen and (max-width:1700px) {
-    .buttons__container {
-        margin-left: 10px;
-    }
-}
 
 @media screen and (max-width:1500px) {
     #comments {
@@ -295,21 +287,28 @@ div.informations__comments > #comments {
     .buttons__container {
         margin-left: 5px;
     }
+    .section__ong {
+        justify-content: space-around;
+    }
 }
 
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1350px) {
     .section__ong {
+        width: 80vw;
+        height: fit-content;
+        display: flex;
         justify-content: space-evenly;
-    }
-}
-
-@media screen and (max-width:925px) {
-    .section__ong {
+        align-items: center;
+        margin-bottom: 50px;
+        font-size: 1em;
         flex-direction: column;
-        margin-top: 70px;
-        height: 100vh;
+        flex-wrap: wrap;
+        box-shadow: 1px 2px 7px #00000070;
+        border-radius: 10px;
+        padding: 20px;
+        z-index: 999;
+        gap: 30px;
     }
-
 }
 
 @media screen and (max-width:800px) {
@@ -319,11 +318,6 @@ div.informations__comments > #comments {
 }
 
 @media screen and (max-width:650px) {
-    .section__ong {
-        height: 115vh;
-        font-size: 13px;
-        margin-top: 50px;
-    }
 
     .informations__botons {
         align-items: center;

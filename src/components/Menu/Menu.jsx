@@ -110,10 +110,10 @@ export default function Menu() {
                         tipo == "usuario" ? 
                         <>
                             <li className="links">
-                                <a href="" className='perfil link'><i class="fa-solid fa-user"></i>Minha Ong</a>
+                                <a href="" className='perfil link'><i class="fa-solid fa-user"></i>Minha conta</a>
                                 <ul>
-                                    <li className="links"><a href='/ong' accesskey="5">Favoritos</a></li>
-                                    <li className="links"><a href='/gerenciamento-ong' accesskey="5">Editar Ong</a></li>
+                                    <li className="links"><a href='/favoritos' accesskey="5">Meus favoritos</a></li>
+                                    <li className="links"><a href='/perfil' accesskey="5">Meu perfil</a></li>
                                     <li className="links"><a href='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
                                 </ul>
                             </li>
