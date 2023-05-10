@@ -6,7 +6,7 @@ export default function Menu() {
     let logoSocieloo;
   
     if (window.location.pathname.startsWith('/ong/')) {
-        logoSocieloo = '../imgs/Socieloo 1.png';
+        logoSocieloo = '../../imgs/Socieloo 1.png';
     } else {
         logoSocieloo = './imgs/Socieloo 1.png';
     }

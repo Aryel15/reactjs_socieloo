@@ -4,7 +4,7 @@ export default function Card(props) {
 
     return (
         <>
-            <a href={props.link} onClick={LocalOng(props.id)}>
+            <a href={props.link}>
                 <div className="card">
                     <div className="img pa">
                         <img src={`../../../imgs/icons/${props.segmento}.png`} alt="" />
