@@ -78,7 +78,7 @@ export default function Home() {
               (regiao === 'Todas' || ong.regiao.toLowerCase() === regiao.toLowerCase()) &&
               (segmento === 'Todas' || ong.segmento.toLowerCase() === segmento.toLowerCase())
           ).map(ong => (
-            <Card categoria="Proteção Animal" titulo={ong.nome} regiao={ong.regiao} segmento={ong.segmento} link={`/ong/${NomeOngLink(ong.nome)}`} id={ong.id}/>
+            <Card categoria="Proteção Animal" titulo={ong.nome} regiao={ong.regiao} segmento={ong.segmento} link={`/ong/${ong.id}/`} id={ong.id}/>
           ))
         }
 

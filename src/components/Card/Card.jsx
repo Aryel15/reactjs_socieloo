@@ -1,9 +1,6 @@
 import './style.css'
 
 export default function Card(props) {
-    function LocalOng(id){
-        localStorage.setItem("idPage", id)
-    }
 
     return (
         <>

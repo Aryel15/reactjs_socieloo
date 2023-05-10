@@ -67,7 +67,6 @@ ul {
     flex-direction: column;
     justify-content: space-between;
     font-size: 1em;
-    margin-left: -10%;
 
 }
 #comentarioLogado{
@@ -91,6 +90,11 @@ ul {
     border-radius: 10px;
     border: 1px solid #00a1ff;
 } 
+.description__about p{
+    text-align: justify;
+    font-weight: 500;
+    font-size: 1em;
+}
 .informations__description h1 {
     font-size: 1.3em;
     text-align: center;
@@ -106,7 +110,7 @@ ul {
     text-align: center;
 }
 
-.informations__description p {
+.description__adress__bank p {
     font-weight: 500;
     text-align: center;
     font-size: 1em;
@@ -186,7 +190,6 @@ div.informations__comments > #comments {
     margin: 0 auto;
     font-weight: bold;
     font-size: 1em;
-    margin-left: -10%;
 }
 
 .buttons__container button+button {

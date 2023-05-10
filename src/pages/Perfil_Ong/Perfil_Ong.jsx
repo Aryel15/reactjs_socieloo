@@ -72,8 +72,8 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
         setEmail(data?.email||"")
         setCnpj(data?.cnpj||"")
         setCnae(data?.cnae||"")
-        setRegiao(data?.cnae||"")
-        setSegmento(data?.cnae||"")
+        setRegiao(data?.regiao||"")
+        setSegmento(data?.segmento||"")
     },[data])
 
     const [nome, setNome] = useState("")
@@ -98,10 +98,12 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
             descricao: descricao,
             agencia: agencia,
             contaCorrente: contaCorrente,
-            pix: pix
+            pix: pix,
+            regiao: regiao,
+            segmento: segmento
         }).then((response) => {
             console.log(response);
-        })
+        }).catch((err) => console.log(err))
     }
 
     return (
@@ -172,7 +174,7 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
                 </div>
             </form>
             <div className="form__button">
-                <button>Salvar edição</button>
+                <button type='submit'>Salvar edição</button>
             </div>
         </>
     )
