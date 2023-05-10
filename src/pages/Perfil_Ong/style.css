@@ -121,8 +121,10 @@
 
 /* Colocar o botão no final */
 .form__button {
-    width: 100%;
+    width: 50%;
     text-align: center;
+    display: block;
+    margin: 0 auto;
 }
 .group__about .form__button {
     width:fit-content;

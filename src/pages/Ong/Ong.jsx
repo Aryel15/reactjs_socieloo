@@ -3,16 +3,18 @@ import './style.css';
 import Menu from '../../components/Menu/Menu';
 import Vlibras from '../../components/Vlibras/Vlibras';
 import Axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 
 export default function Ong() {
-    const id = localStorage.getItem("idPage")
+    const { id } = useParams()
     const [ong, setOng] = useState(id != null ? true : false);
     const [data, setData] = useState()
 
     const descricao_padrao = "Animais de rua são vistos cada vez com mais frequência por moradores da Zona Leste, pensando nisso, Abghail Deaij Carluci, protetora de animais há 18 anos, fundadora e presidente da ONG “Adote sempre cabe mais um”, em que 70% dos animais resgatados são da região leste. Os animais são doados já castrados, vacinados, vermifugados e entregues na residência do adotante. Atualmente a fundadora Abghail alocou um espaço para poder cuidar dos animais abandonados e proporcionar maior conforto a eles. Porém, a verba das doações ainda é baixa em compensação ao número de animais abrigados. Para completar a renda, Abigail oferece projetos vinculados com seu projeto com da ONG, como hospedagem para cães e gatos, táxi dog e decoração para festas."
 
     useEffect(() => {
+        console.log(id);
         Axios.get("http://localhost:8080/api/v1/ong/" + id)
             .then((response) => {
                 setOng(true)
@@ -36,7 +38,7 @@ export default function Ong() {
             <main className="OngPage">
                 {/* Carrossel*/}
                 <div className="options__photos">
-                    <img src={`../imgs/icons/${data?.segmento}.png`} alt="foto de perfil escolhida pela ong" />
+                    <img src={`../../imgs/icons/${data?.segmento}.png`} alt="foto de perfil escolhida pela ong" />
                     <h1>{data?.nome}</h1>
                 </div>
                 <aside className="edit__options">
@@ -48,7 +50,7 @@ export default function Ong() {
                 </aside>
                 <section className="section__ong">
                     <section className="ong__imagens">
-                        <img src={`../imgs/icons/${data?.segmento}.png`} class="ong__image" alt="Imagem da ong mostrando os integrantes" />
+                        <img src={`../../imgs/icons/${data?.segmento}.png`} class="ong__image" alt="Imagem da ong mostrando os integrantes" />
                         <div className="btns_card">
                             <a href={data?.segmento} className="button">{data?.segmento}</a>
                             <a href={data?.regiao} className="button">{data?.regiao}</a>
@@ -116,7 +118,7 @@ function OngInfo({ ong, step, setStep, data, id }){
                     <div className="informations__botons">
                             <div className="buttons__container">
                                 <button>
-                                    <p>Compartilhar</p> <img src="../assets/share.svg" alt="instagram icon" />
+                                    <p>Compartilhar</p> <img src="../../assets/share.svg" alt="instagram icon" />
                                 </button>
                             </div>
                         </div>
@@ -129,7 +131,7 @@ function Comentarios({ step, setStep, data, id }){
             <div className="informations__description">
 
                 <div id="coment_usuario">         
-                    <img src="../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>  
+                    <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>  
                     <div className="texto">
                     <p id="comentarioLogado"><i>Seu comentário</i></p>
                         <h4>@User_logado</h4>
@@ -143,7 +145,7 @@ function Comentarios({ step, setStep, data, id }){
                 </div>
             
                 <div className="coments">
-                    <img src="../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>
+                    <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>
                     <div className="texto">
                         <h4>@User</h4>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
@@ -152,7 +154,7 @@ function Comentarios({ step, setStep, data, id }){
                     
                 <div className="coments">
                     <div>
-                        <img src="../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>
+                        <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed"/>
                     </div>
                     <div className="texto">
                         <h4>@User</h4>

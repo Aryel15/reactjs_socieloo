@@ -89,13 +89,20 @@ export default function Cadastro_Ong() {
 export function Etapa1({ step, setStep, cadastro, valorCadastro }) {
     const [mensagem, setMensagem] = useState('');
     const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
-    const HandleClickAvançar = (e)=>{
+    const HandleClickAvançar = e =>{
         e.preventDefault()
         if((cadastro.nome !== '') && (cadastro.email !== '') && (cadastro.telefone !== '') && (cadastro.cnpj !== '') && (cadastro.cnae !== '')){
           setStep(step + 1)
         }else{
           setMensagem(msg)
           console.log(cadastro);
+        }
+    }
+    const Valida = ()=>{
+        if((cadastro.nome !== '') && (cadastro.email !== '') && (cadastro.telefone !== '') && (cadastro.cnpj !== '') && (cadastro.cnae !== '')){
+          return true;
+        }else{
+          return false;
         }
     }
   return (
@@ -138,10 +145,10 @@ export function Etapa1({ step, setStep, cadastro, valorCadastro }) {
         <div className="section__radio">
             <ul className="radio__group">
                 <li><input className="radio__input" name="process" id="radio-one" type='radio' checked/></li>
-                <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { setStep(step + 1);}}/></li>
-                <li><input className="radio__input" name="process" id="radio-three" type='radio'onClick={() => { setStep(step + 2);}}/></li>
-                <li><input className="radio__input" name="process" id="radio-four" type='radio'onClick={() => { setStep(step + 3);}}/></li>
-                <li><input className="radio__input" name="process" id="radio-five" type='radio'onClick={() => { setStep(step + 4);}}/></li>
+                <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { Valida == true ? setStep(step + 1) : setMensagem(msg)}}/></li>
+                <li><input className="radio__input" name="process" id="radio-three" type='radio'onClick={() => { Valida == true ? setStep(step + 2) : setMensagem(msg)}}/></li>
+                <li><input className="radio__input" name="process" id="radio-four" type='radio'onClick={() => { Valida == true ? setStep(step + 3) : setMensagem(msg)}}/></li>
+                <li><input className="radio__input" name="process" id="radio-five" type='radio'onClick={() => { Valida == true ? setStep(step + 4) : setMensagem(msg)}}/></li>
             </ul>
         </div>
     </section>
@@ -157,6 +164,13 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
           }else{
             setMensagem(msg)
           }
+      }
+      const Valida = ()=>{
+        if((cadastro.regiao !== '') && (cadastro.segmento !== '') && (cadastro.descricao !== '')){
+          return true;
+        }else{
+          return false;
+        }
       }
       return (
           <section id="cadastro__section">
@@ -191,17 +205,17 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                       <textarea name="descricao" id="descricao" cols="30" rows="10" value={cadastro?.descricao} onChange={valorCadastro} ></textarea>
                   </form>
                   <div className="buttons-form2">
-                      <a href="javascript:void(0);" className="voltar" onClick={() => { setStep(step - 1);}}>Voltar</a>
+                      <a href="javascript:void(0);" className="voltar" onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}>Voltar</a>
                       <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Avançar</a>
                   </div>
               </div>
               <div className="section__radio">
                   <ul className="radio__group">
-                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { setStep(step - 1);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}/></li>
                       <li><input className="radio__input" name="process" id="radio-two" type='radio' checked/></li>
-                      <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { setStep(step + 1);}}/></li>
-                      <li><input className="radio__input" name="process" id="radio-four" type='radio' onClick={() => { setStep(step + 2);}}/></li>
-                      <li><input className="radio__input" name="process" id="radio-five" type='radio' onClick={() => { setStep(step + 3);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { Valida == true ? setStep(step + 1) : setMensagem(msg)}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-four" type='radio' onClick={() => { Valida == true ? setStep(step + 2) : setMensagem(msg)}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-five" type='radio' onClick={() => { Valida == true ? setStep(step + 3) : setMensagem(msg)}}/></li>
                   </ul>
               </div>
           </section>
@@ -214,20 +228,30 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
       const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
       const HandleClickAvançar = (e)=>{
           e.preventDefault()
-          if((cadastro.cep !== '') && (cadastro.n !== '') && (cadastro.complemento !== '') && (dataCep.uf !=='') && (dataCep.endereco !=='') && (dataCep.bairro !=='')){
+          if((cadastro.cep !== '') && (cadastro.n !== '') && (cadastro.complemento !== '') && (cadastro.uf !=='') && (cadastro.endereco !=='') && (cadastro.bairro !=='')){
               setStep(step + 1)
           }else{
             setMensagem(msg)
+            console.log(cadastro);
           }
       }
-      Axios.get(`https://viacep.com.br/ws/${cadastro.cep}/json`)
-      .then((response) => {
-        if(response.data !== undefined){
-          setDataCep(response.data)
-          setCadastro({...cadastro, endereco: dataCep.logradouro, bairro: dataCep.bairro, uf: dataCep.uf})
+      const Valida = ()=>{
+        if((cadastro.cep !== '') && (cadastro.n !== '') && (cadastro.complemento !== '') && (cadastro.uf !=='') && (cadastro.endereco !=='') && (cadastro.bairro !=='')){
+          return true;
+        }else{
+          return false;
         }
-      })
-      .catch((err) => console.log(err))
+      }
+      function completar(){
+        Axios.get(`https://viacep.com.br/ws/${cadastro.cep}/json`)
+        .then((response) => {
+            setDataCep(response.data)
+            setCadastro({...cadastro, endereco: dataCep.logradouro, bairro: dataCep.bairro, uf: dataCep.uf})
+            console.log(cadastro);
+            console.log(dataCep.uf);
+        })
+        .catch((err) => console.log(err))
+      }
       return (
           <section id="cadastro__section">
               <div className="section__form 2">
@@ -239,6 +263,7 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                             <div className="cep">
                                 <label for="cep">CEP</label>
                                 <input type="text" id="cep" name="cep" value={cadastro?.cep} onChange={valorCadastro} required/>
+                                <a href="javascript:void(0);" onClick={completar}>Completar endereço</a>
                             </div>
                             <div className="n">
                                 <label for="n">N°</label>
@@ -264,23 +289,23 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                             </div>
                             <div className="uf">
                                 <label for="uf">UF</label>
-                                <input type="text" id="uf" name="uf"  value={dataCep?.uf} onChange={valorCadastro} required/>
+                                <input type="text" id="uf" name="uf"  value={dataCep?.uf} onChange={dataCep?.uf ? "" : valorCadastro } required/>
                             </div>
                           </div>
                       </div>
                   </form>
                   <div className="buttons-form2">
-                      <a href="javascript:void(0);" className="voltar" onClick={() => { setStep(step - 1);}}>Voltar</a>
+                      <a href="javascript:void(0);" className="voltar" onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}>Voltar</a>
                       <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Avançar</a>
                   </div>
               </div>
               <div className="section__radio">
                   <ul className="radio__group">
-                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { setStep(step - 2);}}/></li>
-                      <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { setStep(step - 1);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { Valida == true ? setStep(step - 2) : setMensagem(msg)}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}/></li>
                       <li><input className="radio__input" name="process" id="radio-three" type='radio' checked/></li>
-                      <li><input className="radio__input" name="process" id="radio-four" type='radio' onClick={() => { setStep(step + 1);}}/></li>
-                      <li><input className="radio__input" name="process" id="radio-five" type='radio' onClick={() => { setStep(step + 2);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-four" type='radio' onClick={() => { Valida == true ? setStep(step + 1) : setMensagem(msg)}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-five" type='radio' onClick={() => { Valida == true ? setStep(step + 2) : setMensagem(msg)}}/></li>
                   </ul>
               </div>
           </section>
@@ -296,6 +321,13 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
           }else{
             setMensagem(msg)
           }
+      }
+      const Valida = ()=>{
+        if((cadastro.agencia !== '') && (cadastro.contaCorrente !== '') && (cadastro.pix !== '')){
+          return true;
+        }else{
+          return false;
+        }
       }
       return (
           <section id="cadastro__section">
@@ -317,17 +349,17 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                       </div>
                   </form>
                   <div className="buttons-form2">
-                      <a href="javascript:void(0);" className="voltar" onClick={() => { setStep(step - 1);}}>Voltar</a>
+                      <a href="javascript:void(0);" className="voltar" onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}>Voltar</a>
                       <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Avançar</a>
                   </div>
               </div>
               <div className="section__radio">
                   <ul className="radio__group">
-                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { setStep(step - 3);}}/></li>
-                      <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { setStep(step - 2);}}/></li>
-                      <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { setStep(step - 1);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { Valida == true ? setStep(step - 3) : setMensagem(msg)}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { Valida == true ? setStep(step - 2) : setMensagem(msg)}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}/></li>
                       <li><input className="radio__input" name="process" id="radio-four" type='radio' checked/></li>
-                      <li><input className="radio__input" name="process" id="radio-five" type='radio' onClick={() => { setStep(step + 1);}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-five" type='radio' onClick={() => { Valida == true ? setStep(step + 1) : setMensagem(msg)}}/></li>
                   </ul>
               </div>
           </section>
@@ -426,17 +458,17 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
                     <label for="termos">Eu concordo com os <a href="#">termos e condições</a></label>
                 </div>
                 <div className="buttons-form2">
-                    <a href="javascript:void(0);" className="voltar" onClick={() => { setStep(step - 1);}}>Voltar</a>
+                    <a href="javascript:void(0);" className="voltar" onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}>Voltar</a>
                     <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Finalizar Cadastro</a>
                 </div>
             </form>
             </div>
             <div className="section__radio">
                 <ul className="radio__group">
-                    <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { setStep(step - 4);}}/></li>
-                    <li><input className="radio__input" name="process" id="radio-two" type='radio'  onClick={() => { setStep(step - 3);}}/></li>
-                    <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { setStep(step - 2);}}/></li>
-                    <li><input className="radio__input" name="process" id="radio-four" type='radio' onClick={() => { setStep(step - 1);}}/></li>
+                    <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => {setStep(step - 4)}}/></li>
+                    <li><input className="radio__input" name="process" id="radio-two" type='radio'  onClick={() => { setStep(step - 3)}}/></li>
+                    <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { setStep(step - 2)}}/></li>
+                    <li><input className="radio__input" name="process" id="radio-four" type='radio' onClick={() => { setStep(step - 1)}}/></li>
                     <li><input className="radio__input" name="process" id="radio-five" type='radio' checked/></li>
                 </ul>
             </div>
@@ -453,7 +485,7 @@ function ValidaEmail({ cadastro }) {
       <section className="popup">
         <div className="boxpopup">
           <i class="fa-solid fa-circle-check"></i>
-          <p>Sua Ong foi cadastrada com sucesso!</p>
+          <p>Sua ONG foi cadastrada com sucesso!</p>
           <div className="progress-bar"></div>
         </div>
       </section>
