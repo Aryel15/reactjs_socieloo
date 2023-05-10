@@ -453,7 +453,7 @@ function ValidaEmail({ cadastro }) {
       <section className="popup">
         <div className="boxpopup">
           <i class="fa-solid fa-circle-check"></i>
-          <p>Sua Ong foi cadastrada com sucesso!</p>
+          <p>Sua ONG foi cadastrada com sucesso!</p>
           <div className="progress-bar"></div>
         </div>
       </section>

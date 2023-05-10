@@ -118,9 +118,6 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
                     <label for="cep">CEP</label>
                     <input type="text" id="cep" name="cep" value={cep} onChange={e=> setCep(e.target.value)} />
 
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value={email} />
-
                     <label for="cnpj">CNPJ:</label>
                     <input type="text" name="cnpj" id="cnpj" value={cnpj} onChange={e=> setCnpj(e.target.value)} required/>
 
@@ -172,11 +169,11 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
 
                     <label for="pix">Pix</label>
                     <input type="text" id="pix" name="pix" value={pix} onChange={e=> setPix(e.target.value)} />
-                    <div className="form__button">
-                        <button>Salvar edição</button>
-                    </div>
                 </div>
             </form>
+            <div className="form__button">
+                <button>Salvar edição</button>
+            </div>
         </>
     )
 }
@@ -283,6 +280,7 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
 
 function Deletar_Conta({ stepE, setEStep, data, id }) {
     function Delete() {
+        setPopUp(popBox);
         Axios.delete("http://localhost:8080/api/v1/ong/" + id)
             .then((response) => {
                 console.log(response.data);
@@ -296,6 +294,18 @@ function Deletar_Conta({ stepE, setEStep, data, id }) {
     }
     const [deletar, setDeletar] = useState(false)
     const [msg, setMsg] = useState("")
+
+    const popBox = (
+        <section className="popup">
+          <div className="boxpopup">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Sua ONG foi deletada com sucesso!</p>
+            <div className="progress-bar"></div>
+          </div>
+        </section>
+    )
+    const [popUp, setPopUp] = useState("")
+
     return (
         <>
             <form action="#" className="content__form senha">
@@ -306,8 +316,8 @@ function Deletar_Conta({ stepE, setEStep, data, id }) {
                     <a className="button-as" href="/gerenciamento-ong">Não</a>
                 </div>
                 {deletar === true ? <a className="button-as delete" onClick={Delete}>Deletar conta</a> : ""}
-                <p className="mensagem">{msg}</p>
             </form>
+            {popUp}
         </>
     )
 }
