@@ -13,18 +13,25 @@ export default function Login() {
 
     const handleClickCadastro = e => {
         e.preventDefault() 
-        console.log(email);
-        console.log(senha);
-        localStorage.setItem("email", email)
-
+ 
         Axios.post(`http://localhost:8080/api/v1/login`, {
             senha: senha,
             email: email
         }).then((response) => {
-            console.log(response);
-            setTimeout(() => {
-                window.location.pathname = "/gerenciamento-ong"
-            }, 1000);
+            const id = response.data.id
+            localStorage.setItem("id", id)
+            if(response.data.cnae){
+                localStorage.setItem("tipo", "ong");
+                setTimeout(() => {
+                    window.location.pathname = `/ong/${id}`
+                }, 1000);
+            }else{
+                localStorage.setItem("tipo", "usuario");
+                setTimeout(() => {
+                    window.location.pathname = "/"
+                }, 1000);
+            }
+ 
         }, (err) => {
             setError(false)
             console.log(err);

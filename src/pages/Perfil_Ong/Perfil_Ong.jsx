@@ -26,7 +26,7 @@ export default function Perfil_Ong() {
                console.log(response.data);
            })
        }
-   }, [])
+   }, []) 
 
     return (
         <>
@@ -64,7 +64,7 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
     useEffect(_=> {
         setNome(data?.nome||"")
         setTelefone(data?.telefone||"")
-        setCep(data?.cep||"")
+        // setCep(data?.cep||"")
         setDescricao(data?.descricao||"")
         setAgencia(data?.agencia||"")
         setContaCorrente(data?.contaCorrente||"")
@@ -75,10 +75,10 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
         setRegiao(data?.cnae||"")
         setSegmento(data?.cnae||"")
     },[data])
-
+    const [msg, setMsg] = useState("")
     const [nome, setNome] = useState("")
     const [telefone, setTelefone] = useState("")
-    const [cep, setCep] = useState("")
+    // const [cep, setCep] = useState("")
     const [descricao, setDescricao] = useState("")
     const [agencia, setAgencia] = useState("")
     const [contaCorrente, setContaCorrente] = useState("")
@@ -90,33 +90,48 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
     const [segmento, setSegmento] = useState("")
 
     const handleClickEditar_Perfil = e =>{
+        
+        setPopUp(popBox);
         e.preventDefault()
         Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
             nome: nome,
             telefone: telefone,
-            cep: cep,
             descricao: descricao,
             agencia: agencia,
             contaCorrente: contaCorrente,
             pix: pix
         }).then((response) => {
             console.log(response);
+            setMsg("✔ Você mudou seu email")
+            setTimeout(() => {
+                window.location.pathname = "/gerenciamento-ong"
+            }, 2000); 
         })
     }
+    const popBox = (
+        <section className="popup">
+          <div className="boxpopup">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Dados atualizados com sucesso!</p>
+            <div className="progress-bar"></div>
+          </div>
+        </section>
+    )
 
+    const [popUp, setPopUp] = useState("")
     return (
         <>
             <h2>Editar perfil</h2>
             <form action="#" className="content__form" onSubmit={handleClickEditar_Perfil}>
                 <div className="collum">
                     <label for="nome">Nome</label>
-                    <input type="text" id="nome" name="nome" value={nome} onChange={e=> setNome(e.target.value)} />
+                    <input type="text" id="nome" name="nome" value={nome} onChange={e => setNome(e.target.value)} />
 
                     <label for="telefone">Telefone</label>
                     <input type="tel" id="telefone" name="telefone" value={telefone} onChange={e=> setTelefone(e.target.value)} />
 
-                    <label for="cep">CEP</label>
-                    <input type="text" id="cep" name="cep" value={cep} onChange={e=> setCep(e.target.value)} />
+                    {/* <label for="cep">CEP</label>
+                    <input type="text" id="cep" name="cep" value={cep} onChange={e=> setCep(e.target.value)} /> */}
 
                     <label for="cnpj">CNPJ:</label>
                     <input type="text" name="cnpj" id="cnpj" value={cnpj} onChange={e=> setCnpj(e.target.value)} required/>
@@ -170,10 +185,13 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
                     <label for="pix">Pix</label>
                     <input type="text" id="pix" name="pix" value={pix} onChange={e=> setPix(e.target.value)} />
                 </div>
+                <div className="form__button">
+                <button type="submit" className="button-as">Alterar</button>
+                </div>
+                
             </form>
-            <div className="form__button">
-                <button>Salvar edição</button>
-            </div>
+            {popUp}
+            
         </>
     )
 }
@@ -181,21 +199,31 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
 function Alterar_Email({ stepE, setEStep, data, id }) {
     const [msg, setMsg] = useState("")
     const [email, setEmail] = useState("")
-
     const handleClickAlterarEmail = e =>{
+         setPopUp(popBox);
         e.preventDefault()
         console.log(email);
         Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
             email: email,
         }).then((response) => {
+           
             console.log(response);
-            setMsg("✔ Você mudou seu email")
             setTimeout(() => {
                 window.location.pathname = "/gerenciamento-ong"
             }, 2000); 
         })
     }
+    const popBox = (
+        <section className="popup">
+          <div className="boxpopup">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Seu Email foi atualizado com sucesso!</p>
+            <div className="progress-bar"></div>
+          </div>
+        </section>
+    )
 
+    const [popUp, setPopUp] = useState("")
     return (
         <>
             <form action="#" className="content__form senha" onSubmit={handleClickAlterarEmail}>
@@ -207,12 +235,13 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
                 <input type="email" id="newEmail" name="newEmail" onChange={e => setEmail(e.target.value)}/>
                 <button type="submit" className="button-as">Alterar</button>
             </form>
+            {popUp}
         </>
     )
 }
 
 function Alterar_Senha({ stepE, setEStep, data, id}) {
-
+    
     const [msg, setMsg] = useState("")
     const [senhaFraca, setSenhaFraca] = useState("")
     const [senha, setSenha] = useState("")
@@ -224,7 +253,21 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
         return regex.test(senha);
     };
 
+
+    const popBox = (
+        <section className="popup">
+          <div className="boxpopup">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Sua senha foi alterada com sucesso!</p>
+            <div className="progress-bar"></div>
+            
+          </div>
+        </section>
+    )
+    const [popUp, setPopUp] = useState("")
+
     const handleClickAlterarSenha = e => {
+
         e.preventDefault()
         if (!senhaForte(senha)) {
             setSenhaFraca('Senha fraca');
@@ -240,13 +283,14 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                     senha: senha,
                 }).then((response) => {
                     console.log(response);
-                    setMsg("✔ Você mudou sua senha")
                     setTimeout(() => {
                         window.location.pathname = "/gerenciamento-ong"
                     }, 2000); 
                 })
             }
         }
+        setPopUp(popBox);
+    
     }
 
 
@@ -272,8 +316,11 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                     <p className="senha-fraca">{senhaDiferente}</p>
                 </div>
 
-                <button type="submit" className="button-as">Salvar alterações</button>
+                <button type="submit" className="button-as" href="/gerenciamento-ong">Salvar alterações</button>
+
             </form>
+            
+         {popUp}
         </>
     )
 }
