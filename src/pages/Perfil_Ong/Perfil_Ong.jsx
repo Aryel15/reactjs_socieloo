@@ -121,8 +121,8 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" value={email} />
 
-                    <label for="cnpj">CNPJ:</label>
-                    <input type="text" name="cnpj" id="cnpj" value={cnpj} onChange={e=> setCnpj(e.target.value)} required/>
+                    <label for="cnpj">CNPJ</label>
+                    <input type="text" name="cnpj" id="cnpj" value={cnpj} onChange={e=> setCnpj(e.target.value)} disabled/>
 
                     <label for="cnae">Cnae</label>
                     <input type="text" name="cnae" list="cnae" value={cnae} onChange={e=> setCnae(e.target.value)} required/>
@@ -260,7 +260,7 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                 <p className="mensagem-as">{msg}</p>
                 <div>
                     <label for="senha">Senha atual</label>
-                    <input type="password" name="senha" id="senha" value={data?.senha} />
+                    <input type="password" name="senha" id="senha" />
                 </div>
 
                 <div>
