@@ -12,7 +12,7 @@ export default function Login() {
 
     const handleClickCadastro = e => {
         e.preventDefault() 
-
+ 
         Axios.post(`http://localhost:8080/api/v1/login`, {
             senha: senha,
             email: email
@@ -30,7 +30,7 @@ export default function Login() {
                     window.location.pathname = "/"
                 }, 1000);
             }
-
+ 
         }, (err) => {
             setError(false)
             console.log(err);
