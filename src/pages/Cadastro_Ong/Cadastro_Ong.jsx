@@ -246,7 +246,10 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
         Axios.get(`https://viacep.com.br/ws/${cadastro.cep}/json`)
         .then((response) => {
             setDataCep(response.data)
-            setCadastro({...cadastro, endereco: dataCep.logradouro, bairro: dataCep.bairro, uf: dataCep.uf})
+            setCadastro({...cadastro, 
+              endereco: response.data.logradouro, 
+              bairro: response.data.bairro, 
+              uf: response.data.uf})
             console.log(cadastro);
             console.log(dataCep.uf);
         })
@@ -274,10 +277,6 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                               <label for="complemento">Complemento</label>
                               <input type="text" id="complemento" name="complemento" value={cadastro?.complemento} onChange={valorCadastro} required/>
                           </div>
-                          {/* <div className="logradouro">
-                              <label for="logradouro">Logradouro</label>
-                              <input type="text" id="logradouro" name="logradouro" required/>
-                          </div> */}
                           <div className="endereco">
                               <label for="endereco">Endereco</label>
                               <input type="text" id="endereco" name="endereco"  value={dataCep?.logradouro} onChange={valorCadastro} required/>
@@ -525,7 +524,7 @@ function ValidaEmail({ cadastro }) {
           setTimeout(() => {
             window.location.pathname = "/gerenciamento-ong"
           }, 2000); 
-        })
+        }).catch((err) => console.log(err))
       } else {
         alert("Código inválido");
       }

@@ -104,6 +104,7 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
             segmento: segmento
         }).then((response) => {
             console.log(response);
+            window.location.pathname = "/gerenciamento-ong"
         }).catch((err) => console.log(err))
     }
     const popBox = (
@@ -121,76 +122,76 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
         <>
             <h2>Editar perfil</h2>
             <form action="#" className="content__form" onSubmit={handleClickEditar_Perfil}>
-                <div className="collum">
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" name="nome" value={nome} onChange={e => setNome(e.target.value)} />
+                <div className="rowform">
+                    <div className="collum">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" value={nome} onChange={e => setNome(e.target.value)} />
 
-                    <label for="telefone">Telefone</label>
-                    <input type="tel" id="telefone" name="telefone" value={telefone} onChange={e=> setTelefone(e.target.value)} />
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" value={telefone} onChange={e=> setTelefone(e.target.value)} />
 
-                    {/* <label for="cep">CEP</label>
-                    <input type="text" id="cep" name="cep" value={cep} onChange={e=> setCep(e.target.value)} /> */}
+                        {/* <label for="cep">CEP</label>
+                        <input type="text" id="cep" name="cep" value={cep} onChange={e=> setCep(e.target.value)} /> */}
 
-                    <label for="cnpj">CNPJ:</label>
-                    <input type="text" name="cnpj" id="cnpj" value={cnpj} onChange={e=> setCnpj(e.target.value)} required/>
+                        <label for="cnpj">CNPJ:</label>
+                        <input type="text" name="cnpj" id="cnpj" value={cnpj} onChange={e=> setCnpj(e.target.value)} required/>
 
-                    <label for="cnae">Cnae</label>
-                    <input type="text" name="cnae" list="cnae" value={cnae} onChange={e=> setCnae(e.target.value)} required/>
-                    <datalist name="cnae" id="cnae" className="select-regiao">
-                        <option value="#" selected disabled>Selecione uma opção</option>
-                        <option value="9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS">9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS</option>
-                        <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE</option>
-                        <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS</option>
-                        <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS</option>
-                        <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS</option>
-                        <option value="9430-8/00 - ATIVIDADE DE OPERAÇÃO DE CENTRAIS DE DISQUE DENUNCIA QUANDO REALIZADO POR ENTIDADES SEM FINS LUCRATIVOS">9430-8/00 - ATIVIDADE DE OPERAÇÃO DE CENTRAIS DE DISQUE DENUNCIA QUANDO REALIZADO POR ENTIDADES SEM FINS LUCRATIVOS</option>
-                        <option value="Outro">Outro</option>
-                    </datalist>
-                    <label for="regiao">Região</label>
-                    <input type="text" name="regiao" list="regiao" value={regiao} onChange={e=> setRegiao(e.target.value)} required/>
-                    <datalist name="regiao" id="regiao" className="cad-select" >
-                        <option value="#" selected disabled>Selecione uma opção</option>
-                        <option value="Zona Norte">Zona Norte</option>
-                        <option value="Zona Sul">Zona Sul</option>
-                        <option value="Centro">Centro</option>
-                        <option value="Zona Leste">Zona Leste</option>
-                        <option value="Zona Oeste">Zona Oeste</option>
-                    </datalist>
+                        <label for="cnae">Cnae</label>
+                        <input type="text" name="cnae" list="cnae" value={cnae} onChange={e=> setCnae(e.target.value)} required/>
+                        <datalist name="cnae" id="cnae" className="select-regiao">
+                            <option value="#" selected disabled>Selecione uma opção</option>
+                            <option value="9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS">9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS</option>
+                            <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE</option>
+                            <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS</option>
+                            <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS</option>
+                            <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS</option>
+                            <option value="9430-8/00 - ATIVIDADE DE OPERAÇÃO DE CENTRAIS DE DISQUE DENUNCIA QUANDO REALIZADO POR ENTIDADES SEM FINS LUCRATIVOS">9430-8/00 - ATIVIDADE DE OPERAÇÃO DE CENTRAIS DE DISQUE DENUNCIA QUANDO REALIZADO POR ENTIDADES SEM FINS LUCRATIVOS</option>
+                            <option value="Outro">Outro</option>
+                        </datalist>
+                        <label for="regiao">Região</label>
+                        <input type="text" name="regiao" list="regiao" value={regiao} onChange={e=> setRegiao(e.target.value)} required/>
+                        <datalist name="regiao" id="regiao" className="cad-select" >
+                            <option value="#" selected disabled>Selecione uma opção</option>
+                            <option value="Zona Norte">Zona Norte</option>
+                            <option value="Zona Sul">Zona Sul</option>
+                            <option value="Centro">Centro</option>
+                            <option value="Zona Leste">Zona Leste</option>
+                            <option value="Zona Oeste">Zona Oeste</option>
+                        </datalist>
+                    </div>
+
+                    <div className="collum">
+                        <label for="select-regiao"className="select-label">Qual a causa da sua ONG?</label>
+                        <input type="text" name="segmento" list="segmento" value={segmento} onChange={e=> setSegmento(e.target.value)} required/>
+                        <datalist name="segmento" id="segmento" className="select-regiao" >
+                            <option value="#" selected disabled>Selecione uma opção</option>
+                            <option value="Saúde">Saúde</option>
+                            <option value="Educação">Educação</option>
+                            <option value="Cidadania">Cidadania</option>
+                            <option value="Cultura e esporte">Cultura e esporte</option>
+                            <option value="Gênero e diversidade">Gênero e diversidade</option>
+                            <option value="Meio ambiente">Meio ambiente</option>
+                            <option value="Proteção Animal">Proteção Ambiental</option>
+                            <option value="Outro">Outro</option>
+                        </datalist>
+                        <label for="descricao">Descrição</label>
+                        <textarea name="descricao" id="descricao" value={descricao} onChange={e=> setDescricao(e.target.value)} ></textarea>
+                        <label for="agencia" className="agencia">Agência</label>
+                        <input type="text" id="agencia" name="agencia" value={agencia} onChange={e=> setAgencia(e.target.value)} />
+
+                        <label for="contaCorrente">Conta</label>
+                        <input type="text" id="contaCorrente" name="contaCorrente" value={contaCorrente} onChange={e=> setContaCorrente(e.target.value)} />
+
+                        <label for="pix">Pix</label>
+                        <input type="text" id="pix" name="pix" value={pix} onChange={e=> setPix(e.target.value)} />
+                    </div>
                 </div>
 
-                <div className="collum">
-                    <label for="select-regiao"className="select-label">Qual a causa da sua ONG?</label>
-                    <input type="text" name="segmento" list="segmento" value={segmento} onChange={e=> setSegmento(e.target.value)} required/>
-                    <datalist name="segmento" id="segmento" className="select-regiao" >
-                        <option value="#" selected disabled>Selecione uma opção</option>
-                        <option value="Saúde">Saúde</option>
-                        <option value="Educação">Educação</option>
-                        <option value="Cidadania">Cidadania</option>
-                        <option value="Cultura e esporte">Cultura e esporte</option>
-                        <option value="Gênero e diversidade">Gênero e diversidade</option>
-                        <option value="Meio ambiente">Meio ambiente</option>
-                        <option value="Proteção Animal">Proteção Ambiental</option>
-                        <option value="Outro">Outro</option>
-                    </datalist>
-                    <label for="descricao">Descrição</label>
-                    <textarea name="descricao" id="descricao" value={descricao} onChange={e=> setDescricao(e.target.value)} ></textarea>
-                    <label for="agencia" className="agencia">Agência</label>
-                    <input type="text" id="agencia" name="agencia" value={agencia} onChange={e=> setAgencia(e.target.value)} />
-
-                    <label for="contaCorrente">Conta</label>
-                    <input type="text" id="contaCorrente" name="contaCorrente" value={contaCorrente} onChange={e=> setContaCorrente(e.target.value)} />
-
-                    <label for="pix">Pix</label>
-                    <input type="text" id="pix" name="pix" value={pix} onChange={e=> setPix(e.target.value)} />
-                </div>
                 <div className="form__button">
                 <button type="submit" className="button-as">Alterar</button>
                 </div>
                 
             </form>
-            <div className="form__button">
-                <button type='submit'>Salvar edição</button>
-            </div>
         </>
     )
 }

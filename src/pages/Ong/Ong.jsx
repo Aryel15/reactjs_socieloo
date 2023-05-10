@@ -50,7 +50,7 @@ export default function Ong() {
                 </aside>
                 <section className="section__ong">
                     <section className="ong__imagens">
-                        <img src={`../../imgs/icons/${data?.segmento}.png`} class="ong__image" alt="Imagem da ong mostrando os integrantes" />
+                        <img src={`../imgs/icons/${data?.segmento}.png`} class="ong__image" alt="Imagem da ong mostrando os integrantes" />
                         <div className="btns_card">
                             <a href={data?.segmento} className="button">{data?.segmento}</a>
                             <a href={data?.regiao} className="button">{data?.regiao}</a>

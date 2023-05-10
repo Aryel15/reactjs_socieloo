@@ -287,7 +287,7 @@ export function Etapa4({step, setStep, cadastro}) {
   const [codigo, setCodigo] = useState("")
   const codigoArmazenado = sessionStorage.getItem("codigo");
   function handleClickCadastro(){
-    if (codigo) {
+    if (codigo == codigoArmazenado) {
       console.log(cadastro)
       window.sessionStorage.removeItem("codigo")
         Axios.post("http://localhost:8080/api/v1/user", {

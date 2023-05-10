@@ -3,6 +3,7 @@ import React from 'react';
 
 export default function Menu() {
     const tipo = localStorage.getItem("tipo")
+    const id = localStorage.getItem("id")
     let logoSocieloo;
   
     if (window.location.pathname.startsWith('/ong/')) {
@@ -99,7 +100,7 @@ export default function Menu() {
                             <li className="links">
                                 <a href="" className='perfil link'><i class="fa-solid fa-user"></i>Minha Ong</a>
                                 <ul>
-                                    <li className="links"><a href='/ong' accesskey="5">Minha Ong</a></li>
+                                    <li className="links"><a href={'/ong/'+id} accesskey="5">Minha Ong</a></li>
                                     <li className="links"><a href='/gerenciamento-ong' accesskey="5">Editar Ong</a></li>
                                     <li className="links"><a href='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
                                 </ul>
