@@ -209,8 +209,10 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
            
             console.log(response);
             setTimeout(() => {
+                setPopUp("")
                 window.location.pathname = "/gerenciamento-ong"
             }, 2000); 
+
         })
     }
     const popBox = (
@@ -283,13 +285,15 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                     senha: senha,
                 }).then((response) => {
                     console.log(response);
+                    setPopUp(popBox);
                     setTimeout(() => {
+                        setPopUp("");
                         window.location.pathname = "/gerenciamento-ong"
                     }, 2000); 
                 })
             }
         }
-        setPopUp(popBox);
+        
     
     }
 
@@ -327,16 +331,17 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
 
 function Deletar_Conta({ stepE, setEStep, data, id }) {
     function Delete() {
-        setPopUp(popBox);
         Axios.delete("http://localhost:8080/api/v1/ong/" + id)
-            .then((response) => {
-                console.log(response.data);
-            })
-        localStorage.removeItem("id");
-        setMsg("Sua Ong foi deletada")
-        setTimeout(() => {
-            window.location.pathname = "/"
-        }, 2000); 
+        .then((response) => {
+            setPopUp(popBox);
+            console.log(response.data);        
+            localStorage.removeItem("id");
+            localStorage.removeItem("tipo");
+            setTimeout(() => {
+                window.location.pathname = "/"
+            }, 2000); 
+        })
+
         
     }
     const [deletar, setDeletar] = useState(false)
