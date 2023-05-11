@@ -23,7 +23,7 @@
     background: transparent;
     flex-direction: row;
     align-items: flex-start;
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
 /* Divisão de largura */
@@ -53,10 +53,11 @@
 .options__photos h1{
     padding:5px
 }
-.options__photos img {
+.options__photos i {
     width: 200px;
     height: 200px;
     border-radius: 50%;
+    color: #fff;
 }
 
 .options__itens li {
@@ -292,7 +293,7 @@
     flex-direction: column;
     align-items: center;
 }
-.options__photos img {
+.options__photos i {
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -301,6 +302,11 @@
     z-index: 999;
     border: 2px solid #00a1ff;
     background-color: #00a1ff;
+    color: #fff;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .options__photos h1 {
     background-color: #00a1ff;
@@ -362,11 +368,81 @@
 .card_admin{
     display: flex;
     flex-direction: row;
+    padding:10px;
+    border: 1px solid rgb(81, 81, 81);
+    border-radius: 5px;
+    gap: 0px 50px;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
 }
 .infos, .actions{
     display: flex;
     flex-direction: column;
-    width: 50%;
+}
+.info_card{
+    margin-top: 10px;
+    display:flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.info_card p{
+    font-size: smaller;
+    border-radius: 2px;
+    padding: 2px 5px;
+    border: 1px solid rgb(81, 81, 81);
+    color: rgb(81, 81, 81);
+}
+.actions{
+    gap: 5px;
+}
+.actions a{
+    color: #fff;
+    background-color: #00a1ff;
+    border: #00a1ff 1px solid;
+    padding: 5px 15px;
+    border-radius: 5px;
+    text-align: center;
+    transition: 0.7s all;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.actions a:hover{
+    color: #00a1ff;
+    background-color: #fff;
+    border: #00a1ff 1px solid;
+}
+.formPage-admin{
+    display: flex;
+    flex-direction: column;
+}
+.formPage-admin input{
+    width: 100%;
+    outline: none;
+    border: 1px solid black;
+    font-size: .9em;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.button-ad{
+    width: 100%;
+}
+.buscar{
+    display: flex;
+    gap: 5px;
+}
+.buscar input{
+    width: 100%;
+    outline: none;
+    border: 1px solid black;
+    font-size: .9em;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 /*------------ Media ---*/
 
