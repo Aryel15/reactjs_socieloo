@@ -64,14 +64,14 @@ function Usuarios({ stepE, setEStep}) {
         Axios.get('http://localhost:8080/api/v1/user/')
         .then((response) => {
             setUsers(response.data)
-        })
-    }, [users])
+        }).catch((err) => console.log(err))
+    }, [])
     return (
         <>
             <h2>Usuários</h2>
             {
-            users?.map(ong => (
-                <p>{users?.nome}</p>
+            users?.map(user => (
+                <p>{user.nome}</p>
             ))
             }
         </>
