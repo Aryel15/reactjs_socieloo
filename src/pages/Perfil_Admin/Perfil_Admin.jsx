@@ -9,7 +9,7 @@ export default function Perfil_Admin() {
 
     var name;
     const [data, setData] = useState()
-    const [stepE, setEStep] = React.useState("Relatorios");
+    const [stepE, setEStep] = React.useState("ONGs");
     const editar = {
         Relatorios: <Relatorios/>,
         ONGs: <ONGs/>,
@@ -22,7 +22,7 @@ export default function Perfil_Admin() {
         <>
             <Menu />
             <main id="edit" >
-            <div className="options__photos">
+                <div className="options__photos">
                     <i class="fa-solid fa-screwdriver-wrench"></i>
                     <h1>Perfil de Admin</h1>
                 </div>
@@ -63,7 +63,9 @@ function Relatorios() {
 function Usuarios() {
 
     const [users, setUsers] = useState()
-    const [popUpq, setPopUpq] = useState
+    const [popUpq, setPopUpq] = useState()
+    const [popUpDel, setPopUpDel] = useState()
+
 
     useEffect(() =>{
         Axios.get('http://localhost:8080/api/v1/user')
@@ -71,13 +73,37 @@ function Usuarios() {
             setUsers(response.data)
         }).catch((err) => console.log(err))
     }, [])
-    function Deletar(id){
+    function Deletar(id, nome){
+        setPopUpq((
+            <section className="popup">
+                <div className="boxpopup">
+                <b><p>Deseja deletar o usuário <em>{nome}</em>?</p></b>
+                <div className="btnsDel">
+                    <a className="cancelarDel" href="javascript:void(0);" onClick={() => setPopUpq("")}>Cancelar</a>
+                    <a className="Del" href="javascript:void(0);" onClick={() => {setPopUpq("") ;Delete(id)}}>Desejo deletar</a>
+                </div>
+                </div>
+            </section>
+        ))
         
     }
     function Delete(id) {
         Axios.delete("http://localhost:8080/api/v1/user/" + id)
         .then((response) => {
-            console.log(response.data);        
+            console.log(response.data); 
+            setPopUpDel((
+                <section className="popup">
+                <div className="boxpopup">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <p>Usuário deletado com sucesso!</p>
+                  <div className="progress-bar"></div>
+                </div>
+              </section>
+            ))
+            setTimeout(() => {
+                setPopUpDel("");
+                window.location.pathname = "/gerenciamento"
+            }, 2000);        
         })
     }
     return (
@@ -101,11 +127,13 @@ function Usuarios() {
                     </div>
                     <div className="actions">
                         <a href="javascript:void(0);"><i class="fa-solid fa-eye"></i>Visualizar</a>
-                        <a href="javascript:void(0);" onClick={Deletar(user.id)}><i class="fa-solid fa-trash-can"></i>Excluir</a>
+                        <a href="javascript:void(0);" onClick={() => Deletar(user.id, user.nome)}><i class="fa-solid fa-trash-can"></i>Excluir</a>
                     </div>
                 </div>
             ))
             }
+            {popUpDel}
+            {popUpq}
             </section>
         </>
     )

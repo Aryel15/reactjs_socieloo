@@ -444,6 +444,49 @@
     border-radius: 5px;
     margin-bottom: 10px;
 }
+/*--- Deletar ---*/
+.btnsDel{
+    display: flex;
+    gap: 5px;
+}
+.cancelarDel{
+    color: #fff;
+    background-color: #00a1ff;
+    border: #00a1ff 1px solid;
+    padding: 5px 15px;
+    border-radius: 5px;
+    text-align: center;
+    transition: 0.7s all;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.cancelarDel:hover{
+    color: #00a1ff;
+    background-color: #fff;
+    border: #00a1ff 1px solid;
+}
+.Del{
+    color: #00a1ff;
+    background-color: #fff;
+    border: #00a1ff 1px solid;
+    padding: 5px 15px;
+    border-radius: 5px;
+    text-align: center;
+    transition: 0.7s all;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.Del:hover{
+    color: #fff;
+    background-color: #00a1ff;
+    border: #00a1ff 1px solid;
+}
 /*------------ Media ---*/
 
 @media screen and (max-width: 1000px) {

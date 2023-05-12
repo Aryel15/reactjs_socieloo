@@ -4,18 +4,17 @@
   font-size: 1em;
 }
 .main_home, .main-index{
-  background-color: #f8fbf6;
+  background: url(../imgs/homecover.svg);
+    background-repeat: repeat-x;
+    background-size: contain;
 }
 
 .principal {
-  background-image: url(../imgs/homecover.svg);
   padding-top: 0px;
   padding-bottom: 0px;
   margin: 0;
   width: 100%;
-  height: 400px;
-  background-repeat: repeat-x;
-  background-size: cover;
+  height: 300px;
   display: flex;
   align-items: flex-start;
   font-size: 1em;
