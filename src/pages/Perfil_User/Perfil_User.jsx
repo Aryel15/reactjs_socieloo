@@ -33,7 +33,7 @@ export default function Perfil_User() {
         <main class="profile column">
             <div className="options__photos">
                 <i class="fa-solid fa-user"></i>
-                <h1>{data?.nome}</h1>
+                <h1>{data?.nome} {data?.sobrenome}</h1>
             </div>
            {/* <div class="container container-imgs">
                 <div class="circle">
@@ -67,24 +67,56 @@ export default function Perfil_User() {
   )
 }
 function Editar_Perfil({data, id}){
+    useEffect(_=> {
+        setAlterar({...alterar, nome: data?.nome||"", sobrenome: data?.sobrenome||""})
+    },[data])
+    const [msg, setMsg] = useState("")
+    const [alterar, setAlterar] = useState({
+        nome:'',
+        sobrenome:'',
+    })
+
+    const handleClickEditar_Perfil = e =>{
+        
+        setPopUp(popBox);
+        e.preventDefault()
+        Axios.put(`http://localhost:8080/api/v1/user/${id}`,{
+            nome: alterar.nome,
+            sobrenome: alterar.sobrenome
+        }).then((response) => {
+            setTimeout(() => {
+                console.log(response)
+                setPopUp("");
+                window.location.pathname = "/perfil"
+            }, 2000); 
+        }).catch((err) => console.log(err))
+    }
+    const popBox = (
+        <section className="popup">
+          <div className="boxpopup">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Dados atualizados com sucesso!</p>
+            <div className="progress-bar"></div>
+          </div>
+        </section>
+    )
+
+    const [popUp, setPopUp] = useState("")
     return(
         <>
             <form action="#" class="content__form">
                 <h2>Editar Perfil</h2>
                 <div>
                     <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome" value={data?.nome}/>
+                    <input type="text" name="nome" id="nome" value={alterar?.nome} onChange={e => setAlterar({...alterar, nome:e.target.value})}/>
                 </div>
                 <div>
                     <label for="sobrenome">Sobrenome</label>
-                    <input type="text" name="sobrenome" id="sobrenome" value={data?.sobrenome}/>
+                    <input type="text" name="sobrenome" id="sobrenome" value={alterar?.sobrenome} onChange={e => setAlterar({...alterar, sobrenome:e.target.value})}/>
                 </div>
-                <div>
-                    <label for="email">E-mail</label>
-                    <input type="text" name="email" id="email" value={data?.email}/>
-                </div>
-                <button type="submit" class="button_perfil">Salvar alterações</button>
+                <button type="submit" class="button_perfil" onClick={handleClickEditar_Perfil}>Salvar alterações</button>
             </form>
+            {popUp}
         </>
     )
 }
@@ -95,10 +127,10 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
          setPopUp(popBox);
         e.preventDefault()
         console.log(email);
-        Axios.put(`http://localhost:8080/api/v1/user/${id}`,{
+        Axios.put(`http://localhost:8080/api/v1/user/${id}`, {
             email: email,
         }).then((response) => {
-           
+        
             console.log(response);
             setTimeout(() => {
                 setPopUp("")
@@ -173,6 +205,7 @@ function Alterar_Senha({ data, id}) {
                 if (senha !== novaSenha) {
                     setSenhaFraca('');
                     setSenhaDiferente('As senhas são diferentes');
+                    console.log('As senhas são diferentes');
                     return;
                 } else {
                     setSenhaDiferente('');
