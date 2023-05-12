@@ -4,7 +4,7 @@
   font-size: 1em;
 }
 .main_home, .main-index{
-  background: url(../imgs/homecover.svg);
+  background: url(../imgs/top.png);
     background-repeat: repeat-x;
     background-size: contain;
 }
