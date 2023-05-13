@@ -117,9 +117,14 @@ function OngInfo({ ong, step, setStep, data, id }){
 
                     <div className="informations__botons">
                             <div className="buttons__container">
-                                <button>
+                            <script>
+                                let url = location.href;
+                                document.getElementById("demo").innerHTML = url;
+                                </script>
+                                <button a href={window.location.href}>
                                     <p>Compartilhar</p> <img src="../../assets/share.svg" alt="instagram icon" />
                                 </button>
+                               
                             </div>
                         </div>
                 </section>

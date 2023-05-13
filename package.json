@@ -19,6 +19,7 @@
     "react-dom": "^18.2.0",
     "react-imask": "^6.6.1-alpha.1",
     "react-router-dom": "^6.8.2",
+    "reactjs-popup": "^2.0.5",
     "vlibras-react": "^1.1.0"
   },
   "devDependencies": {
