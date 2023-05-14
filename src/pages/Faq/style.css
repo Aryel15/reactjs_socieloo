@@ -43,6 +43,7 @@ main.profile.column.main-faq div h2 {
 .main-faq p {
   font-weight: 400;
   margin-left: 2rem;
+  margin-right: 2rem;
   height: max-content;
   margin-bottom: 40px;
   text-align: justify;

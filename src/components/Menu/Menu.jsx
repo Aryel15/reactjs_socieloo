@@ -90,8 +90,9 @@ export default function Menu() {
                     {
                         !tipo ?
                         <>
-                            <li className="links login"><a className="link" href='/login' accesskey="5">Fazer login</a></li>
-                            <li className="links botão"><a className="link" href='/cadastro-ong' accesskey="6">Cadastre-se</a></li>
+                            <li className="links faq"><a className="link" href='/faq' accesskey="5">Dúvidas Frequentes</a></li>
+                            <li className="links login"><a className="link" href='/login' accesskey="6">Fazer login</a></li>
+                            <li className="links botão"><a className="link" href='/cadastro-ong' accesskey="7">Cadastre-se</a></li>
                         </> : ""
                     }
                     {
