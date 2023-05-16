@@ -118,15 +118,59 @@ function OngInfo({ ong, step, setStep, data, id, map }) {
                         let url = location.href;
                         document.getElementById("demo").innerHTML = url;
                     </script>
-                    <button a href={window.location.href}>
+                    <button onClick={openModal}>
                         <p>Compartilhar</p> <img src="../../assets/share.svg" alt="instagram icon" />
                     </button>
-
+                    <div className="modal-wrapper">
+                        <div className="modal-content">
+                            <button className="button-close">
+                                <svg onClick={closeModal} xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" className="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                            <h3 className="modal-title">
+                                Compartilhar ONG
+                            </h3>
+                            <h4 className="modal-subtitle">
+                                Compartilhe a ONG com seus amigos!
+                            </h4>
+                            <div className="modal-link">
+                                <span id="link-span">{window.location.href}</span>
+                                <button className="btn-copy" onClick={copyURL}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" className="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                    Copiar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     )
 }
+
+function openModal() {
+    const modalWrapper = document.querySelector(".modal-wrapper")
+
+    modalWrapper.classList.add("opened-modal")
+    document.body.classList.add("body-no_scroll")
+}
+
+function closeModal() {
+    const modalWrapper = document.querySelector(".modal-wrapper")
+
+    modalWrapper.classList.remove("opened-modal")
+    document.body.classList.remove("body-no_scroll")
+}
+
+async function copyURL() {
+    const link = window.location.href
+
+    await navigator.clipboard.writeText(link)
+
+    alert("Link copiado com sucesso!")
+
+    console.log(link)
+}
+
 function Comentarios({ step, setStep, data, id }) {
     return (
         <section className="secao_coments">
