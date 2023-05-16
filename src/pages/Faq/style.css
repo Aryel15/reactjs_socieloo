@@ -28,22 +28,26 @@ main.profile.column.main-faq div h2 {
 
 .main-faq details,
 .main-faq hr {
-  width: 100vw;
+  width: 85vw;
   margin: 40px 0;
 }
 
-.main-faq summary {
+.main-faq summary{
   font-weight: 600;
   margin-left: 2rem;
   height: max-content;
   margin-bottom: 10px;
-  font-size: 1em;
+  font-size: 1.25em;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  font-weight: bold;
+  color: #00a1ff;
 }
 
 .main-faq p {
   font-weight: 400;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
   height: max-content;
   margin-bottom: 40px;
   text-align: justify;
