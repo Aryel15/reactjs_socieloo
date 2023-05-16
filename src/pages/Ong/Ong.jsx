@@ -28,7 +28,7 @@ export default function Ong() {
         if(data?.cep != undefined && data?.endereco != undefined){
             let src = 'https://maps.google.com/maps?width=100%25&height=600&hl=pt-br&q=' + (data?.endereco + ", " + data?.cep).replaceAll(" ", "%20").toString() + '+(adress)&t=&z=14&ie=UTF8&iwloc=B&output=embed'
 
-            setMap(<iframe width="100%" height="600" frameborder="0"  marginheight="0" marginwidth="0" src={src}></iframe>)
+            setMap(<iframe width="400px" height="300px" frameborder="0"  marginheight="0" marginwidth="0" src={src}></iframe>)
         }
     }, [data])
 
@@ -61,7 +61,9 @@ export default function Ong() {
                         <div className="btns_card">
                             <p href={data?.segmento} className="button">{data?.segmento}</p>
                             <p href={data?.regiao} className="button">{data?.regiao}</p>
+                            <br />
                         </div>
+                            {map}
 
                     </section>
                     {pages[step]}
@@ -88,24 +90,30 @@ function OngInfo({ ong, step, setStep, data, id, map }) {
                     <div className='description__adress__bank'>
                         <div className="description__adress">
                             <p> <span>Endereço:</span> {data?.endereco}, São Paulo - SP {data?.cep} </p>
-                            <br />
-                            {map}
                         </div>
 
                         <div className="description__bank">
-                            <p>Dados bancários:</p>
+                            <p>Dados para doação:</p>
                             <br />
-                            <span>Banco:</span>
-                            <p>...</p>
+                            <div className="bank">
+                                <span>Banco:</span>
+                                <p>...</p>
+                            </div>
                             <br />
-                            <span>Agência:</span>
-                            <p>{data?.agencia}</p>
+                            <div className="bank">
+                                <span>Agência:</span>
+                                <p>{data?.agencia}</p>
+                            </div>
                             <br />
-                            <span>Conta corrente:</span>
-                            <p>{data?.contaCorrente}</p>
+                            <div className="bank">
+                                <span>Conta corrente:</span>
+                                <p>{data?.contaCorrente}</p>
+                            </div>
                             <br />
-                            <span>Pix</span>
-                            <p>{data?.pix}</p>
+                            <div className="bank">
+                                <span>Pix:</span>
+                                <p>{data?.pix}</p>
+                            </div>
                         </div>
                     </div>
                 </div>

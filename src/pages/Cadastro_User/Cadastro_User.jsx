@@ -13,9 +13,7 @@ export default function Cadastro_User() {
     sobrenome: '',
     email: '',
     telefone: '',
-    senha: '',
-    regiao: '',
-    segmentos: []
+    senha: ''
   })
   const valorCadastro = e => {
     const { name, value } = e.target;
@@ -32,7 +30,7 @@ export default function Cadastro_User() {
           });
         }
   };
-  const handleCheckboxChange = e => {
+  /*const handleCheckboxChange = e => {
     const { title, checked } = e.target;
     if (checked) {
       // adicionar o valor do checkbox ao array
@@ -47,12 +45,12 @@ export default function Cadastro_User() {
         segmentos: prevState.segmentos.filter(item => item !== title)
       }));
     }
-  };
+  };*/
 
   const pages = [
     <Etapa1 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro}/>, 
-    <Etapa2 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro}/>, 
-    <Etapa3 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro} handleCheckboxChange={handleCheckboxChange}/>,
+    //<Etapa2 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro}/>, 
+    //<Etapa3 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro} handleCheckboxChange={handleCheckboxChange}/>,
     <Etapa4 step={step} setStep={setStep} cadastro={cadastro} valorCadastro={valorCadastro}/>
   ];
   return (
@@ -74,6 +72,32 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
   const [mensagem, setMensagem] = useState('');
   const [senhaFraca, setSenhaFraca] = useState('');
   const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
+  function gerarCodigo() {
+    let codigo = "";
+    for (let i = 0; i < 5; i++) {
+      codigo += Math.floor(Math.random() * 10);
+    }
+    return codigo;
+  }
+  function enviarEmail(destinatario, codigo) {
+    return emailjs.send("serviceID", "template_xwxib2d", {
+      to_email: destinatario,
+      codigo: codigo.toString(),
+    }, "QSlqTSkhTipqcM7El");
+  }
+  function ValidaEmail(){
+    let codigo = gerarCodigo();
+    sessionStorage.setItem("codigo", codigo);
+  
+    enviarEmail(cadastro.email, codigo)
+      .then(() => {
+        setStep(step + 1);
+      })
+      .catch((error) => {
+        console.log(error);
+    });
+  }
+
   const HandleClickAvançar = (e)=>{
       e.preventDefault()
       if((cadastro.nome !== '') && (cadastro.email !== '') && (cadastro.sobrenome !== '') && (cadastro.senha !== '')){
@@ -83,6 +107,7 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
           return;
         }else{
           setStep(step + 1)
+          ValidaEmail()
         }
       }else{
         setMensagem(msg)
@@ -113,7 +138,7 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
     </section>
   )
 }
-export function Etapa2({step, setStep, cadastro, valorCadastro}){
+/*export function Etapa2({step, setStep, cadastro, valorCadastro}){
   const [mensagem, setMensagem] = useState('');
   const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Selecione uma das opções</>)
   const HandleClickAvançar = (e)=>{
@@ -264,7 +289,7 @@ export function Etapa3({step, setStep, cadastro, handleCheckboxChange}) {
         </form>
     </section>
   )
-}
+}*/
 export function Etapa4({step, setStep, cadastro}) {
 
   const formatEmail = (email) => {
