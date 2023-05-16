@@ -6,9 +6,11 @@
     width: 100%;
     max-height: max-content;
 }
-.carrossel{
+
+.carrossel {
     display: none;
 }
+
 .section__ong {
     width: 80vw;
     height: fit-content;
@@ -69,7 +71,8 @@ ul {
     font-size: 1em;
 
 }
-#comentarioLogado{
+
+#comentarioLogado {
     text-align: left;
     color: rgb(168, 176, 173);
 }
@@ -84,17 +87,20 @@ ul {
     margin-left: 0;
     gap: 10px;
 }
-#description__container > div.description__about{
+
+#description__container>div.description__about {
     font-size: 1.2em;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #00a1ff;
-} 
-.description__about p{
+}
+
+.description__about p {
     text-align: justify;
     font-weight: 500;
     font-size: 1em;
 }
+
 .informations__description h1 {
     font-size: 1.3em;
     text-align: center;
@@ -106,7 +112,7 @@ ul {
     font-weight: bold;
 }
 
-.description__bank span{
+.description__bank span {
     text-align: center;
 }
 
@@ -136,7 +142,7 @@ ul {
     font-size: 1em;
 }
 
-.informations__botons > .informations__donation > input[type='button'],
+.informations__botons>.informations__donation>input[type='button'],
 .informations__botons button {
     background-color: #00a1ff;
     border: #00a1ff solid 1px;
@@ -147,7 +153,7 @@ ul {
     font-weight: bolder;
 }
 
-.informations__botons > .informations__donation > input[type='button'] {
+.informations__botons>.informations__donation>input[type='button'] {
     width: 200px;
     padding: 10px;
     margin-right: -12%;
@@ -164,20 +170,24 @@ ul {
     width: 100%;
     font-size: 1em;
 }
-div.informations__comments > #comments {
+
+div.informations__comments>#comments {
     width: 82%;
     resize: none;
     border: 1px solid black;
     font-size: 1em;
     margin-left: 100px;
 }
-#comments::placeholder{
+
+#comments::placeholder {
     padding-top: 2px;
     padding-left: 5px;
 }
-.description__social{
+
+.description__social {
     padding-left: 0;
 }
+
 .buttons__container {
     margin: 10px 0px;
     font-size: 1em;
@@ -206,23 +216,25 @@ div.informations__comments > #comments {
     font-size: 1em;
 }
 
-.description__adress__bank{
-    
+.description__adress__bank {
+
     /* display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;*/
-    font-size: 1.2em; 
+    font-size: 1.2em;
     margin-left: 0px;
 }
-.description__adress{
+
+.description__adress {
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #00a1ff;
     margin-bottom: 10px;
-    
+
 }
-.description__bank{
+
+.description__bank {
     border-radius: 10px;
     border: 1px solid #00a1ff;
     padding: 10px;
@@ -230,20 +242,22 @@ div.informations__comments > #comments {
     flex-direction: column;
     text-align: left;
 }
-    
 
-.description__adress, .description__bank, .description__adress p{
+
+.description__adress,
+.description__bank,
+.description__adress p {
     font-size: 1em;
     /* word-wrap:break-word; */
     /* text-align: center; */
 }
 
-.description__adress__bank > .description__bank > p:nth-child(1){
+.description__adress__bank>.description__bank>p:nth-child(1) {
     margin-bottom: 0px;
     font-size: 1em;
     font-weight: bold;
     /* word-wrap:break-word; */
-    
+
 }
 
 
@@ -253,7 +267,7 @@ div.informations__comments > #comments {
     text-align: center;
 } */
 /*--- Novo ---*/
-.options__photos{
+.options__photos {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -263,6 +277,7 @@ div.informations__comments > #comments {
     background-size: contain;
     padding-left: 10vw;
 }
+
 .options__photos img {
     width: 100px;
     height: 100px;
@@ -273,26 +288,31 @@ div.informations__comments > #comments {
     border: 2px solid #00a1ff;
     background-color: #00a1ff;
 }
-.OngPage{
+
+.OngPage {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-.ong__imagens{
+
+.ong__imagens {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.ong__image{
+
+.ong__image {
     width: 250px;
     height: 250px;
     border-radius: 50%;
 }
-.btns_card{
+
+.btns_card {
     margin-top: 20px;
 }
+
 /* Comentários */
 .secao_coments {
     width: 50%;
@@ -304,7 +324,8 @@ div.informations__comments > #comments {
     padding-bottom: 50px;
     font-size: 1em;
 }
-#coment_usuario{
+
+#coment_usuario {
     height: auto;
     border-top: 2px solid #ebebeb;
     display: grid;
@@ -316,36 +337,42 @@ div.informations__comments > #comments {
     margin-bottom: 10px;
     font-size: 1em;
 }
-#img-feed{
+
+#img-feed {
     width: 100px;
     border-radius: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.texto{
+
+.texto {
     width: 40vw;
     margin-left: 30px;
     text-align: justify;
     font-size: 1em;
 }
 
-.texto h4, .texto p, .texto p i{
+.texto h4,
+.texto p,
+.texto p i {
     font-size: 1em;
 }
-.pos_editbotao{
-    text-align: right;
-    margin-top: -40px;
-    margin-bottom: -10px;
-    font-size: 1em;
-}
-.pos_editbotao{
+
+.pos_editbotao {
     text-align: right;
     margin-top: -40px;
     margin-bottom: -10px;
     font-size: 1em;
 }
 
-.editbotao{
+.pos_editbotao {
+    text-align: right;
+    margin-top: -40px;
+    margin-bottom: -10px;
+    font-size: 1em;
+}
+
+.editbotao {
     text-align: right;
     text-decoration: dashed;
     margin-top: 10px;
@@ -358,21 +385,35 @@ div.informations__comments > #comments {
     font-size: 1em;
 }
 
-.editbotao:hover{
+.editbotao:hover {
     color: #fff;
     background-color: #00a1ff;
 }
-.coments{
+
+.coments {
     height: auto;
     border-top: 2px solid #ebebeb;
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding-right: 250px;
     padding-top: 10px;
-    width:  100%;
+    width: 100%;
     margin-top: 30px;
     margin-bottom: 30px;
     font-size: 1em;
+}
+
+#root>main>section>section.ong__imagens>div>p{
+    background-color: #fff;
+    font-size: 0.6em;
+    border: rgb(86, 86, 86) 1px solid;
+    padding: 2px 6px;
+    border-radius: 2px;
+    color: rgb(86, 86, 86);
+    margin-right: 7px;
+    display: block;
+    transition: 0.7s;
+    cursor: default;
 }
 
 /* Avaliar */
@@ -387,6 +428,7 @@ div.informations__comments > #comments {
     .buttons__container {
         margin-left: 5px;
     }
+
     .section__ong {
         justify-content: space-around;
     }
@@ -427,6 +469,7 @@ div.informations__comments > #comments {
         margin: 0%;
         margin-bottom: 50px;
     }
+
     .informations__comments {
         flex-direction: column;
     }
@@ -452,14 +495,16 @@ div.informations__comments > #comments {
         font-size: 1.05em;
     }
 
-    .informations__botons > .informations__donation >  input[type='button'] {
+    .informations__botons>.informations__donation>input[type='button'] {
         padding: 13px;
         font-size: 1.05em;
     }
+
     #subTitle {
         text-align: center;
         margin-top: 30px;
     }
+
     .informations__description h1 {
         margin-bottom: 10px;
     }
