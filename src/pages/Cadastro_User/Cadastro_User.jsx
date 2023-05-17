@@ -131,8 +131,8 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
         <input className="input-field" type="password" id="password" name="senha" placeholder="Senha" onChange={valorCadastro}/>
         <p className="mensagem">{senhaFraca}</p>
         <div className="buttons">
-          <a href="#" className="button-white" ><img src='./imgs/google.png' alt="" />Cadastrar-se com Google</a>
-          <a href="javascript:void(0);" className="button-blue" onClick={HandleClickAvançar}>Próximo</a>
+          {/*<a href="#" className="button-white" ><img src='./imgs/google.png' alt="" />Cadastrar-se com Google</a>*/}
+          <a href="javascript:void(0);" className="button-blue-1" onClick={HandleClickAvançar}>Próximo</a>
         </div>
       </form>
     </section>

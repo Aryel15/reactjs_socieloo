@@ -200,6 +200,7 @@ function Alterar_Senha({ data, id}) {
         if(senhaAtual == data.senha){
             if (!senhaForte(senha)) {
                 setSenhaFraca('Senha fraca');
+                setSenhaErrada("")
                 return;
             } else {
                 if (senha !== novaSenha) {

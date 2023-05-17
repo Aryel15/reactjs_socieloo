@@ -164,6 +164,11 @@
 
     gap:10px;
 }
+.senha-fraca{
+    color: #c90000;
+    font-size: 1em;
+    font-weight: 600;
+}
 /*Deletar conta*/
 .buttons-delete{
     margin:5px 0;
@@ -199,6 +204,8 @@
 }
 .mensagem{
     color:#cd0101;
+    font-size: 1em;
+    font-weight: 600;
 }
 .mensagem-as{
     color:rgb(0, 207, 0);

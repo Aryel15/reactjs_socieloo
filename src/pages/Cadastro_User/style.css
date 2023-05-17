@@ -110,6 +110,24 @@ a {
   transition: all 0.7s;
   border: #00a1ff solid 1px;
 }
+.section-user .form-container .buttons .button-blue-1 {
+  padding: 0.5rem 2rem;
+  background: var(--brand);
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  transition: all 0.7s;
+  border: #00a1ff solid 1px;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
 
 .section-user .form-container .buttons .button-blue:hover {
   border: #00a1ff solid 1px;

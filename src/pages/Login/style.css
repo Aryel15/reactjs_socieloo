@@ -171,6 +171,9 @@ label{
 }
 .show{
     display: block;
+    color: #c90000;
+    font-size: 1em;
+    font-weight: 600;
 }
 #cadastro__section > div > div.form__login{
     width: 500px;

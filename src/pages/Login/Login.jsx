@@ -71,7 +71,7 @@ export default function Login() {
                                         <a href="">Esqueceu a senha?</a>
                                     </div>
                                     <input type="submit" value="Entrar" id="entrar" /><br />
-                                    <button id="google"><img src='./imgs/google.png' alt="" /> Entrar com o Google</button>
+                                    {/*<button id="google"><img src='./imgs/google.png' alt="" /> Entrar com o Google</button>*/}
                                     <p className="cadastro-login">Não tem conta? <a href="./cadastro_usuario.html">Cadastre-se</a></p>
                                 </form>
                             </div>

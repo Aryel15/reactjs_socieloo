@@ -249,6 +249,9 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
     const [senha, setSenha] = useState("")
     const [senhaDiferente, setSenhaDiferente] = useState("")
     const [novaSenha, setNovaSenha] = useState("")
+    const [senhaAtual, setSenhaAtual] = useState("")
+    const [senhaErrada, setSenhaErrada] = useState("")
+
 
     const senhaForte = (senha) => {
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
@@ -271,27 +274,33 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
     const handleClickAlterarSenha = e => {
 
         e.preventDefault()
-        if (!senhaForte(senha)) {
-            setSenhaFraca('Senha fraca');
-            return;
-        } else {
-            if (senha !== novaSenha) {
-                setSenhaFraca('');
-                setSenhaDiferente('As senhas são diferentes');
+
+        if(senhaAtual == data.senha){
+            if (!senhaForte(senha)) {
+                setSenhaFraca('Senha fraca');
+                setSenhaErrada("")
                 return;
             } else {
-                setSenhaDiferente('');
-                Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
-                    senha: senha,
-                }).then((response) => {
-                    console.log(response);
-                    setPopUp(popBox);
-                    setTimeout(() => {
-                        setPopUp("");
-                        window.location.pathname = "/gerenciamento-ong"
-                    }, 2000); 
-                })
+                if (senha !== novaSenha) {
+                    setSenhaFraca('');
+                    setSenhaDiferente('As senhas são diferentes');
+                    return;
+                } else {
+                    setSenhaDiferente('');
+                    Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
+                        senha: senha,
+                    }).then((response) => {
+                        console.log(response);
+                        setPopUp(popBox);
+                        setTimeout(() => {
+                            setPopUp("");
+                            window.location.pathname = "/gerenciamento-ong"
+                        }, 2000); 
+                    })
+                }
             }
+        }else{
+            setSenhaErrada("Senha atual está errada")
         }
         
     
@@ -305,7 +314,8 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                 <p className="mensagem-as">{msg}</p>
                 <div>
                     <label for="senha">Senha atual</label>
-                    <input type="password" name="senha" id="senha" />
+                    <input type="password" name="senha" id="senha"  onChange={e => setSenhaAtual(e.target.value)}/>
+                    <p className="senha-fraca">{senhaErrada}</p>
                 </div>
 
                 <div>

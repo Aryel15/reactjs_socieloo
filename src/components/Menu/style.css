@@ -271,6 +271,7 @@ nav ul{
     border-radius: 50%;
     width: 30px;
     height: 30px;
+    font-size: 1.9rem;
 }
 .sair i{
     color: #fff;
@@ -294,6 +295,7 @@ label[for="bt_menu"]{
     display: flex;
     align-items: center;
     align-content: flex-start;
+    gap: 5px;
 }
 
 #menu > li:nth-child(4) > a > i{
