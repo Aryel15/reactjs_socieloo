@@ -149,7 +149,7 @@ function Cadastrar({ step, setStep, cadastro, setCadastro }) {
                   <option value="Cidadania">Cidadania</option>
                   <option value="Cultura ou esporte">Cultura ou esporte</option>
                   <option value="Gênero e diversidade">Gênero e diversidade</option>
-                  <option value="Meio ambiente">Meio ambiente</option>
+                  <option value="Meio Ambiente">Meio ambiente</option>
                   <option value="Proteção Ambiental">Proteção Ambiental</option>
                   <option value="Outro">Outro</option>
                 </select>
