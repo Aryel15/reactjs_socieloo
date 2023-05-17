@@ -88,7 +88,7 @@ export default function Home() {
             <div className="buscador">
               <select name="Segmentos" id="segmentos" onChange={(e) => setFilter({ ...filter, segmento: e.target.value })}>
                 <option value="Cidadania">Cidadania</option>
-                <option value="Cultura e Esportes">Cultura e Esportes</option>
+                <option value="Cultura e Esporte">Cultura e Esporte</option>
                 <option value="Educação">Educação</option>
                 <option value="Gênero e Diversidade">Gênero e Diversidade</option>
                 <option value="Meio Ambiente">Meio Ambiente</option>
