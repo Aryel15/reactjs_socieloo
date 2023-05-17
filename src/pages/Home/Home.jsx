@@ -14,6 +14,7 @@ export default function Home() {
   const [regiao, setRegiao] = useState("Todas")
   const [segmento, setSegmento] = useState("Todas")
 
+
   useEffect(() => {
     handleClickSearch();
     Axios.get("http://localhost:8080/api/v1/ong")
@@ -74,6 +75,15 @@ export default function Home() {
       localStorage.setItem("lat", null);
       localStorage.setItem("long", null);
     })
+      /*const hash = decodeURIComponent(window.location.hash.split("#")[1]);
+      if (window.location.hash != "" || window.location.hash != hash) {
+        console.log(hash);
+        if(hash.startsWith('Zona') || hash === 'Centro'){
+          setFilter({ ...filter, regiao:hash});
+        }else{
+          setFilter({ ...filter, segmento:hash});
+        }
+      } */
   }, [])
 
 

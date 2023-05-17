@@ -1,9 +1,11 @@
+import { useEffect } from 'react';
 import './style.css'
 import React from 'react';
 
 export default function Menu() {
     const tipo = localStorage.getItem("tipo")
     const id = localStorage.getItem("id")
+
     let logoSocieloo;
   
     if (window.location.pathname.startsWith('/ong/')) {
@@ -46,23 +48,23 @@ export default function Menu() {
                     <li className="links">
                         <a href="#" className="link" accesskey="2">Segmentos▾</a>
                         <ul>
-                            <li className="sublink"><a href="">Cidadania</a></li>
-                            <li className="sublink"><a href="">Cultura e Esportes</a></li>
-                            <li className="sublink"><a href="">Educação</a></li>
-                            <li className="sublink"><a href="">Gênero e Diversidade</a></li>
-                            <li className="sublink"><a href="">Meio Ambiente</a></li>
-                            <li className="sublink"><a href="">Proteção Animal</a></li>
-                            <li className="sublink"><a href="">Saúde</a></li>
+                            <li className="sublink"><a href="/#Cidadania">Cidadania</a></li>
+                            <li className="sublink"><a href="/#Cultura e Esporte">Cultura e Esportes</a></li>
+                            <li className="sublink"><a href="/#Educação">Educação</a></li>
+                            <li className="sublink"><a href="/#Gênero e Diversidade">Gênero e Diversidade</a></li>
+                            <li className="sublink"><a href="/#Meio Ambiente">Meio Ambiente</a></li>
+                            <li className="sublink"><a href="/#Proteção Animal">Proteção Animal</a></li>
+                            <li className="sublink"><a href="/#Saúde">Saúde</a></li>
                         </ul>
                     </li>
                     <li className="links">
                         <a href="#" className="link" accesskey="3">Região▾</a>
                         <ul>
-                            <li className="sublink"><a href="">Zona Leste</a></li>
-                            <li className="sublink"><a href="">Zona Norte</a></li>
-                            <li className="sublink"><a href="">Centro</a></li>
-                            <li className="sublink"><a href="">Zona Oeste</a></li>
-                            <li className="sublink"><a href="">Zona Sul</a></li>
+                            <li className="sublink"><a href="/#Zona Leste">Zona Leste</a></li>
+                            <li className="sublink"><a href="/#Zona Norte">Zona Norte</a></li>
+                            <li className="sublink"><a href="/#Centro">Centro</a></li>
+                            <li className="sublink"><a href="/#Zona Oeste">Zona Oeste</a></li>
+                            <li className="sublink"><a href="/#Zona Sul">Zona Sul</a></li>
                         </ul>
                     </li>
                     <li className="links acess">
