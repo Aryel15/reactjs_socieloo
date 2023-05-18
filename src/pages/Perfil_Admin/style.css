@@ -166,6 +166,28 @@
 
     gap:10px;
 }
+/*Relatórios*/
+.dados{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    flex-direction: row;
+}
+.num{
+    width: 300px;
+    border: #727272 1px solid;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.num h3{
+    color: #00a1ff;
+    font-size: 5rem;
+}
 /*Deletar conta*/
 .buttons-delete{
     margin:5px 0;

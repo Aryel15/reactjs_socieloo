@@ -3,6 +3,7 @@ import './style.css'
 import Menu from '../../components/Menu/Menu'
 import Vlibras from '../../components/Vlibras/Vlibras'
 import Axios from 'axios'
+import Chart from 'react-google-charts'
 
 export default function Perfil_Admin() {
     let id  = localStorage.getItem("id");
@@ -31,7 +32,7 @@ export default function Perfil_Admin() {
                     <aside className="edit__options">
 
                         <ul className="options__itens">
-                            <li hidden className={stepE === "Relatorios" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Relatorios")}><i className='bx bx-pencil'></i> Relatórios</a></li>
+                            <li className={stepE === "Relatorios" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Relatorios")}><i className='bx bx-pencil'></i> Relatórios</a></li>
                             <li className={stepE === "ONGs" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("ONGs")}><i className='bx bxs-lock-alt'></i> ONG'S</a></li>
                             <li className={stepE === "Usuarios" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Usuarios")}><i className='bx bxs-lock-alt'></i> Usuários</a></li>
                             <li hidden className={stepE === "Comentarios" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Comentarios")}><i className='bx bxs-message-square-x'></i> Comentários</a></li>
@@ -51,11 +52,61 @@ export default function Perfil_Admin() {
 }
 
 function Relatorios() {
-    
+    const [ongs, setOngs] = useState()
+    const [users, setUsers] = useState()
+    const [graf1, setGraf1] = useState()
+    const [regiao, setRegiao] = useState({
+        Leste:'',
+        Oeste:'',
+        Norte:'',
+        Sul:'',
+        Centro:''
+    })
+    let regioes
+    useEffect(() =>{
+        Axios.get('http://localhost:8080/api/v1/ong')
+        .then((response) => {
+            setOngs(response.data)
+            setRegiao({...regiao,
+                Leste: response.data.filter(ong => ong.regiao == "Zona Leste"),
+                Oeste: response.data.filter(ong => ong.regiao == "Zona Oeste"),
+                Norte: response.data.filter(ong => ong.regiao == "Zona Norte"),
+                Sul: response.data.filter(ong => ong.regiao == "Zona Sul"),
+                Centro: response.data.filter(ong => ong.regiao == "Centro")
+            })
+            regioes = [
+                ["Região", "Numero de Ongs", { role: "style" }],
+                ["Zona Leste", regiao.Leste.length, "#0000FF"], // RGB value
+                ["Zona Oeste", regiao.Oeste.length, "#008000"], // English color name
+                ["Zona Norte", regiao.Norte.length, "#DC143C"],
+                ["Zona Sul", regiao.Sul.length, "color: #FFFF00"], // CSS-style declaration
+                ["Centro", regiao.Centro.length, "color: #A020F0"], // CSS-style declaration
+            ];
+            setGraf1((
+                <Chart chartType="ColumnChart" width="100%" height="400px" data={regioes} />
+            ))  
+        }).catch((err) => console.log(err))
+        Axios.get('http://localhost:8080/api/v1/user')
+        .then((response) => {
+            setUsers(response.data)
+        }).catch((err) => console.log(err))
+         
+    }, [])
+
     return (
         <>
             <h2>Relatórios</h2>
-
+            <section className="dados">
+                <div className="num">
+                    <h4>Total de Ongs Cadastradas:</h4>
+                    <h3>{ongs?.length}</h3>
+                </div>
+                <div className="num">
+                    <h4>Total de Usuários Cadastrados:</h4>
+                    <h3>{users?.length}</h3>
+                </div>
+            </section>
+                {graf1}                
         </>
     )
 }
