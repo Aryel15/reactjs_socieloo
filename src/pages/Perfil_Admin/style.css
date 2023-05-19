@@ -6,44 +6,192 @@
 }
 
 /*  ----------------------- Estrutura da página --------------------------- */
-#edit {
+/*Relatórios*/
+.bar-admin{
+    width: 100%;
+    padding: 5px 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #00a1ff;
+    color: #fff;
+}
+.perfil-admin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+#edit-admin {
     width: 100%;
     height: 100vh;
-    margin: 0px auto;
+    margin: 0px;
     display: flex;
     place-content: center;
-    background: #00a1ff;
+    background: #fff;
+    flex-direction: column;
 }
 
-.edit__conteiner {
-    width: 75%;
+.edit__conteiner-admin {
+    width: 100%;
     height: 100%;
     display: flex;
     place-content: center;
     background: transparent;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
-    margin-top: 0px;
+    justify-content: space-between;
+}
+.edit__content-admin{
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background-color: #e2f4ff;
+    background-color: #fff;
+    font-size: 1rem;
+    padding: 30px;
 }
 
-/* Divisão de largura */
-.edit__options {
-    background: #fff;
-    width: 25%;
-    height: 100vh;
+.edit__content-admin h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.options__itens-admin{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+}
+.options__itens-admin li{
+    background-color: #7e7e7e;
+    border: none;
+    padding: 10px 25px;
+    transition: 0.7s all;
+    width: 200px;
+    margin: 0px;
+}
+.options__itens-admin li .options__item{
+    transition: 0.7s all;
+    color: #fff;
+}
+.options__itens-admin li:not(.select):hover{
+    background-color: #161616;
+    cursor: pointer;
+}
+.options__itens-admin .select{
+    background-color: #000;
+}
+.options__itens-admin li {
+    position: relative;
+    padding: 10px;
+}
+
+.options__itens-admin li>a {
+    font-size: 18px;
+}
+
+.edit__options-admin {
+    background: #7e7e7e;
+    width: 100%;
+    height: fit-content;
     font-size: 1rem;
     text-align: center;
-    border-right: 2px solid #00a1ff;
-    display:flex;
+    border-right: none;
+    display: flex;
+    flex-direction: row;
+    
+}
+.dados{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    flex-direction: row;
+}
+.num{
+    width: 300px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px #00000024;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.num h3{
+    color: #00a1ff;
+    font-size: 5rem;
+}
+.grafico{
+    width: 600px;
+    height: 435px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px #00000024;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.grafico h4{
+    margin-top: 10px;
+}
+.grafico + div{
+    width: 100% !important;
+    height: 100% !important;
+}
+.ongs-admin{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    margin: -30px;
+}
+.menu-ongs{
+    width: 25%;
+    background-color: #85d2ff;
+    border: none;
+}
+.options__itens-ongs{
+    display: flex;
+    flex-direction: column;
+    transition: 0.7s all;
+    width: 200px;
+    margin: 0px;
+}
+.options__itens-ongs li {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.options__itens-ongs li:hover {
+    background-color: #00a1ff;
+}
+.options__itens-ongs li a{
+    color: #fff;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+.ongs-aside{
+    padding: 20px;
 }
 
-.edit__content {
-    background: #fff;
-    width: 70%;
-    height: auto;
-    font-size: 1rem;
-}
+
+
+/*--------------------------------*/
+
+
+/* Divisão de largura */
+
+
 
 /*  ----------------------- aside --------------------------- */
 .options__photos {
@@ -60,16 +208,7 @@
     color: #fff;
 }
 
-.options__itens li {
-    position: relative;
-    padding: 30px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.252);
-    border-top: 1px solid rgba(255, 255, 255, 0.085);
-}
 
-.options__itens li>a {
-    font-size: 20px;
-}
 
 
 .options__item {
@@ -82,15 +221,6 @@
 }
 
 /*  ----------------------- main content --------------------------- */
-.edit__content {
-    padding: 30px;
-    height: 100vh;
-}
-
-.edit__content h2 {
-    font-size: 40px;
-    margin-bottom: 20px;
-}
 
 .content__form label {
     font-size: 20px;
@@ -157,7 +287,7 @@
     background-color: #fff;
 }
 /* Alterar Senha*/
-.edit__content label::after{
+.edit__content-admin label::after{
     content:":";
 }
 .senha{
@@ -166,28 +296,7 @@
 
     gap:10px;
 }
-/*Relatórios*/
-.dados{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    flex-direction: row;
-}
-.num{
-    width: 300px;
-    border: #727272 1px solid;
-    border-radius: 5px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.num h3{
-    color: #00a1ff;
-    font-size: 5rem;
-}
+
 /*Deletar conta*/
 .buttons-delete{
     margin:5px 0;
@@ -271,50 +380,7 @@
     align-items: center;
     margin-bottom: 5vh;
 }
-.options__itens{
-    display: flex;
-    width: 100%;
-    justify-content: flex-start;
-    gap: 0px 5px;
-}
-.options__itens li{
-    background-color: #00a1ff;
-    border: none;
-    border-radius: 5px 5px 0px 0px;
-    padding: 10px 25px;
-    transition: 0.7s all;
-}
-.options__itens li .options__item{
-    transition: 0.7s all;
-    color: #fff;
-}
-.options__itens li:not(.select):hover{
-    background-color: #0086d3;
-}
-.options__itens .select{
-    background-color: #000;
-}
 
-.edit__options {
-    background: #fff;
-    width: 78vw;
-    height: fit-content;
-    font-size: 1rem;
-    text-align: center;
-    border-right: none;
-    display: flex;
-    flex-direction: column;
-    
-}
-.edit__conteiner {
-    width: 90vw;
-    height: 100%;
-    display: flex;
-    place-content: center;
-    background: transparent;
-    flex-direction: column;
-    align-items: center;
-}
 .options__photos i {
     width: 100px;
     height: 100px;
@@ -338,14 +404,7 @@
     border-radius: 0px 10px 10px 0px;
     margin-left: -15px;
 }
-.edit__content{
-    box-shadow: 1px 2px 7px #00000070;
-    border-radius: 10px;
-    z-index: 999;
-    width: 80vw;
-    height: auto;
 
-}
 .content__form {
     display: flex;
     gap: 10px;
@@ -528,7 +587,7 @@
     }
 }
 @media screen and (max-width: 860px) {
-    .options__itens li a{
+    .options__itens-admin li a{
         font-size: 1rem;
     }
     .options__photos{
@@ -547,10 +606,10 @@
     }
 }
 @media screen and (max-width: 750px) {
-    .options__itens li a{
+    .options__itens-admin li a{
         font-size: 0.8rem;
     }
-    .options__itens li{
+    .options__itens-admin li{
         background-color: #00a1ff;
         border: none;
         border-radius: 5px 5px 0px 0px;

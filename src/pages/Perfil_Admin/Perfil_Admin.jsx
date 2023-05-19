@@ -7,10 +7,10 @@ import Chart from 'react-google-charts'
 
 export default function Perfil_Admin() {
     let id  = localStorage.getItem("id");
-
+    let today = new Date().toLocaleDateString()
     var name;
     const [data, setData] = useState()
-    const [stepE, setEStep] = React.useState("ONGs");
+    const [stepE, setEStep] = React.useState("Relatorios");
     const editar = {
         Relatorios: <Relatorios/>,
         ONGs: <ONGs/>,
@@ -22,26 +22,31 @@ export default function Perfil_Admin() {
     return (
         <>
             <Menu />
-            <main id="edit" >
-                <div className="options__photos">
-                    <i class="fa-solid fa-screwdriver-wrench"></i>
-                    <h1>Perfil de Admin</h1>
+            <main id="edit-admin" >
+                <div className="bar-admin">
+                    <div className="perfil-admin">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <h2>Perfil de Admin</h2>
+                    </div>
+                    <div className="day">
+                        {today}
+                    </div>
                 </div>
-                <section className="edit__conteiner" id="conteudo" >
+                <section className="edit__conteiner-admin" id="conteudo" >
 
-                    <aside className="edit__options">
+                    <aside className="edit__options-admin">
 
-                        <ul className="options__itens">
-                            <li className={stepE === "Relatorios" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Relatorios")}><i className='bx bx-pencil'></i> Relatórios</a></li>
-                            <li className={stepE === "ONGs" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("ONGs")}><i className='bx bxs-lock-alt'></i> ONG'S</a></li>
-                            <li className={stepE === "Usuarios" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Usuarios")}><i className='bx bxs-lock-alt'></i> Usuários</a></li>
+                        <ul className="options__itens-admin">
+                            <li className={stepE === "Relatorios" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Relatorios")}><i class="fa-regular fa-file"></i> Relatórios</a></li>
+                            <li className={stepE === "ONGs" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("ONGs")}><i class="fa-solid fa-shield-dog"></i> ONG'S</a></li>
+                            <li className={stepE === "Usuarios" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Usuarios")}><i class="fa-solid fa-users"></i> Usuários</a></li>
                             <li hidden className={stepE === "Comentarios" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Comentarios")}><i className='bx bxs-message-square-x'></i> Comentários</a></li>
-                            <li className={stepE === "Conta_Admin" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Conta_Admin")}><i className='bx bxs-message-square-x'></i> Conta de Admin</a></li>
+                            <li className={stepE === "Conta_Admin" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Conta_Admin")}><i class="fa-solid fa-lock"></i> Conta de Admin</a></li>
                         </ul>
 
                     </aside>
 
-                    <section className="edit__content">
+                    <section className="edit__content-admin">
                         {editar[stepE]}
                     </section>
                 </section>
@@ -76,11 +81,11 @@ function Relatorios() {
             })
             regioes = [
                 ["Região", "Numero de Ongs", { role: "style" }],
-                ["Zona Leste", regiao.Leste.length, "#0000FF"], // RGB value
-                ["Zona Oeste", regiao.Oeste.length, "#008000"], // English color name
-                ["Zona Norte", regiao.Norte.length, "#DC143C"],
-                ["Zona Sul", regiao.Sul.length, "color: #FFFF00"], // CSS-style declaration
-                ["Centro", regiao.Centro.length, "color: #A020F0"], // CSS-style declaration
+                ["Zona Leste", regiao.Leste.length, "#00a1ff"], // RGB value
+                ["Zona Oeste", regiao.Oeste.length, "#2db2ff"], // English color name
+                ["Zona Norte", regiao.Norte.length, "#6ecaff"],
+                ["Zona Sul", regiao.Sul.length, "color: #94d8ff"], // CSS-style declaration
+                ["Centro", regiao.Centro.length, "color: #afe2ff"], // CSS-style declaration
             ];
             setGraf1((
                 <Chart chartType="ColumnChart" width="100%" height="400px" data={regioes} />
@@ -105,8 +110,11 @@ function Relatorios() {
                     <h4>Total de Usuários Cadastrados:</h4>
                     <h3>{users?.length}</h3>
                 </div>
+                <div className="grafico">
+                <h4>Total de Ongs Cadastradas por região:</h4>
+                    {graf1}                
+                </div>
             </section>
-                {graf1}                
         </>
     )
 }
@@ -192,6 +200,7 @@ function Usuarios() {
 
 function ONGs() {
     const [ongs, setOngs] = useState()
+    const [conteudo, setConteudo] = useState()
     useEffect(() =>{
         Axios.get('http://localhost:8080/api/v1/ong')
         .then((response) => {
@@ -200,34 +209,47 @@ function ONGs() {
     }, [])
     return (
         <>
-            <h2>Ongs</h2>
-            <div className="buscar">
-                <input type="text" placeholder='Pesquise a ong por nome'/>
-                <div className="search">
-                      <a href="javascript:void(0)">
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                      </a>
-                  </div>
-            </div>
-            <section className='ongs'>
-                {
-                ongs?.map(ong => (
-                    <div key={ong.id} className="card_admin">
-                        <div className="infos">
-                            <h3>{ong.nome}</h3>
-                            <div className="info_card">
-                                <p>{ong.segmento}</p>
-                                <p>{ong.regiao}</p>
+        
+        <main className="ongs-admin">
+            <aside className="menu-ongs">
+                <ul className="options__itens-ongs">
+                    <li className={conteudo === "Todas" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setEStep("Relatorios")}><i class="fa-solid fa-shield-dog"></i> Todas</a></li>
+                    <li className={conteudo === "Relatorios" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setEStep("Relatorios")}><i class="fa-regular fa-star"></i> Favoritos</a></li>
+                    <li className={conteudo === "ONGs" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setEStep("ONGs")}><i class="fa-regular fa-comment"></i>Comentários</a></li>
+                    <li className={conteudo === "Usuarios" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setEStep("Usuarios")}><i class="fa-solid fa-triangle-exclamation"></i>Denuncias</a></li>
+                </ul>
+            </aside>
+            <section className="ongs-aside">
+                <h2>Ongs</h2>
+                <div className="buscar">
+                    <input type="text" placeholder='Pesquise a ong por nome'/>
+                    <div className="search">
+                        <a href="javascript:void(0)">
+                            <i className="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                    </div>
+                </div>
+                <section className='ongs'>
+                    {
+                    ongs?.map(ong => (
+                        <div key={ong.id} className="card_admin">
+                            <div className="infos">
+                                <h3>{ong.nome}</h3>
+                                <div className="info_card">
+                                    <p>{ong.segmento}</p>
+                                    <p>{ong.regiao}</p>
+                                </div>
+                            </div>
+                            <div className="actions">
+                                <a href={"/ong/" + ong.id}><i class="fa-solid fa-eye"></i>Visualizar</a>
+                                <a  href="javascript:void(0);"><i class="fa-solid fa-trash-can"></i>Excluir</a>
                             </div>
                         </div>
-                        <div className="actions">
-                            <a href={"/ong/" + ong.id}><i class="fa-solid fa-eye"></i>Visualizar</a>
-                            <a href="javascript:void(0);"><i class="fa-solid fa-trash-can"></i>Excluir</a>
-                        </div>
-                    </div>
-                ))
-                }
+                    ))
+                    }
+                </section>
             </section>
+        </main>
         </>
     )
 }
