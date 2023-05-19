@@ -50,6 +50,9 @@
     background-color: #fff;
     font-size: 1rem;
     padding: 30px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .edit__content-admin h2 {
@@ -120,6 +123,7 @@
     align-items: flex-start;
     gap: 10px;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 .num{
     width: 300px;
@@ -150,10 +154,6 @@
 }
 .grafico h4{
     margin-top: 10px;
-}
-.grafico + div{
-    width: 100% !important;
-    height: 100% !important;
 }
 .ongs-admin{
     display: flex;
