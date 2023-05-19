@@ -8,7 +8,6 @@ import Chart from 'react-google-charts'
 export default function Perfil_Admin() {
     let id  = localStorage.getItem("id");
     let today = new Date().toLocaleDateString()
-    var name;
     const [data, setData] = useState()
     const [stepE, setEStep] = React.useState("Relatorios");
     const editar = {
@@ -21,7 +20,7 @@ export default function Perfil_Admin() {
 
     return (
         <>
-            <Menu />
+            {/*<Menu />*/}
             <main id="edit-admin" >
                 <div className="bar-admin">
                     <div className="perfil-admin">
@@ -30,6 +29,7 @@ export default function Perfil_Admin() {
                     </div>
                     <div className="day">
                         {today}
+                        <a href="/">Home</a>
                     </div>
                 </div>
                 <section className="edit__conteiner-admin" id="conteudo" >
@@ -57,45 +57,68 @@ export default function Perfil_Admin() {
 }
 
 function Relatorios() {
-    const [ongs, setOngs] = useState()
-    const [users, setUsers] = useState()
-    const [graf1, setGraf1] = useState()
+    const [ongs, setOngs] = useState(null)
+    const [users, setUsers] = useState(null)
+    const [graf1, setGraf1] = useState(null)
     const [regiao, setRegiao] = useState({
-        Leste:'',
-        Oeste:'',
-        Norte:'',
-        Sul:'',
-        Centro:''
+        Leste:null,
+        Oeste:null,
+        Norte:null,
+        Sul:null,
+        Centro:null
     })
+    /*setRegiao({...regiao,
+        Leste: response.data(ong => ong.regiao == ""),
+        Oeste: response.data.filter(ong => ong.regiao == "Zona Oeste"),
+        Norte: response.data.filter(ong => ong.regiao == "Zona Norte"),
+        Sul: response.data.filter(ong => ong.regiao == "Zona Sul"),
+        Centro: response.data.filter(ong => ong.regiao == "Centro")
+    })*/
+    
     let regioes
+    regioes = [
+        ["Região", "Numero de Ongs", { role: "style" }],
+    ];
     useEffect(() =>{
-        Axios.get('http://localhost:8080/api/v1/ong')
+        Axios.get('http://localhost:8080/api/v1/ong/buscaRegiao/Zona Leste')
         .then((response) => {
-            setOngs(response.data)
-            setRegiao({...regiao,
-                Leste: response.data.filter(ong => ong.regiao == "Zona Leste"),
-                Oeste: response.data.filter(ong => ong.regiao == "Zona Oeste"),
-                Norte: response.data.filter(ong => ong.regiao == "Zona Norte"),
-                Sul: response.data.filter(ong => ong.regiao == "Zona Sul"),
-                Centro: response.data.filter(ong => ong.regiao == "Centro")
-            })
-            regioes = [
-                ["Região", "Numero de Ongs", { role: "style" }],
-                ["Zona Leste", regiao.Leste.length, "#00a1ff"], // RGB value
-                ["Zona Oeste", regiao.Oeste.length, "#2db2ff"], // English color name
-                ["Zona Norte", regiao.Norte.length, "#6ecaff"],
-                ["Zona Sul", regiao.Sul.length, "color: #94d8ff"], // CSS-style declaration
-                ["Centro", regiao.Centro.length, "color: #afe2ff"], // CSS-style declaration
-            ];
-            setGraf1((
-                <Chart chartType="ColumnChart" width="100%" height="400px" data={regioes} />
-            ))  
+            setRegiao({...regiao, Leste: response.data})
+            regioes.push(["Zona Leste", response.data, "#00a1ff"])
         }).catch((err) => console.log(err))
-        Axios.get('http://localhost:8080/api/v1/user')
+        Axios.get('http://localhost:8080/api/v1/ong/buscaRegiao/Zona Sul')
+        .then((response) => {
+            setRegiao({...regiao, Sul: response.data})
+            regioes.push(["Zona Sul", response.data, "color: #94d8ff"])
+        }).catch((err) => console.log(err))
+        Axios.get('http://localhost:8080/api/v1/ong/buscaRegiao/Zona Oeste')
+        .then((response) => {
+            setRegiao({...regiao, Oeste: response.data})
+            regioes.push(["Zona Oeste", response.data, "#2db2ff"])
+        }).catch((err) => console.log(err))
+        Axios.get('http://localhost:8080/api/v1/ong/buscaRegiao/Zona Norte')
+        .then((response) => {
+            setRegiao({...regiao, Norte: response.data})
+            regioes.push(["Zona Norte", response.data, "#6ecaff"])
+        }).catch((err) => console.log(err))
+        Axios.get('http://localhost:8080/api/v1/ong/buscaRegiao/Centro')
+        .then((response) => {
+            setRegiao({...regiao, Centro: response.data})
+            regioes.push(["Centro", response.data, "color: #afe2ff"])
+        }).catch((err) => console.log(err))
+        Axios.get('http://localhost:8080/api/v1/user/todosUsuarios')
         .then((response) => {
             setUsers(response.data)
         }).catch((err) => console.log(err))
-         
+        Axios.get('http://localhost:8080/api/v1/ong/todasAsOngs')
+        .then((response) => {
+            setOngs(response.data)
+        }).catch((err) => console.log(err))
+        let regioesData = regioes.slice(0,6)
+        console.log(regioesData);
+        setGraf1((
+            <Chart chartType="ColumnChart" width="100%" height="400px" data={regioes} />
+        ))  
+
     }, [])
 
     return (
@@ -104,11 +127,11 @@ function Relatorios() {
             <section className="dados">
                 <div className="num">
                     <h4>Total de Ongs Cadastradas:</h4>
-                    <h3>{ongs?.length}</h3>
+                    <h3>{ongs}</h3>
                 </div>
                 <div className="num">
                     <h4>Total de Usuários Cadastrados:</h4>
-                    <h3>{users?.length}</h3>
+                    <h3>{users}</h3>
                 </div>
                 <div className="grafico">
                 <h4>Total de Ongs Cadastradas por região:</h4>
@@ -200,7 +223,7 @@ function Usuarios() {
 
 function ONGs() {
     const [ongs, setOngs] = useState()
-    const [conteudo, setConteudo] = useState()
+    const [conteudo, setConteudo] = useState('Todas')
     useEffect(() =>{
         Axios.get('http://localhost:8080/api/v1/ong')
         .then((response) => {
@@ -213,41 +236,47 @@ function ONGs() {
         <main className="ongs-admin">
             <aside className="menu-ongs">
                 <ul className="options__itens-ongs">
-                    <li className={conteudo === "Todas" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setEStep("Relatorios")}><i class="fa-solid fa-shield-dog"></i> Todas</a></li>
-                    <li className={conteudo === "Relatorios" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setEStep("Relatorios")}><i class="fa-regular fa-star"></i> Favoritos</a></li>
-                    <li className={conteudo === "ONGs" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setEStep("ONGs")}><i class="fa-regular fa-comment"></i>Comentários</a></li>
-                    <li className={conteudo === "Usuarios" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setEStep("Usuarios")}><i class="fa-solid fa-triangle-exclamation"></i>Denuncias</a></li>
+                    <li className={conteudo === "Todas" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Todas")}><i class="fa-solid fa-shield-dog"></i> Todas</a></li>
+                    <li className={conteudo === "Favoritos" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Favoritos")}><i class="fa-regular fa-star"></i> Favoritos</a></li>
+                    <li className={conteudo === "Comentários" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Comentários")}><i class="fa-regular fa-comment"></i>Comentários</a></li>
+                    <li className={conteudo === "Denuncias" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Denuncias")}><i class="fa-solid fa-triangle-exclamation"></i>Denuncias</a></li>
                 </ul>
             </aside>
             <section className="ongs-aside">
                 <h2>Ongs</h2>
-                <div className="buscar">
-                    <input type="text" placeholder='Pesquise a ong por nome'/>
-                    <div className="search">
-                        <a href="javascript:void(0)">
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                        </a>
-                    </div>
-                </div>
-                <section className='ongs'>
-                    {
-                    ongs?.map(ong => (
-                        <div key={ong.id} className="card_admin">
-                            <div className="infos">
-                                <h3>{ong.nome}</h3>
-                                <div className="info_card">
-                                    <p>{ong.segmento}</p>
-                                    <p>{ong.regiao}</p>
-                                </div>
-                            </div>
-                            <div className="actions">
-                                <a href={"/ong/" + ong.id}><i class="fa-solid fa-eye"></i>Visualizar</a>
-                                <a  href="javascript:void(0);"><i class="fa-solid fa-trash-can"></i>Excluir</a>
+                {
+                    conteudo === 'Todas' ? (
+                    <>
+                        <div className="buscar">
+                            <input type="text" placeholder='Pesquise a ong por nome'/>
+                            <div className="search">
+                                <a href="javascript:void(0)">
+                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                </a>
                             </div>
                         </div>
-                    ))
-                    }
-                </section>
+                        <section className='ongs'>
+                            {
+                            ongs?.map(ong => (
+                                <div key={ong.id} className="card_admin">
+                                    <div className="infos">
+                                        <h3>{ong.nome}</h3>
+                                        <div className="info_card">
+                                            <p>{ong.segmento}</p>
+                                            <p>{ong.regiao}</p>
+                                        </div>
+                                    </div>
+                                    <div className="actions">
+                                        <a href={"/ong/" + ong.id}><i class="fa-solid fa-eye"></i>Visualizar</a>
+                                        {/*<a  href="javascript:void(0);"><i class="fa-solid fa-trash-can"></i>Excluir</a>*/}
+                                    </div>
+                                </div>
+                            ))
+                            }
+                        </section>
+                    </>) : null
+                }
+
             </section>
         </main>
         </>

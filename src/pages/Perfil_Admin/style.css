@@ -56,7 +56,18 @@
     font-size: 40px;
     margin-bottom: 20px;
 }
-
+.day{
+    display: flex;
+    gap: 0px 15px;
+}
+.day a{
+    color: #fff;
+    transition: 0.7s all;
+}
+.day a:hover{
+    text-decoration: underline;
+    transition: 0.7s all;
+}
 .options__itens-admin{
     display: flex;
     width: 100%;
@@ -147,12 +158,12 @@
 .ongs-admin{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     margin: -30px;
 }
 .menu-ongs{
-    width: 25%;
+    width: 200px;
     background-color: #85d2ff;
     border: none;
 }
@@ -162,6 +173,9 @@
     transition: 0.7s all;
     width: 200px;
     margin: 0px;
+}
+.options__itens-ongs .select{
+    background-color: #00a1ff;
 }
 .options__itens-ongs li {
     width: 100%;
@@ -182,6 +196,19 @@
 }
 .ongs-aside{
     padding: 20px;
+}
+.buscar{
+    display: flex;
+    gap: 5px;
+}
+.buscar input{
+    width: 80%;
+    outline: none;
+    border: 1px solid black;
+    font-size: .9em;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 
@@ -521,19 +548,7 @@
 .button-ad{
     width: 100%;
 }
-.buscar{
-    display: flex;
-    gap: 5px;
-}
-.buscar input{
-    width: 100%;
-    outline: none;
-    border: 1px solid black;
-    font-size: .9em;
-    padding: 8px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
+
 /*--- Deletar ---*/
 .btnsDel{
     display: flex;
