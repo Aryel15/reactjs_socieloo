@@ -20,6 +20,8 @@ import Visita_Guiada from './Visita_Guiada/Visita_Guiada';
 import Perfil_Ong from './Perfil_Ong/Perfil_Ong';
 import Cadastro_Ong from './Cadastro_Ong/Cadastro_Ong';
 import Perfil_Admin from './Perfil_Admin/Perfil_Admin';
+import Cadastro_Admin from './Cadastro_Admin/Cadastro_Admin';
+import NotFound from './404/NotFound';
 
 export default function Router() {
     return (
@@ -46,6 +48,8 @@ export default function Router() {
                 <Route path='/visita-guiada' element={<Visita_Guiada />} />
                 <Route path='/gerenciamento-ong' element={<Perfil_Ong />} />
                 <Route path='/gerenciamento' element={<Perfil_Admin />} />
+                <Route path='/cadastro-admin' element={<Cadastro_Admin />} />
+                <Route path='*' element={<NotFound/>}/>
             </Routes>
         </BrowserRouter>
     )

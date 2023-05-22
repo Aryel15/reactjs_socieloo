@@ -7,6 +7,18 @@ import Chart from 'react-google-charts'
 
 export default function Perfil_Admin() {
     let id = localStorage.getItem("id");
+    let tipo = localStorage.getItem("tipo");
+    useEffect(() =>{
+        if(tipo !== "admin"){
+            window.location.pathname = "/"
+        }else{
+            Axios.get("http://localhost:8080/api/v1/admin/" + id)
+            .then((response) => {
+                setData(response.data);
+                console.log(response.data);
+            })
+        }
+    }, [])
     let today = new Date().toLocaleDateString()
     const [data, setData] = useState()
     const [stepE, setEStep] = React.useState("Relatorios");
@@ -15,7 +27,7 @@ export default function Perfil_Admin() {
         ONGs: <ONGs />,
         Usuarios: <Usuarios />,
         Comentarios: <Comentarios />,
-        Conta_Admin: <Conta_Admin />,
+        Conta_Admin: <Conta_Admin data={data}/>,
     }
 
     return (
@@ -94,15 +106,7 @@ function Relatorios() {
                 const ongs = response.data;
                 segmentosRef.current.push([segmento, ongs, cor]);
                 const options = {
-                    slices: {
-                      0: { color: "#00a1ff" },
-                      1: { color: "#005485" },
-                      2: { color: "#0072b5" },
-                      3: { color: "#003b5e" },
-                      4: { color: "#3cb7ff" },
-                      5: { color: "#6fcaff" },
-                      6: { color: "#b1e2ff" },
-                    },
+                    colors: ["#00a1ff", "#005485", "#0072b5", "#003b5e", "#3cb7ff", "#6fcaff", "#b1e2ff"]
                   };
                 setGraf2(<Chart chartType="PieChart" options={options} data={segmentosRef.current.slice(0, 8)} width={"600px"} height={"400px"}/>);
             } catch (err) {
@@ -121,6 +125,8 @@ function Relatorios() {
         .then((response) => {
             setUsers(response.data)
         }).catch((err) => console.log(err))
+
+
         Axios.get('http://localhost:8080/api/v1/ong/todasAsOngs')
         .then((response) => {
             setOngs(response.data)
@@ -303,19 +309,83 @@ function Comentarios() {
         </>
     )
 }
-function Conta_Admin() {
+function Conta_Admin({data}) {
+    let id = localStorage.getItem("id");
 
+    const [admin, setAdmin] = useState({
+        nome: '',
+        sobrenome: '',
+        email: '',
+        senha: ''
+    })
+    useEffect(() =>{
+        setAdmin({...admin,
+            nome: data?.nome||"",
+            sobrenome: data?.sobrenome||"",
+            email: data?.email||""
+        })
+    }, [])
+    const popBox = (
+        <section className="popup">
+          <div className="boxpopup">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Dados atualizados com sucesso!</p>
+            <div className="progress-bar"></div>
+          </div>
+        </section>
+    )
+    const popBox2 = (
+        <section className="popup">
+          <div className="boxpopup">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Sua conta foi deletada com sucesso!</p>
+            <div className="progress-bar"></div>
+          </div>
+        </section>
+    )
+    const valorAdmin= e => {setAdmin({...admin, [e.target.name]: e.target.value});}
+    const [popUp, setPopUp] = useState("")
+    function Delete() {
+        Axios.delete("http://localhost:8080/api/v1/ong/" + id)
+        .then((response) => {
+            setPopUp(popBox2);
+            console.log(response.data);        
+            localStorage.removeItem("id");
+            localStorage.removeItem("tipo");
+            setTimeout(() => {
+                window.location.pathname = "/"
+            }, 2000); 
+        })
+    }
+    const [deletar, setDeletar] = useState(false)
+
+    function Alterar(e){
+        e.preventDefault();
+        Axios.put("http://localhost:8080/api/v1/admin/"+ id, {
+            nome: admin.nome,
+            sobrenome: admin.sobrenome,
+            email: admin.email,
+        }).then((response) => {
+            console.log(response.data);
+            setPopUp(popBox);
+            setTimeout(() => {
+              setPopUp("");
+                window.location.pathname = "/gerenciamento"
+            }, 2000);
+        }).catch((err) => console.log(err))
+    }
     return (
         <>
             <h2>Informações Admin</h2>
-            <form className='formPage-admin' action="">
+            <form className='formPage-admin' action="" onSubmit={Alterar}>
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" />
+                <input type="text" id="nome" name="nome" value={admin.nome} onChange={valorAdmin}/>
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" id="sobrenome" name="sobrenome" value={admin.sobrenome} onChange={valorAdmin}/>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" />
-                <label for="senha">Senha</label>
-                <input type="password" name="senha" id="senha" />
+                <input type="email" id="email" name="email" value={admin.email} onChange={valorAdmin}/>
                 <button type="submit" className="button-as button-ad">Alterar</button>
+                {popUp}
             </form>
         </>
     )
