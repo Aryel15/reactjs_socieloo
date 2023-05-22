@@ -351,7 +351,6 @@ function Deletar_Conta({ stepE, setEStep, data, id }) {
                 window.location.pathname = "/"
             }, 2000); 
         })
-
         
     }
     const [deletar, setDeletar] = useState(false)
