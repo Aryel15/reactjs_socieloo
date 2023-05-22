@@ -185,7 +185,6 @@ function Usuarios() {
                 </div>
             </section>
         ))
-
     }
     function Delete(id) {
         Axios.delete("http://localhost:8080/api/v1/user/" + id)
@@ -344,9 +343,26 @@ function Conta_Admin({data}) {
         </section>
     )
     const valorAdmin= e => {setAdmin({...admin, [e.target.name]: e.target.value});}
+    const [popUpq, setPopUpq] = useState("")
     const [popUp, setPopUp] = useState("")
-    function Delete() {
-        Axios.delete("http://localhost:8080/api/v1/ong/" + id)
+    function Deletar(e) {
+        e.preventDefault()
+
+        setPopUpq((
+            <section className="popup">
+                <div className="boxpopup">
+                    <b><p>Tem certeza que deseja deletar sua conta?</p></b>
+                    <div className="btnsDel">
+                        <a className="cancelarDel" href="javascript:void(0);" onClick={() => setPopUpq("")}>Cancelar</a>
+                        <a className="Del" href="javascript:void(0);" onClick={() => { setPopUpq(""); Delete(e)}}>Desejo deletar</a>
+                    </div>
+                </div>
+            </section>
+        ))
+    }
+    function Delete(e) {
+        e.preventDefault()
+        Axios.delete("http://localhost:8080/api/v1/admin/" + id)
         .then((response) => {
             setPopUp(popBox2);
             console.log(response.data);        
@@ -357,7 +373,6 @@ function Conta_Admin({data}) {
             }, 2000); 
         })
     }
-    const [deletar, setDeletar] = useState(false)
 
     function Alterar(e){
         e.preventDefault();
@@ -386,7 +401,10 @@ function Conta_Admin({data}) {
                 <input type="email" id="email" name="email" value={admin.email} onChange={valorAdmin}/>
                 <button type="submit" className="button-as button-ad">Alterar</button>
                 {popUp}
-            </form>
+                {popUpq}
+            </form>  
+            <br /><br /><br />  
+            <a href="javascript:void(0);" onClick={Deletar} className='mensagem'><i class="fa-solid fa-trash-can"></i> Deletar conta</a>
         </>
     )
 }
