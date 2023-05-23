@@ -97,7 +97,7 @@ function OngInfo({ ong, step, setStep, data, id, map }) {
                             <br />
                             <div className="bank">
                                 <span>Banco:</span>
-                                <p>...</p>
+                                <p>{data?.banco}</p>
                             </div>
                             <br />
                             <div className="bank">

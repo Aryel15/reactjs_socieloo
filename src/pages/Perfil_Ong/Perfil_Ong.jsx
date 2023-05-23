@@ -215,15 +215,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
 
         })
     }
-    const popBox = (
-        <section className="popup">
-          <div className="boxpopup">
-            <i class="fa-solid fa-circle-check"></i>
-            <p>Seu Email foi atualizado com sucesso!</p>
-            <div className="progress-bar"></div>
-          </div>
-        </section>
-    )
+
 
     const [popUp, setPopUp] = useState("")
     return (

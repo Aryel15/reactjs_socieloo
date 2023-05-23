@@ -156,6 +156,12 @@
 .grafico h4{
     margin-top: 10px;
 }
+.graf1 text[text-anchor="start"]:first-child {
+    display: none;
+}
+.graf1 svg g:first-child > rect{
+    display: none;
+}
 .ongs-admin{
     display: flex;
     flex-direction: row;
@@ -167,6 +173,7 @@
     width: 200px;
     background-color: #85d2ff;
     border: none;
+    height: 100%;
 }
 .options__itens-ongs{
     display: flex;

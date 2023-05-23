@@ -29,6 +29,12 @@ export default function Perfil_Admin() {
         Comentarios: <Comentarios />,
         Conta_Admin: <Conta_Admin data={data}/>,
     }
+    const sair = e =>{
+        e.preventDefault()
+        localStorage.removeItem("id");
+        localStorage.removeItem("tipo");
+        window.location.pathname = "/admin"
+    }
 
     return (
         <>
@@ -42,6 +48,7 @@ export default function Perfil_Admin() {
                     <div className="day">
                         {today}
                         <a href="/">Home</a>
+                        <a href="javascript:void(0);" onClick={sair}>Sair</a>
                     </div>
                 </div>
                 <section className="edit__conteiner-admin" id="conteudo" >

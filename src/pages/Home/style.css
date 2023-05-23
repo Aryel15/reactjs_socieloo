@@ -97,7 +97,7 @@
 }
 
 .section__cards {
-  width: 80vw;
+  width: 60vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

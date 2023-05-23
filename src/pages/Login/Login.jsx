@@ -10,6 +10,7 @@ export default function Login() {
     const [senha, setSenha] = useState("")
     const [error, setError] = useState(true)
 
+
     const handleClickCadastro = e => {
         e.preventDefault() 
  
@@ -19,15 +20,19 @@ export default function Login() {
         }).then((response) => {
             const id = response.data.id
             localStorage.setItem("id", id)
-            if(response.data.cnae){
+            if(response.data.role === "ONG"){
                 localStorage.setItem("tipo", "ong");
                 setTimeout(() => {
                     window.location.pathname = `/ong/${id}`
                 }, 1000);
-            }else{
+            }else if(response.data.role === "USUARIO") {
                 localStorage.setItem("tipo", "usuario");
                 setTimeout(() => {
                     window.location.pathname = "/"
+                }, 1000);
+            }else if(response.data.role === "ADMIN"){
+                setTimeout(() => {
+                    window.location.pathname = "/admin"
                 }, 1000);
             }
  
