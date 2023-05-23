@@ -80,6 +80,7 @@ function Relatorios() {
     const [users, setUsers] = useState(null)
     const [graf1, setGraf1] = useState(null)
     const [graf2, setGraf2] = useState(null)
+    const [graf3, setGraf3] = useState(null)
     const [regiao, setRegiao] = useState({
         Leste: null,
         Oeste: null,
@@ -87,11 +88,69 @@ function Relatorios() {
         Sul: null,
         Centro: null
     })
+    const [mesesO, setMesesO] = useState({
+        Jan: 0,
+        Fev:0,
+        Mar:0,
+        Abr:0,
+        Mai:0,
+        Jun:0,
+        Jul:0,
+        Ago:0,
+        Set:0,
+        Out:0,
+        Nov:0,
+        Dez:0
+    })
+    const meses = {
+        1: 'Jan',
+        2: 'Fev',
+        3: 'Mar',
+        4: 'Abr',
+        5: 'Mai',
+        6: 'Jun',
+        7: 'Jul',
+        8: 'Ago',
+        9: 'Set',
+        10: 'Out',
+        11: 'Nov',
+        12: 'Dez'
+      };
+      const data = [
+        ["Mês", "Ong"],
+        ];
+      
+    const options = {
+        curveType: "function",
+        legend: { position: "bottom" },
+    };
 
     const regioesRef = useRef([['Região', 'Ongs', { role: 'style' }]]);
     const segmentosRef = useRef([['Região', 'Ongs', { role: 'style' }]]);
 
+    const [ongsdata, setOngsdata] = useState("");
     useEffect(() => {
+        //Ongs cadastradas por mês
+        Axios.get("http://localhost:8080/api/v1/ong")
+        .then((response) =>{
+            setOngsdata(response.data);
+            response.data.map((ong) => {
+                const mes = parseInt(ong.dataCadastro.split('-')[1]);
+                setMesesO((prevState) => ({...prevState, [meses[mes]]: prevState[meses[mes]] + 1}));
+
+            })
+        })
+        const data = [
+            ["Mês", "Ongs"],
+            ];
+        Object.keys(mesesO).forEach((key) => {
+            data.push([key, mesesO[key]]);
+        });
+        console.log(data.slice(0, 13));
+        setGraf3(<Chart chartType="Line" width="100%" height="400px" data={data.slice(0, 13)} options={options} />)
+
+        //Usuários cadastradas por mês
+        //Ongs cadastradas por região
         const buscaRegiao = async (zona, cor) => {
             try {
                 const response = await Axios.get(`http://localhost:8080/api/v1/ong/buscaRegiao/${zona}`);
@@ -107,6 +166,8 @@ function Relatorios() {
         buscaRegiao('Zona Oeste', '#2db2ff');
         buscaRegiao('Zona Norte', '#6ecaff');
         buscaRegiao('Centro', 'color: #afe2ff');
+
+        //Ongs cadastradas por segmento
         const buscaSegmento = async (segmento, cor) => {
             try {
                 const response = await Axios.get(`http://localhost:8080/api/v1/ong/buscaSegmento/${segmento}`);
@@ -161,6 +222,10 @@ return (
             <div className="grafico graf2">
                 <h4>Total de Ongs Cadastradas por segmento:</h4>
                 {graf2}
+            </div>
+            <div className="grafico graf2">
+                <h4>Total de Ongs Cadastradas por mês:</h4>
+                {graf3}
             </div>
         </section>
     </>

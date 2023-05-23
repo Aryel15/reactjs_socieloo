@@ -517,12 +517,13 @@ function ValidaEmail({ cadastro }) {
           //uf: cadastro.uf,
           //bairro: cadastro.bairro
         }).then((response) => {
-          localStorage.setItem("id", response.data.id);
+          let id = response.data.id
+          localStorage.setItem("id", id);
           localStorage.setItem("tipo", "ong");
           setPopUp(popBox);
           console.log(cadastro);
           setTimeout(() => {
-            window.location.pathname = "/gerenciamento-ong"
+            window.location.pathname = `/ong/${id}`
           }, 2000); 
         }).catch((err) => console.log(err))
       } else {
