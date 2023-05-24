@@ -176,7 +176,7 @@ label{
     font-weight: 600;
 }
 #cadastro__section > div > div.form__login{
-    width: 500px;
+    width: 100%;
     display: block;
     margin: 0 auto;
 }

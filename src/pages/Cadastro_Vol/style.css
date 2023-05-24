@@ -305,7 +305,7 @@ label[for="termos"],
 /*media query*/
 @media screen and (max-width:890px) { 
     .container_form {
-        width: 100vw;
+        width: 90vw;
         margin: auto;
         margin-top: 10px;
         display: flex;

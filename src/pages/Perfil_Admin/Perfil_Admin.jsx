@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './style.css'
-import Menu from '../../components/Menu/Menu'
 import Vlibras from '../../components/Vlibras/Vlibras'
 import Axios from 'axios'
 import Chart from 'react-google-charts'
@@ -81,6 +80,7 @@ function Relatorios() {
     const [graf1, setGraf1] = useState(null)
     const [graf2, setGraf2] = useState(null)
     const [graf3, setGraf3] = useState(null)
+    const [graf4, setGraf4] = useState(null)
     const [regiao, setRegiao] = useState({
         Leste: null,
         Oeste: null,
@@ -88,7 +88,7 @@ function Relatorios() {
         Sul: null,
         Centro: null
     })
-    const [mesesO, setMesesO] = useState({
+    /* const [mesesO, setMesesO] = useState({
         Jan: 0,
         Fev:0,
         Mar:0,
@@ -115,41 +115,79 @@ function Relatorios() {
         10: 'Out',
         11: 'Nov',
         12: 'Dez'
-      };
-      const data = [
+      };*/
+    const data = [
         ["Mês", "Ong"],
-        ];
+    ];
+    const userdata = [
+        ["Mês", "Ong"],
+    ];
       
     const options = {
-        curveType: "function",
-        legend: { position: "bottom" },
-    };
+        colors: ["#00a1ff", "#005485"]
+    }; 
 
     const regioesRef = useRef([['Região', 'Ongs', { role: 'style' }]]);
     const segmentosRef = useRef([['Região', 'Ongs', { role: 'style' }]]);
 
-    const [ongsdata, setOngsdata] = useState("");
+    const [ongsdata, setOngsdata] = useState({
+        mesAtual:0,
+        mesPassado:0
+    });
+    const [usersdata, setUsersdata] = useState({
+        mesAtual:0,
+        mesPassado:0
+    });
     useEffect(() => {
-        //Ongs cadastradas por mês
-        Axios.get("http://localhost:8080/api/v1/ong")
+            //Ongs cadastradas no mês passado
+        Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOngMesPassado")
         .then((response) =>{
-            setOngsdata(response.data);
-            response.data.map((ong) => {
+            console.log(response.data)
+            setOngsdata({...ongsdata, mesPassado: response.data})
+            data.push(["Mês passado", parseInt(ongsdata.mesPassado)])
+            console.log(data);
+        })
+        //Ongs cadastradas por mês
+        Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOng")
+        .then((response) =>{
+            console.log(response.data)
+            setOngsdata({...ongsdata, mesAtual: response.data})
+            data.push(["Este mês", parseInt(ongsdata.mesAtual)])
+/*            setOngsdata(response.data);
+             response.data.map((ong) => {
                 const mes = parseInt(ong.dataCadastro.split('-')[1]);
                 setMesesO((prevState) => ({...prevState, [meses[mes]]: prevState[meses[mes]] + 1}));
 
-            })
+            }) */
+            setGraf3(<Chart chartType="BarChart" width="100%" height="400px" data={data?.slice(0, 3)} options={options} />)
         })
-        const data = [
+/*         const data = [
             ["Mês", "Ongs"],
             ];
         Object.keys(mesesO).forEach((key) => {
             data.push([key, mesesO[key]]);
         });
         console.log(data.slice(0, 13));
-        setGraf3(<Chart chartType="Line" width="100%" height="400px" data={data.slice(0, 13)} options={options} />)
+        setGraf3(<Chart chartType="Line" width="100%" height="400px" data={data.slice(0, 13)} options={options} />) */
+
+
+        
 
         //Usuários cadastradas por mês
+        Axios.get("http://localhost:8080/api/v1/user/cadastramentoOngMesPassado")
+        .then((response) =>{
+            console.log(response.data)
+            setUsersdata({...usersdata, mesPassado: response.data})
+            userdata.push(["Mês passado", parseInt(usersdata.mesPassado)])
+        })
+        //Usuários cadastradas por mês
+        Axios.get("http://localhost:8080/api/v1/user/cadastramentoOng")
+        .then((response) =>{
+            console.log(response.data)
+            setUsersdata({...usersdata, mesAtual: response.data})
+            userdata.push(["Este mês", parseInt(usersdata.mesAtual)])
+            setGraf4(<Chart chartType="BarChart" width="100%" height="400px" data={userdata?.slice(0, 3)} options={options} />)
+        })
         //Ongs cadastradas por região
         const buscaRegiao = async (zona, cor) => {
             try {
@@ -226,6 +264,10 @@ return (
             <div className="grafico graf2">
                 <h4>Total de Ongs Cadastradas por mês:</h4>
                 {graf3}
+            </div>
+            <div className="grafico graf2">
+                <h4>Total de Usuários Cadastrados por mês:</h4>
+                {graf4}
             </div>
         </section>
     </>
@@ -357,7 +399,7 @@ function ONGs() {
                                                 </div>
                                                 <div className="actions">
                                                     <a href={"/ong/" + ong.id}><i class="fa-solid fa-eye"></i>Visualizar</a>
-                                                    {/*<a  href="javascript:void(0);"><i class="fa-solid fa-trash-can"></i>Excluir</a>*/}
+                                                    <a  href="javascript:void(0);" ><i class="fa-solid fa-trash-can"></i>Excluir</a>
                                                 </div>
                                             </div>
                                         ))
