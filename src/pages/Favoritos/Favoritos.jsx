@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Menu from '../../components/Menu/Menu'
 import Vlibras from '../../components/Vlibras/Vlibras'
 import './style.css'
 import RemoveCard from '../../components/RemoveCard/RemoveCard'
+import Axios from 'axios'
 
 export default function Favoritos() {
+    const id = localStorage.getItem("id")
+    const [ongs, setOngs] =  useState()
+    useEffect(()=>{
+        Axios.get(`http://localhost:8080/api/v1/ong/favoritos/${id}`)
+        .then((response) =>{
+            setOngs(response.data);
+        })
+    })
+
   return (
     <>
         <Menu/>
@@ -49,14 +59,13 @@ export default function Favoritos() {
                 </div>
             </section>
             <section className="fav__cards" id="conteudo">
-                <div className="cards__title">
-                    <h2>Proteção Animal</h2>
-                </div>
 
                 <div className="card__conteiner">
-                    <RemoveCard categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='public\imgs\icons\Cidadania.png' regiao="Zona Leste" link="/ong"/>
-                    <RemoveCard categoria="Proteção Animal" titulo="Sempre cabe mais um" icon='public\imgs\icons\Proteção animal.png' regiao="Zona Leste" link="/ong"/>
-
+                    {
+                        ongs?.map(ong => (
+                            <RemoveCard titulo={ong.nome} regiao={ong.regiao} segmento={ong.segmento} link={`/ong/${ong.id}/`} id={ong.id} key={ong.id}/>
+                          ))
+                    }
                 </div>
             </section>
         </main>

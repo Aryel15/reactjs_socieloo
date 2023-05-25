@@ -12,6 +12,7 @@ export default function Ong() {
     const [ong, setOng] = useState(id != null ? true : false);
     const [data, setData] = useState()
     const [map, setMap] = useState(<p>...</p>)
+    const [favorito, setFavorito] = useState(false)
 
     useEffect(() => {
         console.log(id);
@@ -22,6 +23,16 @@ export default function Ong() {
             }, (err) => {
                 setOng(false)
                 console.log(err);
+            })
+            Axios.get(`http://localhost:8080/api/v1/user/${idUser}`)
+            .then((response) =>{
+                var favoritos = response.data.favoritos
+                const ongFav = favoritos.find(element => element == id);
+                if (ongFav == id) {
+                    setFavorito(true)
+                }else{
+                    setFavorito(false)
+                }
             })
     }, [])
 
@@ -41,9 +52,28 @@ export default function Ong() {
         Avaliar: <Avaliar step={step} setStep={setStep} data={data} id={id} />,
     }
     function Favoritar(){
-        Axios.post('http://localhost:8080/api/v1/ong/favoritos/' + idUser)
+        Axios.get(`http://localhost:8080/api/v1/user/${idUser}`)
         .then((response) =>{
-            console.log(response.data);
+            var favoritos = response.data.favoritos
+            const ongPage = favoritos.find(element => element == id);
+            if (ongPage == id) {
+                favoritos.splice(favoritos.indexOf(parseInt(id)), 1);
+                console.log(favoritos);
+                setFavorito(false)
+            }else{
+                favoritos.push(id)
+                console.log(favoritos);
+                setFavorito(true)
+            }
+           
+            Axios.put(`http://localhost:8080/api/v1/user/${idUser}`, {
+                favoritos: favoritos
+            })
+            .then((response) =>{
+                console.log(favoritos);
+                console.log(response.data);
+            })
+    
         })
     }
 
@@ -71,11 +101,10 @@ export default function Ong() {
                             <br />
                         </div>
                         <div className="btn_favoritar">
-                            <input type="radio" name="favorito" id="favorito" />
-                            <label htmlFor="favorito" onClick={Favoritar}><i class="fa-regular fa-heart"></i>Favoritar</label>
+                            <input type="checkbox" name="favorito" id="favorito" checked={favorito}/>
+                            <label htmlFor="favorito" className={favorito == true ? "check" : "notcheck"} onClick={Favoritar} ><i class="fa-regular fa-heart"></i>Favoritar</label>
                         </div>
                             {map}
-
                     </section>
                     {pages[step]}
 

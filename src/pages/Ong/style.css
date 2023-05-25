@@ -65,15 +65,20 @@ ul {
   justify-content: center;
   border: 2px solid #00a1ff;
 }
+
 .btn_favoritar label:hover{
   cursor: pointer;
 }
 .btn_favoritar input{
   display: none;
 }
-.btn_favoritar input:checked ~ label{
+.btn_favoritar label.check{
   background-color: #00a1ff;
   color: #fff;
+}
+.btn_favoritar label.notcheck{
+  background-color: #fff;
+  color: #00a1ff;
 }
 
 .ong__imagens {
@@ -192,7 +197,7 @@ ul {
 
 }
 
-#description__social .social__item a img {
+/* #description__social .social__item a img {
   width: 35px;
 }
 
@@ -246,7 +251,8 @@ div.informations__comments > #comments {
   padding-left: 0;
 }
 
-.buttons__container {
+ */
+ .buttons__container {
   margin: 10px 0px;
   font-size: 1em;
   width: 100%;
