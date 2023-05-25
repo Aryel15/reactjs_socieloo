@@ -40,6 +40,7 @@ a .cardR h2{
     margin-left: 7px;
     font-size: 0.8em;
     color: #000;
+    text-align: left;
 }
 .pa{
     border-radius: 7px 7px 0 0;
