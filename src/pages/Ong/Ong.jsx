@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 
 export default function Ong() {
     const { id } = useParams()
+    const idUser = localStorage.getItem("id")
     const [ong, setOng] = useState(id != null ? true : false);
     const [data, setData] = useState()
     const [map, setMap] = useState(<p>...</p>)
@@ -39,6 +40,12 @@ export default function Ong() {
         Comentarios: <Comentarios step={step} setStep={setStep} data={data} id={id} />,
         Avaliar: <Avaliar step={step} setStep={setStep} data={data} id={id} />,
     }
+    function Favoritar(){
+        Axios.post('http://localhost:8080/api/v1/ong/favoritos/' + idUser)
+        .then((response) =>{
+            console.log(response.data);
+        })
+    }
 
     return (
         <>
@@ -62,6 +69,10 @@ export default function Ong() {
                             <p href={data?.segmento} className="button">{data?.segmento}</p>
                             <p href={data?.regiao} className="button">{data?.regiao}</p>
                             <br />
+                        </div>
+                        <div className="btn_favoritar">
+                            <input type="radio" name="favorito" id="favorito" />
+                            <label htmlFor="favorito" onClick={Favoritar}><i class="fa-regular fa-heart"></i>Favoritar</label>
                         </div>
                             {map}
 

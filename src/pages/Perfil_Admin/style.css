@@ -156,12 +156,6 @@
 .grafico h4{
     margin-top: 10px;
 }
-.graf1 text[text-anchor="start"]:first-child {
-    display: none;
-}
-.graf1 svg g:first-child > rect{
-    display: none;
-}
 .ongs-admin{
     display: flex;
     flex-direction: row;

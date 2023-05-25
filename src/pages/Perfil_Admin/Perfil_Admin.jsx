@@ -124,8 +124,12 @@ function Relatorios() {
     ];
       
     const options = {
-        colors: ["#00a1ff", "#005485"]
+        colors: ["#00a1ff", "#005485"],
+        legend: { position: 'none' }
     }; 
+    const optionsLegend ={
+        legend: { position: 'none' }
+    }
 
     const regioesRef = useRef([['Região', 'Ongs', { role: 'style' }]]);
     const segmentosRef = useRef([['Região', 'Ongs', { role: 'style' }]]);
@@ -142,15 +146,12 @@ function Relatorios() {
             //Ongs cadastradas no mês passado
         Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOngMesPassado")
         .then((response) =>{
-            console.log(response.data)
             setOngsdata({...ongsdata, mesPassado: response.data})
             data.push(["Mês passado", parseInt(ongsdata.mesPassado)])
-            console.log(data);
         })
         //Ongs cadastradas por mês
         Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOng")
         .then((response) =>{
-            console.log(response.data)
             setOngsdata({...ongsdata, mesAtual: response.data})
             data.push(["Este mês", parseInt(ongsdata.mesAtual)])
 /*            setOngsdata(response.data);
@@ -176,14 +177,13 @@ function Relatorios() {
         //Usuários cadastradas por mês
         Axios.get("http://localhost:8080/api/v1/user/cadastramentoOngMesPassado")
         .then((response) =>{
-            console.log(response.data)
             setUsersdata({...usersdata, mesPassado: response.data})
             userdata.push(["Mês passado", parseInt(usersdata.mesPassado)])
+            console.log(userdata);
         })
         //Usuários cadastradas por mês
         Axios.get("http://localhost:8080/api/v1/user/cadastramentoOng")
         .then((response) =>{
-            console.log(response.data)
             setUsersdata({...usersdata, mesAtual: response.data})
             userdata.push(["Este mês", parseInt(usersdata.mesAtual)])
             setGraf4(<Chart chartType="BarChart" width="100%" height="400px" data={userdata?.slice(0, 3)} options={options} />)
@@ -194,7 +194,7 @@ function Relatorios() {
                 const response = await Axios.get(`http://localhost:8080/api/v1/ong/buscaRegiao/${zona}`);
                 const ongs = response.data;
                 regioesRef.current.push([zona, ongs, cor]);
-                setGraf1(<Chart chartType="ColumnChart" width="100%" height="400px" data={regioesRef.current.slice(0, 6)} />);
+                setGraf1(<Chart chartType="ColumnChart" width="100%" height="400px" options={optionsLegend} data={regioesRef.current.slice(0, 6)} />);
             } catch (err) {
                 console.log(err);
             }

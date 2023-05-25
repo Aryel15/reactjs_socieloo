@@ -54,6 +54,28 @@ ul {
   list-style: none;
 }
 
+.btn_favoritar label{
+  margin: 10px;
+  display: flex;
+  gap: 10px;
+  padding: 5px;
+  border-radius: 15px;
+  color: #00a1ff;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #00a1ff;
+}
+.btn_favoritar label:hover{
+  cursor: pointer;
+}
+.btn_favoritar input{
+  display: none;
+}
+.btn_favoritar input:checked ~ label{
+  background-color: #00a1ff;
+  color: #fff;
+}
+
 .ong__imagens {
   width: fit-content;
   /*background: rgb(200,235,255);
