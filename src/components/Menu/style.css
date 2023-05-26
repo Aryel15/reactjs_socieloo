@@ -342,7 +342,7 @@ label[for="bt_menu"]{
         right: -0.01px;
         top:78px;
         padding-bottom: 10px;
-        height: 380px;
+        height:auto;
         z-index: 9999;
         border-radius: 0px 0px 5px 5px;
     }
@@ -403,5 +403,10 @@ label[for="bt_menu"]{
         display: block;
         border: 0;
         
+    }
+    #menu > .links.acess {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

@@ -124,6 +124,19 @@ export default function Menu() {
                             </li>
                         </> : ""
                     }
+                    {
+                        tipo == "admin" ? 
+                        <>
+                            <li className="links">
+                                <a href="" className='perfil link'><i class="fa-solid fa-user"></i>Minha conta</a>
+                                <ul>
+                                    <li className="links"><a href='/gerenciamento' accesskey="5">Meu perfil</a></li>
+                                    <li className="links"><a href='/cadastro-admin' accesskey="5">Novo cadastro</a></li>
+                                    <li className="links"><a href='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                                </ul>
+                            </li>
+                        </> : ""
+                    }
                     
                 </ul>
             </nav>
