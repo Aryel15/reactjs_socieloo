@@ -634,3 +634,20 @@
         transition: 0.7s all;
     }
 }
+@media print {
+    .bar-admin{
+        display: none;
+    }
+    .edit__options-admin{
+        display: none;
+    }
+    div[vw].enabled img{
+        display: none;
+    }
+    .grafico:nth-child(2){
+        margin-top: 60%;
+    }
+    .grafico:nth-child(4){
+        margin-top: 25%;
+    }
+}

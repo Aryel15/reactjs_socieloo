@@ -134,58 +134,31 @@ function Relatorios() {
     const regioesRef = useRef([['Região', 'Ongs', { role: 'style' }]]);
     const segmentosRef = useRef([['Região', 'Ongs', { role: 'style' }]]);
 
-    const [ongsdata, setOngsdata] = useState({
-        mesAtual:0,
-        mesPassado:0
-    });
-    const [usersdata, setUsersdata] = useState({
-        mesAtual:0,
-        mesPassado:0
-    });
     useEffect(() => {
-            //Ongs cadastradas no mês passado
+        //Ongs cadastradas no mês passado
         Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOngMesPassado")
         .then((response) =>{
-            setOngsdata({...ongsdata, mesPassado: response.data})
-            data.push(["Mês passado", parseInt(ongsdata.mesPassado)])
-        })
-        //Ongs cadastradas por mês
-        Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOng")
-        .then((response) =>{
-            setOngsdata({...ongsdata, mesAtual: response.data})
-            data.push(["Este mês", parseInt(ongsdata.mesAtual)])
-/*            setOngsdata(response.data);
-             response.data.map((ong) => {
-                const mes = parseInt(ong.dataCadastro.split('-')[1]);
-                setMesesO((prevState) => ({...prevState, [meses[mes]]: prevState[meses[mes]] + 1}));
-
-            }) */
+            data.push(["Mês passado", parseInt(response.data)])
             setGraf3(<Chart chartType="BarChart" width="100%" height="400px" data={data?.slice(0, 3)} options={options} />)
         })
-/*         const data = [
-            ["Mês", "Ongs"],
-            ];
-        Object.keys(mesesO).forEach((key) => {
-            data.push([key, mesesO[key]]);
-        });
-        console.log(data.slice(0, 13));
-        setGraf3(<Chart chartType="Line" width="100%" height="400px" data={data.slice(0, 13)} options={options} />) */
+        //Ongs cadastradas este mês
+        Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOng")
+        .then((response) =>{
+            data.push(["Este mês", parseInt(response.data)])
+            setGraf3(<Chart chartType="BarChart" width="100%" height="400px" data={data?.slice(0, 3)} options={options} />)
+        })
 
 
-        
-
-        //Usuários cadastradas por mês
+        //Usuários cadastradas no mês passado
         Axios.get("http://localhost:8080/api/v1/user/cadastramentoOngMesPassado")
         .then((response) =>{
-            setUsersdata({...usersdata, mesPassado: response.data})
-            userdata.push(["Mês passado", parseInt(usersdata.mesPassado)])
-            console.log(userdata);
+            userdata.push(["Mês passado", parseInt(response.data)])
+            setGraf4(<Chart chartType="BarChart" width="100%" height="400px" data={userdata?.slice(0, 3)} options={options} />)
         })
-        //Usuários cadastradas por mês
+        //Usuários cadastradas este mês
         Axios.get("http://localhost:8080/api/v1/user/cadastramentoOng")
         .then((response) =>{
-            setUsersdata({...usersdata, mesAtual: response.data})
-            userdata.push(["Este mês", parseInt(usersdata.mesAtual)])
+            userdata.push(["Este mês", parseInt(response.data)])
             setGraf4(<Chart chartType="BarChart" width="100%" height="400px" data={userdata?.slice(0, 3)} options={options} />)
         })
         //Ongs cadastradas por região
@@ -301,7 +274,7 @@ function Usuarios() {
         ))
     }
     function Delete(id) {
-        Axios.delete("http://localhost:8080/api/v1/user/" + id)
+        Axios.delete("http://localhost:8080/api/v1/admin/deletarUsuario/" + id)
             .then((response) => {
                 console.log(response.data);
                 setPopUpDel((
@@ -355,12 +328,47 @@ function Usuarios() {
 function ONGs() {
     const [ongs, setOngs] = useState()
     const [conteudo, setConteudo] = useState('Todas')
+    const [popUpq, setPopUpq] = useState()
+    const [popUpDel, setPopUpDel] = useState()
     useEffect(() => {
         Axios.get('http://localhost:8080/api/v1/ong')
             .then((response) => {
                 setOngs(response.data)
             }).catch((err) => console.log(err))
     }, [])
+
+    function Deletar(id, nome) {
+        setPopUpq((
+            <section className="popup">
+                <div className="boxpopup">
+                    <b><p>Deseja deletar a ong <em>{nome}</em>?</p></b>
+                    <div className="btnsDel">
+                        <a className="cancelarDel" href="javascript:void(0);" onClick={() => setPopUpq("")}>Cancelar</a>
+                        <a className="Del" href="javascript:void(0);" onClick={() => { setPopUpq(""); Delete(id) }}>Desejo deletar</a>
+                    </div>
+                </div>
+            </section>
+        ))
+    }
+    function Delete(id) {
+        Axios.delete("http://localhost:8080/api/v1/admin/deletarOng/" + id)
+            .then((response) => {
+                console.log(response.data);
+                setPopUpDel((
+                    <section className="popup">
+                        <div className="boxpopup">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <p>Ong deletada com sucesso!</p>
+                            <div className="progress-bar"></div>
+                        </div>
+                    </section>
+                ))
+                setTimeout(() => {
+                    setPopUpDel("");
+                    window.location.pathname = "/gerenciamento"
+                }, 2000);
+            })
+    }
     return (
         <>
 
@@ -399,7 +407,7 @@ function ONGs() {
                                                 </div>
                                                 <div className="actions">
                                                     <a href={"/ong/" + ong.id}><i class="fa-solid fa-eye"></i>Visualizar</a>
-                                                    <a  href="javascript:void(0);" ><i class="fa-solid fa-trash-can"></i>Excluir</a>
+                                                    <a  href="javascript:void(0);" onClick={() => Deletar(ong.id, ong.nome)}><i class="fa-solid fa-trash-can"></i>Excluir</a>
                                                 </div>
                                             </div>
                                         ))
@@ -407,7 +415,8 @@ function ONGs() {
                                 </section>
                             </>) : null
                     }
-
+                {popUpDel}
+                {popUpq}
                 </section>
             </main>
         </>
