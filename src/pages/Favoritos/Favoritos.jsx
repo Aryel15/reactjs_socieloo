@@ -20,6 +20,9 @@ export default function Favoritos() {
         Axios.get(`http://localhost:8080/api/v1/ong/favoritos/${id}`)
         .then((response) =>{
             setOngs(response.data);
+        }).catch((err) => {
+            console.log(err)
+            
         })
     })
     function handleClickSearch() {

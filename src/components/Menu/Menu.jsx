@@ -128,7 +128,7 @@ export default function Menu() {
                         tipo == "admin" ? 
                         <>
                             <li className="links">
-                                <a href="" className='perfil link'><i class="fa-solid fa-user"></i>Minha conta</a>
+                                <a href="" className='perfil link'><i class="fa-solid fa-screwdriver-wrench"></i>Minha conta</a>
                                 <ul>
                                     <li className="links"><a href='/gerenciamento' accesskey="5">Meu perfil</a></li>
                                     <li className="links"><a href='/cadastro-admin' accesskey="5">Novo cadastro</a></li>

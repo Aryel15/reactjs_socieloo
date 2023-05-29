@@ -53,12 +53,17 @@ iframe{
 ul {
   list-style: none;
 }
+.btn_favoritar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .btn_favoritar label{
   margin: 10px;
   display: flex;
   gap: 10px;
-  padding: 5px;
+  padding: 5px 10px;
   border-radius: 15px;
   color: #00a1ff;
   align-items: center;
@@ -197,7 +202,7 @@ ul {
 
 }
 
-/* #description__social .social__item a img {
+ #description__social .social__item a img {
   width: 35px;
 }
 
@@ -243,15 +248,15 @@ div.informations__comments > #comments {
   font-size: 1em;
   margin-left: 100px;
 }
-#comments::placeholder {
+/* #comments::placeholder {
   padding-top: 2px;
   padding-left: 5px;
 }
 .description__social {
   padding-left: 0;
-}
+} */
 
- */
+ 
  .buttons__container {
   margin: 10px 0px;
   font-size: 1em;

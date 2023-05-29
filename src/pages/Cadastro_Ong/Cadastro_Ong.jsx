@@ -23,6 +23,7 @@ export default function Cadastro_Ong() {
       pix: '',
       descricao: '',
       segmento: '',
+      banco:'',
       cep:'',
       endereco:'',
       complemento:'',
@@ -315,14 +316,14 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
       const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
       const HandleClickAvançar = (e)=>{
           e.preventDefault()
-          if((cadastro.agencia !== '') && (cadastro.contaCorrente !== '') && (cadastro.pix !== '')){
+          if((cadastro.agencia !== '') && (cadastro.contaCorrente !== '') && (cadastro.pix !== '') && (cadastro.banco !== '')){
               setStep(step + 1)
           }else{
             setMensagem(msg)
           }
       }
       const Valida = ()=>{
-        if((cadastro.agencia !== '') && (cadastro.contaCorrente !== '') && (cadastro.pix !== '')){
+        if((cadastro.agencia !== '') && (cadastro.contaCorrente !== '') && (cadastro.pix !== '') && (cadastro.banco !== '')){
           return true;
         }else{
           return false;
@@ -343,6 +344,8 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                               <label for="contaCorrente">Conta</label>
                               <input type="text" id="contaCorrente" name="contaCorrente" required value={cadastro?.contaCorrente} onChange={valorCadastro}/>
                           </div>
+                          <label for="banco">Banco</label>
+                          <input type="text" id="banco" name="banco" required value={cadastro?.banco} onChange={valorCadastro}/>
                           <label for="pix">Pix</label>
                           <input type="text" id="pix" name="pix" required value={cadastro?.pix} onChange={valorCadastro}/>
                       </div>
@@ -508,6 +511,7 @@ function ValidaEmail({ cadastro }) {
           agencia: cadastro.agencia,
           contaCorrente: cadastro.contaCorrente,
           pix: cadastro.pix,
+          banco: cadastro.banco,
           descricao: cadastro.descricao,
           segmento: cadastro.segmento,
           cep: cadastro.cep,

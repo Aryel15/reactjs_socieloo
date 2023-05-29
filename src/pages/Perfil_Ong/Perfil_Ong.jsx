@@ -101,7 +101,15 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
             contaCorrente: contaCorrente,
             pix: pix,
             regiao: regiao,
-            segmento: segmento
+            segmento: segmento,
+            cnae:cnae,
+            banco: data.banco,
+            cep: data.cep,
+            email: data.email,
+            cpf: data.cpf,
+            cnpj: data.cnpj,
+            complemento: data.complemento,
+            senha: data.senha
         }).then((response) => {
             console.log(response);
             window.location.pathname = "/gerenciamento-ong"
@@ -199,11 +207,35 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
 function Alterar_Email({ stepE, setEStep, data, id }) {
     const [msg, setMsg] = useState("")
     const [email, setEmail] = useState("")
+    const popBox = (
+        <section className="popup">
+          <div className="boxpopup">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Seu email foi alterado com sucesso!</p>
+            <div className="progress-bar"></div>
+            
+          </div>
+        </section>
+    )
     const handleClickAlterarEmail = e =>{
          setPopUp(popBox);
         e.preventDefault()
         console.log(email);
         Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
+            nome: data.nome,
+            telefone: data.telefone,
+            descricao: data.descricao,
+            agencia: data.agencia,
+            contaCorrente: data.contaCorrente,
+            pix: data.pix,
+            regiao: data.regiao,
+            segmento: data.segmento,
+            cnae:data.cnae,
+            banco: data.banco,
+            cep: data.cep,
+            cpf: data.cpf,
+            cnpj: data.cnpj,
+            senha:data.senha,
             email: email,
         }).then((response) => {
            
@@ -280,6 +312,21 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                 } else {
                     setSenhaDiferente('');
                     Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
+                        nome: data.nome,
+                        telefone: data.telefone,
+                        descricao: data.descricao,
+                        agencia: data.agencia,
+                        contaCorrente: data.contaCorrente,
+                        pix: data.pix,
+                        regiao: data.regiao,
+                        segmento: data.segmento,
+                        cnae:data.cnae,
+                        banco: data.banco,
+                        cep: data.cep,
+                        email: data.email,
+                        cpf: data.cpf,
+                        cnpj: data.cnpj,
+                        complemento: data.complemento,
                         senha: senha,
                     }).then((response) => {
                         console.log(response);

@@ -47,6 +47,7 @@ export default function Perfil_Admin() {
                     <div className="day">
                         {today}
                         <a href="/">Home</a>
+                        <a href="/cadastro-admin">Novo Cadastro</a>
                         <a href="javascript:void(0);" onClick={sair}>Sair</a>
                     </div>
                 </div>
@@ -81,6 +82,7 @@ function Relatorios() {
     const [graf2, setGraf2] = useState(null)
     const [graf3, setGraf3] = useState(null)
     const [graf4, setGraf4] = useState(null)
+    const [loading, setLoading] = useState(null)
     const [regiao, setRegiao] = useState({
         Leste: null,
         Oeste: null,
@@ -138,6 +140,7 @@ function Relatorios() {
         //Ongs cadastradas no mês passado
         Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOngMesPassado")
         .then((response) =>{
+            
             data.push(["Mês passado", parseInt(response.data)])
             setGraf3(<Chart chartType="BarChart" width="100%" height="400px" data={data?.slice(0, 3)} options={options} />)
         })
@@ -164,10 +167,16 @@ function Relatorios() {
         //Ongs cadastradas por região
         const buscaRegiao = async (zona, cor) => {
             try {
+                setLoading((
+                    <div className="load">
+                        <span class="loader"></span>
+                    </div>
+                ))
                 const response = await Axios.get(`http://localhost:8080/api/v1/ong/buscaRegiao/${zona}`);
                 const ongs = response.data;
                 regioesRef.current.push([zona, ongs, cor]);
                 setGraf1(<Chart chartType="ColumnChart" width="100%" height="400px" options={optionsLegend} data={regioesRef.current.slice(0, 6)} />);
+                setLoading(null)
             } catch (err) {
                 console.log(err);
             }
@@ -228,6 +237,7 @@ return (
         <section className="dados">
             <div className="grafico graf1">
                 <h4>Total de Ongs Cadastradas por região:</h4>
+                {loading}
                 {graf1}
             </div>
             <div className="grafico graf2">

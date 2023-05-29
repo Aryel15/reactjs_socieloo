@@ -8,6 +8,29 @@
     background-repeat: repeat-x;
     background-size: contain;
 }
+.load{
+  margin: 20px;
+}
+.loader {
+  padding: 20px;
+  width: 48px;
+  height: 48px;
+  border: 5px solid #00a1ff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
 
 .principal {
   padding-top: 0px;

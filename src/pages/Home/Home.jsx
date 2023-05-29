@@ -7,6 +7,7 @@ import Axios from 'axios';
 
 export default function Home() {
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(null)
   const [filter, setFilter] = useState({
     regiao: "Todas",
     segmento: "Todas",
@@ -16,10 +17,16 @@ export default function Home() {
 
 
   useEffect(() => {
+    setLoading((
+      <div className="load">
+          <span class="loader"></span>
+      </div>
+    ))
     handleClickSearch();
     Axios.get("http://localhost:8080/api/v1/ong")
       .then((response) => {
         setData(response.data);
+        setLoading(null)
       })
   }, [regiao, segmento])
 
@@ -126,6 +133,7 @@ export default function Home() {
         </section>
         <section id="main-index">
           <div className="section__cards">
+            {loading}
             {
               data.filter(
                 ong =>

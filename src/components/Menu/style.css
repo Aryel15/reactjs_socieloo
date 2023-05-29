@@ -81,6 +81,17 @@ nav ul{
     font-size: 1em;
 
 }
+.fa-screwdriver-wrench{
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #00a1ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
 /**Exibe submenu**/
 .links:hover ul{ 
     display: block;
@@ -262,7 +273,7 @@ nav ul{
     align-items: center;
     justify-content: center;
 }
-.perfil i{
+.perfil i:not(.fa-screwdriver-wrench){
     color: #fff;
     background-color: #00a1ff;
     display: flex;
