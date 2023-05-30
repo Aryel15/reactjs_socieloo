@@ -12,7 +12,6 @@ import Faq from './Faq/Faq';
 import Acessibilidade from './Acessibilidade/Acessibilidade';
 import Favoritos from './Favoritos/Favoritos';
 import Comentarios from './Comentarios/Comentarios';
-import Avaliacao from './Avaliacao/Avaliacao';
 import Excluir_Cadastro from './Excluir_Cadastro/Excluir_Cadastro';
 import Alterar_Senha from './Alterar_Senha/Alterar_Senha';
 import Cadastro_Vol from './Cadastro_Vol/Cadastro_Vol';
@@ -42,7 +41,6 @@ export default function Router() {
                 <Route path='/acessibilidade' element={<Acessibilidade />} />
                 <Route path='/favoritos' element={<Favoritos />} />
                 <Route path='/comentarios' element={<Comentarios />} />
-                <Route path='/avaliacao' element={<Avaliacao />} />
                 <Route path='/excluir-cadastro' element={<Excluir_Cadastro />} />
                 <Route path='/alterar-senha' element={<Alterar_Senha />} />
                 <Route path='/visita-guiada' element={<Visita_Guiada />} />

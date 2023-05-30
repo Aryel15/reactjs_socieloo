@@ -270,12 +270,6 @@ function Avaliar({ step, setStep, data, id }) {
                             <div className="container_form">
                                 <h1>Avaliação das ONGs</h1>
                                 <form className="form" action="#" method="post">
-                                    <div className="form_grupo">
-                                        <label for="nome" className="form_label">Avalie uma ONG de sua preferência</label>
-                                        <input type="text" name="nome" className="form_input" id="nome"
-                                            placeholder="Escreva o nome da ONG" required />
-                                    </div>
-
                                     <div className="avaliacao__container">
                                         <ul className="avaliacao">
                                             <li className="star-icon ativo" data-avaliacao="1"></li>

@@ -78,46 +78,13 @@ export default function Perfil_Admin() {
 function Relatorios() {
     const [ongs, setOngs] = useState(null)
     const [users, setUsers] = useState(null)
+    const [ongsDel, setOngsDel] = useState(null)
+    const [usersDel, setUsersDel] = useState(null)
     const [graf1, setGraf1] = useState(null)
     const [graf2, setGraf2] = useState(null)
     const [graf3, setGraf3] = useState(null)
     const [graf4, setGraf4] = useState(null)
     const [loading, setLoading] = useState(null)
-    const [regiao, setRegiao] = useState({
-        Leste: null,
-        Oeste: null,
-        Norte: null,
-        Sul: null,
-        Centro: null
-    })
-    /* const [mesesO, setMesesO] = useState({
-        Jan: 0,
-        Fev:0,
-        Mar:0,
-        Abr:0,
-        Mai:0,
-        Jun:0,
-        Jul:0,
-        Ago:0,
-        Set:0,
-        Out:0,
-        Nov:0,
-        Dez:0
-    })
-    const meses = {
-        1: 'Jan',
-        2: 'Fev',
-        3: 'Mar',
-        4: 'Abr',
-        5: 'Mai',
-        6: 'Jun',
-        7: 'Jul',
-        8: 'Ago',
-        9: 'Set',
-        10: 'Out',
-        11: 'Nov',
-        12: 'Dez'
-      };*/
     const data = [
         ["Mês", "Ong"],
     ];
@@ -219,11 +186,25 @@ function Relatorios() {
         .then((response) => {
             setOngs(response.data)
         }).catch((err) => console.log(err))
+
+        Axios.get('http://localhost:8080/api/v1/admin/todasAsUserExcluidas')
+        .then((response) => {
+            setUsersDel(response.data)
+            console.log(response.data);
+        }).catch((err) => console.log(err))
+
+
+        Axios.get('http://localhost:8080/api/v1/admin/todasAsOngsExcluidas')
+        .then((response) => {
+            setOngsDel(response.data)
+        }).catch((err) => console.log(err))
     }, []);
 
 return (
     <>
-        <h2>Relatórios</h2>
+        <div className="title-re">
+            <h2>Relatórios</h2> <img src='./imgs/SocieloPrint.svg' alt="Logo Socieloo" /><h4 className="print" onClick={() => document.execCommand('print')}><i class="fa-solid fa-print"></i>Imprimir</h4>
+        </div>
         <section className="dados">
             <div className="num num1">
                 <h4>Total de Ongs Cadastradas:</h4>
@@ -232,6 +213,14 @@ return (
             <div className="num num2">
                 <h4>Total de Usuários Cadastrados:</h4>
                 <h3>{users}</h3>
+            </div>
+            <div className="num num1">
+                <h4>Total de Ongs Excluidas:</h4>
+                <h3>{ongsDel}</h3>
+            </div>
+            <div className="num num2">
+                <h4>Total de Usuários Excluidos:</h4>
+                <h3>{usersDel}</h3>
             </div>
         </section>
         <section className="dados">
@@ -340,11 +329,35 @@ function ONGs() {
     const [conteudo, setConteudo] = useState('Todas')
     const [popUpq, setPopUpq] = useState()
     const [popUpDel, setPopUpDel] = useState()
+    const [ongsFav, setOngsFav] = useState()
+    const onggFav = []
+    const Favoritas = []
     useEffect(() => {
         Axios.get('http://localhost:8080/api/v1/ong')
             .then((response) => {
                 setOngs(response.data)
             }).catch((err) => console.log(err))
+        Axios.get('http://localhost:8080/api/v1/ong/ongFavoritadas')
+            .then((response) => {
+                setOngsFav(response.data)
+                for(var i = 0; i < response.data.length; ++i){
+                    onggFav.push(Object.assign({}, ongsFav[i]))
+                }
+                Favoritas = response.data.map((item) => {
+                    return {
+                      nome: item[0],
+                      favoritos: item[1]
+                    }
+                  });
+                  console.log(response.data);
+                  console.log(response.data.map((item) => {
+                    return {
+                      nome: item[0],
+                      favoritos: item[1]
+                    }
+                  }));
+            }).catch((err) => console.log(err))
+
     }, [])
 
     function Deletar(id, nome) {
@@ -424,6 +437,24 @@ function ONGs() {
                                     }
                                 </section>
                             </>) : null
+                    }
+                    {
+                        conteudo === "Favoritos" ?
+                        <section className='ongs'>
+                        <p>Apareçam por favor!!!!!!</p>
+                        {
+                            Favoritas?.map(ong => (
+                                <div key={ong.nome} className="card_admin">
+                                    <div className="infos">
+                                        <h3>{ong.nome}</h3>
+                                    </div>
+                                    <div className="actions">
+                                        <a href={"/ong/" + ong.id}><i class="fa-solid fa-eye"></i>{ong.favoritos}</a>
+                                    </div>
+                                </div> 
+                            ))
+                        } 
+                        </section> : null
                     }
                 {popUpDel}
                 {popUpq}
