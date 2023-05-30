@@ -401,14 +401,14 @@ div.informations__comments > #comments {
   font-size: 1em;
 }
 #img-feed {
-  width: 100px;
+  width: 50px;
   border-radius: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 .texto {
-  width: 40vw;
-  margin-left: 30px;
+  width: 30vw;
+  margin-left: 15px;
   text-align: justify;
   font-size: 1em;
 }
@@ -435,7 +435,7 @@ div.informations__comments > #comments {
   text-align: right;
   text-decoration: dashed;
   margin-top: 10px;
-  margin-left: 20px;
+  margin-left: 15px;
   padding: 5px;
   border-radius: 5px;
   border: #00a1ff solid 1px;

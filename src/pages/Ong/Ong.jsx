@@ -231,8 +231,8 @@ function Comentarios({ step, setStep, data, id }) {
                         <h4>@User_logado</h4>
 
                         <div className="pos_editbotao">
-                            <button className="editbotao">Editar comentário</button>
-                            <button className="editbotao">Deletar comentário</button>
+                            <button className="editbotao">Editar</button>
+                            <button className="editbotao">Deletar</button>
                         </div><br />
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                     </div>
@@ -256,10 +256,6 @@ function Comentarios({ step, setStep, data, id }) {
                     </div>
                 </div>
 
-                <div className="informations__comments">
-                    <textarea name="comments" id="comments" cols="100" rows="6" placeholder="Comente o que achou..."></textarea>
-                    <button className="botao">Enviar</button>
-                </div>
             </div>
         </section>
     )
