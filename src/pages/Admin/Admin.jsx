@@ -22,7 +22,7 @@ export default function Admin() {
             </section>
         )
  
-        Axios.post(`http://localhost:8080/api/v1/login`, {
+        Axios.post(`https://socieloo-back.onrender.com/api/v1/login`, {
             senha: senha,
             email: email
         }).then((response) => {

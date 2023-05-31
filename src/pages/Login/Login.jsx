@@ -14,7 +14,7 @@ export default function Login() {
     const handleClickCadastro = e => {
         e.preventDefault() 
  
-        Axios.post(`http://localhost:8080/api/v1/login`, {
+        Axios.post(`https://socieloo-back.onrender.com/api/v1/login`, {
             senha: senha,
             email: email
         }).then((response) => {

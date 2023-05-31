@@ -315,7 +315,7 @@ export function Etapa4({step, setStep, cadastro}) {
     if (codigo == codigoArmazenado) {
       console.log(cadastro)
       window.sessionStorage.removeItem("codigo")
-        Axios.post("http://localhost:8080/api/v1/user", {
+        Axios.post("https://socieloo-back.onrender.com/api/v1/user", {
           nome: cadastro.nome,
           sobrenome: cadastro.sobrenome,
           email: cadastro.email,

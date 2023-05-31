@@ -37,7 +37,7 @@ export default function Cadastro_Admin() {
             console.log("senha fraca");
             return;
           }else{
-            Axios.post("http://localhost:8080/api/v1/admin", {
+            Axios.post("https://socieloo-back.onrender.com/api/v1/admin", {
                   nome: cadastro.nome,
                   sobrenome: cadastro.sobrenome,
                   email: cadastro.email,

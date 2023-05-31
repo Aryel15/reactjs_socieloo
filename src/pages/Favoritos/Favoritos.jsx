@@ -17,7 +17,7 @@ export default function Favoritos() {
     const [segmento, setSegmento] = useState("Todas")
     const [nomeong, setNomeong] = useState("")
     useEffect(()=>{
-        Axios.get(`http://localhost:8080/api/v1/ong/favoritos/${id}`)
+        Axios.get(`https://socieloo-back.onrender.com/api/v1/ong/favoritos/${id}`)
         .then((response) =>{
             setOngs(response.data);
         }).catch((err) => {

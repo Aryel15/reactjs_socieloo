@@ -20,7 +20,7 @@ export default function Perfil_Ong() {
        if(id === null){
            window.location.pathname = "/gerenciamento-ong"
        }else{
-           Axios.get("http://localhost:8080/api/v1/ong/" + id)
+           Axios.get("https://socieloo-back.onrender.com/api/v1/ong/" + id)
            .then((response) => {
                setData(response.data);
                console.log(response.data);
@@ -93,7 +93,7 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
         
         setPopUp(popBox);
         e.preventDefault()
-        Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
+        Axios.put(`https://socieloo-back.onrender.com/api/v1/ong/${id}`,{
             nome: nome,
             telefone: telefone,
             descricao: descricao,
@@ -221,7 +221,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
          setPopUp(popBox);
         e.preventDefault()
         console.log(email);
-        Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
+        Axios.put(`https://socieloo-back.onrender.com/api/v1/ong/${id}`,{
             nome: data.nome,
             telefone: data.telefone,
             descricao: data.descricao,
@@ -311,7 +311,7 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                     return;
                 } else {
                     setSenhaDiferente('');
-                    Axios.put(`http://localhost:8080/api/v1/ong/${id}`,{
+                    Axios.put(`https://socieloo-back.onrender.com/api/v1/ong/${id}`,{
                         nome: data.nome,
                         telefone: data.telefone,
                         descricao: data.descricao,
@@ -380,7 +380,7 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
 
 function Deletar_Conta({ stepE, setEStep, data, id }) {
     function Delete() {
-        Axios.delete("http://localhost:8080/api/v1/ong/" + id)
+        Axios.delete("https://socieloo-back.onrender.com/api/v1/ong/" + id)
         .then((response) => {
             setPopUp(popBox);
             console.log(response.data);        

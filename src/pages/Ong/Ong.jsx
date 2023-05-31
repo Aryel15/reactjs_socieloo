@@ -16,7 +16,7 @@ export default function Ong() {
 
     useEffect(() => {
         console.log(id);
-        Axios.get("http://localhost:8080/api/v1/ong/" + id)
+        Axios.get("https://socieloo-back.onrender.com/api/v1/ong/" + id)
             .then((response) => {
                 setOng(true)
                 setData(response.data)
@@ -24,7 +24,7 @@ export default function Ong() {
                 setOng(false)
                 console.log(err);
             })
-            Axios.get(`http://localhost:8080/api/v1/user/${idUser}`)
+            Axios.get(`https://socieloo-back.onrender.com/api/v1/user/${idUser}`)
             .then((response) =>{
                 var favoritos = response.data.favoritos
                 const ongFav = favoritos.find(element => element == id);
@@ -52,7 +52,7 @@ export default function Ong() {
         Avaliar: <Avaliar step={step} setStep={setStep} data={data} id={id} />,
     }
     function Favoritar(){
-        Axios.get(`http://localhost:8080/api/v1/user/${idUser}`)
+        Axios.get(`https://socieloo-back.onrender.com/api/v1/user/${idUser}`)
         .then((response) =>{
             var favoritos = response.data.favoritos
             const ongPage = favoritos.find(element => element == id);
@@ -66,7 +66,7 @@ export default function Ong() {
                 setFavorito(true)
             }
            
-            Axios.put(`http://localhost:8080/api/v1/user/${idUser}`, {
+            Axios.put(`https://socieloo-back.onrender.com/api/v1/user/${idUser}`, {
                 favoritos: favoritos
             })
             .then((response) =>{

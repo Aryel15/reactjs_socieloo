@@ -11,7 +11,7 @@ export default function Perfil_Admin() {
         if(tipo !== "admin"){
             window.location.pathname = "/"
         }else{
-            Axios.get("http://localhost:8080/api/v1/admin/" + id)
+            Axios.get("https://socieloo-back.onrender.com/api/v1/admin/" + id)
             .then((response) => {
                 setData(response.data);
                 console.log(response.data);
@@ -105,14 +105,14 @@ function Relatorios() {
 
     useEffect(() => {
         //Ongs cadastradas no mês passado
-        Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOngMesPassado")
+        Axios.get("https://socieloo-back.onrender.com/api/v1/ong/cadastramentoOngMesPassado")
         .then((response) =>{
             
             data.push(["Mês passado", parseInt(response.data)])
             setGraf3(<Chart chartType="BarChart" width="100%" height="400px" data={data?.slice(0, 3)} options={options} />)
         })
         //Ongs cadastradas este mês
-        Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOng")
+        Axios.get("https://socieloo-back.onrender.com/api/v1/ong/cadastramentoOng")
         .then((response) =>{
             data.push(["Este mês", parseInt(response.data)])
             setGraf3(<Chart chartType="BarChart" width="100%" height="400px" data={data?.slice(0, 3)} options={options} />)
@@ -120,13 +120,13 @@ function Relatorios() {
 
 
         //Usuários cadastradas no mês passado
-        Axios.get("http://localhost:8080/api/v1/user/cadastramentoOngMesPassado")
+        Axios.get("https://socieloo-back.onrender.com/api/v1/user/cadastramentoOngMesPassado")
         .then((response) =>{
             userdata.push(["Mês passado", parseInt(response.data)])
             setGraf4(<Chart chartType="BarChart" width="90%" height="400px" data={userdata?.slice(0, 3)} options={options} />)
         })
         //Usuários cadastradas este mês
-        Axios.get("http://localhost:8080/api/v1/user/cadastramentoOng")
+        Axios.get("https://socieloo-back.onrender.com/api/v1/user/cadastramentoOng")
         .then((response) =>{
             userdata.push(["Este mês", parseInt(response.data)])
             setGraf4(<Chart chartType="BarChart" width="100%" height="400px" data={userdata?.slice(0, 3)} options={options} />)
@@ -139,7 +139,7 @@ function Relatorios() {
                         <span class="loader"></span>
                     </div>
                 ))
-                const response = await Axios.get(`http://localhost:8080/api/v1/ong/buscaRegiao/${zona}`);
+                const response = await Axios.get(`https://socieloo-back.onrender.com/api/v1/ong/buscaRegiao/${zona}`);
                 const ongs = response.data;
                 regioesRef.current.push([zona, ongs, cor]);
                 setGraf1(<Chart chartType="ColumnChart" width="100%" height="400px" options={optionsLegend} data={regioesRef.current.slice(0, 6)} />);
@@ -157,7 +157,7 @@ function Relatorios() {
         //Ongs cadastradas por segmento
         const buscaSegmento = async (segmento, cor) => {
             try {
-                const response = await Axios.get(`http://localhost:8080/api/v1/ong/buscaSegmento/${segmento}`);
+                const response = await Axios.get(`https://socieloo-back.onrender.com/api/v1/ong/buscaSegmento/${segmento}`);
                 const ongs = response.data;
                 segmentosRef.current.push([segmento, ongs, cor]);
                 const options = {
@@ -176,25 +176,25 @@ function Relatorios() {
         buscaSegmento('Proteção Animal');
         buscaSegmento('Saúde');
 
-        Axios.get('http://localhost:8080/api/v1/user/todosUsuarios')
+        Axios.get('https://socieloo-back.onrender.com/api/v1/user/todosUsuarios')
         .then((response) => {
             setUsers(response.data)
         }).catch((err) => console.log(err))
 
 
-        Axios.get('http://localhost:8080/api/v1/ong/todasAsOngs')
+        Axios.get('https://socieloo-back.onrender.com/api/v1/ong/todasAsOngs')
         .then((response) => {
             setOngs(response.data)
         }).catch((err) => console.log(err))
 
-        Axios.get('http://localhost:8080/api/v1/admin/todasAsUserExcluidas')
+        Axios.get('https://socieloo-back.onrender.com/api/v1/admin/todasAsUserExcluidas')
         .then((response) => {
             setUsersDel(response.data)
             console.log(response.data);
         }).catch((err) => console.log(err))
 
 
-        Axios.get('http://localhost:8080/api/v1/admin/todasAsOngsExcluidas')
+        Axios.get('https://socieloo-back.onrender.com/api/v1/admin/todasAsOngsExcluidas')
         .then((response) => {
             setOngsDel(response.data)
         }).catch((err) => console.log(err))
@@ -258,7 +258,7 @@ function Usuarios() {
 
 
     useEffect(() => {
-        Axios.get('http://localhost:8080/api/v1/user')
+        Axios.get('https://socieloo-back.onrender.com/api/v1/user')
             .then((response) => {
                 setUsers(response.data)
             }).catch((err) => console.log(err))
@@ -277,7 +277,7 @@ function Usuarios() {
         ))
     }
     function Delete(id) {
-        Axios.delete("http://localhost:8080/api/v1/admin/deletarUsuario/" + id)
+        Axios.delete("https://socieloo-back.onrender.com/api/v1/admin/deletarUsuario/" + id)
             .then((response) => {
                 console.log(response.data);
                 setPopUpDel((
@@ -337,11 +337,11 @@ function ONGs() {
     const [filterNome, setfilterNome] = useState('Todas')
     const [nome, setNome] = useState("")
     useEffect(() => {
-        Axios.get('http://localhost:8080/api/v1/ong')
+        Axios.get('https://socieloo-back.onrender.com/api/v1/ong')
             .then((response) => {
                 setOngs(response.data)
             }).catch((err) => console.log(err))
-        Axios.get('http://localhost:8080/api/v1/ong/ongFavoritadas')
+        Axios.get('https://socieloo-back.onrender.com/api/v1/ong/ongFavoritadas')
             .then((response) => {
                 const data = response.data.map((item) => {
                     return {
@@ -368,7 +368,7 @@ function ONGs() {
         ))
     }
     function Delete(id) {
-        Axios.delete("http://localhost:8080/api/v1/admin/deletarOng/" + id)
+        Axios.delete("https://socieloo-back.onrender.com/api/v1/admin/deletarOng/" + id)
             .then((response) => {
                 console.log(response.data);
                 setPopUpDel((
@@ -525,7 +525,7 @@ function Conta_Admin({data}) {
     }
     function Delete(e) {
         e.preventDefault()
-        Axios.delete("http://localhost:8080/api/v1/admin/" + id)
+        Axios.delete("https://socieloo-back.onrender.com/api/v1/admin/" + id)
         .then((response) => {
             setPopUp(popBox2);
             console.log(response.data);        
@@ -539,7 +539,7 @@ function Conta_Admin({data}) {
 
     function Alterar(e){
         e.preventDefault();
-        Axios.put("http://localhost:8080/api/v1/admin/"+ id, {
+        Axios.put("https://socieloo-back.onrender.com/api/v1/admin/"+ id, {
             nome: admin.nome,
             sobrenome: admin.sobrenome,
             email: admin.email,

@@ -20,7 +20,7 @@ export default function Perfil_User() {
         if(id === null){
             window.location.pathname = "/"
         }else{
-            Axios.get("http://localhost:8080/api/v1/user/" + id)
+            Axios.get("https://socieloo-back.onrender.com/api/v1/user/" + id)
             .then((response) => {
                 setData(response.data);
                 console.log(response.data);
@@ -80,7 +80,7 @@ function Editar_Perfil({data, id}){
         
         setPopUp(popBox);
         e.preventDefault()
-        Axios.put(`http://localhost:8080/api/v1/user/${id}`,{
+        Axios.put(`https://socieloo-back.onrender.com/api/v1/user/${id}`,{
             nome: alterar.nome,
             sobrenome: alterar.sobrenome
         }).then((response) => {
@@ -127,7 +127,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
          setPopUp(popBox);
         e.preventDefault()
         console.log(email);
-        Axios.put(`http://localhost:8080/api/v1/user/${id}`, {
+        Axios.put(`https://socieloo-back.onrender.com/api/v1/user/${id}`, {
             email: email,
         }).then((response) => {
         
@@ -210,7 +210,7 @@ function Alterar_Senha({ data, id}) {
                     return;
                 } else {
                     setSenhaDiferente('');
-                    Axios.put(`http://localhost:8080/api/v1/user/${id}`,{
+                    Axios.put(`https://socieloo-back.onrender.com/api/v1/user/${id}`,{
                         senha: senha,
                     }).then((response) => {
                         console.log(response);
@@ -264,7 +264,7 @@ function Alterar_Senha({ data, id}) {
 
 function Deletar_Conta({data, id }) {
     function Delete() {
-        Axios.delete("http://localhost:8080/api/v1/user/" + id)
+        Axios.delete("https://socieloo-back.onrender.com/api/v1/user/" + id)
         .then((response) => {
             setPopUp(popBox);
             console.log(response.data);        
