@@ -67,8 +67,8 @@ export default function Menu() {
                             <li className="sublink"><a href="/#Zona Sul">Zona Sul</a></li>
                         </ul>
                     </li>
-                    <li className="links acess">
-                        <a href="#" accesskey="4">Acessibilidade▾</a>
+                    <li className="links">
+                        <a href="#" className="link" accesskey="4">Acessibilidade▾</a>
                         <ul>
                             <li className="atalho"><a href="#conteudo" accesskey="1" title="Ir para o conteúdo">Conteúdo[1]↓</a></li>
                             <li className="atalho"><a href="#menu" accesskey="2" title="Ir para o menu de navegação">Menu[2]↓</a></li>

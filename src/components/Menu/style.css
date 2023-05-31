@@ -207,11 +207,10 @@ nav ul{
 }
 #menu > .links{
     margin: 0 10px;
-    height: 70px;
 }
 #menu > .links:not(.acess){
     display: flex;
-    justify-content: center;
+    justify-content:flex-start;
     align-items: center;
 }
 .links a{
@@ -406,7 +405,12 @@ label[for="bt_menu"]{
         color: #fff;
     }
     #menu li ul{
-        position: static;
+        background-color: #87bad8d8;
+        border-radius: 5px;
+        float:inline-start;
+        margin: 30px;
+        position:relative;
+  
     }
     #menu li ul li{
         position: relative;
