@@ -641,7 +641,7 @@ body.body-no_scroll{
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 650px) {
   .section__ong {
     margin-top: 80px;
   }

@@ -46,48 +46,54 @@ export default function Menu() {
                 <input type="checkbox" id="bt_menu" />
                 <ul id="menu">
                     <li className="links">
-                        <a href="#" className="link" accesskey="2">Segmentos▾</a>
-                        <ul>
-                            <li className="sublink"><a href="/ongs/Cidadania">Cidadania</a></li>
-                            <li className="sublink"><a href="/ongs/Cultura e Esporte">Cultura e Esportes</a></li>
-                            <li className="sublink"><a href="/ongs/Educação">Educação</a></li>
-                            <li className="sublink"><a href="/ongs/Gênero e Diversidade">Gênero e Diversidade</a></li>
-                            <li className="sublink"><a href="/ongs/Meio Ambiente">Meio Ambiente</a></li>
-                            <li className="sublink"><a href="/ongs/Proteção Animal">Proteção Animal</a></li>
-                            <li className="sublink"><a href="/ongs/Saúde">Saúde</a></li>
-                        </ul>
+                        <a href="#" className="link" accesskey="2">
+                            Segmentos▾
+                            <ul>
+                                <li className="sublink"><a href="/ongs/Cidadania">Cidadania</a></li>
+                                <li className="sublink"><a href="/ongs/Cultura e Esporte">Cultura e Esportes</a></li>
+                                <li className="sublink"><a href="/ongs/Educação">Educação</a></li>
+                                <li className="sublink"><a href="/ongs/Gênero e Diversidade">Gênero e Diversidade</a></li>
+                                <li className="sublink"><a href="/ongs/Meio Ambiente">Meio Ambiente</a></li>
+                                <li className="sublink"><a href="/ongs/Proteção Animal">Proteção Animal</a></li>
+                                <li className="sublink"><a href="/ongs/Saúde">Saúde</a></li>
+                            </ul>
+                        </a>
                     </li>
                     <li className="links">
-                        <a href="#" className="link" accesskey="3">Região▾</a>
-                        <ul>
-                            <li className="sublink"><a href="/ongs/Zona Leste">Zona Leste</a></li>
-                            <li className="sublink"><a href="/ongs/Zona Norte">Zona Norte</a></li>
-                            <li className="sublink"><a href="/ongs/Centro">Centro</a></li>
-                            <li className="sublink"><a href="/ongs/Zona Oeste">Zona Oeste</a></li>
-                            <li className="sublink"><a href="/ongs/Zona Sul">Zona Sul</a></li>
-                        </ul>
+                        <a href="#" className="link" accesskey="3">
+                            Região▾
+                            <ul>
+                                <li className="sublink"><a href="/ongs/Zona Leste">Zona Leste</a></li>
+                                <li className="sublink"><a href="/ongs/Zona Norte">Zona Norte</a></li>
+                                <li className="sublink"><a href="/ongs/Centro">Centro</a></li>
+                                <li className="sublink"><a href="/ongs/Zona Oeste">Zona Oeste</a></li>
+                                <li className="sublink"><a href="/ongs/Zona Sul">Zona Sul</a></li>
+                            </ul>
+                        </a>
                     </li>
                     <li className="links acess">
-                        <a href="#" className="link" accesskey="4">Acessibilidade▾</a>
-                        <ul>
-                            <li className="atalho"><a href="#conteudo" accesskey="1" title="Ir para o conteúdo">Conteúdo[1]↓</a></li>
-                            <li className="atalho"><a href="#menu" accesskey="2" title="Ir para o menu de navegação">Menu[2]↓</a></li>
-                            <li className="atalho"><a href="#rodape" accesskey="3" title="Ir para o rodapé">Rodapé[3]↓</a></li>
-                            <li className="sublink"><a href="javascript:void(0)" title="Ativar contraste" id="contraste"
-                                accesskey="c">Contraste
-                                ◉</a></li>
-                            <li className="sublink"><a href="javascript:void(0)" title="Desativar contraste" id="sem-contraste"
-                                accesskey="z">Sem
-                                contraste ○</a></li>
-                            <li className="sublink"><a href="javascript:void(0)" id="aumentar" title="Aumentar fonte"
-                                accesskey="b">Aumentar fonte
-                                +</a></li>
-                            <li className="sublink"><a href="javascript:void(0)" id="diminuir" title="Diminuir fonte"
-                                accesskey="s">Diminuir fonte
-                                -</a></li>
-                            <li className="sublink"><a href="/acessibilidade"
-                                title="Manual de acessibilidade">Acessibilidade</a></li>
-                        </ul>
+                        <a href="#" className="link" accesskey="4">
+                            Acessibilidade▾
+                            <ul>
+                                <li className="atalho"><a href="#conteudo" accesskey="1" title="Ir para o conteúdo">Conteúdo[1]↓</a></li>
+                                <li className="atalho"><a href="#menu" accesskey="2" title="Ir para o menu de navegação">Menu[2]↓</a></li>
+                                <li className="atalho"><a href="#rodape" accesskey="3" title="Ir para o rodapé">Rodapé[3]↓</a></li>
+                                <li className="sublink"><a href="javascript:void(0)" title="Ativar contraste" id="contraste"
+                                    accesskey="c">Contraste
+                                    ◉</a></li>
+                                <li className="sublink"><a href="javascript:void(0)" title="Desativar contraste" id="sem-contraste"
+                                    accesskey="z">Sem
+                                    contraste ○</a></li>
+                                <li className="sublink"><a href="javascript:void(0)" id="aumentar" title="Aumentar fonte"
+                                    accesskey="b">Aumentar fonte
+                                    +</a></li>
+                                <li className="sublink"><a href="javascript:void(0)" id="diminuir" title="Diminuir fonte"
+                                    accesskey="s">Diminuir fonte
+                                    -</a></li>
+                                <li className="sublink"><a href="/acessibilidade"
+                                    title="Manual de acessibilidade">Acessibilidade</a></li>
+                            </ul>
+                        </a>
                     </li>
                     <li className="links faq"><a className="link" href='/faq' accesskey="5">Dúvidas Frequentes</a></li>
 
@@ -106,7 +112,7 @@ export default function Menu() {
                                 <ul>
                                     <li className="links"><a href={'/ong/'+id} accesskey="5">Minha Ong</a></li>
                                     <li className="links"><a href='/gerenciamento-ong' accesskey="5">Editar Ong</a></li>
-                                    <li className="links"><a href='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                                        <li className="links"><a href='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
                                 </ul>
                             </li>
                         </> : ""
