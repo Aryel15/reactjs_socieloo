@@ -10,10 +10,11 @@
   display: none;
 }
 
-iframe{
+iframe {
   margin-top: 10px;
   border-radius: 10px;
-  border: 2px solid #00a1ff
+  border: 2px solid #00a1ff;
+  max-width: 100%;
 }
 /*.degrade{
   background: rgb(200,235,255);
@@ -53,13 +54,13 @@ iframe{
 ul {
   list-style: none;
 }
-.btn_favoritar{
+.btn_favoritar {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.btn_favoritar label{
+.btn_favoritar label {
   margin: 10px;
   display: flex;
   gap: 10px;
@@ -71,17 +72,17 @@ ul {
   border: 2px solid #00a1ff;
 }
 
-.btn_favoritar label:hover{
+.btn_favoritar label:hover {
   cursor: pointer;
 }
-.btn_favoritar input{
+.btn_favoritar input {
   display: none;
 }
-.btn_favoritar label.check{
+.btn_favoritar label.check {
   background-color: #00a1ff;
   color: #fff;
 }
-.btn_favoritar label.notcheck{
+.btn_favoritar label.notcheck {
   background-color: #fff;
   color: #00a1ff;
 }
@@ -93,7 +94,6 @@ ul {
   padding: 20px;
   padding-bottom: 50px;
   border-radius: 10px;
-
 }
 
 .ong__informations {
@@ -146,7 +146,6 @@ ul {
   border-radius: 10px;
   /*border: 1px solid #00a1ff;*/
   background-color: #e5f6ff;
-
 }
 .description__about p {
   text-align: justify;
@@ -183,7 +182,7 @@ ul {
 #description__social .social__item {
   display: inline;
 }
-.bank{
+.bank {
   font-weight: 500;
   text-align: left;
   font-size: 1em;
@@ -193,16 +192,15 @@ ul {
   align-items: center;
   width: 100%;
 }
-.bank p{
+.bank p {
   font-weight: normal;
   background-color: #fff;
   border-radius: 5px;
   padding: 5px;
   width: 75%;
-
 }
 
- #description__social .social__item a img {
+#description__social .social__item a img {
   width: 35px;
 }
 
@@ -213,7 +211,7 @@ ul {
   font-size: 1em;
 }
 
-.informations__botons>.informations__donation>input[type='button'],
+.informations__botons > .informations__donation > input[type='button'],
 .informations__botons button {
   background-color: #00a1ff;
   border: #00a1ff solid 1px;
@@ -256,8 +254,7 @@ div.informations__comments > #comments {
   padding-left: 0;
 } */
 
- 
- .buttons__container {
+.buttons__container {
   margin: 10px 0px;
   font-size: 1em;
   width: 100%;
@@ -462,7 +459,7 @@ div.informations__comments > #comments {
 }
 
 /* ===== MODAL =====*/
-body.body-no_scroll{
+body.body-no_scroll {
   overflow: hidden;
 }
 
@@ -553,10 +550,9 @@ body.body-no_scroll{
 }
 
 /* Avaliar */
-.avaliacao__container{
+.avaliacao__container {
   width: 180px;
-  height: 100%
-
+  height: 100%;
 }
 .main_content {
   display: flex;
@@ -566,7 +562,7 @@ body.body-no_scroll{
   gap: 1rem;
   padding: 1rem 0;
   margin: 0;
-  height: 84vh;
+  height: 5%;
   font-size: 1em;
 }
 .avaliacao {
@@ -581,19 +577,19 @@ body.body-no_scroll{
   /* alterar o tamanho das estrelas */
 }
 .star-icon::before {
-  content: "\2605";
+  content: '\2605';
 }
 
-.star-icon.ativo~.star-icon::before {
-  content: "\2606";
+.star-icon.ativo ~ .star-icon::before {
+  content: '\2606';
 }
 
 .avaliacao:hover .star-icon::before {
-  content: "\2605";
-} 
+  content: '\2605';
+}
 
-.star-icon:hover~.star-icon::before {
-  content: "\2606";
+.star-icon:hover ~ .star-icon::before {
+  content: '\2606';
 }
 .form_grupo {
   width: 100%;
@@ -602,10 +598,12 @@ body.body-no_scroll{
   position: relative;
   flex-direction: column;
 }
-#box-artigo > div > form > div:nth-child(3) > div.form_message,#box-artigo > div > form > div:nth-child(3) > div.options__checkbox > label > a,#box-artigo > div > form > div:nth-child(3) > div.submit, #box-artigo > div > form > div:nth-child(3) > div.submit button {
+#box-artigo > div > form > div:nth-child(3) > div.form_message,
+#box-artigo > div > form > div:nth-child(3) > div.options__checkbox > label > a,
+#box-artigo > div > form > div:nth-child(3) > div.submit,
+#box-artigo > div > form > div:nth-child(3) > div.submit button {
   font-size: 1em;
 }
-
 
 /* Responsividade */
 
@@ -638,6 +636,7 @@ body.body-no_scroll{
     padding: 20px;
     z-index: 999;
     gap: 30px;
+    align-content: center;
   }
 }
 
@@ -707,17 +706,17 @@ body.body-no_scroll{
   }
 }
 
-#root>main>section>section.ong__imagens>div>p{
-    background-color: transparent;
-    font-size: 0.6em;
-    border: rgb(68, 68, 68) 1px solid;
-    padding: 2px 6px;
-    border-radius: 2px;
-    color: rgb(68, 68, 68);
-    margin-right: 7px;
-    display: block;
-    transition: 0.7s;
-    cursor: default;
+#root > main > section > section.ong__imagens > div > p {
+  background-color: transparent;
+  font-size: 0.6em;
+  border: rgb(68, 68, 68) 1px solid;
+  padding: 2px 6px;
+  border-radius: 2px;
+  color: rgb(68, 68, 68);
+  margin-right: 7px;
+  display: block;
+  transition: 0.7s;
+  cursor: default;
 }
 
 /* Avaliar */
@@ -751,4 +750,8 @@ body.body-no_scroll{
   .container__subtle {
     margin: 50% 0px 10%;
   }
+}
+
+.container_form {
+  width: 70vw !important;
 }

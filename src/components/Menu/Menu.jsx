@@ -15,7 +15,7 @@ export default function Menu() {
     }
     let menuIcon
     if (window.location.pathname.startsWith('/ong/') || window.location.pathname.startsWith('/ongs/')) {
-        menuIcon = '../imgs/menu.png';
+        menuIcon = '../../imgs/menu.png';
     } else {
         menuIcon = './imgs/menu.png';
     }
