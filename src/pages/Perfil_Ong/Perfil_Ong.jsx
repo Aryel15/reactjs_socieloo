@@ -5,35 +5,35 @@ import Vlibras from '../../components/Vlibras/Vlibras'
 import Axios from 'axios'
 
 export default function Perfil_Ong() {
-    let id  = localStorage.getItem("id");
+    let id = localStorage.getItem("id");
 
     var name;
     const [data, setData] = useState()
     const [stepE, setEStep] = React.useState("Editar_Perfil");
     const editar = {
         Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep} data={data} id={id} />,
-        Alterar_Senha: <Alterar_Senha step={stepE} setStep={setEStep} data={data} id={id}  />,
-        Alterar_Email: <Alterar_Email step={stepE} setStep={setEStep} data={data} id={id}  />,
+        Alterar_Senha: <Alterar_Senha step={stepE} setStep={setEStep} data={data} id={id} />,
+        Alterar_Email: <Alterar_Email step={stepE} setStep={setEStep} data={data} id={id} />,
         Deletar_Conta: <Deletar_Conta step={stepE} setStep={setEStep} data={data} id={id} />,
     }
     useEffect(() => {
-       if(id === null){
-           window.location.pathname = "/gerenciamento-ong"
-       }else{
-           Axios.get("https://socieloo-back.onrender.com/api/v1/ong/" + id)
-           .then((response) => {
-               setData(response.data);
-               console.log(response.data);
-           })
-       }
-   }, []) 
+        if (id === null) {
+            window.location.pathname = "/gerenciamento-ong"
+        } else {
+            Axios.get("https://socieloo-back.onrender.com/api/v1/ong/" + id)
+                .then((response) => {
+                    setData(response.data);
+                    console.log(response.data);
+                })
+        }
+    }, [])
 
     return (
         <>
             <Menu />
             <main id="edit" >
                 <div className="options__photos">
-                <img src={`../imgs/icons/${data?.segmento}.png`} alt="foto de perfil escolhida pela ong" />
+                    <img src={`../imgs/icons/${data?.segmento}.png`} alt="foto de perfil escolhida pela ong" />
                     <h1>{data?.nome}</h1>
                 </div>
                 <section className="edit__conteiner" id="conteudo" >
@@ -60,27 +60,29 @@ export default function Perfil_Ong() {
 }
 
 function Editar_Perfil({ stepE, setEStep, data, id }) {
-    
-    useEffect(_=> {
-        setNome(data?.nome||"")
-        setTelefone(data?.telefone||"")
+
+    useEffect(_ => {
+        setNome(data?.nome || "")
+        setTelefone(data?.telefone || "")
         // setCep(data?.cep||"")
-        setDescricao(data?.descricao||"")
-        setAgencia(data?.agencia||"")
-        setContaCorrente(data?.contaCorrente||"")
-        setPix(data?.pix||"")
-        setEmail(data?.email||"")
-        setCnpj(data?.cnpj||"")
-        setCnae(data?.cnae||"")
-        setRegiao(data?.regiao||"")
-        setSegmento(data?.segmento||"")
-    },[data])
+        setDescricao(data?.descricao || "")
+        setAgencia(data?.agencia || "")
+        setBanco(data?.banco || "")
+        setContaCorrente(data?.contaCorrente || "")
+        setPix(data?.pix || "")
+        setEmail(data?.email || "")
+        setCnpj(data?.cnpj || "")
+        setCnae(data?.cnae || "")
+        setRegiao(data?.regiao || "")
+        setSegmento(data?.segmento || "")
+    }, [data])
     const [msg, setMsg] = useState("")
     const [nome, setNome] = useState("")
     const [telefone, setTelefone] = useState("")
     // const [cep, setCep] = useState("")
     const [descricao, setDescricao] = useState("")
     const [agencia, setAgencia] = useState("")
+    const [banco, setBanco] = useState("")
     const [contaCorrente, setContaCorrente] = useState("")
     const [pix, setPix] = useState("")
     const [email, setEmail] = useState("")
@@ -89,11 +91,11 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
     const [regiao, setRegiao] = useState("")
     const [segmento, setSegmento] = useState("")
 
-    const handleClickEditar_Perfil = e =>{
-        
+    const handleClickEditar_Perfil = e => {
+
         setPopUp(popBox);
         e.preventDefault()
-        Axios.put(`https://socieloo-back.onrender.com/api/v1/ong/${id}`,{
+        Axios.put(`https://socieloo-back.onrender.com/api/v1/ong/${id}`, {
             nome: nome,
             telefone: telefone,
             descricao: descricao,
@@ -102,8 +104,8 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
             pix: pix,
             regiao: regiao,
             segmento: segmento,
-            cnae:cnae,
-            banco: data.banco,
+            cnae: cnae,
+            banco: banco,
             cep: data.cep,
             email: data.email,
             cpf: data.cpf,
@@ -117,11 +119,11 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
     }
     const popBox = (
         <section className="popup">
-          <div className="boxpopup">
-            <i class="fa-solid fa-circle-check"></i>
-            <p>Dados atualizados com sucesso!</p>
-            <div className="progress-bar"></div>
-          </div>
+            <div className="boxpopup">
+                <i class="fa-solid fa-circle-check"></i>
+                <p>Dados atualizados com sucesso!</p>
+                <div className="progress-bar"></div>
+            </div>
         </section>
     )
 
@@ -136,16 +138,16 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
                         <input type="text" id="nome" name="nome" value={nome} onChange={e => setNome(e.target.value)} />
 
                         <label for="telefone">Telefone</label>
-                        <input type="tel" id="telefone" name="telefone" value={telefone} onChange={e=> setTelefone(e.target.value)} />
+                        <input type="tel" id="telefone" name="telefone" value={telefone} onChange={e => setTelefone(e.target.value)} />
 
                         {/* <label for="cep">CEP</label>
                         <input type="text" id="cep" name="cep" value={cep} onChange={e=> setCep(e.target.value)} /> */}
 
                         <label for="cnpj">CNPJ</label>
-                        <input type="text" name="cnpj" id="cnpj" value={cnpj} onChange={e=> setCnpj(e.target.value)} disabled/>
+                        <input type="text" name="cnpj" id="cnpj" value={cnpj} onChange={e => setCnpj(e.target.value)} disabled />
 
                         <label for="cnae">Cnae</label>
-                        <input type="text" name="cnae" list="cnae" value={cnae} onChange={e=> setCnae(e.target.value)} required/>
+                        <input type="text" name="cnae" list="cnae" value={cnae} onChange={e => setCnae(e.target.value)} required />
                         <datalist name="cnae" id="cnae" className="select-regiao">
                             <option value="#" selected disabled>Selecione uma opção</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS">9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS</option>
@@ -157,7 +159,7 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
                             <option value="Outro">Outro</option>
                         </datalist>
                         <label for="regiao">Região</label>
-                        <input type="text" name="regiao" list="regiao" value={regiao} onChange={e=> setRegiao(e.target.value)} required/>
+                        <input type="text" name="regiao" list="regiao" value={regiao} onChange={e => setRegiao(e.target.value)} required />
                         <datalist name="regiao" id="regiao" className="cad-select" >
                             <option value="#" selected disabled>Selecione uma opção</option>
                             <option value="Zona Norte">Zona Norte</option>
@@ -169,8 +171,8 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
                     </div>
 
                     <div className="collum">
-                        <label for="select-regiao"className="select-label">Qual a causa da sua ONG?</label>
-                        <input type="text" name="segmento" list="segmento" value={segmento} onChange={e=> setSegmento(e.target.value)} required/>
+                        <label for="select-regiao" className="select-label">Qual a causa da sua ONG?</label>
+                        <input type="text" name="segmento" list="segmento" value={segmento} onChange={e => setSegmento(e.target.value)} required />
                         <datalist name="segmento" id="segmento" className="select-regiao" >
                             <option value="#" selected disabled>Selecione uma opção</option>
                             <option value="Saúde">Saúde</option>
@@ -183,22 +185,25 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
                             <option value="Outro">Outro</option>
                         </datalist>
                         <label for="descricao">Descrição</label>
-                        <textarea name="descricao" id="descricao" value={descricao} onChange={e=> setDescricao(e.target.value)} ></textarea>
+                        <textarea name="descricao" id="descricao" value={descricao} onChange={e => setDescricao(e.target.value)} ></textarea>
                         <label for="agencia" className="agencia">Agência</label>
-                        <input type="text" id="agencia" name="agencia" value={agencia} onChange={e=> setAgencia(e.target.value)} />
+                        <input type="text" id="agencia" name="agencia" value={agencia} onChange={e => setAgencia(e.target.value)} />
 
                         <label for="contaCorrente">Conta</label>
-                        <input type="text" id="contaCorrente" name="contaCorrente" value={contaCorrente} onChange={e=> setContaCorrente(e.target.value)} />
+                        <input type="text" id="contaCorrente" name="contaCorrente" value={contaCorrente} onChange={e => setContaCorrente(e.target.value)} />
+
+                        <label for="banco" className="banco">Banco</label>
+                        <input type="text" id="banco" name="banco" value={banco} onChange={e => setBanco(e.target.value)} />
 
                         <label for="pix">Pix</label>
-                        <input type="text" id="pix" name="pix" value={pix} onChange={e=> setPix(e.target.value)} />
+                        <input type="text" id="pix" name="pix" value={pix} onChange={e => setPix(e.target.value)} />
                     </div>
                 </div>
 
                 <div className="form__button">
-                <button type="submit" className="button-as">Alterar</button>
+                    <button type="submit" className="button-as">Alterar</button>
                 </div>
-                
+
             </form>
         </>
     )
@@ -209,19 +214,19 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
     const [email, setEmail] = useState("")
     const popBox = (
         <section className="popup">
-          <div className="boxpopup">
-            <i class="fa-solid fa-circle-check"></i>
-            <p>Seu email foi alterado com sucesso!</p>
-            <div className="progress-bar"></div>
-            
-          </div>
+            <div className="boxpopup">
+                <i class="fa-solid fa-circle-check"></i>
+                <p>Seu email foi alterado com sucesso!</p>
+                <div className="progress-bar"></div>
+
+            </div>
         </section>
     )
-    const handleClickAlterarEmail = e =>{
-         setPopUp(popBox);
+    const handleClickAlterarEmail = e => {
+        setPopUp(popBox);
         e.preventDefault()
         console.log(email);
-        Axios.put(`https://socieloo-back.onrender.com/api/v1/ong/${id}`,{
+        Axios.put(`https://socieloo-back.onrender.com/api/v1/ong/${id}`, {
             nome: data.nome,
             telefone: data.telefone,
             descricao: data.descricao,
@@ -230,20 +235,20 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
             pix: data.pix,
             regiao: data.regiao,
             segmento: data.segmento,
-            cnae:data.cnae,
+            cnae: data.cnae,
             banco: data.banco,
             cep: data.cep,
             cpf: data.cpf,
             cnpj: data.cnpj,
-            senha:data.senha,
+            senha: data.senha,
             email: email,
         }).then((response) => {
-           
+
             console.log(response);
             setTimeout(() => {
                 setPopUp("")
                 window.location.pathname = "/gerenciamento-ong"
-            }, 2000); 
+            }, 2000);
 
         })
     }
@@ -258,7 +263,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" value={data?.email} />
                 <label for="newEmail">Email novo</label>
-                <input type="email" id="newEmail" name="newEmail" onChange={e => setEmail(e.target.value)}/>
+                <input type="email" id="newEmail" name="newEmail" onChange={e => setEmail(e.target.value)} />
                 <button type="submit" className="button-as">Alterar</button>
             </form>
             {popUp}
@@ -266,8 +271,8 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
     )
 }
 
-function Alterar_Senha({ stepE, setEStep, data, id}) {
-    
+function Alterar_Senha({ stepE, setEStep, data, id }) {
+
     const [msg, setMsg] = useState("")
     const [senhaFraca, setSenhaFraca] = useState("")
     const [senha, setSenha] = useState("")
@@ -285,12 +290,12 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
 
     const popBox = (
         <section className="popup">
-          <div className="boxpopup">
-            <i class="fa-solid fa-circle-check"></i>
-            <p>Sua senha foi alterada com sucesso!</p>
-            <div className="progress-bar"></div>
-            
-          </div>
+            <div className="boxpopup">
+                <i class="fa-solid fa-circle-check"></i>
+                <p>Sua senha foi alterada com sucesso!</p>
+                <div className="progress-bar"></div>
+
+            </div>
         </section>
     )
     const [popUp, setPopUp] = useState("")
@@ -299,7 +304,7 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
 
         e.preventDefault()
 
-        if(senhaAtual == data.senha){
+        if (senhaAtual == data.senha) {
             if (!senhaForte(senha)) {
                 setSenhaFraca('Senha fraca');
                 setSenhaErrada("")
@@ -311,7 +316,7 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                     return;
                 } else {
                     setSenhaDiferente('');
-                    Axios.put(`https://socieloo-back.onrender.com/api/v1/ong/${id}`,{
+                    Axios.put(`https://socieloo-back.onrender.com/api/v1/ong/${id}`, {
                         nome: data.nome,
                         telefone: data.telefone,
                         descricao: data.descricao,
@@ -320,7 +325,7 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                         pix: data.pix,
                         regiao: data.regiao,
                         segmento: data.segmento,
-                        cnae:data.cnae,
+                        cnae: data.cnae,
                         banco: data.banco,
                         cep: data.cep,
                         email: data.email,
@@ -334,15 +339,15 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                         setTimeout(() => {
                             setPopUp("");
                             window.location.pathname = "/gerenciamento-ong"
-                        }, 2000); 
+                        }, 2000);
                     })
                 }
             }
-        }else{
+        } else {
             setSenhaErrada("Senha atual está errada")
         }
-        
-    
+
+
     }
 
 
@@ -353,27 +358,27 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
                 <p className="mensagem-as">{msg}</p>
                 <div>
                     <label for="senha">Senha atual</label>
-                    <input type="password" name="senha" id="senha"  onChange={e => setSenhaAtual(e.target.value)}/>
+                    <input type="password" name="senha" id="senha" onChange={e => setSenhaAtual(e.target.value)} />
                     <p className="senha-fraca">{senhaErrada}</p>
                 </div>
 
                 <div>
                     <label for="novaSenha">Nova senha</label>
-                    <input type="password" name="novaSenha" id="novaSenha" onChange={e => setNovaSenha(e.target.value)}/>
+                    <input type="password" name="novaSenha" id="novaSenha" onChange={e => setNovaSenha(e.target.value)} />
                     <p className="senha-fraca">{senhaFraca}</p>
                 </div>
 
                 <div>
                     <label for="repeteSenha">Repita nova senha</label>
-                    <input type="password" name="repeteSenha" id="repeteSenha" onChange={e => setSenha(e.target.value)}/>
+                    <input type="password" name="repeteSenha" id="repeteSenha" onChange={e => setSenha(e.target.value)} />
                     <p className="senha-fraca">{senhaDiferente}</p>
                 </div>
 
                 <button type="submit" className="button-as" href="/gerenciamento-ong">Salvar alterações</button>
 
             </form>
-            
-         {popUp}
+
+            {popUp}
         </>
     )
 }
@@ -381,27 +386,27 @@ function Alterar_Senha({ stepE, setEStep, data, id}) {
 function Deletar_Conta({ stepE, setEStep, data, id }) {
     function Delete() {
         Axios.delete("https://socieloo-back.onrender.com/api/v1/ong/" + id)
-        .then((response) => {
-            setPopUp(popBox);
-            console.log(response.data);        
-            localStorage.removeItem("id");
-            localStorage.removeItem("tipo");
-            setTimeout(() => {
-                window.location.pathname = "/"
-            }, 2000); 
-        })
-        
+            .then((response) => {
+                setPopUp(popBox);
+                console.log(response.data);
+                localStorage.removeItem("id");
+                localStorage.removeItem("tipo");
+                setTimeout(() => {
+                    window.location.pathname = "/"
+                }, 2000);
+            })
+
     }
     const [deletar, setDeletar] = useState(false)
     const [msg, setMsg] = useState("")
 
     const popBox = (
         <section className="popup">
-          <div className="boxpopup">
-            <i class="fa-solid fa-circle-check"></i>
-            <p>Sua ONG foi deletada com sucesso!</p>
-            <div className="progress-bar"></div>
-          </div>
+            <div className="boxpopup">
+                <i class="fa-solid fa-circle-check"></i>
+                <p>Sua ONG foi deletada com sucesso!</p>
+                <div className="progress-bar"></div>
+            </div>
         </section>
     )
     const [popUp, setPopUp] = useState("")
