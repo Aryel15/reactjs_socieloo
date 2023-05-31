@@ -424,4 +424,7 @@ label[for="bt_menu"]{
         justify-content: center;
         align-items: center;
     }
+    .links ul{ 
+        display: block;
+    }
 }

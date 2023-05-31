@@ -195,7 +195,7 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                         <option value="Saúde">Saúde</option>
                         <option value="Educação">Educação</option>
                         <option value="Cidadania">Cidadania</option>
-                        <option value="Cultura ou esporte">Cultura ou esporte</option>
+                        <option value="Cultura e esporte">Cultura e esporte</option>
                         <option value="Gênero e diversidade">Gênero e diversidade</option>
                         <option value="Meio ambiente">Meio ambiente</option>
                         <option value="Proteção Animal">Proteção Animal</option>

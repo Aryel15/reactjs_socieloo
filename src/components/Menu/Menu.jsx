@@ -8,13 +8,13 @@ export default function Menu() {
 
     let logoSocieloo;
   
-    if (window.location.pathname.startsWith('/ong/')) {
+    if (window.location.pathname.startsWith('/ong/') || window.location.pathname.startsWith('/ongs/')) {
         logoSocieloo = '../../imgs/Socieloo 1.png';
     } else {
         logoSocieloo = './imgs/Socieloo 1.png';
     }
     let menuIcon
-    if (window.location.pathname.startsWith('/ong/')) {
+    if (window.location.pathname.startsWith('/ong/') || window.location.pathname.startsWith('/ongs/')) {
         menuIcon = '../imgs/menu.png';
     } else {
         menuIcon = './imgs/menu.png';
@@ -48,26 +48,26 @@ export default function Menu() {
                     <li className="links">
                         <a href="#" className="link" accesskey="2">Segmentos▾</a>
                         <ul>
-                            <li className="sublink"><a href="/#Cidadania">Cidadania</a></li>
-                            <li className="sublink"><a href="/#Cultura e Esporte">Cultura e Esportes</a></li>
-                            <li className="sublink"><a href="/#Educação">Educação</a></li>
-                            <li className="sublink"><a href="/#Gênero e Diversidade">Gênero e Diversidade</a></li>
-                            <li className="sublink"><a href="/#Meio Ambiente">Meio Ambiente</a></li>
-                            <li className="sublink"><a href="/#Proteção Animal">Proteção Animal</a></li>
-                            <li className="sublink"><a href="/#Saúde">Saúde</a></li>
+                            <li className="sublink"><a href="/ongs/Cidadania">Cidadania</a></li>
+                            <li className="sublink"><a href="/ongs/Cultura e Esporte">Cultura e Esportes</a></li>
+                            <li className="sublink"><a href="/ongs/Educação">Educação</a></li>
+                            <li className="sublink"><a href="/ongs/Gênero e Diversidade">Gênero e Diversidade</a></li>
+                            <li className="sublink"><a href="/ongs/Meio Ambiente">Meio Ambiente</a></li>
+                            <li className="sublink"><a href="/ongs/Proteção Animal">Proteção Animal</a></li>
+                            <li className="sublink"><a href="/ongs/Saúde">Saúde</a></li>
                         </ul>
                     </li>
                     <li className="links">
                         <a href="#" className="link" accesskey="3">Região▾</a>
                         <ul>
-                            <li className="sublink"><a href="/#Zona Leste">Zona Leste</a></li>
-                            <li className="sublink"><a href="/#Zona Norte">Zona Norte</a></li>
-                            <li className="sublink"><a href="/#Centro">Centro</a></li>
-                            <li className="sublink"><a href="/#Zona Oeste">Zona Oeste</a></li>
-                            <li className="sublink"><a href="/#Zona Sul">Zona Sul</a></li>
+                            <li className="sublink"><a href="/ongs/Zona Leste">Zona Leste</a></li>
+                            <li className="sublink"><a href="/ongs/Zona Norte">Zona Norte</a></li>
+                            <li className="sublink"><a href="/ongs/Centro">Centro</a></li>
+                            <li className="sublink"><a href="/ongs/Zona Oeste">Zona Oeste</a></li>
+                            <li className="sublink"><a href="/ongs/Zona Sul">Zona Sul</a></li>
                         </ul>
                     </li>
-                    <li className="links">
+                    <li className="links acess">
                         <a href="#" className="link" accesskey="4">Acessibilidade▾</a>
                         <ul>
                             <li className="atalho"><a href="#conteudo" accesskey="1" title="Ir para o conteúdo">Conteúdo[1]↓</a></li>

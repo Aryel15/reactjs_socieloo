@@ -21,6 +21,7 @@ import Cadastro_Ong from './Cadastro_Ong/Cadastro_Ong';
 import Perfil_Admin from './Perfil_Admin/Perfil_Admin';
 import Cadastro_Admin from './Cadastro_Admin/Cadastro_Admin';
 import NotFound from './404/NotFound';
+import Ongs from './Ongs/Ongs';
 
 export default function Router() {
     return (
@@ -35,6 +36,7 @@ export default function Router() {
                 <Route path='/cadastro' element={<Cadastro />} />
                 <Route path='/cadastro-ong' element={<Cadastro_Ong />} />
                 <Route path='/ong/:id' element={<Ong />} />
+                <Route path='/ongs/:tipo' element={<Ongs />} />
                 <Route path='/ong' element={<Ong />} />
                 <Route path='/faq' element={<Faq />} />
                 <Route path='/perfil' element={<Perfil_User />} />

@@ -123,7 +123,7 @@ function Relatorios() {
         Axios.get("http://localhost:8080/api/v1/user/cadastramentoOngMesPassado")
         .then((response) =>{
             userdata.push(["Mês passado", parseInt(response.data)])
-            setGraf4(<Chart chartType="BarChart" width="100%" height="400px" data={userdata?.slice(0, 3)} options={options} />)
+            setGraf4(<Chart chartType="BarChart" width="90%" height="400px" data={userdata?.slice(0, 3)} options={options} />)
         })
         //Usuários cadastradas este mês
         Axios.get("http://localhost:8080/api/v1/user/cadastramentoOng")
@@ -163,7 +163,7 @@ function Relatorios() {
                 const options = {
                     colors: ["#00a1ff", "#005485", "#0072b5", "#003b5e", "#3cb7ff", "#6fcaff", "#b1e2ff"]
                   };
-                setGraf2(<Chart chartType="PieChart" options={options} data={segmentosRef.current.slice(0, 8)} width={"600px"} height={"400px"}/>);
+                setGraf2(<Chart chartType="PieChart" width="100%" height="400px" options={options} data={segmentosRef.current.slice(0, 8)}/>);
             } catch (err) {
                 console.log(err);
             }
@@ -224,22 +224,26 @@ return (
             </div>
         </section>
         <section className="dados">
-            <div className="grafico graf1">
-                <h4>Total de Ongs Cadastradas por região:</h4>
-                {loading}
-                {graf1}
+            <div className="rowG">
+                <div className="grafico graf1">
+                    <h4>Total de Ongs Cadastradas por região:</h4>
+                    {loading}
+                    {graf1}
+                </div>
+                <div className="grafico graf2">
+                    <h4>Total de Ongs Cadastradas por segmento:</h4>
+                    {graf2}
+                </div>
             </div>
-            <div className="grafico graf2">
-                <h4>Total de Ongs Cadastradas por segmento:</h4>
-                {graf2}
-            </div>
-            <div className="grafico graf2">
-                <h4>Total de Ongs Cadastradas por mês:</h4>
-                {graf3}
-            </div>
-            <div className="grafico graf2">
-                <h4>Total de Usuários Cadastrados por mês:</h4>
-                {graf4}
+            <div className="rowG">
+                <div className="grafico graf2">
+                    <h4>Total de Ongs Cadastradas por mês:</h4>
+                    {graf3}
+                </div>
+                <div className="grafico graf2">
+                    <h4>Total de Usuários Cadastrados por mês:</h4>
+                    {graf4}
+                </div>
             </div>
         </section>
     </>
@@ -329,9 +333,9 @@ function ONGs() {
     const [conteudo, setConteudo] = useState('Todas')
     const [popUpq, setPopUpq] = useState()
     const [popUpDel, setPopUpDel] = useState()
-    const [ongsFav, setOngsFav] = useState()
-    const onggFav = []
-    const Favoritas = []
+    const [favoritas, setFavoritas] = useState([]);
+    const [filterNome, setfilterNome] = useState('Todas')
+    const [nome, setNome] = useState("")
     useEffect(() => {
         Axios.get('http://localhost:8080/api/v1/ong')
             .then((response) => {
@@ -339,23 +343,13 @@ function ONGs() {
             }).catch((err) => console.log(err))
         Axios.get('http://localhost:8080/api/v1/ong/ongFavoritadas')
             .then((response) => {
-                setOngsFav(response.data)
-                for(var i = 0; i < response.data.length; ++i){
-                    onggFav.push(Object.assign({}, ongsFav[i]))
-                }
-                Favoritas = response.data.map((item) => {
+                const data = response.data.map((item) => {
                     return {
                       nome: item[0],
                       favoritos: item[1]
                     }
-                  });
-                  console.log(response.data);
-                  console.log(response.data.map((item) => {
-                    return {
-                      nome: item[0],
-                      favoritos: item[1]
-                    }
-                  }));
+                });
+                setFavoritas(data)
             }).catch((err) => console.log(err))
 
     }, [])
@@ -392,6 +386,9 @@ function ONGs() {
                 }, 2000);
             })
     }
+    function handleClickSearch() {
+        setfilterNome(nome)
+      }
     return (
         <>
 
@@ -399,9 +396,8 @@ function ONGs() {
                 <aside className="menu-ongs">
                     <ul className="options__itens-ongs">
                         <li className={conteudo === "Todas" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Todas")}><i class="fa-solid fa-shield-dog"></i> Todas</a></li>
-                        <li className={conteudo === "Favoritos" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Favoritos")}><i class="fa-regular fa-star"></i> Favoritos</a></li>
+                        <li className={conteudo === "Favoritos" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Favoritos")}><i class="fa-solid fa-heart"></i> Favoritos</a></li>
                         <li className={conteudo === "Comentários" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Comentários")}><i class="fa-regular fa-comment"></i>Comentários</a></li>
-                        <li className={conteudo === "Denuncias" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Denuncias")}><i class="fa-solid fa-triangle-exclamation"></i>Denuncias</a></li>
                     </ul>
                 </aside>
                 <section className="ongs-aside">
@@ -410,16 +406,20 @@ function ONGs() {
                         conteudo === 'Todas' ? (
                             <>
                                 <div className="buscar">
-                                    <input type="text" placeholder='Pesquise a ong por nome' />
+                                    <input type="text" placeholder='Pesquise a ong por nome' onChange={e=> setNome(e.target.value)}/>
                                     <div className="search">
-                                        <a href="javascript:void(0)">
+                                        <a href="javascript:void(0)" onClick={handleClickSearch}>
                                             <i className="fa-solid fa-magnifying-glass"></i>
                                         </a>
                                     </div>
+                                    <a className='todas' href='javascript:void(0);' onClick={()=> setfilterNome('Todas')}>Todas</a>
                                 </div>
                                 <section className='ongs'>
                                     {
-                                        ongs?.map(ong => (
+                                        ongs?.filter(
+                                            ong =>
+                                              (filterNome === 'Todas' || ong.nome.toLowerCase() === filterNome.toLowerCase())
+                                          ).map(ong => (
                                             <div key={ong.id} className="card_admin">
                                                 <div className="infos">
                                                     <h3>{ong.nome}</h3>
@@ -435,22 +435,21 @@ function ONGs() {
                                             </div>
                                         ))
                                     }
+                                    
                                 </section>
                             </>) : null
                     }
+
                     {
                         conteudo === "Favoritos" ?
                         <section className='ongs'>
-                        <p>Apareçam por favor!!!!!!</p>
                         {
-                            Favoritas?.map(ong => (
+                            favoritas?.map(ong => (
                                 <div key={ong.nome} className="card_admin">
                                     <div className="infos">
                                         <h3>{ong.nome}</h3>
                                     </div>
-                                    <div className="actions">
-                                        <a href={"/ong/" + ong.id}><i class="fa-solid fa-eye"></i>{ong.favoritos}</a>
-                                    </div>
+                                    <p className='favoritas'>{ong.favoritos}<i class="fa-solid fa-heart"></i></p>
                                 </div> 
                             ))
                         } 
