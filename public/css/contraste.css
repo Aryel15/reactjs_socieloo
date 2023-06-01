@@ -432,3 +432,24 @@ label[for="termos"]>a{
 .edit__options{
   border-right: 2px solid #000;
 }
+
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*pagina ong*/
+#root > main.OngPage > aside.edit__options > ul.options__itens{
+  background-color: black;
+}
+
+#root > main.OngPage > section.section__ong{
+  box-shadow: 1px 2px 7px #fff;
+}
+
+#root > main.OngPage > section.section__ong > .ong__informations{
+  color: black;
+}
+.OngPage,.options__photos, .options__photos h1, .edit__options, .options__itens, ul.options__itens > li, ul.options__itens > li > a, #root > main > section > main > section.section-seu-codigo.container, .form_message, #box-artigo > div > form > div.form_grupo > div.submit {
+  font-size: 1em;
+}
+#root>main>section>section.ong__imagens>div>p{
+  color: white;
+}
