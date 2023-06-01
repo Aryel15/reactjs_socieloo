@@ -9,9 +9,10 @@ export default function Perfil_Ong() {
 
     var name;
     const [data, setData] = useState()
+    const [favoritos, setFavoritos] = useState()
     const [stepE, setEStep] = React.useState("Editar_Perfil");
     const editar = {
-        Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep} data={data} id={id} />,
+        Editar_Perfil: <Editar_Perfil step={stepE} setStep={setEStep} data={data} id={id} favoritos={favoritos}/>,
         Alterar_Senha: <Alterar_Senha step={stepE} setStep={setEStep} data={data} id={id} />,
         Alterar_Email: <Alterar_Email step={stepE} setStep={setEStep} data={data} id={id} />,
         Deletar_Conta: <Deletar_Conta step={stepE} setStep={setEStep} data={data} id={id} />,
@@ -24,6 +25,13 @@ export default function Perfil_Ong() {
                 .then((response) => {
                     setData(response.data);
                     console.log(response.data);
+                    Axios.get("https://socieloo-back.onrender.com/api/v1/ong/ongFavoritadas")
+                    .then((response) => {
+                        const result = response.data.find(item => item[0] === data.nome);
+                        setFavoritos(result[1])
+                        console.log(result[1]);
+                        
+                    })
                 })
         }
     }, [])
@@ -59,7 +67,7 @@ export default function Perfil_Ong() {
     )
 }
 
-function Editar_Perfil({ stepE, setEStep, data, id }) {
+function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
 
     useEffect(_ => {
         setNome(data?.nome || "")
@@ -168,6 +176,12 @@ function Editar_Perfil({ stepE, setEStep, data, id }) {
                             <option value="Zona Leste">Zona Leste</option>
                             <option value="Zona Oeste">Zona Oeste</option>
                         </datalist>
+                        <div className="card_fav">
+                            <div className="infos">
+                                <h3>Favoritos</h3>
+                            </div>
+                            <p className='favoritas'>{favoritos}<i class="fa-solid fa-heart"></i></p>
+                        </div> 
                     </div>
 
                     <div className="collum">

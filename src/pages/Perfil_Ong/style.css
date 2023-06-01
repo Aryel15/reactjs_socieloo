@@ -365,6 +365,19 @@
     width: 100%;
     margin-top: 50px;
 }
+.card_fav{
+    display: flex;
+    flex-direction: row;
+    padding:8.5px;
+    border: 1px solid rgb(81, 81, 81);
+    border-radius: 5px;
+    gap: 5px 50px;
+    width: fit-content;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 52px;
+}
 
 /*------------ Media ---*/
 
