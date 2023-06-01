@@ -366,7 +366,7 @@
     margin-top: 50px;
 }
 .card_fav{
-    display: flex;
+    display: none;
     flex-direction: row;
     padding:8.5px;
     border: 1px solid rgb(81, 81, 81);
