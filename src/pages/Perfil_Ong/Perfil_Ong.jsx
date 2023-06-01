@@ -176,7 +176,7 @@ function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
                             <option value="Zona Leste">Zona Leste</option>
                             <option value="Zona Oeste">Zona Oeste</option>
                         </datalist>
-                        <div className="card_fav">
+                        <div hidden className="card_fav">
                             <div className="infos">
                                 <h3>Favoritos</h3>
                             </div>
