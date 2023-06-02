@@ -9,10 +9,12 @@ import { useParams } from 'react-router-dom';
 export default function Ong() {
     const { id } = useParams()
     const idUser = localStorage.getItem("id")
+    const tipo = localStorage.getItem("tipo")
     const [ong, setOng] = useState(id != null ? true : false);
     const [data, setData] = useState()
     const [map, setMap] = useState(<p>...</p>)
     const [favorito, setFavorito] = useState(false)
+    const [favoritos, setFavoritos] = useState("")
 
     useEffect(() => {
         console.log(id);
@@ -20,6 +22,11 @@ export default function Ong() {
             .then((response) => {
                 setOng(true)
                 setData(response.data)
+                Axios.get("https://socieloo-back.onrender.com/api/v1/ong/ongFavoritadas")
+                .then((res) => {
+                    const result = res.data.find(item => item[0] === response.data.nome);
+                    setFavoritos(result[1])
+                })
             }, (err) => {
                 setOng(false)
                 console.log(err);
@@ -100,10 +107,16 @@ export default function Ong() {
                             <p href={data?.regiao} className="button">{data?.regiao}</p>
                             <br />
                         </div>
+                        {tipo === 'admin' || tipo === 'ong' ?                         
+                        <div className="btn_favoritar">
+                            <label htmlFor="favorito" className="check">{favoritos} Favoritos<i class="fa-regular fa-heart"></i></label>
+                        </div> 
+                        :
                         <div className="btn_favoritar">
                             <input type="checkbox" name="favorito" id="favorito" checked={favorito}/>
                             <label htmlFor="favorito" className={favorito == true ? "check" : "notcheck"} onClick={Favoritar} ><i class="fa-regular fa-heart"></i>Favoritar</label>
                         </div>
+                        }
                             {map}
                     </section>
                     {pages[step]}
