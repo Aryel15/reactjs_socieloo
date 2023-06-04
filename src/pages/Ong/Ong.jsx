@@ -233,47 +233,56 @@ async function copyURL() {
 }
 
 function Comentarios({ step, setStep, data, id }) {
+    const [comentario, setComentario] = useState()
+    const idUser = localStorage.getItem("id")
+    Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioOng/' + id)
+    .then((response) =>{
+        setComentario(response.data)
+    })
     return (
         <section className="secao_coments">
             <div className="informations__description">
 
-                <div id="coment_usuario">
-                    <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
-                    <div className="texto">
-                        <p id="comentarioLogado"><i>Seu comentário</i></p>
-                        <h4>@User_logado</h4>
-
-                        <div className="pos_editbotao">
-                            <button className="editbotao">Editar</button>
-                            <button className="editbotao">Deletar</button>
-                        </div><br />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </div>
-                </div>
-
-                <div className="coments">
-                    <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
-                    <div className="texto">
-                        <h4>@User</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </div>
-                </div>
-
-                <div className="coments">
-                    <div>
-                        <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
-                    </div>
-                    <div className="texto">
-                        <h4>@User</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </div>
-                </div>
+                    {comentario?.map((comentario) => (
+                        <div id={comentario.usuario.id == idUser ? "coment_usuario" : null} className={comentario.usuario.id == idUser ? null : "coments"}>
+                            <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
+                            <div className="texto">
+                                {comentario.usuario.id == idUser ? <p id="comentarioLogado"><i>Seu comentário</i></p> : null}
+                                
+                                <h4>@{comentario.usuario.nome}</h4>
+                                {
+                                    comentario.usuario.id == idUser ?
+                                    <div className="pos_editbotao">
+                                        <button className="editbotao">Editar</button>
+                                        <button className="editbotao">Deletar</button><br /> 
+                                    </div>: null
+                                }
+                                <p>{comentario.textoComentario}</p>
+                            </div>
+                        </div>
+                    ))}
 
             </div>
         </section>
     )
 }
 function Avaliar({ step, setStep, data, id }) {
+    const [rating, setRating] = useState(1);
+    const [text, setText] = useState("")
+    const idUser = localStorage.getItem("id")
+
+    const handleClick = (value) => {
+      setRating(value);
+    };
+    function enviarComentario(e){
+        e.preventDefault
+        Axios.post('https://socieloo-back.onrender.com/api/v1/comentario',{
+            ongId: id,
+            usuarioId: idUser,
+            textoComentario: text,
+            avaliacao: rating,
+        }).then((response) => console.log(response.data))
+    }
     return (
         <>
             <main className="main_content container">
@@ -282,14 +291,13 @@ function Avaliar({ step, setStep, data, id }) {
                         <div id="box-artigo" className="box-artigo">
                             <div className="container_form">
                                 <h1>Avaliação das ONGs</h1>
-                                <form className="form" action="#" method="post">
+                                <form className="form" action="javascript:void(0)" onSubmit={enviarComentario} method="post">
                                     <div className="avaliacao__container">
+                                    
                                         <ul className="avaliacao">
-                                            <li className="star-icon ativo" data-avaliacao="1"></li>
-                                            <li className="star-icon" data-avaliacao="2"></li>
-                                            <li className="star-icon" data-avaliacao="3"></li>
-                                            <li className="star-icon" data-avaliacao="4"></li>
-                                            <li className="star-icon" data-avaliacao="5"></li>
+                                        {[1, 2, 3, 4, 5].map((value) => (
+                                            <li className={value < rating ? "star-icon" : "star-icon ativo"} data-avaliacao="2" onClick={() => handleClick(value)}></li>
+                                        ))}
                                         </ul>
                                     </div>
 
@@ -297,7 +305,7 @@ function Avaliar({ step, setStep, data, id }) {
                                         <div className="form_message">
                                             <label for="message" className="form_message_label"> Escreva sua revisão aqui:</label>
                                             <textarea name="mensagem" id="message" cols="30" rows="3"
-                                                className="form_input message_input" required></textarea>
+                                                className="form_input message_input" onChange={(e) => setText(e.target.value)} required></textarea>
                                         </div>
                                         <div className="options__checkbox">
                                             <input type="checkbox" name="termos" id="termos" />
@@ -305,7 +313,6 @@ function Avaliar({ step, setStep, data, id }) {
                                                 condições</a></label>
                                         </div>
                                         <div className="submit">
-                                            <input type="hidden" name="acao" value="enviar" />
                                             <button type="submit" name="Submit" className="submit_btn">Enviar</button>
                                         </div>
                                     </div>
