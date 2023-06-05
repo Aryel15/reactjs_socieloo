@@ -107,15 +107,15 @@ export default function Ong() {
                             <p href={data?.regiao} className="button">{data?.regiao}</p>
                             <br />
                         </div>
-                        {tipo === 'admin' || tipo === 'ong' ?                         
+                        {tipo === 'admin' || tipo === 'ong' && idUser === id ?                         
                         <div className="btn_favoritar">
                             <label htmlFor="favorito" className="check">{favoritos} Favoritos<i class="fa-regular fa-heart"></i></label>
                         </div> 
-                        :
+                        : tipo === 'usuario' ?
                         <div className="btn_favoritar">
                             <input type="checkbox" name="favorito" id="favorito" checked={favorito}/>
                             <label htmlFor="favorito" className={favorito == true ? "check" : "notcheck"} onClick={Favoritar} ><i class="fa-regular fa-heart"></i>Favoritar</label>
-                        </div>
+                        </div> : null
                         }
                             {map}
                     </section>
@@ -238,6 +238,8 @@ function Comentarios({ step, setStep, data, id }) {
     const [newText, setNewText] = useState("")
     const [userText, setUserText] = useState("")
     const idUser = localStorage.getItem("id")
+    const tipo = localStorage.getItem("tipo")
+
     Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioOng/' + id)
     .then((response) =>{
         setComentario(response.data)
@@ -262,10 +264,10 @@ function Comentarios({ step, setStep, data, id }) {
             <div className="informations__description">
 
                     {comentario?.map((comentario) => (
-                        <div key={comentario.id} id={comentario.usuario.id == idUser ? "coment_usuario" : null} className={comentario.usuario.id == idUser ? null : "coments"}>
+                        <div key={comentario.id} id={comentario.usuario.id == idUser && tipo !== "ong" ? "coment_usuario" : null} className={comentario.usuario.id == idUser && tipo !== "ong" ? null : "coments"}>
                             <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
                             <div className="texto">
-                                {comentario.usuario.id == idUser ? <p id="comentarioLogado"><i>Seu comentário</i></p> : null}
+                                {comentario.usuario.id == idUser && tipo !== "ong" ? <p id="comentarioLogado"><i>Seu comentário</i></p> : null}
                                 <ul className="avaliacao">
                                         {[1, 2, 3, 4, 5].map((value) => (
                                             <li className={ value< comentario.avaliacao ? "star-icon-comment" : "star-icon-comment ativo"} ></li>
@@ -273,7 +275,7 @@ function Comentarios({ step, setStep, data, id }) {
                                 </ul>
                                 <h4>@{comentario.usuario.nome}</h4>
                                 {
-                                    comentario.usuario.id == idUser ? <>
+                                    comentario.usuario.id == idUser && tipo !== "ong"  ? <>
                                     <div className="pos_editbotao">
                                         <button className="editbotao" onClick={() => setEditar(true)}>Editar</button>
                                         <button className="editbotao">Deletar</button><br /> 
@@ -304,9 +306,9 @@ function Avaliar({ step, setStep, data, id }) {
     useEffect(() =>{
         Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/avaliacoes/'+ id)
         .then((response)=>{
-            setAvaliacao(response.data)
+            setAvaliacao(response.data[0])
         })
-    })
+    }, [])
 
     const handleClick = (value) => {
       setRating(value);
@@ -329,21 +331,21 @@ function Avaliar({ step, setStep, data, id }) {
                     <a href="/login" className='link'>Login</a>
                 </div>
             </main>
-            : tipo === "ong" ? 
+            : tipo === "ong" && idUser === id || tipo === 'admin' ? 
             <main className="main_content container">
                 <h1>Avaliações</h1>
                 <h3>Quantidade de avaliações:</h3>
                 <p>{avaliacao?.qtdAvaliacoes}</p>
-                <h3>Quantidade de avaliações:</h3>
+                <h3>Soma de avaliações:</h3>
                 <p>{avaliacao?.somaAvaliacoes}</p>
-                <h3>Quantidade de avaliações:</h3>
+                <h3>Média de avaliações:</h3>
                 <ul className="avaliacao">
                     {[1, 2, 3, 4, 5].map((value) => (
                         <li className={ value< avaliacao?.mediaAvaliacoes ? "star-icon-comment" : "star-icon-comment ativo"} ></li>
                     ))}
                 </ul>
             </main>
-            :       
+            : tipo === "usuario" ?  
             <main className="main_content container">
                 <section className="section-seu-codigo container">
                     <div className="content">
@@ -381,7 +383,7 @@ function Avaliar({ step, setStep, data, id }) {
                         <div className="clear"></div>
                     </div>
                 </section>
-            </main>}
+            </main> : null}
         </>
     )
 }
