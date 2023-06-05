@@ -244,7 +244,6 @@ function Comentarios({ step, setStep, data, id }) {
         const comentariou = response.data.find(
             (c) => c.usuario.id === idUser
           );
-    
       
     })
     function Salvar(e, id){
@@ -299,7 +298,15 @@ function Comentarios({ step, setStep, data, id }) {
 function Avaliar({ step, setStep, data, id }) {
     const [rating, setRating] = useState(1);
     const [text, setText] = useState("")
+    const [avaliacao, setAvaliacao] = useState()
     const idUser = localStorage.getItem("id")
+    const tipo = localStorage.getItem("tipo")
+    useEffect(() =>{
+        Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/avaliacoes/'+ id)
+        .then((response)=>{
+            setAvaliacao(response.data)
+        })
+    })
 
     const handleClick = (value) => {
       setRating(value);
@@ -322,7 +329,21 @@ function Avaliar({ step, setStep, data, id }) {
                     <a href="/login" className='link'>Login</a>
                 </div>
             </main>
-            :        
+            : tipo === "ong" ? 
+            <main className="main_content container">
+                <h1>Avaliações</h1>
+                <h3>Quantidade de avaliações:</h3>
+                <p>{avaliacao?.qtdAvaliacoes}</p>
+                <h3>Quantidade de avaliações:</h3>
+                <p>{avaliacao?.somaAvaliacoes}</p>
+                <h3>Quantidade de avaliações:</h3>
+                <ul className="avaliacao">
+                    {[1, 2, 3, 4, 5].map((value) => (
+                        <li className={ value< avaliacao?.mediaAvaliacoes ? "star-icon-comment" : "star-icon-comment ativo"} ></li>
+                    ))}
+                </ul>
+            </main>
+            :       
             <main className="main_content container">
                 <section className="section-seu-codigo container">
                     <div className="content">
