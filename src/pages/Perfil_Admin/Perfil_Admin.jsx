@@ -390,6 +390,12 @@ function ONGs() {
     const [favoritas, setFavoritas] = useState([]);
     const [filterNome, setfilterNome] = useState('Todas')
     const [nome, setNome] = useState("")
+    const [comentario, setComentario] = useState()
+    const [editar, setEditar] = useState(false)
+    const [newText, setNewText] = useState("")
+    const [userText, setUserText] = useState("")
+    const idUser = localStorage.getItem("id")
+
     useEffect(() => {
         Axios.get('https://socieloo-back.onrender.com/api/v1/ong')
             .then((response) => {
@@ -405,7 +411,10 @@ function ONGs() {
                 });
                 setFavoritas(data)
             }).catch((err) => console.log(err))
-
+        Axios.get('https://socieloo-back.onrender.com/api/v1/comentario')
+        .then((response) =>{
+            setComentario(response.data)
+        })
     }, [])
 
     function Deletar(id, nome) {
@@ -508,6 +517,26 @@ function ONGs() {
                             ))
                         } 
                         </section> : null
+                    }
+                    {
+                        conteudo === "Comentários" ?
+                        <section className='ongs'>
+                        {
+                        comentario?.map((comentario) => (<>
+                            <h3>Ong: {comentario.ong.nome}</h3>
+                            <div key={comentario.id}  className={"coments"}>
+                                <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
+                                <div className="texto">
+                                    <ul className="avaliacao">
+                                            {[1, 2, 3, 4, 5].map((value) => (
+                                                <li className={ value< comentario.avaliacao ? "star-icon-comment" : "star-icon-comment ativo"} ></li>
+                                            ))}
+                                    </ul>
+                                    <h4>@{comentario.usuario.nome}</h4>
+                                    <p>{comentario.textoComentario}</p>
+                                </div>
+                            </div></>
+                        ))}  </section>: null
                     }
                 {popUpDel}
                 {popUpq}

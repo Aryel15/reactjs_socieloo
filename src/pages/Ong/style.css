@@ -595,6 +595,22 @@ body.body-no_scroll {
 .star-icon:hover ~ .star-icon::before {
   content: '\2606';
 }
+.star-icon-comment {
+  list-style-type: none;
+  cursor: pointer;
+  color: #ffe500;
+  font-size: 20px;
+  /* alterar o tamanho das estrelas */
+}
+.star-icon-comment::before {
+  content: '\2605';
+}
+
+.star-icon-comment.ativo ~ .star-icon-comment::before {
+  content: '\2606';
+}
+
+
 .form_grupo {
   width: 100%;
   margin-bottom: 20px;
@@ -607,6 +623,10 @@ body.body-no_scroll {
 #box-artigo > div > form > div:nth-child(3) > div.submit,
 #box-artigo > div > form > div:nth-child(3) > div.submit button {
   font-size: 1em;
+}
+.textoComent{
+  border: none;
+  outline: none;
 }
 
 /* Responsividade */
@@ -757,5 +777,5 @@ body.body-no_scroll {
 }
 
 .container_form {
-  width: 70vw !important;
+  width: 100% ;
 }

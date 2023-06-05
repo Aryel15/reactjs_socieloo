@@ -4,7 +4,7 @@ export default function Card(props) {
 
     return (
         <>
-            <a href={props.link}>
+            <a href={props.link} key={props.nome}>
                 <div className="card">
                     <div className="img pa">
                         <img src={`../../../imgs/icons/${props.segmento}.png`} alt="" />

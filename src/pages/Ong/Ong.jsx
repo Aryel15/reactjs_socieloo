@@ -234,30 +234,60 @@ async function copyURL() {
 
 function Comentarios({ step, setStep, data, id }) {
     const [comentario, setComentario] = useState()
+    const [editar, setEditar] = useState(false)
+    const [newText, setNewText] = useState("")
+    const [userText, setUserText] = useState("")
     const idUser = localStorage.getItem("id")
     Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioOng/' + id)
     .then((response) =>{
         setComentario(response.data)
+        const comentariou = response.data.find(
+            (c) => c.usuario.id === idUser
+          );
+    
+      
     })
+    function Salvar(e, id){
+        e.preventDefault
+        console.log(id);
+        console.log(newText);
+/*         Axios.put('https://socieloo-back.onrender.com/api/v1/comentario'+ id,{
+            textoComentario: newText,
+        }).then((response) => {
+            console.log(response.data)
+            setEditar(false)
+        }) */
+    }
     return (
         <section className="secao_coments">
             <div className="informations__description">
 
                     {comentario?.map((comentario) => (
-                        <div id={comentario.usuario.id == idUser ? "coment_usuario" : null} className={comentario.usuario.id == idUser ? null : "coments"}>
+                        <div key={comentario.id} id={comentario.usuario.id == idUser ? "coment_usuario" : null} className={comentario.usuario.id == idUser ? null : "coments"}>
                             <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
                             <div className="texto">
                                 {comentario.usuario.id == idUser ? <p id="comentarioLogado"><i>Seu comentário</i></p> : null}
-                                
+                                <ul className="avaliacao">
+                                        {[1, 2, 3, 4, 5].map((value) => (
+                                            <li className={ value< comentario.avaliacao ? "star-icon-comment" : "star-icon-comment ativo"} ></li>
+                                        ))}
+                                </ul>
                                 <h4>@{comentario.usuario.nome}</h4>
                                 {
-                                    comentario.usuario.id == idUser ?
+                                    comentario.usuario.id == idUser ? <>
                                     <div className="pos_editbotao">
-                                        <button className="editbotao">Editar</button>
+                                        <button className="editbotao" onClick={() => setEditar(true)}>Editar</button>
                                         <button className="editbotao">Deletar</button><br /> 
-                                    </div>: null
+                                        {
+                                            editar == true ? 
+                                            <button className="editbotao" onClick={() => Salvar(comentario.id)}>Salvar</button> : null
+                                        }
+                                    </div>
+                                    <input type="text" className='textoComent' value={comentario.textoComentario} readOnly={!editar} onChange={(e) => setNewText(e.target.value)}/>
+                                    </>: <p>{comentario.textoComentario}</p>
                                 }
-                                <p>{comentario.textoComentario}</p>
+                                
+                                
                             </div>
                         </div>
                     ))}
@@ -285,6 +315,14 @@ function Avaliar({ step, setStep, data, id }) {
     }
     return (
         <>
+        {idUser === null ? 
+            <main className="main_content container">
+                <h1>Faça login para avaliar</h1>
+                <div className="botão">
+                    <a href="/login" className='link'>Login</a>
+                </div>
+            </main>
+            :        
             <main className="main_content container">
                 <section className="section-seu-codigo container">
                     <div className="content">
@@ -322,7 +360,7 @@ function Avaliar({ step, setStep, data, id }) {
                         <div className="clear"></div>
                     </div>
                 </section>
-            </main>
+            </main>}
         </>
     )
 }
