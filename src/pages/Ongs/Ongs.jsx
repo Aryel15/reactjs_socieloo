@@ -51,7 +51,7 @@ export default function Ongs() {
       <main className="main_home">
         <section id="main-index">
           <h1>{title}</h1>
-          <div className="section__cards">
+          <div className="section__cards" id='conteudo'>
             {loading}
             {
               data.filter(

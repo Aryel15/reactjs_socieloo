@@ -54,7 +54,7 @@ export default function Admin() {
             
                 <section id="cadastro__section">
                 
-                <div className="section__form">
+                <div className="section__form"  id='conteudo'>
                 <div className="form__admin">
                     <form id="admin" action="" onSubmit={handleClickCadastro}>
                         <h2>Admin</h2>

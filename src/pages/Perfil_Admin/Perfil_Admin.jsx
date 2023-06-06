@@ -39,7 +39,7 @@ export default function Perfil_Admin() {
         <>
             {/*<Menu />*/}
             <main id="edit-admin" >
-                <div className="bar-admin">
+                <div className="bar-admin" id='conteudo'>
                     <div className="perfil-admin">
                         <i class="fa-solid fa-screwdriver-wrench"></i>
                         <h2>Perfil de Admin</h2>

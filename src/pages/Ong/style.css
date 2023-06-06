@@ -176,6 +176,7 @@ ul {
   font-weight: normal;
   text-align: left;
   font-size: 1em;
+  overflow-x: scroll;
 }
 
 #description__social {
@@ -628,6 +629,12 @@ body.body-no_scroll {
   border: none;
   outline: none;
 }
+.main-comentarios{
+  overflow-y: scroll;
+  height: 65vh;
+  display: flex;
+  justify-content: flex-start;
+}
 
 /* Responsividade */
 
@@ -666,7 +673,7 @@ body.body-no_scroll {
 
 @media screen and (max-width: 650px) {
   .section__ong {
-    margin-top: 80px;
+    margin-top: 0px;
   }
 }
 

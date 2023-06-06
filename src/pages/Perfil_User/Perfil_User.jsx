@@ -58,7 +58,7 @@ export default function Perfil_User() {
                     <li className={stepE === "Deletar_Conta" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Deletar_Conta")}><i className='bx bxs-message-square-x'></i> Deletar conta</a></li>
                 </ul>
             </aside>
-            <section className="edit__content">
+            <section className="edit__content"  id='conteudo'>
             {editar[stepE]}
             </section>
         </main>

@@ -108,7 +108,7 @@ export function Etapa1({ step, setStep, cadastro, valorCadastro }) {
     }
   return (
     <section id="cadastro__section">
-        <div className="section__form">
+        <div className="section__form" id='conteudo'>
             <form action="#" method="post">
                 <p className='mensagem'>{mensagem}</p>
                 <h1 className="section__title">Cadastre sua ONG</h1>

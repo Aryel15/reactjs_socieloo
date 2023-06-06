@@ -9,7 +9,7 @@ export default function Acessibilidade() {
       <Menu/>
       <h1 id="title-acess">Acessibilidade</h1>
         <section id="content">
-            <p className="content__text-acess">Este site foi desenvolvido para que pessoas com deficiência visual, baixa
+            <p className="content__text-acess" id='conteudo'>Este site foi desenvolvido para que pessoas com deficiência visual, baixa
                 visão, daltonismo, deficiência
                 auditiva e mobilidade reduzida possam navegar por meio de recursos como alto contraste, aumento de
                 fonte, teclas de atalho, tradução para a Língua Brasileira de Sinais e navegação por teclado.<br/>

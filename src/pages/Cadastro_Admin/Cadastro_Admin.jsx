@@ -69,7 +69,7 @@ export default function Cadastro_Admin() {
             
                 <section id="cadastro__section">
                 
-                <div className="section__form">
+                <div className="section__form"  id='conteudo'>
                 <div className="form__admin">
                     <form id="admin" action="" onSubmit={Cadastrar}>
                         <p className="mensagem">{mensagem}</p>

@@ -56,7 +56,7 @@ export default function Cadastro_User() {
   return (
     <>
       <Menu />
-      <main className='cad-user'>
+      <main className='cad-user' id='conteudo'>
         <img src="../imgs/doacaoAnimal.png" alt=""/>
         {pages[step]}
         <img src="../imgs/cadeirarodas.png" alt=""/>

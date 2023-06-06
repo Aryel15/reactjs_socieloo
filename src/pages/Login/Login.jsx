@@ -49,7 +49,7 @@ export default function Login() {
                 <img src="../imgs/gestora.png" alt="" />
                 {
                     <section id="cadastro__section">
-                        <div className="section__form">
+                        <div className="section__form" id='conteudo'>
                             <div className="form__login">
                                 <form id="login" action="javascript:void(0)" onSubmit={handleClickCadastro}>
                                     <h2>Bem vindo!</h2>
@@ -77,7 +77,7 @@ export default function Login() {
                                     </div>
                                     <input type="submit" value="Entrar" id="entrar" /><br />
                                     {/*<button id="google"><img src='./imgs/google.png' alt="" /> Entrar com o Google</button>*/}
-                                    <p className="cadastro-login">Não tem conta? <a href="./cadastro_usuario.html">Cadastre-se</a></p>
+                                    <p className="cadastro-login">Não tem conta? <a href="/cadastro-ong">Cadastre-se</a></p>
                                 </form>
                             </div>
                         </div>

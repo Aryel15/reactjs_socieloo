@@ -87,7 +87,7 @@ export default function Ong() {
     return (
         <>
             <Menu />
-            <main className="OngPage">
+            <main className="OngPage" id='conteudo'>
                 <div className="options__photos">
                     <img src={`../../imgs/icons/${data?.segmento}.png`} alt="foto de perfil escolhida pela ong" />
                     <h1>{data?.nome}</h1>
@@ -240,14 +240,17 @@ function Comentarios({ step, setStep, data, id }) {
     const idUser = localStorage.getItem("id")
     const tipo = localStorage.getItem("tipo")
 
-    Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioOng/' + id)
-    .then((response) =>{
-        setComentario(response.data)
-        const comentariou = response.data.find(
-            (c) => c.usuario.id === idUser
-          );
-      
-    })
+    useEffect(() =>{
+        Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioOng/' + id)
+        .then((response) =>{
+            setComentario(response.data)
+            const comentariou = response.data.find(
+                (c) => c.usuario.id === idUser
+            );
+          
+        })
+
+    }, [])
     function Salvar(e, id){
         e.preventDefault
         console.log(id);
@@ -259,9 +262,29 @@ function Comentarios({ step, setStep, data, id }) {
             setEditar(false)
         }) */
     }
+    function Delete(id) {
+        Axios.delete("https://socieloo-back.onrender.com/api/v1/user/deletaComentario/" + id)
+        .then((response) => {
+            setPopUp(popBox);
+            console.log(response.data);        
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000); 
+        })
+    }
+    const popBox = (
+        <section className="popup">
+          <div className="boxpopup">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Seu comentário foi deletado com sucesso!</p>
+            <div className="progress-bar"></div>
+          </div>
+        </section>
+    )
+    const [popUp, setPopUp] = useState("")
     return (
         <section className="secao_coments">
-            <div className="informations__description">
+            <div className="informations__description main-comentarios">
 
                     {comentario?.map((comentario) => (
                         <div key={comentario.id} id={comentario.usuario.id == idUser && tipo !== "ong" ? "coment_usuario" : null} className={comentario.usuario.id == idUser && tipo !== "ong" ? null : "coments"}>
@@ -278,7 +301,7 @@ function Comentarios({ step, setStep, data, id }) {
                                     comentario.usuario.id == idUser && tipo !== "ong"  ? <>
                                     <div className="pos_editbotao">
                                         <button className="editbotao" onClick={() => setEditar(true)}>Editar</button>
-                                        <button className="editbotao">Deletar</button><br /> 
+                                        <button className="editbotao" onClick={() => Delete(comentario.id)}>Deletar</button><br /> 
                                         {
                                             editar == true ? 
                                             <button className="editbotao" onClick={() => Salvar(comentario.id)}>Salvar</button> : null
@@ -292,7 +315,7 @@ function Comentarios({ step, setStep, data, id }) {
                             </div>
                         </div>
                     ))}
-
+                    {popUp}
             </div>
         </section>
     )
@@ -320,7 +343,10 @@ function Avaliar({ step, setStep, data, id }) {
             usuarioId: idUser,
             textoComentario: text,
             avaliacao: rating,
-        }).then((response) => console.log(response.data))
+        }).then((response) => {
+            console.log(response.data)
+            setStep("Comentarios")
+        })
     }
     return (
         <>
