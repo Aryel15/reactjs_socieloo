@@ -392,26 +392,29 @@ div.informations__comments > #comments {
 #coment_usuario {
   height: auto;
   border-top: 2px solid #ebebeb;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding-right: 250px;
+  display: flex;
+  padding-right: 20px;
   padding-top: 10px;
-  width: 100%;
+  width:100%;
   margin-top: 30px;
   margin-bottom: 10px;
   font-size: 1em;
 }
 #img-feed {
-  width: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 .texto {
-  width: 30vw;
+  width: 100%;
   margin-left: 15px;
   text-align: justify;
   font-size: 1em;
+}
+.texto input{
+  width: 100%;
 }
 
 .texto h4,
@@ -627,6 +630,7 @@ body.body-no_scroll {
 .textoComent{
   border: none;
   outline: none;
+  width: 100%;
 }
 .main-comentarios{
   overflow-y: scroll;

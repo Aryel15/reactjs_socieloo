@@ -121,10 +121,10 @@ export function Etapa1({ step, setStep, cadastro, valorCadastro }) {
                         <input type="text" id="email" name="email" value={cadastro?.email} required placeholder="noobmaster69@hotmail.com" onChange={valorCadastro}/>
 
                         <label for="telefone">Telefone</label>
-                        <input type="text" id="telefone" name="telefone" value={cadastro?.telefone} required placeholder="+55 (11) 98765-4321" onChange={valorCadastro}/>
+                        <input type="text" id="telefone" name="telefone" value={cadastro?.telefone} maxLength="12" required placeholder="+55 (11) 98765-4321" onChange={valorCadastro}/>
 
                         <label for="cnpj">CNPJ:</label>
-                        <input type="text" name="cnpj" id="cnpj" value={cadastro?.cnpj} placeholder="000.000.000-00" onChange={valorCadastro} required/>
+                        <input type="text" name="cnpj" id="cnpj" value={cadastro?.cnpj} maxLength="11" placeholder="000.000.000-00" onChange={valorCadastro} required/>
 
                         <label for="cnae">Cnae</label>
                         <select name="cnae" id="cnae" onChange={valorCadastro} className="select-regiao" required>

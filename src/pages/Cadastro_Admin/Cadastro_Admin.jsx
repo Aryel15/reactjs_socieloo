@@ -37,18 +37,18 @@ export default function Cadastro_Admin() {
             console.log("senha fraca");
             return;
           }else{
-            Axios.post("https://socieloo-back.onrender.com/api/v1/admin", {
+            Axios.post("https://socieloo-back.onrender.com/api/v1/admin/1", {
                   nome: cadastro.nome,
                   sobrenome: cadastro.sobrenome,
                   email: cadastro.email,
                   senha: cadastro.senha,
               }).then((response) => {
+                  setPopUp(popBox);
                   console.log(response.data);
                   localStorage.removeItem("tipo")
                   localStorage.removeItem("id")
                   localStorage.setItem("id", response.data.id);
                   localStorage.setItem("tipo", "admin");
-                  setPopUp(popBox);
                   setTimeout(() => {
                     setPopUp("");
                       window.location.pathname = "/gerenciamento"
