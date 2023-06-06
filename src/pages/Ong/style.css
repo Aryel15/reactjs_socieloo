@@ -176,7 +176,6 @@ ul {
   font-weight: normal;
   text-align: left;
   font-size: 1em;
-  overflow-x: scroll;
 }
 
 #description__social {
@@ -671,9 +670,9 @@ body.body-no_scroll {
   }
 }
 
-@media screen and (max-width: 650px) {
-  .section__ong {
-    margin-top: 0px;
+@media screen and (max-width: 850px) {
+  .secao_coments{
+    width: 100%;
   }
 }
 
@@ -757,17 +756,24 @@ body.body-no_scroll {
   }
 
   .section__ong {
-    margin-top: 10%;
+    margin-top: 0;
+    width: 100vw;
   }
 
   .informations__description h1 {
     font-size: 1.3em;
   }
+  .description__adress__bank p {
+    font-weight: normal;
+    text-align: left;
+    font-size: 1em;
+    overflow-x: scroll;
+  }
 }
 
 @media screen and (max-width: 400px) {
   .section__ong {
-    margin-top: 30%;
+    margin-top: 0%;
   }
 
   .ong__informations {

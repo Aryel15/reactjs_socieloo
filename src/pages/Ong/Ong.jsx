@@ -324,12 +324,21 @@ function Avaliar({ step, setStep, data, id }) {
     const [rating, setRating] = useState(1);
     const [text, setText] = useState("")
     const [avaliacao, setAvaliacao] = useState()
+    const [avalia, setAvalia] = useState(true)
     const idUser = localStorage.getItem("id")
     const tipo = localStorage.getItem("tipo")
     useEffect(() =>{
         Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/avaliacoes/'+ id)
         .then((response)=>{
             setAvaliacao(response.data[0])
+        })
+        Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioUser/'+ idUser)
+        .then((response)=>{
+            if (response.data.length > 0) {
+                setAvalia(false)
+            }else{
+                setAvalia(true)
+            }
         })
     }, [])
 
@@ -371,12 +380,12 @@ function Avaliar({ step, setStep, data, id }) {
                     ))}
                 </ul>
             </main>
-            : tipo === "usuario" ?  
+            : tipo === "usuario" && avalia === true ?  
             <main className="main_content container">
                 <section className="section-seu-codigo container">
                     <div className="content">
                         <div id="box-artigo" className="box-artigo">
-                            <div className="container_form">
+                            <div className="container_form form-avaliacao">
                                 <h1>Avaliação das ONGs</h1>
                                 <form className="form" action="javascript:void(0)" onSubmit={enviarComentario} method="post">
                                     <div className="avaliacao__container">
