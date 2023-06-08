@@ -324,6 +324,7 @@ function Avaliar({ step, setStep, data, id }) {
     const [avalia, setAvalia] = useState(true)
     const idUser = localStorage.getItem("id")
     const tipo = localStorage.getItem("tipo")
+    let avaliou
     useEffect(() =>{
         Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/avaliacoes/'+ id)
         .then((response)=>{
@@ -331,15 +332,15 @@ function Avaliar({ step, setStep, data, id }) {
         })
         Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioUser/'+ idUser)
         .then((response)=>{
-            console.log(response.data);
             if (response.data.length === 0) {
                 setAvalia(true);
               } else {
-                const avaliou = response.data.some(co => co.ong.id === id);    
+                avaliou = response.data.some(co => co.ong.id === id);
                 setAvalia(avaliou);       
-              }
+                console.log(avalia);    
+            }
         })
-    }, [])
+    }, [avaliou, avalia])
 
     const handleClick = (value) => {
       setRating(value);
@@ -401,11 +402,6 @@ function Avaliar({ step, setStep, data, id }) {
                                             <label for="message" className="form_message_label"> Escreva sua revisão aqui:</label>
                                             <textarea name="mensagem" id="message" cols="30" rows="3"
                                                 className="form_input message_input" onChange={(e) => setText(e.target.value)} required></textarea>
-                                        </div>
-                                        <div className="options__checkbox">
-                                            <input type="checkbox" name="termos" id="termos" />
-                                            <label className="check_label" for="termos">Eu concordo com os <a href="#">termos e
-                                                condições</a></label>
                                         </div>
                                         <div className="submit">
                                             <button type="submit" name="Submit" className="submit_btn">Enviar</button>
