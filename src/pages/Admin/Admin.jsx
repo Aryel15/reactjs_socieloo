@@ -21,12 +21,22 @@ export default function Admin() {
               </div>
             </section>
         )
+        const popBox2 = (
+            <section className="popup">
+              <div className="boxpopup">
+                <i class="fa-solid fa-circle-check"></i>
+                <p>Seja bem-vindo de volta!</p>
+                <div className="progress-bar"></div>
+              </div>
+            </section>
+        )
  
         Axios.post(`https://socieloo-back.onrender.com/api/v1/login`, {
             senha: senha,
             email: email
         }).then((response) => {
             if(response.data.role === "ADMIN"){
+                setPopUp(popBox2);
                 localStorage.removeItem("id")
                 const id = response.data.id
                 localStorage.setItem("id", id)

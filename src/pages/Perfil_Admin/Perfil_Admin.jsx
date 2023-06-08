@@ -47,7 +47,8 @@ export default function Perfil_Admin() {
                     <div className="day">
                         {today}
                         <a href="/">Home</a>
-                        <a href="/cadastro-admin">Novo Cadastro</a>
+                        {tipo === 'admin' && id === 1 ? <a href="/cadastro-admin">Novo Cadastro</a>
+                         : null}
                         <a href="javascript:void(0);" onClick={sair}>Sair</a>
                     </div>
                 </div>
@@ -369,7 +370,7 @@ function Usuarios() {
                                 <p>{user.email}</p>
                             </div>
                             <div className="actions">
-                                <a href="javascript:void(0);"><i class="fa-solid fa-eye"></i>Visualizar</a>
+                                {/*<a href="javascript:void(0);"><i class="fa-solid fa-eye"></i>Visualizar</a>*/}
                                 <a href="javascript:void(0);" onClick={() => Deletar(user.id, user.nome)}><i class="fa-solid fa-trash-can"></i>Excluir</a>
                             </div>
                         </div>

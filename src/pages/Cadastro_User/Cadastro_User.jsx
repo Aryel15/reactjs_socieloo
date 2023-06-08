@@ -100,7 +100,7 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
 
   const HandleClickAvançar = (e)=>{
       e.preventDefault()
-      if((cadastro.nome !== '') && (cadastro.email !== '') && (cadastro.sobrenome !== '') && (cadastro.senha !== '')){
+      if((cadastro.nome !== '') && (cadastro.email !== '') && (cadastro.sobrenome !== '') && (cadastro.senha !== '' && (check !== false))){
         if (!senhaForte(cadastro.senha)) {
           setSenhaFraca('Senha fraca');
           console.log("senha fraca");
@@ -118,6 +118,16 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     return regex.test(senha);
   };
+  const Termos = (
+    <div className="termos-main">
+      <div className="popTermos">
+        <i class="fa-solid fa-xmark" onClick={() => setPopTermos(null)}></i>
+        <embed src="../imgs/Termos de Uso.pdf" type="application/pdf" width="90%" height="90%"></embed>
+      </div>
+    </div>
+  )
+  const [check, setCheck] = useState(false)
+  const [popTermos, setPopTermos] = useState(null)
   return(
     <section className="section-user">
       <form action="#" method="post" className="form-container">
@@ -130,11 +140,16 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
         <input className='input-field' type="email" id="email" name="email" placeholder="E-mail" value={cadastro?.email} onChange={valorCadastro}/>
         <input className="input-field" type="password" id="password" name="senha" placeholder="Senha" onChange={valorCadastro}/>
         <p className="mensagem">{senhaFraca}</p>
+        <div className="options__checkbox">
+            <input type="checkbox" name="termos" id="termos" onClick={() => setCheck(!check)} checked={check}/>
+            <label for="termos" onClick={() => setCheck(!check)}>Eu concordo com os <a href="javascript:void(0);" onClick={() => setPopTermos(Termos)}>termos e condições</a></label>
+        </div>
         <div className="buttons">
           {/*<a href="#" className="button-white" ><img src='./imgs/google.png' alt="" />Cadastrar-se com Google</a>*/}
           <a href="javascript:void(0);" className="button-blue-1" onClick={HandleClickAvançar}>Próximo</a>
         </div>
       </form>
+    {popTermos}
     </section>
   )
 }

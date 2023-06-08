@@ -9,6 +9,17 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
     const [error, setError] = useState(true)
+    const [popUp, setPopUp] = useState("")
+
+    const popBox = (
+        <section className="popup">
+          <div className="boxpopup">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Seja bem-vindo de volta!</p>
+            <div className="progress-bar"></div>
+          </div>
+        </section>
+    )
 
 
     const handleClickCadastro = e => {
@@ -18,6 +29,7 @@ export default function Login() {
             senha: senha,
             email: email
         }).then((response) => {
+            setPopUp(popBox)
             const id = response.data.id
             localStorage.setItem("id", id)
             if(response.data.role === "ONG"){
@@ -84,6 +96,7 @@ export default function Login() {
                     </section>
                 }
                 <img src="../imgs/caixaDoacao.png" alt="" />
+            {popUp}
             </main>
             <Vlibras />
         </>

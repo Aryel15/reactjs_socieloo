@@ -159,7 +159,7 @@ function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
                         <datalist name="cnae" id="cnae" className="select-regiao">
                             <option value="#" selected disabled>Selecione uma opção</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS">9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS</option>
-                            <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE</option>
+                            <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO Meio Ambiente">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO Meio Ambiente</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS</option>
@@ -194,7 +194,7 @@ function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
                             <option value="Cidadania">Cidadania</option>
                             <option value="Cultura e esporte">Cultura e esporte</option>
                             <option value="Gênero e diversidade">Gênero e diversidade</option>
-                            <option value="Meio ambiente">Meio ambiente</option>
+                            <option value="Meio Ambiente">Meio Ambiente</option>
                             <option value="Proteção Animal">Proteção Ambiental</option>
                             <option value="Outro">Outro</option>
                         </datalist>

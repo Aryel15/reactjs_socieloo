@@ -244,9 +244,6 @@ function Comentarios({ step, setStep, data, id }) {
         Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioOng/' + id)
         .then((response) =>{
             setComentario(response.data)
-            const comentariou = response.data.find(
-                (c) => c.usuario.id === idUser
-            );
           
         })
 
@@ -334,11 +331,13 @@ function Avaliar({ step, setStep, data, id }) {
         })
         Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioUser/'+ idUser)
         .then((response)=>{
-            if (response.data.length > 0) {
-                setAvalia(false)
-            }else{
-                setAvalia(true)
-            }
+            console.log(response.data);
+            if (response.data.length === 0) {
+                setAvalia(true);
+              } else {
+                const avaliou = response.data.some(co => co.ong.id === id);    
+                setAvalia(avaliou);       
+              }
         })
     }, [])
 
