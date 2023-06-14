@@ -309,6 +309,7 @@ div.informations__comments > #comments {
   text-align: left;
   /*border: 1px solid #00a1ff;*/
   background-color: #e5f6ff;
+  margin-top: 10px;
 }
 
 .description__adress,
@@ -413,7 +414,7 @@ div.informations__comments > #comments {
   text-align: justify;
   font-size: 1em;
 }
-.texto input{
+.texto input {
   width: 100%;
 }
 
