@@ -395,7 +395,7 @@ div.informations__comments > #comments {
   display: flex;
   padding-right: 20px;
   padding-top: 10px;
-  width:100%;
+  width: 100%;
   margin-top: 30px;
   margin-bottom: 10px;
   font-size: 1em;
@@ -455,7 +455,7 @@ div.informations__comments > #comments {
 .coments {
   height: auto;
   border-top: 2px solid #ebebeb;
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr 1fr;
   padding-right: 250px;
   padding-top: 10px;
@@ -613,7 +613,6 @@ body.body-no_scroll {
   content: '\2606';
 }
 
-
 .form_grupo {
   width: 100%;
   margin-bottom: 20px;
@@ -627,14 +626,14 @@ body.body-no_scroll {
 #box-artigo > div > form > div:nth-child(3) > div.submit button {
   font-size: 1em;
 }
-.textoComent{
+.textoComent {
   border: none;
   outline: none;
   width: 100%;
 }
-.main-comentarios{
+.main-comentarios {
   overflow-y: scroll;
-  height: 65vh;
+  height: 100vh;
   display: flex;
   justify-content: flex-start;
 }
@@ -675,7 +674,7 @@ body.body-no_scroll {
 }
 
 @media screen and (max-width: 850px) {
-  .secao_coments{
+  .secao_coments {
     width: 100%;
   }
 }
@@ -794,5 +793,5 @@ body.body-no_scroll {
 }
 
 .container_form {
-  width: 100% ;
+  width: 100%;
 }
