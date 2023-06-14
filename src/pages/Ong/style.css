@@ -457,12 +457,7 @@ div.informations__comments > #comments {
   height: auto;
   border-top: 2px solid #ebebeb;
   display: flex;
-<<<<<<< HEAD
   padding-right: 10px;
-=======
-  grid-template-columns: 1fr 1fr;
-  padding-right: 250px;
->>>>>>> b231d3d468b443f487dc3d23b894432ea45919a9
   padding-top: 10px;
   width: 100%;
   margin-top: 30px;
