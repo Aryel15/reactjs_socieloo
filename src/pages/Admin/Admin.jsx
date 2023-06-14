@@ -72,13 +72,7 @@ export default function Admin() {
                         <input type="email" name="email" id="email" onChange={(e) => {setEmail(e.target.value.trim()); setError(true) }}/><br />
                         <label for="senha">Senha:</label><br />
                         <input type="password" name="senha" id="senha" onChange={(e) => {setSenha(e.target.value.trim()); setError(true)}}/><br />
-                        <div className="esqueceu_senha">
-                            <div className="lembrar">
-                                <input type="radio" name="lembrar" id="lembrar" />
-                                <label for="lembrar">Lembrar-me</label>
-                            </div>
-                            <a href="">Esqueceu a senha?</a>
-                        </div>
+                        <p className={error ? 'error' : 'show'}>Email ou senha inválidos</p>
                         <input type="submit" value="Entrar" id="entrar" /><br />
                     </form>
                 </div>

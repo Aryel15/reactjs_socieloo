@@ -11,8 +11,8 @@ export default function Card(props) {
                     </div>
                     <h2>{props.titulo}</h2>
                     <div className="btns_card">
-                        <a href={props.segmento} className="button">{props.segmento}</a>
-                        <a href={props.regiao} className="button">{props.regiao}</a>
+                        <a href={`/ongs/${props.segmento}`} className="button">{props.segmento}</a>
+                        <a href={`/ongs/${props.regiao}`} className="button">{props.regiao}</a>
                     </div>
                 </div>
             </a>

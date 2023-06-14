@@ -49,7 +49,7 @@ export default function Login() {
             }
  
         }, (err) => {
-            setError(false)
+            setError(false);
             console.log(err);
         });
     }
@@ -80,13 +80,6 @@ export default function Login() {
                                     }} />
                                     <br />
                                     <p className={error ? 'error' : 'show'}>Email ou senha inválidos</p>
-                                    <div className="esqueceu_senha">
-                                        <div className="lembrar">
-                                            <input type="radio" name="lembrar" id="lembrar" />
-                                            <label for="lembrar">Lembrar-me</label>
-                                        </div>
-                                        <a href="">Esqueceu a senha?</a>
-                                    </div>
                                     <input type="submit" value="Entrar" id="entrar" /><br />
                                     {/*<button id="google"><img src='./imgs/google.png' alt="" /> Entrar com o Google</button>*/}
                                     <p className="cadastro-login">Não tem conta? <a href="/cadastro-ong">Cadastre-se</a></p>

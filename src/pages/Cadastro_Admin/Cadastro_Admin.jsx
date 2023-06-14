@@ -5,6 +5,7 @@ import Vlibras from '../../components/Vlibras/Vlibras';
 import Axios from 'axios';
 
 export default function Cadastro_Admin() {
+    const idAdmin = localStorage.getItem("id");
     const [mensagem, setMensagem] = useState('');
     const [senhaFraca, setSenhaFraca] = useState('');
     const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
@@ -12,7 +13,7 @@ export default function Cadastro_Admin() {
         <section className="popup">
           <div className="boxpopup">
             <i class="fa-solid fa-circle-check"></i>
-            <p>Você foi cadastrado com sucesso!</p>
+            <p>Novo Admin cadastrado com sucesso!</p>
             <div className="progress-bar"></div>
           </div>
         </section>
@@ -37,7 +38,7 @@ export default function Cadastro_Admin() {
             console.log("senha fraca");
             return;
           }else{
-            Axios.post("https://socieloo-back.onrender.com/api/v1/admin/1", {
+            Axios.post(`https://socieloo-back.onrender.com/api/v1/admin/${idAdmin}`, {
                   nome: cadastro.nome,
                   sobrenome: cadastro.sobrenome,
                   email: cadastro.email,
@@ -45,10 +46,6 @@ export default function Cadastro_Admin() {
               }).then((response) => {
                   setPopUp(popBox);
                   console.log(response.data);
-                  localStorage.removeItem("tipo")
-                  localStorage.removeItem("id")
-                  localStorage.setItem("id", response.data.id);
-                  localStorage.setItem("tipo", "admin");
                   setTimeout(() => {
                     setPopUp("");
                       window.location.pathname = "/gerenciamento"
@@ -83,13 +80,6 @@ export default function Cadastro_Admin() {
                         <label for="senha">Senha:</label><br />
                         <input type="password" name="senha" id="senha" onChange={valorCadastro}/><br />
                         <p className="mensagem">{senhaFraca}</p>
-                        <div className="esqueceu_senha">
-                            <div className="lembrar">
-                                <input type="radio" name="lembrar" id="lembrar" />
-                                <label for="lembrar">Lembrar-me</label>
-                            </div>
-                            <a href="">Esqueceu a senha?</a>
-                        </div>
                         <input type="submit" value="Entrar" id="entrar" /><br />
                     </form>
                 </div>

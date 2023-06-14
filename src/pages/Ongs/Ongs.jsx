@@ -30,7 +30,7 @@ export default function Ongs() {
         setData(response.data);
         setLoading(null)
     })
-    if (tipo === 'Cidadania' || tipo === 'Cultura e Esporte' || tipo === 'Educação' || tipo === 'Gênero e Diversidade' || tipo === 'Meio Ambiente' || tipo === 'Proteção Animal' || tipo === 'Saúde') {
+    if (tipo === 'Cidadania' || tipo === 'Cultura e Esporte' || tipo === 'Cultura e esporte' || tipo === 'Educação' || tipo === 'Gênero e Diversidade' || tipo === 'Gênero e diversidade' || tipo === 'Meio Ambiente' || tipo === 'Proteção Animal' || tipo === 'Saúde') {
       setSegmento(tipo)
       setTitle("Ongs: " + tipo)
     }else if (tipo === 'Zona Leste' || tipo === 'Zona Norte' || tipo === 'Centro' || tipo === 'Zona Oeste' || tipo === 'Zona Sul'){
@@ -41,6 +41,7 @@ export default function Ongs() {
       setRegiao(null)
       setSegmento(null)
     }
+    console.log(segmento);
 
   }, [regiao, segmento])
 
