@@ -309,6 +309,7 @@ div.informations__comments > #comments {
   text-align: left;
   /*border: 1px solid #00a1ff;*/
   background-color: #e5f6ff;
+  margin-top: 10px;
 }
 
 .description__adress,
@@ -395,7 +396,7 @@ div.informations__comments > #comments {
   display: flex;
   padding-right: 20px;
   padding-top: 10px;
-  width:100%;
+  width: 100%;
   margin-top: 30px;
   margin-bottom: 10px;
   font-size: 1em;
@@ -413,7 +414,7 @@ div.informations__comments > #comments {
   text-align: justify;
   font-size: 1em;
 }
-.texto input{
+.texto input {
   width: 100%;
 }
 
@@ -456,7 +457,12 @@ div.informations__comments > #comments {
   height: auto;
   border-top: 2px solid #ebebeb;
   display: flex;
+<<<<<<< HEAD
   padding-right: 10px;
+=======
+  grid-template-columns: 1fr 1fr;
+  padding-right: 250px;
+>>>>>>> b231d3d468b443f487dc3d23b894432ea45919a9
   padding-top: 10px;
   width: 100%;
   margin-top: 30px;
@@ -627,7 +633,6 @@ body.body-no_scroll {
   content: '\2606';
 }
 
-
 .form_grupo {
   width: 100%;
   margin-bottom: 20px;
@@ -641,7 +646,7 @@ body.body-no_scroll {
 #box-artigo > div > form > div:nth-child(3) > div.submit button {
   font-size: 1em;
 }
-.textoComent{
+.textoComent {
   border: none;
   outline: none;
   width: 100%;
@@ -649,7 +654,7 @@ body.body-no_scroll {
   max-height: max-content;
   resize: none;
 }
-.main-comentarios{
+.main-comentarios {
   overflow-y: scroll;
   height: 100vh;
   display: flex;
@@ -692,7 +697,7 @@ body.body-no_scroll {
 }
 
 @media screen and (max-width: 850px) {
-  .secao_coments{
+  .secao_coments {
     width: 100%;
   }
 }
@@ -811,5 +816,5 @@ body.body-no_scroll {
 }
 
 .container_form {
-  width: 100% ;
+  width: 100%;
 }

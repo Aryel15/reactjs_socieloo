@@ -144,6 +144,20 @@ function OngInfo({ ong, step, setStep, data, id, map }) {
                         <div className="description__adress">
                             <p> <span>Endereço:</span> {data?.endereco}, São Paulo - SP {data?.cep} </p>
                         </div>
+                        <div className="description__bank">
+                            <p>Dados para contato:</p>
+                            <br />
+                            <div className="bank">
+                                <span>Email:</span>
+                                <p>{data?.email}</p>
+                            </div>
+                            <br />
+                            <div className="bank">
+                                <span>Telefone:</span>
+                                <p>{data?.telefone}</p>
+                            </div>
+                            <br />
+                        </div>
 
                         <div className="description__bank">
                             <p>Dados para doação:</p>

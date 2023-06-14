@@ -175,7 +175,10 @@ function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
                             <option value="Centro">Centro</option>
                             <option value="Zona Leste">Zona Leste</option>
                             <option value="Zona Oeste">Zona Oeste</option>
+                        
                         </datalist>
+                        <label for="pix">Pix</label>
+                        <input type="text" id="pix" name="pix" value={pix} onChange={e => setPix(e.target.value)} />
                         <div hidden className="card_fav">
                             <div className="infos">
                                 <h3>Favoritos</h3>
@@ -209,8 +212,7 @@ function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
                         <label for="banco" className="banco">Banco</label>
                         <input type="text" id="banco" name="banco" value={banco} onChange={e => setBanco(e.target.value)} />
 
-                        <label for="pix">Pix</label>
-                        <input type="text" id="pix" name="pix" value={pix} onChange={e => setPix(e.target.value)} />
+                        
                     </div>
                 </div>
 
