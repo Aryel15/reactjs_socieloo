@@ -244,7 +244,6 @@ function Comentarios({ step, setStep, data, id }) {
         Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioOng/' + id)
         .then((response) =>{
             setComentario(response.data)
-          
         })
 
     }, [])
@@ -282,8 +281,8 @@ function Comentarios({ step, setStep, data, id }) {
     return (
         <section className="secao_coments">
             <div className="informations__description main-comentarios">
-
-                    {comentario?.map((comentario) => (
+                {comentario?.length > 0 ? 
+                    comentario?.map((comentario) => (
                         <div key={comentario.id} id={comentario.usuario.id == idUser && tipo !== "ong" ? "coment_usuario" : null} className={comentario.usuario.id == idUser && tipo !== "ong" ? null : "coments"}>
                             <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
                             <div className="texto">
@@ -297,21 +296,25 @@ function Comentarios({ step, setStep, data, id }) {
                                 {
                                     comentario.usuario.id == idUser && tipo !== "ong"  ? <>
                                     <div className="pos_editbotao">
-                                        <button className="editbotao" onClick={() => setEditar(true)}>Editar</button>
+                                        {/*<button className="editbotao" onClick={() => setEditar(true)}>Editar</button>*/}
                                         <button className="editbotao" onClick={() => Delete(comentario.id)}>Deletar</button><br /> 
                                         {
                                             editar == true ? 
                                             <button className="editbotao" onClick={() => Salvar(comentario.id)}>Salvar</button> : null
                                         }
                                     </div>
-                                    <input type="text" className='textoComent' value={comentario.textoComentario} readOnly={!editar} onChange={(e) => setNewText(e.target.value)}/>
+                                    <textarea type="text" className='textoComent' value={comentario.textoComentario} readOnly={!editar} onChange={(e) => setNewText(e.target.value)}/>
                                     </>: <p>{comentario.textoComentario}</p>
                                 }
                                 
                                 
                             </div>
                         </div>
-                    ))}
+                    )) : 
+                    <div className='notComments'>
+                    <h2>Não há comentários ainda</h2>
+                    <button className="editbotao" onClick={() => setStep("Avaliar")}>Comentar</button> 
+                    </div>}
                     {popUp}
             </div>
         </section>
@@ -321,26 +324,14 @@ function Avaliar({ step, setStep, data, id }) {
     const [rating, setRating] = useState(1);
     const [text, setText] = useState("")
     const [avaliacao, setAvaliacao] = useState()
-    const [avalia, setAvalia] = useState(true)
     const idUser = localStorage.getItem("id")
     const tipo = localStorage.getItem("tipo")
-    let avaliou
     useEffect(() =>{
         Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/avaliacoes/'+ id)
         .then((response)=>{
             setAvaliacao(response.data[0])
         })
-        Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioUser/'+ idUser)
-        .then((response)=>{
-            if (response.data.length === 0) {
-                setAvalia(true);
-              } else {
-                avaliou = response.data.some(co => co.ong.id === id);
-                setAvalia(avaliou);       
-                console.log(avalia);    
-            }
-        })
-    }, [avaliou, avalia])
+    }, [])
 
     const handleClick = (value) => {
       setRating(value);
@@ -380,7 +371,7 @@ function Avaliar({ step, setStep, data, id }) {
                     ))}
                 </ul>
             </main>
-            : tipo === "usuario" && avalia === true ?  
+            : tipo === "usuario" ?  
             <main className="main_content container">
                 <section className="section-seu-codigo container">
                     <div className="content">
