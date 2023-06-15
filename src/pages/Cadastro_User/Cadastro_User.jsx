@@ -72,7 +72,7 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
   const [mensagem, setMensagem] = useState('');
   const [senhaFraca, setSenhaFraca] = useState('');
   const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
-  function gerarCodigo() {
+/*   function gerarCodigo() {
     let codigo = "";
     for (let i = 0; i < 5; i++) {
       codigo += Math.floor(Math.random() * 10);
@@ -96,7 +96,35 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
       .catch((error) => {
         console.log(error);
     });
-  }
+  } */
+  const popBox = (
+    <section className="popup">
+      <div className="boxpopup">
+        <i class="fa-solid fa-circle-check"></i>
+        <p>Você foi cadastrado com sucesso!</p>
+        <div className="progress-bar"></div>
+      </div>
+    </section>
+  )
+  const [popUp, setPopUp] = useState("")
+  function Cadastro(){
+        Axios.post("https://socieloo-back.onrender.com/api/v1/user", {
+          nome: cadastro.nome,
+          sobrenome: cadastro.sobrenome,
+          email: cadastro.email,
+          senha: cadastro.senha,
+        }).then((response) => {
+          console.log(response.data);
+          localStorage.removeItem("tipo")
+          localStorage.removeItem("id")
+          localStorage.setItem("id", response.data.id);
+          localStorage.setItem("tipo", "usuario");
+          setPopUp(popBox);
+          setTimeout(() => {
+            window.location.pathname = "/"
+          }, 2000);
+        }).catch((err) => console.log(err))
+    }
 
   const HandleClickAvançar = (e)=>{
       e.preventDefault()
@@ -106,8 +134,10 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
           console.log("senha fraca");
           return;
         }else{
-          setStep(step + 1)
-          ValidaEmail()
+          //setStep(step + 1)
+          setPopUp(popBox)
+          Cadastro()
+          //ValidaEmail()
         }
       }else{
         setMensagem(msg)
@@ -149,6 +179,7 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
           <a href="javascript:void(0);" className="button-blue-1" onClick={HandleClickAvançar}>Próximo</a>
         </div>
       </form>
+      {popUp}
     {popTermos}
     </section>
   )
