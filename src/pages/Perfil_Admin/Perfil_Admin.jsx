@@ -39,7 +39,7 @@ export default function Perfil_Admin() {
         <>
             {/*<Menu />*/}
             <main id="edit-admin" >
-                <div className="bar-admin">
+                <div className="bar-admin" id='conteudo'>
                     <div className="perfil-admin">
                         <i class="fa-solid fa-screwdriver-wrench"></i>
                         <h2>Perfil de Admin</h2>
@@ -47,7 +47,8 @@ export default function Perfil_Admin() {
                     <div className="day">
                         {today}
                         <a href="/">Home</a>
-                        <a href="/cadastro-admin">Novo Cadastro</a>
+                        {tipo === 'admin' && id === 1 ? <a href="/cadastro-admin">Novo Cadastro</a>
+                         : null}
                         <a href="javascript:void(0);" onClick={sair}>Sair</a>
                     </div>
                 </div>
@@ -84,7 +85,14 @@ function Relatorios() {
     const [graf2, setGraf2] = useState(null)
     const [graf3, setGraf3] = useState(null)
     const [graf4, setGraf4] = useState(null)
-    const [loading, setLoading] = useState(null)
+    const [loading1, setLoading1] = useState(null)
+    const [loading2, setLoading2] = useState(null)
+    const [loading3, setLoading3] = useState(null)
+    const [loading4, setLoading4] = useState(null)
+    const [loading5, setLoading5] = useState(null)
+    const [loading6, setLoading6] = useState(null)
+    const [loading7, setLoading7] = useState(null)
+    const [loading8, setLoading8] = useState(null)
     const data = [
         ["Mês", "Ong"],
     ];
@@ -107,9 +115,14 @@ function Relatorios() {
         //Ongs cadastradas no mês passado
         Axios.get("https://socieloo-back.onrender.com/api/v1/ong/cadastramentoOngMesPassado")
         .then((response) =>{
-            
+            setLoading7((
+                <div className="load">
+                    <span class="loader"></span>
+                </div>
+            ))
             data.push(["Mês passado", parseInt(response.data)])
             setGraf3(<Chart chartType="BarChart" width="100%" height="400px" data={data?.slice(0, 3)} options={options} />)
+            setLoading7(null)
         })
         //Ongs cadastradas este mês
         Axios.get("https://socieloo-back.onrender.com/api/v1/ong/cadastramentoOng")
@@ -122,19 +135,25 @@ function Relatorios() {
         //Usuários cadastradas no mês passado
         Axios.get("https://socieloo-back.onrender.com/api/v1/user/cadastramentoOngMesPassado")
         .then((response) =>{
+            setLoading8((
+                <div className="load">
+                    <span class="loader"></span>
+                </div>
+            ))
             userdata.push(["Mês passado", parseInt(response.data)])
             setGraf4(<Chart chartType="BarChart" width="90%" height="400px" data={userdata?.slice(0, 3)} options={options} />)
+            setLoading8(null)
         })
         //Usuários cadastradas este mês
         Axios.get("https://socieloo-back.onrender.com/api/v1/user/cadastramentoOng")
         .then((response) =>{
             userdata.push(["Este mês", parseInt(response.data)])
-            setGraf4(<Chart chartType="BarChart" width="100%" height="400px" data={userdata?.slice(0, 3)} options={options} />)
+            setGraf4(<Chart chartType="BarChart" width="100%" height="400px" data={userdata?.slice(0, 3)} options={options} />) 
         })
         //Ongs cadastradas por região
         const buscaRegiao = async (zona, cor) => {
             try {
-                setLoading((
+                setLoading5((
                     <div className="load">
                         <span class="loader"></span>
                     </div>
@@ -143,7 +162,7 @@ function Relatorios() {
                 const ongs = response.data;
                 regioesRef.current.push([zona, ongs, cor]);
                 setGraf1(<Chart chartType="ColumnChart" width="100%" height="400px" options={optionsLegend} data={regioesRef.current.slice(0, 6)} />);
-                setLoading(null)
+                setLoading5(null)
             } catch (err) {
                 console.log(err);
             }
@@ -157,6 +176,11 @@ function Relatorios() {
         //Ongs cadastradas por segmento
         const buscaSegmento = async (segmento, cor) => {
             try {
+                setLoading6((
+                    <div className="load">
+                        <span class="loader"></span>
+                    </div>
+                ))
                 const response = await Axios.get(`https://socieloo-back.onrender.com/api/v1/ong/buscaSegmento/${segmento}`);
                 const ongs = response.data;
                 segmentosRef.current.push([segmento, ongs, cor]);
@@ -164,6 +188,7 @@ function Relatorios() {
                     colors: ["#00a1ff", "#005485", "#0072b5", "#003b5e", "#3cb7ff", "#6fcaff", "#b1e2ff"]
                   };
                 setGraf2(<Chart chartType="PieChart" width="100%" height="400px" options={options} data={segmentosRef.current.slice(0, 8)}/>);
+                setLoading6(null)
             } catch (err) {
                 console.log(err);
             }
@@ -178,25 +203,48 @@ function Relatorios() {
 
         Axios.get('https://socieloo-back.onrender.com/api/v1/user/todosUsuarios')
         .then((response) => {
+            setLoading2((
+                <div className="load">
+                    <span class="loader"></span>
+                </div>
+            ))
             setUsers(response.data)
+            setLoading2(null)
         }).catch((err) => console.log(err))
 
 
         Axios.get('https://socieloo-back.onrender.com/api/v1/ong/todasAsOngs')
         .then((response) => {
+            setLoading1((
+                <div className="load">
+                    <span class="loader"></span>
+                </div>
+            ))
             setOngs(response.data)
+            setLoading1(null)
         }).catch((err) => console.log(err))
 
         Axios.get('https://socieloo-back.onrender.com/api/v1/admin/todasAsUserExcluidas')
         .then((response) => {
+            setLoading3((
+                <div className="load">
+                    <span class="loader"></span>
+                </div>
+            ))
             setUsersDel(response.data)
-            console.log(response.data);
+            setLoading3(null)
         }).catch((err) => console.log(err))
 
 
         Axios.get('https://socieloo-back.onrender.com/api/v1/admin/todasAsOngsExcluidas')
         .then((response) => {
+            setLoading4((
+                <div className="load">
+                    <span class="loader"></span>
+                </div>
+            ))
             setOngsDel(response.data)
+            setLoading4(null)
         }).catch((err) => console.log(err))
     }, []);
 
@@ -208,18 +256,22 @@ return (
         <section className="dados">
             <div className="num num1">
                 <h4>Total de Ongs Cadastradas:</h4>
+                {loading1}
                 <h3>{ongs}</h3>
             </div>
             <div className="num num2">
                 <h4>Total de Usuários Cadastrados:</h4>
+                {loading2}
                 <h3>{users}</h3>
             </div>
             <div className="num num1">
                 <h4>Total de Ongs Excluidas:</h4>
+                {loading3}
                 <h3>{ongsDel}</h3>
             </div>
             <div className="num num2">
                 <h4>Total de Usuários Excluidos:</h4>
+                {loading4}
                 <h3>{usersDel}</h3>
             </div>
         </section>
@@ -227,22 +279,25 @@ return (
             <div className="rowG">
                 <div className="grafico graf1">
                     <h4>Total de Ongs Cadastradas por região:</h4>
-                    {loading}
+                    {loading5}
                     {graf1}
                 </div>
                 <div className="grafico graf2">
                     <h4>Total de Ongs Cadastradas por segmento:</h4>
                     {graf2}
+                    {loading6}
                 </div>
             </div>
             <div className="rowG">
                 <div className="grafico graf2">
                     <h4>Total de Ongs Cadastradas por mês:</h4>
                     {graf3}
+                    {loading7}
                 </div>
                 <div className="grafico graf2">
                     <h4>Total de Usuários Cadastrados por mês:</h4>
                     {graf4}
+                    {loading8}
                 </div>
             </div>
         </section>
@@ -315,7 +370,7 @@ function Usuarios() {
                                 <p>{user.email}</p>
                             </div>
                             <div className="actions">
-                                <a href="javascript:void(0);"><i class="fa-solid fa-eye"></i>Visualizar</a>
+                                {/*<a href="javascript:void(0);"><i class="fa-solid fa-eye"></i>Visualizar</a>*/}
                                 <a href="javascript:void(0);" onClick={() => Deletar(user.id, user.nome)}><i class="fa-solid fa-trash-can"></i>Excluir</a>
                             </div>
                         </div>
@@ -336,6 +391,12 @@ function ONGs() {
     const [favoritas, setFavoritas] = useState([]);
     const [filterNome, setfilterNome] = useState('Todas')
     const [nome, setNome] = useState("")
+    const [comentario, setComentario] = useState()
+    const [editar, setEditar] = useState(false)
+    const [newText, setNewText] = useState("")
+    const [userText, setUserText] = useState("")
+    const idUser = localStorage.getItem("id")
+
     useEffect(() => {
         Axios.get('https://socieloo-back.onrender.com/api/v1/ong')
             .then((response) => {
@@ -351,7 +412,10 @@ function ONGs() {
                 });
                 setFavoritas(data)
             }).catch((err) => console.log(err))
-
+        Axios.get('https://socieloo-back.onrender.com/api/v1/comentario')
+        .then((response) =>{
+            setComentario(response.data)
+        })
     }, [])
 
     function Deletar(id, nome) {
@@ -454,6 +518,26 @@ function ONGs() {
                             ))
                         } 
                         </section> : null
+                    }
+                    {
+                        conteudo === "Comentários" ?
+                        <section className='ongs'>
+                        {
+                        comentario?.map((comentario) => (<>
+                            <h3>Ong: {comentario.ong.nome}</h3>
+                            <div key={comentario.id}  className={"coments"}>
+                                <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
+                                <div className="texto">
+                                    <ul className="avaliacao">
+                                            {[1, 2, 3, 4, 5].map((value) => (
+                                                <li className={ value< comentario.avaliacao ? "star-icon-comment" : "star-icon-comment ativo"} ></li>
+                                            ))}
+                                    </ul>
+                                    <h4>@{comentario.usuario.nome}</h4>
+                                    <p>{comentario.textoComentario}</p>
+                                </div>
+                            </div></>
+                        ))}  </section>: null
                     }
                 {popUpDel}
                 {popUpq}

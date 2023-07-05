@@ -41,7 +41,7 @@ export default function Favoritos() {
     <>
         <Menu/>
         <main id="main__fav">
-            <section className="section-fav">
+            <section className="section-fav" id='conteudo'>
                 <div className="fav__text">
                     <h1>Favoritos</h1>
                     <p>Todas as suas ONGs e projetos favoritos </p>

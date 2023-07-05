@@ -58,7 +58,7 @@ export default function Perfil_User() {
                     <li className={stepE === "Deletar_Conta" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Deletar_Conta")}><i className='bx bxs-message-square-x'></i> Deletar conta</a></li>
                 </ul>
             </aside>
-            <section className="edit__content">
+            <section className="edit__content"  id='conteudo'>
             {editar[stepE]}
             </section>
         </main>
@@ -197,34 +197,34 @@ function Alterar_Senha({ data, id}) {
     const handleClickAlterarSenha = e => {
 
         e.preventDefault()
-        if(senhaAtual == data.senha){
-            if (!senhaForte(senha)) {
-                setSenhaFraca('Senha fraca');
-                setSenhaErrada("")
+        if (!senhaForte(senha)) {
+            setSenhaFraca('Senha fraca');
+            setSenhaErrada("")
+            return;
+        } else {
+            if (senha !== novaSenha) {
+                setSenhaFraca('');
+                setSenhaDiferente('As senhas são diferentes');
+                console.log('As senhas são diferentes');
                 return;
             } else {
-                if (senha !== novaSenha) {
-                    setSenhaFraca('');
-                    setSenhaDiferente('As senhas são diferentes');
-                    console.log('As senhas são diferentes');
-                    return;
-                } else {
-                    setSenhaDiferente('');
-                    Axios.put(`https://socieloo-back.onrender.com/api/v1/user/${id}`,{
-                        senha: senha,
-                    }).then((response) => {
-                        console.log(response);
-                        setPopUp(popBox);
-                        setTimeout(() => {
-                            setPopUp("");
-                            window.location.pathname = "/perfil"
-                        }, 2000); 
-                    })
-                }
+                setSenhaDiferente('');
+                Axios.put(`https://socieloo-back.onrender.com/api/v1/user/${id}`,{
+                    senha: senha,
+                }).then((response) => {
+                    console.log(response);
+                    setPopUp(popBox);
+                    setTimeout(() => {
+                        setPopUp("");
+                        window.location.pathname = "/perfil"
+                    }, 2000); 
+                })
             }
+        }
+/*         if(senhaAtual == data.senha){
         }else{
             setSenhaErrada("Senha atual está errada")
-        }
+        } */
         
     
     }
@@ -235,11 +235,11 @@ function Alterar_Senha({ data, id}) {
             <form action="#" className="content__form senha" onSubmit={handleClickAlterarSenha}>
                 <h2>Alterar Senha</h2>
                 <p className="mensagem-as">{msg}</p>
-                <div>
+{/*                 <div>
                     <label for="senha">Senha atual</label>
                     <input type="password" name="senha" id="senha" onChange={e => setSenhaAtual(e.target.value)}/>
                     <p className="senha-fraca">{senhaErrada}</p>
-                </div>
+                </div> */}
 
                 <div>
                     <label for="novaSenha">Nova senha</label>

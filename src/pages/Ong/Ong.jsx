@@ -9,10 +9,12 @@ import { useParams } from 'react-router-dom';
 export default function Ong() {
     const { id } = useParams()
     const idUser = localStorage.getItem("id")
+    const tipo = localStorage.getItem("tipo")
     const [ong, setOng] = useState(id != null ? true : false);
     const [data, setData] = useState()
     const [map, setMap] = useState(<p>...</p>)
     const [favorito, setFavorito] = useState(false)
+    const [favoritos, setFavoritos] = useState("")
 
     useEffect(() => {
         console.log(id);
@@ -20,6 +22,11 @@ export default function Ong() {
             .then((response) => {
                 setOng(true)
                 setData(response.data)
+                Axios.get("https://socieloo-back.onrender.com/api/v1/ong/ongFavoritadas")
+                .then((res) => {
+                    const result = res.data.find(item => item[0] === response.data.nome);
+                    setFavoritos(result[1])
+                })
             }, (err) => {
                 setOng(false)
                 console.log(err);
@@ -80,7 +87,7 @@ export default function Ong() {
     return (
         <>
             <Menu />
-            <main className="OngPage">
+            <main className="OngPage" id='conteudo'>
                 <div className="options__photos">
                     <img src={`../../imgs/icons/${data?.segmento}.png`} alt="foto de perfil escolhida pela ong" />
                     <h1>{data?.nome}</h1>
@@ -100,10 +107,16 @@ export default function Ong() {
                             <p href={data?.regiao} className="button">{data?.regiao}</p>
                             <br />
                         </div>
+                        {tipo === 'admin' || tipo === 'ong' && idUser === id ?                         
+                        <div className="btn_favoritar">
+                            <label htmlFor="favorito" className="check">{favoritos} Favoritos<i class="fa-regular fa-heart"></i></label>
+                        </div> 
+                        : tipo === 'usuario' ?
                         <div className="btn_favoritar">
                             <input type="checkbox" name="favorito" id="favorito" checked={favorito}/>
                             <label htmlFor="favorito" className={favorito == true ? "check" : "notcheck"} onClick={Favoritar} ><i class="fa-regular fa-heart"></i>Favoritar</label>
-                        </div>
+                        </div> : null
+                        }
                             {map}
                     </section>
                     {pages[step]}
@@ -130,6 +143,20 @@ function OngInfo({ ong, step, setStep, data, id, map }) {
                     <div className='description__adress__bank'>
                         <div className="description__adress">
                             <p> <span>Endereço:</span> {data?.endereco}, São Paulo - SP {data?.cep} </p>
+                        </div>
+                        <div className="description__bank">
+                            <p>Dados para contato:</p>
+                            <br />
+                            <div className="bank">
+                                <span>Email:</span>
+                                <p>{data?.email}</p>
+                            </div>
+                            <br />
+                            <div className="bank">
+                                <span>Telefone:</span>
+                                <p>{data?.telefone}</p>
+                            </div>
+                            <br />
                         </div>
 
                         <div className="description__bank">
@@ -220,63 +247,158 @@ async function copyURL() {
 }
 
 function Comentarios({ step, setStep, data, id }) {
+    const [comentario, setComentario] = useState()
+    const [editar, setEditar] = useState(false)
+    const [newText, setNewText] = useState("")
+    const [userText, setUserText] = useState("")
+    const idUser = localStorage.getItem("id")
+    const tipo = localStorage.getItem("tipo")
+
+    useEffect(() =>{
+        Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioOng/' + id)
+        .then((response) =>{
+            setComentario(response.data)
+        })
+
+    }, [])
+    function Salvar(e, id){
+        e.preventDefault
+        console.log(id);
+        console.log(newText);
+/*         Axios.put('https://socieloo-back.onrender.com/api/v1/comentario'+ id,{
+            textoComentario: newText,
+        }).then((response) => {
+            console.log(response.data)
+            setEditar(false)
+        }) */
+    }
+    function Delete(id) {
+        Axios.delete("https://socieloo-back.onrender.com/api/v1/user/deletaComentario/" + id)
+        .then((response) => {
+            setPopUp(popBox);
+            console.log(response.data);        
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000); 
+        })
+    }
+    const popBox = (
+        <section className="popup">
+          <div className="boxpopup">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Seu comentário foi deletado com sucesso!</p>
+            <div className="progress-bar"></div>
+          </div>
+        </section>
+    )
+    const [popUp, setPopUp] = useState("")
     return (
         <section className="secao_coments">
-            <div className="informations__description">
-
-                <div id="coment_usuario">
-                    <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
-                    <div className="texto">
-                        <p id="comentarioLogado"><i>Seu comentário</i></p>
-                        <h4>@User_logado</h4>
-
-                        <div className="pos_editbotao">
-                            <button className="editbotao">Editar</button>
-                            <button className="editbotao">Deletar</button>
-                        </div><br />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </div>
-                </div>
-
-                <div className="coments">
-                    <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
-                    <div className="texto">
-                        <h4>@User</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </div>
-                </div>
-
-                <div className="coments">
-                    <div>
-                        <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
-                    </div>
-                    <div className="texto">
-                        <h4>@User</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </div>
-                </div>
-
+            <div className="informations__description main-comentarios">
+                {comentario?.length > 0 ? 
+                    comentario?.map((comentario) => (
+                        <div key={comentario.id} id={comentario.usuario.id == idUser && tipo !== "ong" ? "coment_usuario" : null} className={comentario.usuario.id == idUser && tipo !== "ong" ? null : "coments"}>
+                            <img src="../../imgs/user.png" alt="Ícone de usuário" id="img-feed" />
+                            <div className="texto">
+                                {comentario.usuario.id == idUser && tipo !== "ong" ? <p id="comentarioLogado"><i>Seu comentário</i></p> : null}
+                                <ul className="avaliacao">
+                                        {[1, 2, 3, 4, 5].map((value) => (
+                                            <li className={ value< comentario.avaliacao ? "star-icon-comment" : "star-icon-comment ativo"} ></li>
+                                        ))}
+                                </ul>
+                                <h4>@{comentario.usuario.nome}</h4>
+                                {
+                                    comentario.usuario.id == idUser && tipo !== "ong"  ? <>
+                                    <div className="pos_editbotao">
+                                        {/*<button className="editbotao" onClick={() => setEditar(true)}>Editar</button>*/}
+                                        <button className="editbotao" onClick={() => Delete(comentario.id)}>Deletar</button><br /> 
+                                        {
+                                            editar == true ? 
+                                            <button className="editbotao" onClick={() => Salvar(comentario.id)}>Salvar</button> : null
+                                        }
+                                    </div>
+                                    <textarea type="text" className='textoComent' value={comentario.textoComentario} readOnly={!editar} onChange={(e) => setNewText(e.target.value)}/>
+                                    </>: <p>{comentario.textoComentario}</p>
+                                }
+                                
+                                
+                            </div>
+                        </div>
+                    )) : 
+                    <div className='notComments'>
+                    <h2>Não há comentários ainda</h2>
+                    <button className="editbotao" onClick={() => setStep("Avaliar")}>Comentar</button> 
+                    </div>}
+                    {popUp}
             </div>
         </section>
     )
 }
 function Avaliar({ step, setStep, data, id }) {
+    const [rating, setRating] = useState(1);
+    const [text, setText] = useState("")
+    const [avaliacao, setAvaliacao] = useState()
+    const idUser = localStorage.getItem("id")
+    const tipo = localStorage.getItem("tipo")
+    useEffect(() =>{
+        Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/avaliacoes/'+ id)
+        .then((response)=>{
+            setAvaliacao(response.data[0])
+        })
+    }, [])
+
+    const handleClick = (value) => {
+      setRating(value);
+    };
+    function enviarComentario(e){
+        e.preventDefault
+        Axios.post('https://socieloo-back.onrender.com/api/v1/comentario',{
+            ongId: id,
+            usuarioId: idUser,
+            textoComentario: text,
+            avaliacao: rating,
+        }).then((response) => {
+            console.log(response.data)
+            setStep("Comentarios")
+        })
+    }
     return (
         <>
+        {idUser === null ? 
+            <main className="main_content container">
+                <h1>Faça login para avaliar</h1>
+                <div className="botão">
+                    <a href="/login" className='link'>Login</a>
+                </div>
+            </main>
+            : tipo === "ong" && idUser === id || tipo === 'admin' ? 
+            <main className="main_content container">
+                <h1>Avaliações</h1>
+                <h3>Quantidade de avaliações:</h3>
+                <p>{avaliacao?.qtdAvaliacoes}</p>
+                <h3>Soma de avaliações:</h3>
+                <p>{avaliacao?.somaAvaliacoes}</p>
+                <h3>Média de avaliações:</h3>
+                <ul className="avaliacao">
+                    {[1, 2, 3, 4, 5].map((value) => (
+                        <li className={ value< avaliacao?.mediaAvaliacoes ? "star-icon-comment" : "star-icon-comment ativo"} ></li>
+                    ))}
+                </ul>
+            </main>
+            : tipo === "usuario" ?  
             <main className="main_content container">
                 <section className="section-seu-codigo container">
                     <div className="content">
                         <div id="box-artigo" className="box-artigo">
-                            <div className="container_form">
+                            <div className="container_form form-avaliacao">
                                 <h1>Avaliação das ONGs</h1>
-                                <form className="form" action="#" method="post">
+                                <form className="form" action="javascript:void(0)" onSubmit={enviarComentario} method="post">
                                     <div className="avaliacao__container">
+                                    
                                         <ul className="avaliacao">
-                                            <li className="star-icon ativo" data-avaliacao="1"></li>
-                                            <li className="star-icon" data-avaliacao="2"></li>
-                                            <li className="star-icon" data-avaliacao="3"></li>
-                                            <li className="star-icon" data-avaliacao="4"></li>
-                                            <li className="star-icon" data-avaliacao="5"></li>
+                                        {[1, 2, 3, 4, 5].map((value) => (
+                                            <li className={value < rating ? "star-icon" : "star-icon ativo"} data-avaliacao="2" onClick={() => handleClick(value)}></li>
+                                        ))}
                                         </ul>
                                     </div>
 
@@ -284,15 +406,9 @@ function Avaliar({ step, setStep, data, id }) {
                                         <div className="form_message">
                                             <label for="message" className="form_message_label"> Escreva sua revisão aqui:</label>
                                             <textarea name="mensagem" id="message" cols="30" rows="3"
-                                                className="form_input message_input" required></textarea>
-                                        </div>
-                                        <div className="options__checkbox">
-                                            <input type="checkbox" name="termos" id="termos" />
-                                            <label className="check_label" for="termos">Eu concordo com os <a href="#">termos e
-                                                condições</a></label>
+                                                className="form_input message_input" onChange={(e) => setText(e.target.value)} required></textarea>
                                         </div>
                                         <div className="submit">
-                                            <input type="hidden" name="acao" value="enviar" />
                                             <button type="submit" name="Submit" className="submit_btn">Enviar</button>
                                         </div>
                                     </div>
@@ -302,7 +418,7 @@ function Avaliar({ step, setStep, data, id }) {
                         <div className="clear"></div>
                     </div>
                 </section>
-            </main>
+            </main> : null}
         </>
     )
 }

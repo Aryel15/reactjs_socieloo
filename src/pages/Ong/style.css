@@ -129,6 +129,10 @@ ul {
   text-align: left;
   color: rgb(168, 176, 173);
 }
+#coment_usuario .pos_editbotao{
+  margin-top: -40px;
+  margin-bottom: 0px;
+}
 
 #description__container {
   width: auto;
@@ -305,6 +309,7 @@ div.informations__comments > #comments {
   text-align: left;
   /*border: 1px solid #00a1ff;*/
   background-color: #e5f6ff;
+  margin-top: 10px;
 }
 
 .description__adress,
@@ -388,9 +393,8 @@ div.informations__comments > #comments {
 #coment_usuario {
   height: auto;
   border-top: 2px solid #ebebeb;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding-right: 250px;
+  display: flex;
+  padding-right: 20px;
   padding-top: 10px;
   width: 100%;
   margin-top: 30px;
@@ -398,16 +402,20 @@ div.informations__comments > #comments {
   font-size: 1em;
 }
 #img-feed {
-  width: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 .texto {
-  width: 30vw;
+  width: 100%;
   margin-left: 15px;
   text-align: justify;
   font-size: 1em;
+}
+.texto input {
+  width: 100%;
 }
 
 .texto h4,
@@ -448,16 +456,30 @@ div.informations__comments > #comments {
 .coments {
   height: auto;
   border-top: 2px solid #ebebeb;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding-right: 250px;
+  display: flex;
+  padding-right: 10px;
   padding-top: 10px;
   width: 100%;
   margin-top: 30px;
   margin-bottom: 30px;
   font-size: 1em;
+  max-width: fit-content;
 }
-
+.coments p{
+  white-space: pre-wrap;
+}
+.coments textarea{
+  overflow: hidden;
+}
+.notComments{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.notComments button:hover{
+  cursor: pointer;
+}
 /* ===== MODAL =====*/
 body.body-no_scroll {
   overflow: hidden;
@@ -591,6 +613,21 @@ body.body-no_scroll {
 .star-icon:hover ~ .star-icon::before {
   content: '\2606';
 }
+.star-icon-comment {
+  list-style-type: none;
+  cursor: pointer;
+  color: #ffe500;
+  font-size: 20px;
+  /* alterar o tamanho das estrelas */
+}
+.star-icon-comment::before {
+  content: '\2605';
+}
+
+.star-icon-comment.ativo ~ .star-icon-comment::before {
+  content: '\2606';
+}
+
 .form_grupo {
   width: 100%;
   margin-bottom: 20px;
@@ -603,6 +640,20 @@ body.body-no_scroll {
 #box-artigo > div > form > div:nth-child(3) > div.submit,
 #box-artigo > div > form > div:nth-child(3) > div.submit button {
   font-size: 1em;
+}
+.textoComent {
+  border: none;
+  outline: none;
+  width: 100%;
+  overflow-y: scroll;
+  max-height: max-content;
+  resize: none;
+}
+.main-comentarios {
+  overflow-y: scroll;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
 }
 
 /* Responsividade */
@@ -640,9 +691,9 @@ body.body-no_scroll {
   }
 }
 
-@media screen and (max-width: 650px) {
-  .section__ong {
-    margin-top: 80px;
+@media screen and (max-width: 850px) {
+  .secao_coments {
+    width: 100%;
   }
 }
 
@@ -726,17 +777,24 @@ body.body-no_scroll {
   }
 
   .section__ong {
-    margin-top: 10%;
+    margin-top: 0;
+    width: 100vw;
   }
 
   .informations__description h1 {
     font-size: 1.3em;
   }
+  .description__adress__bank p {
+    font-weight: normal;
+    text-align: left;
+    font-size: 1em;
+    overflow-x: scroll;
+  }
 }
 
 @media screen and (max-width: 400px) {
   .section__ong {
-    margin-top: 30%;
+    margin-top: 0%;
   }
 
   .ong__informations {
@@ -753,5 +811,5 @@ body.body-no_scroll {
 }
 
 .container_form {
-  width: 70vw !important;
+  width: 100%;
 }

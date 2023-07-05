@@ -7,7 +7,7 @@ export default function Faq() {
   return (
     <>
       <Menu/>
-      <main className="profile column main-faq">
+      <main className="profile column main-faq" id='conteudo'>
         <div>
             <h2 className="page-subtitle">Dúvidas Frequentes (FAQ)</h2>
         </div>

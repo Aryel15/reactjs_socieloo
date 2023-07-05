@@ -132,7 +132,7 @@ export default function Home() {
           </div>
         </section>
         <section id="main-index">
-          <div className="section__cards">
+          <div className="section__cards" id='conteudo'> 
             {loading}
             {
               data.filter(

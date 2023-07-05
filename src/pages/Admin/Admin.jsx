@@ -21,12 +21,22 @@ export default function Admin() {
               </div>
             </section>
         )
+        const popBox2 = (
+            <section className="popup">
+              <div className="boxpopup">
+                <i class="fa-solid fa-circle-check"></i>
+                <p>Seja bem-vindo de volta!</p>
+                <div className="progress-bar"></div>
+              </div>
+            </section>
+        )
  
         Axios.post(`https://socieloo-back.onrender.com/api/v1/login`, {
             senha: senha,
             email: email
         }).then((response) => {
             if(response.data.role === "ADMIN"){
+                setPopUp(popBox2);
                 localStorage.removeItem("id")
                 const id = response.data.id
                 localStorage.setItem("id", id)
@@ -54,7 +64,7 @@ export default function Admin() {
             
                 <section id="cadastro__section">
                 
-                <div className="section__form">
+                <div className="section__form"  id='conteudo'>
                 <div className="form__admin">
                     <form id="admin" action="" onSubmit={handleClickCadastro}>
                         <h2>Admin</h2>
@@ -62,13 +72,7 @@ export default function Admin() {
                         <input type="email" name="email" id="email" onChange={(e) => {setEmail(e.target.value.trim()); setError(true) }}/><br />
                         <label for="senha">Senha:</label><br />
                         <input type="password" name="senha" id="senha" onChange={(e) => {setSenha(e.target.value.trim()); setError(true)}}/><br />
-                        <div className="esqueceu_senha">
-                            <div className="lembrar">
-                                <input type="radio" name="lembrar" id="lembrar" />
-                                <label for="lembrar">Lembrar-me</label>
-                            </div>
-                            <a href="">Esqueceu a senha?</a>
-                        </div>
+                        <p className={error ? 'error' : 'show'}>Email ou senha inválidos</p>
                         <input type="submit" value="Entrar" id="entrar" /><br />
                     </form>
                 </div>

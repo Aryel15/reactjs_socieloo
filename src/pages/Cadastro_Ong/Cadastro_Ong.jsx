@@ -108,7 +108,7 @@ export function Etapa1({ step, setStep, cadastro, valorCadastro }) {
     }
   return (
     <section id="cadastro__section">
-        <div className="section__form">
+        <div className="section__form" id='conteudo'>
             <form action="#" method="post">
                 <p className='mensagem'>{mensagem}</p>
                 <h1 className="section__title">Cadastre sua ONG</h1>
@@ -121,16 +121,16 @@ export function Etapa1({ step, setStep, cadastro, valorCadastro }) {
                         <input type="text" id="email" name="email" value={cadastro?.email} required placeholder="noobmaster69@hotmail.com" onChange={valorCadastro}/>
 
                         <label for="telefone">Telefone</label>
-                        <input type="text" id="telefone" name="telefone" value={cadastro?.telefone} required placeholder="+55 (11) 98765-4321" onChange={valorCadastro}/>
+                        <input type="text" id="telefone" name="telefone" value={cadastro?.telefone} maxLength="12" required placeholder="+55 (11) 98765-4321" onChange={valorCadastro}/>
 
                         <label for="cnpj">CNPJ:</label>
-                        <input type="text" name="cnpj" id="cnpj" value={cadastro?.cnpj} placeholder="000.000.000-00" onChange={valorCadastro} required/>
+                        <input type="text" name="cnpj" id="cnpj" value={cadastro?.cnpj} maxLength="11" placeholder="000.000.000-00" onChange={valorCadastro} required/>
 
                         <label for="cnae">Cnae</label>
                         <select name="cnae" id="cnae" onChange={valorCadastro} className="select-regiao" required>
                             <option value="#" selected disabled>Selecione uma opção</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS">9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS</option>
-                            <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE</option>
+                            <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO Meio Ambiente">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO Meio Ambiente</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS</option>
@@ -197,7 +197,7 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                         <option value="Cidadania">Cidadania</option>
                         <option value="Cultura e esporte">Cultura e esporte</option>
                         <option value="Gênero e diversidade">Gênero e diversidade</option>
-                        <option value="Meio ambiente">Meio ambiente</option>
+                        <option value="Meio Ambiente">Meio Ambiente</option>
                         <option value="Proteção Animal">Proteção Animal</option>
                         <option value="Outro">Outro</option>
                         </select>
@@ -391,6 +391,7 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
         codigo: codigo.toString(),
       }, "QSlqTSkhTipqcM7El");
     }
+    const [check, setCheck] = useState(false)
 
     const isCadastroValido = () => {
       for (let campo in cadastro) {
@@ -418,7 +419,10 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
 
     const HandleClickAvançar = (e) => {
       e.preventDefault();
-    
+      if(check === false){
+        setMensagem(msg);
+        return;
+      }
       if (cadastro.senha === '' || senhaDiferente === '') {
         setMensagem(msg);
         console.log("não tem senha");
@@ -442,6 +446,15 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
     
       isCadastroValido();
     };
+    const Termos = (
+      <div className="termos-main">
+        <div className="popTermos">
+          <i class="fa-solid fa-xmark" onClick={() => setPopTermos(null)}></i>
+          <embed src="../imgs/Termos de Uso.pdf" type="application/pdf" width="90%" height="90%"></embed>
+        </div>
+      </div>
+    )
+    const [popTermos, setPopTermos] = useState(null)
 
     return(
         <section id="cadastro__section">
@@ -456,8 +469,8 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
                 <input type="password" id="confirmsenha" name="confirmsenha" required onChange={(e) => setSenhaDiferente(e.target.value)}/>
                 <p className='err-senha'>{msgsenhaDiferente}</p>
                 <div className="options__checkbox">
-                    <input type="checkbox" name="termos" id="termos"/>
-                    <label for="termos">Eu concordo com os <a href="#">termos e condições</a></label>
+                  <input type="checkbox" name="termos" id="termos" onClick={() => setCheck(!check)} checked={check}/>
+                  <label for="termos" onClick={() => setCheck(!check)}>Eu concordo com os <a href="javascript:void(0);" onClick={() => setPopTermos(Termos)}>termos e condições</a></label>
                 </div>
                 <div className="buttons-form2">
                     <a href="javascript:void(0);" className="voltar" onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}>Voltar</a>
@@ -475,6 +488,7 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
                 </ul>
             </div>
             {popUp}
+            {popTermos}
 
         </section>
     )

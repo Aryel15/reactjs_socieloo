@@ -159,7 +159,7 @@ function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
                         <datalist name="cnae" id="cnae" className="select-regiao">
                             <option value="#" selected disabled>Selecione uma opção</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS">9430-8/00 - ASSOCIAÇÃO DE PROTEÇÃO DE MINORIAS ÉTNICAS</option>
-                            <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO MEIO AMBIENTE</option>
+                            <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO Meio Ambiente">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DO Meio Ambiente</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE DEFESA DOS DIREITOS HUMANOS</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE GRUPOS MINORITÁRIOS</option>
                             <option value="9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS">9430-8/00 - ASSOCIAÇÃO, ONG, DE MOVIMENTOS ECOLÓGICOS</option>
@@ -175,7 +175,10 @@ function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
                             <option value="Centro">Centro</option>
                             <option value="Zona Leste">Zona Leste</option>
                             <option value="Zona Oeste">Zona Oeste</option>
+                        
                         </datalist>
+                        <label for="pix">Pix</label>
+                        <input type="text" id="pix" name="pix" value={pix} onChange={e => setPix(e.target.value)} />
                         <div hidden className="card_fav">
                             <div className="infos">
                                 <h3>Favoritos</h3>
@@ -194,7 +197,7 @@ function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
                             <option value="Cidadania">Cidadania</option>
                             <option value="Cultura e esporte">Cultura e esporte</option>
                             <option value="Gênero e diversidade">Gênero e diversidade</option>
-                            <option value="Meio ambiente">Meio ambiente</option>
+                            <option value="Meio Ambiente">Meio Ambiente</option>
                             <option value="Proteção Animal">Proteção Ambiental</option>
                             <option value="Outro">Outro</option>
                         </datalist>
@@ -209,8 +212,7 @@ function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
                         <label for="banco" className="banco">Banco</label>
                         <input type="text" id="banco" name="banco" value={banco} onChange={e => setBanco(e.target.value)} />
 
-                        <label for="pix">Pix</label>
-                        <input type="text" id="pix" name="pix" value={pix} onChange={e => setPix(e.target.value)} />
+                        
                     </div>
                 </div>
 
@@ -318,48 +320,48 @@ function Alterar_Senha({ stepE, setEStep, data, id }) {
 
         e.preventDefault()
 
-        if (senhaAtual == data.senha) {
-            if (!senhaForte(senha)) {
-                setSenhaFraca('Senha fraca');
-                setSenhaErrada("")
+        if (!senhaForte(senha)) {
+            setSenhaFraca('Senha fraca');
+            setSenhaErrada("")
+            return;
+        } else {
+            if (senha !== novaSenha) {
+                setSenhaFraca('');
+                setSenhaDiferente('As senhas são diferentes');
                 return;
             } else {
-                if (senha !== novaSenha) {
-                    setSenhaFraca('');
-                    setSenhaDiferente('As senhas são diferentes');
-                    return;
-                } else {
-                    setSenhaDiferente('');
-                    Axios.put(`https://socieloo-back.onrender.com/api/v1/ong/${id}`, {
-                        nome: data.nome,
-                        telefone: data.telefone,
-                        descricao: data.descricao,
-                        agencia: data.agencia,
-                        contaCorrente: data.contaCorrente,
-                        pix: data.pix,
-                        regiao: data.regiao,
-                        segmento: data.segmento,
-                        cnae: data.cnae,
-                        banco: data.banco,
-                        cep: data.cep,
-                        email: data.email,
-                        cpf: data.cpf,
-                        cnpj: data.cnpj,
-                        complemento: data.complemento,
-                        senha: senha,
-                    }).then((response) => {
-                        console.log(response);
-                        setPopUp(popBox);
-                        setTimeout(() => {
-                            setPopUp("");
-                            window.location.pathname = "/gerenciamento-ong"
-                        }, 2000);
-                    })
-                }
+                setSenhaDiferente('');
+                Axios.put(`https://socieloo-back.onrender.com/api/v1/ong/${id}`, {
+                    nome: data.nome,
+                    telefone: data.telefone,
+                    descricao: data.descricao,
+                    agencia: data.agencia,
+                    contaCorrente: data.contaCorrente,
+                    pix: data.pix,
+                    regiao: data.regiao,
+                    segmento: data.segmento,
+                    cnae: data.cnae,
+                    banco: data.banco,
+                    cep: data.cep,
+                    email: data.email,
+                    cpf: data.cpf,
+                    cnpj: data.cnpj,
+                    complemento: data.complemento,
+                    senha: senha,
+                }).then((response) => {
+                    console.log(response);
+                    setPopUp(popBox);
+                    setTimeout(() => {
+                        setPopUp("");
+                        window.location.pathname = "/gerenciamento-ong"
+                    }, 2000);
+                })
             }
+        }
+/*         if (senhaAtual == data.senha) {
         } else {
             setSenhaErrada("Senha atual está errada")
-        }
+        } */
 
 
     }
@@ -370,11 +372,11 @@ function Alterar_Senha({ stepE, setEStep, data, id }) {
             <form action="#" className="content__form senha" onSubmit={handleClickAlterarSenha}>
                 <h2>Alterar Senha</h2>
                 <p className="mensagem-as">{msg}</p>
-                <div>
+                {/*<div>
                     <label for="senha">Senha atual</label>
                     <input type="password" name="senha" id="senha" onChange={e => setSenhaAtual(e.target.value)} />
                     <p className="senha-fraca">{senhaErrada}</p>
-                </div>
+                </div>*/}
 
                 <div>
                     <label for="novaSenha">Nova senha</label>

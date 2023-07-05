@@ -9,6 +9,17 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
     const [error, setError] = useState(true)
+    const [popUp, setPopUp] = useState("")
+
+    const popBox = (
+        <section className="popup">
+          <div className="boxpopup">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>Seja bem-vindo de volta!</p>
+            <div className="progress-bar"></div>
+          </div>
+        </section>
+    )
 
 
     const handleClickCadastro = e => {
@@ -18,6 +29,7 @@ export default function Login() {
             senha: senha,
             email: email
         }).then((response) => {
+            setPopUp(popBox)
             const id = response.data.id
             localStorage.setItem("id", id)
             if(response.data.role === "ONG"){
@@ -37,7 +49,7 @@ export default function Login() {
             }
  
         }, (err) => {
-            setError(false)
+            setError(false);
             console.log(err);
         });
     }
@@ -49,7 +61,7 @@ export default function Login() {
                 <img src="../imgs/gestora.png" alt="" />
                 {
                     <section id="cadastro__section">
-                        <div className="section__form">
+                        <div className="section__form" id='conteudo'>
                             <div className="form__login">
                                 <form id="login" action="javascript:void(0)" onSubmit={handleClickCadastro}>
                                     <h2>Bem vindo!</h2>
@@ -68,22 +80,16 @@ export default function Login() {
                                     }} />
                                     <br />
                                     <p className={error ? 'error' : 'show'}>Email ou senha inválidos</p>
-                                    <div className="esqueceu_senha">
-                                        <div className="lembrar">
-                                            <input type="radio" name="lembrar" id="lembrar" />
-                                            <label for="lembrar">Lembrar-me</label>
-                                        </div>
-                                        <a href="">Esqueceu a senha?</a>
-                                    </div>
                                     <input type="submit" value="Entrar" id="entrar" /><br />
                                     {/*<button id="google"><img src='./imgs/google.png' alt="" /> Entrar com o Google</button>*/}
-                                    <p className="cadastro-login">Não tem conta? <a href="./cadastro_usuario.html">Cadastre-se</a></p>
+                                    <p className="cadastro-login">Não tem conta? <a href="/cadastro-ong">Cadastre-se</a></p>
                                 </form>
                             </div>
                         </div>
                     </section>
                 }
                 <img src="../imgs/caixaDoacao.png" alt="" />
+            {popUp}
             </main>
             <Vlibras />
         </>

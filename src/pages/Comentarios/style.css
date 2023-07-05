@@ -85,7 +85,7 @@
 .coments{
     height: auto;
     border-top: 2px solid #ebebeb;
-    display: grid;
+    display: flex;
     grid-template-columns: 1fr 1fr;
     padding-right: 250px;
     padding-top: 10px;
