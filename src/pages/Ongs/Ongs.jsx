@@ -25,7 +25,7 @@ export default function Ongs() {
           <span class="loader"></span>
       </div>
     ))
-    Axios.get("https://socieloo-back.onrender.com/api/v1/ong")
+    Axios.get("http://socieloo-back.up.railway.app/api/v1/ong")
       .then((response) => {
         setData(response.data);
         setLoading(null)

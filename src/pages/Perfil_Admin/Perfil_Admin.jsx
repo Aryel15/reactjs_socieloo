@@ -11,7 +11,7 @@ export default function Perfil_Admin() {
         if(tipo !== "admin"){
             window.location.pathname = "/"
         }else{
-            Axios.get("https://socieloo-back.onrender.com/api/v1/admin/" + id)
+            Axios.get("http://socieloo-back.up.railway.app/api/v1/admin/" + id)
             .then((response) => {
                 setData(response.data);
                 console.log(response.data);
@@ -113,7 +113,7 @@ function Relatorios() {
 
     useEffect(() => {
         //Ongs cadastradas no mês passado
-        Axios.get("https://socieloo-back.onrender.com/api/v1/ong/cadastramentoOngMesPassado")
+        Axios.get("http://socieloo-back.up.railway.app/api/v1/ong/cadastramentoOngMesPassado")
         .then((response) =>{
             setLoading7((
                 <div className="load">
@@ -125,7 +125,7 @@ function Relatorios() {
             setLoading7(null)
         })
         //Ongs cadastradas este mês
-        Axios.get("https://socieloo-back.onrender.com/api/v1/ong/cadastramentoOng")
+        Axios.get("http://socieloo-back.up.railway.app/api/v1/ong/cadastramentoOng")
         .then((response) =>{
             data.push(["Este mês", parseInt(response.data)])
             setGraf3(<Chart chartType="BarChart" width="100%" height="400px" data={data?.slice(0, 3)} options={options} />)
@@ -133,7 +133,7 @@ function Relatorios() {
 
 
         //Usuários cadastradas no mês passado
-        Axios.get("https://socieloo-back.onrender.com/api/v1/user/cadastramentoOngMesPassado")
+        Axios.get("http://socieloo-back.up.railway.app/api/v1/user/cadastramentoOngMesPassado")
         .then((response) =>{
             setLoading8((
                 <div className="load">
@@ -145,7 +145,7 @@ function Relatorios() {
             setLoading8(null)
         })
         //Usuários cadastradas este mês
-        Axios.get("https://socieloo-back.onrender.com/api/v1/user/cadastramentoOng")
+        Axios.get("http://socieloo-back.up.railway.app/api/v1/user/cadastramentoOng")
         .then((response) =>{
             userdata.push(["Este mês", parseInt(response.data)])
             setGraf4(<Chart chartType="BarChart" width="100%" height="400px" data={userdata?.slice(0, 3)} options={options} />) 
@@ -158,7 +158,7 @@ function Relatorios() {
                         <span class="loader"></span>
                     </div>
                 ))
-                const response = await Axios.get(`https://socieloo-back.onrender.com/api/v1/ong/buscaRegiao/${zona}`);
+                const response = await Axios.get(`http://socieloo-back.up.railway.app/api/v1/ong/buscaRegiao/${zona}`);
                 const ongs = response.data;
                 regioesRef.current.push([zona, ongs, cor]);
                 setGraf1(<Chart chartType="ColumnChart" width="100%" height="400px" options={optionsLegend} data={regioesRef.current.slice(0, 6)} />);
@@ -181,7 +181,7 @@ function Relatorios() {
                         <span class="loader"></span>
                     </div>
                 ))
-                const response = await Axios.get(`https://socieloo-back.onrender.com/api/v1/ong/buscaSegmento/${segmento}`);
+                const response = await Axios.get(`http://socieloo-back.up.railway.app/api/v1/ong/buscaSegmento/${segmento}`);
                 const ongs = response.data;
                 segmentosRef.current.push([segmento, ongs, cor]);
                 const options = {
@@ -201,7 +201,7 @@ function Relatorios() {
         buscaSegmento('Proteção Animal');
         buscaSegmento('Saúde');
 
-        Axios.get('https://socieloo-back.onrender.com/api/v1/user/todosUsuarios')
+        Axios.get('http://socieloo-back.up.railway.app/api/v1/user/todosUsuarios')
         .then((response) => {
             setLoading2((
                 <div className="load">
@@ -213,7 +213,7 @@ function Relatorios() {
         }).catch((err) => console.log(err))
 
 
-        Axios.get('https://socieloo-back.onrender.com/api/v1/ong/todasAsOngs')
+        Axios.get('http://socieloo-back.up.railway.app/api/v1/ong/todasAsOngs')
         .then((response) => {
             setLoading1((
                 <div className="load">
@@ -224,7 +224,7 @@ function Relatorios() {
             setLoading1(null)
         }).catch((err) => console.log(err))
 
-        Axios.get('https://socieloo-back.onrender.com/api/v1/admin/todasAsUserExcluidas')
+        Axios.get('http://socieloo-back.up.railway.app/api/v1/admin/todasAsUserExcluidas')
         .then((response) => {
             setLoading3((
                 <div className="load">
@@ -236,7 +236,7 @@ function Relatorios() {
         }).catch((err) => console.log(err))
 
 
-        Axios.get('https://socieloo-back.onrender.com/api/v1/admin/todasAsOngsExcluidas')
+        Axios.get('http://socieloo-back.up.railway.app/api/v1/admin/todasAsOngsExcluidas')
         .then((response) => {
             setLoading4((
                 <div className="load">
@@ -313,7 +313,7 @@ function Usuarios() {
 
 
     useEffect(() => {
-        Axios.get('https://socieloo-back.onrender.com/api/v1/user')
+        Axios.get('http://socieloo-back.up.railway.app/api/v1/user')
             .then((response) => {
                 setUsers(response.data)
             }).catch((err) => console.log(err))
@@ -332,7 +332,7 @@ function Usuarios() {
         ))
     }
     function Delete(id) {
-        Axios.delete("https://socieloo-back.onrender.com/api/v1/admin/deletarUsuario/" + id)
+        Axios.delete("http://socieloo-back.up.railway.app/api/v1/admin/deletarUsuario/" + id)
             .then((response) => {
                 console.log(response.data);
                 setPopUpDel((
@@ -398,11 +398,11 @@ function ONGs() {
     const idUser = localStorage.getItem("id")
 
     useEffect(() => {
-        Axios.get('https://socieloo-back.onrender.com/api/v1/ong')
+        Axios.get('http://socieloo-back.up.railway.app/api/v1/ong')
             .then((response) => {
                 setOngs(response.data)
             }).catch((err) => console.log(err))
-        Axios.get('https://socieloo-back.onrender.com/api/v1/ong/ongFavoritadas')
+        Axios.get('http://socieloo-back.up.railway.app/api/v1/ong/ongFavoritadas')
             .then((response) => {
                 const data = response.data.map((item) => {
                     return {
@@ -412,7 +412,7 @@ function ONGs() {
                 });
                 setFavoritas(data)
             }).catch((err) => console.log(err))
-        Axios.get('https://socieloo-back.onrender.com/api/v1/comentario')
+        Axios.get('http://socieloo-back.up.railway.app/api/v1/comentario')
         .then((response) =>{
             setComentario(response.data)
         })
@@ -432,7 +432,7 @@ function ONGs() {
         ))
     }
     function Delete(id) {
-        Axios.delete("https://socieloo-back.onrender.com/api/v1/admin/deletarOng/" + id)
+        Axios.delete("http://socieloo-back.up.railway.app/api/v1/admin/deletarOng/" + id)
             .then((response) => {
                 console.log(response.data);
                 setPopUpDel((
@@ -609,7 +609,7 @@ function Conta_Admin({data}) {
     }
     function Delete(e) {
         e.preventDefault()
-        Axios.delete("https://socieloo-back.onrender.com/api/v1/admin/" + id)
+        Axios.delete("http://socieloo-back.up.railway.app/api/v1/admin/" + id)
         .then((response) => {
             setPopUp(popBox2);
             console.log(response.data);        
@@ -623,7 +623,7 @@ function Conta_Admin({data}) {
 
     function Alterar(e){
         e.preventDefault();
-        Axios.put("https://socieloo-back.onrender.com/api/v1/admin/"+ id, {
+        Axios.put("http://socieloo-back.up.railway.app/api/v1/admin/"+ id, {
             nome: admin.nome,
             sobrenome: admin.sobrenome,
             email: admin.email,

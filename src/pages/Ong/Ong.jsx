@@ -18,11 +18,11 @@ export default function Ong() {
 
     useEffect(() => {
         console.log(id);
-        Axios.get("https://socieloo-back.onrender.com/api/v1/ong/" + id)
+        Axios.get("http://socieloo-back.up.railway.app/api/v1/ong/" + id)
             .then((response) => {
                 setOng(true)
                 setData(response.data)
-                Axios.get("https://socieloo-back.onrender.com/api/v1/ong/ongFavoritadas")
+                Axios.get("http://socieloo-back.up.railway.app/api/v1/ong/ongFavoritadas")
                 .then((res) => {
                     const result = res.data.find(item => item[0] === response.data.nome);
                     setFavoritos(result[1])
@@ -31,7 +31,7 @@ export default function Ong() {
                 setOng(false)
                 console.log(err);
             })
-            Axios.get(`https://socieloo-back.onrender.com/api/v1/user/${idUser}`)
+            Axios.get(`http://socieloo-back.up.railway.app/api/v1/user/${idUser}`)
             .then((response) =>{
                 var favoritos = response.data.favoritos
                 const ongFav = favoritos.find(element => element == id);
@@ -59,7 +59,7 @@ export default function Ong() {
         Avaliar: <Avaliar step={step} setStep={setStep} data={data} id={id} />,
     }
     function Favoritar(){
-        Axios.get(`https://socieloo-back.onrender.com/api/v1/user/${idUser}`)
+        Axios.get(`http://socieloo-back.up.railway.app/api/v1/user/${idUser}`)
         .then((response) =>{
             var favoritos = response.data.favoritos
             const ongPage = favoritos.find(element => element == id);
@@ -73,7 +73,7 @@ export default function Ong() {
                 setFavorito(true)
             }
            
-            Axios.put(`https://socieloo-back.onrender.com/api/v1/user/${idUser}`, {
+            Axios.put(`http://socieloo-back.up.railway.app/api/v1/user/${idUser}`, {
                 favoritos: favoritos
             })
             .then((response) =>{
@@ -255,7 +255,7 @@ function Comentarios({ step, setStep, data, id }) {
     const tipo = localStorage.getItem("tipo")
 
     useEffect(() =>{
-        Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/todosComentarioOng/' + id)
+        Axios.get('http://socieloo-back.up.railway.app/api/v1/comentario/todosComentarioOng/' + id)
         .then((response) =>{
             setComentario(response.data)
         })
@@ -265,7 +265,7 @@ function Comentarios({ step, setStep, data, id }) {
         e.preventDefault
         console.log(id);
         console.log(newText);
-/*         Axios.put('https://socieloo-back.onrender.com/api/v1/comentario'+ id,{
+/*         Axios.put('http://socieloo-back.up.railway.app/api/v1/comentario'+ id,{
             textoComentario: newText,
         }).then((response) => {
             console.log(response.data)
@@ -273,7 +273,7 @@ function Comentarios({ step, setStep, data, id }) {
         }) */
     }
     function Delete(id) {
-        Axios.delete("https://socieloo-back.onrender.com/api/v1/user/deletaComentario/" + id)
+        Axios.delete("http://socieloo-back.up.railway.app/api/v1/user/deletaComentario/" + id)
         .then((response) => {
             setPopUp(popBox);
             console.log(response.data);        
@@ -341,7 +341,7 @@ function Avaliar({ step, setStep, data, id }) {
     const idUser = localStorage.getItem("id")
     const tipo = localStorage.getItem("tipo")
     useEffect(() =>{
-        Axios.get('https://socieloo-back.onrender.com/api/v1/comentario/avaliacoes/'+ id)
+        Axios.get('http://socieloo-back.up.railway.app/api/v1/comentario/avaliacoes/'+ id)
         .then((response)=>{
             setAvaliacao(response.data[0])
         })
@@ -352,7 +352,7 @@ function Avaliar({ step, setStep, data, id }) {
     };
     function enviarComentario(e){
         e.preventDefault
-        Axios.post('https://socieloo-back.onrender.com/api/v1/comentario',{
+        Axios.post('http://socieloo-back.up.railway.app/api/v1/comentario',{
             ongId: id,
             usuarioId: idUser,
             textoComentario: text,
