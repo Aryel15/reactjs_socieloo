@@ -23,7 +23,7 @@ export default function Home() {
       </div>
     ))
     handleClickSearch();
-    Axios.get("http://socieloo-back.up.railway.app/api/v1/ong")
+    Axios.get("https://socieloo-back.up.railway.app/api/v1/ong")
       .then((response) => {
         setData(response.data);
         setLoading(null)

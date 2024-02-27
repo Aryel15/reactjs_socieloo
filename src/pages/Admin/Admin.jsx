@@ -31,7 +31,7 @@ export default function Admin() {
             </section>
         )
  
-        Axios.post(`http://socieloo-back.up.railway.app/api/v1/login`, {
+        Axios.post(`https://socieloo-back.up.railway.app/api/v1/login`, {
             senha: senha,
             email: email
         }).then((response) => {

@@ -4,13 +4,13 @@ import Axios from 'axios';
 export default function RemoveCard(props) {
     const id = localStorage.getItem("id")
     function desFavoritar(idOng){
-        Axios.get(`http://socieloo-back.up.railway.app/api/v1/user/${id}`)
+        Axios.get(`https://socieloo-back.up.railway.app/api/v1/user/${id}`)
         .then((response) =>{
             var favoritos = response.data.favoritos
             favoritos.splice(favoritos.indexOf(parseInt(idOng)), 1);
             console.log(favoritos);
            
-            Axios.put(`http://socieloo-back.up.railway.app/api/v1/user/${id}`, {
+            Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${id}`, {
                 favoritos: favoritos
             })
             .then((response) =>{

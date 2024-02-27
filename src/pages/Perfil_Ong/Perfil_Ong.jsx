@@ -21,11 +21,11 @@ export default function Perfil_Ong() {
         if (id === null) {
             window.location.pathname = "/gerenciamento-ong"
         } else {
-            Axios.get("http://socieloo-back.up.railway.app/api/v1/ong/" + id)
+            Axios.get("https://socieloo-back.up.railway.app/api/v1/ong/" + id)
                 .then((response) => {
                     setData(response.data);
                     console.log(response.data);
-                    Axios.get("http://socieloo-back.up.railway.app/api/v1/ong/ongFavoritadas")
+                    Axios.get("https://socieloo-back.up.railway.app/api/v1/ong/ongFavoritadas")
                     .then((response) => {
                         const result = response.data.find(item => item[0] === data.nome);
                         setFavoritos(result[1])
@@ -103,7 +103,7 @@ function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
 
         setPopUp(popBox);
         e.preventDefault()
-        Axios.put(`http://socieloo-back.up.railway.app/api/v1/ong/${id}`, {
+        Axios.put(`https://socieloo-back.up.railway.app/api/v1/ong/${id}`, {
             nome: nome,
             telefone: telefone,
             descricao: descricao,
@@ -242,7 +242,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
         setPopUp(popBox);
         e.preventDefault()
         console.log(email);
-        Axios.put(`http://socieloo-back.up.railway.app/api/v1/ong/${id}`, {
+        Axios.put(`https://socieloo-back.up.railway.app/api/v1/ong/${id}`, {
             nome: data.nome,
             telefone: data.telefone,
             descricao: data.descricao,
@@ -331,7 +331,7 @@ function Alterar_Senha({ stepE, setEStep, data, id }) {
                 return;
             } else {
                 setSenhaDiferente('');
-                Axios.put(`http://socieloo-back.up.railway.app/api/v1/ong/${id}`, {
+                Axios.put(`https://socieloo-back.up.railway.app/api/v1/ong/${id}`, {
                     nome: data.nome,
                     telefone: data.telefone,
                     descricao: data.descricao,
@@ -401,7 +401,7 @@ function Alterar_Senha({ stepE, setEStep, data, id }) {
 
 function Deletar_Conta({ stepE, setEStep, data, id }) {
     function Delete() {
-        Axios.delete("http://socieloo-back.up.railway.app/api/v1/ong/" + id)
+        Axios.delete("https://socieloo-back.up.railway.app/api/v1/ong/" + id)
             .then((response) => {
                 setPopUp(popBox);
                 console.log(response.data);

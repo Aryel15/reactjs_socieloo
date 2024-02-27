@@ -514,7 +514,7 @@ function ValidaEmail({ cadastro }) {
       if (codigo === codigoArmazenado) {
         console.log(cadastro)
         window.sessionStorage.removeItem("codigo")
-        Axios.post("http://socieloo-back.up.railway.app/api/v1/ong", {
+        Axios.post("https://socieloo-back.up.railway.app/api/v1/ong", {
           nome: cadastro.nome,
           cnae: cadastro.cnae,
           cnpj: cadastro.cnpj,
