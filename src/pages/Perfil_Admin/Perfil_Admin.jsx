@@ -15,7 +15,7 @@ export default function Perfil_Admin() {
         if(tipo !== "admin"){
             navigate("/")
         }else{
-            Axios.get(`http://localhost:8080/api/v1/admin/${id}`, {
+            Axios.get(`https://socieloo-back.up.railway.app/api/v1/admin/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -123,7 +123,7 @@ function Relatorios() {
 
     useEffect(() => {
         //Ongs cadastradas no mês passado
-        Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOngMesPassado", {
+        Axios.get("https://socieloo-back.up.railway.app/api/v1/ong/cadastramentoOngMesPassado", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -139,7 +139,7 @@ function Relatorios() {
             setLoading7(null)
         })
         //Ongs cadastradas este mês
-        Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOng", {
+        Axios.get("https://socieloo-back.up.railway.app/api/v1/ong/cadastramentoOng", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -151,7 +151,7 @@ function Relatorios() {
 
 
         //Usuários cadastradas no mês passado
-        Axios.get("http://localhost:8080/api/v1/user/cadastramentoOngMesPassado", {
+        Axios.get("https://socieloo-back.up.railway.app/api/v1/user/cadastramentoOngMesPassado", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -167,7 +167,7 @@ function Relatorios() {
             setLoading8(null)
         })
         //Usuários cadastradas este mês
-        Axios.get("http://localhost:8080/api/v1/user/cadastramentoOng", {
+        Axios.get("https://socieloo-back.up.railway.app/api/v1/user/cadastramentoOng", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -184,7 +184,7 @@ function Relatorios() {
                         <span class="loader"></span>
                     </div>
                 ))
-                const response = await Axios.get(`http://localhost:8080/api/v1/ong/buscaRegiao/${zona}`, {
+                const response = await Axios.get(`https://socieloo-back.up.railway.app/api/v1/ong/buscaRegiao/${zona}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -211,7 +211,7 @@ function Relatorios() {
                         <span class="loader"></span>
                     </div>
                 ))
-                const response = await Axios.get(`http://localhost:8080/api/v1/ong/buscaSegmento/${segmento}`, {
+                const response = await Axios.get(`https://socieloo-back.up.railway.app/api/v1/ong/buscaSegmento/${segmento}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -235,7 +235,7 @@ function Relatorios() {
         buscaSegmento('Proteção Animal');
         buscaSegmento('Saúde');
 
-        Axios.get('http://localhost:8080/api/v1/user/todosUsuarios', {
+        Axios.get('https://socieloo-back.up.railway.app/api/v1/user/todosUsuarios', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -251,7 +251,7 @@ function Relatorios() {
         }).catch((err) => console.log(err))
 
 
-        Axios.get('http://localhost:8080/api/v1/ong/todasAsOngs', {
+        Axios.get('https://socieloo-back.up.railway.app/api/v1/ong/todasAsOngs', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -266,7 +266,7 @@ function Relatorios() {
             setLoading1(null)
         }).catch((err) => console.log(err))
 
-        Axios.get('http://localhost:8080/api/v1/admin/todasAsUserExcluidas', {
+        Axios.get('https://socieloo-back.up.railway.app/api/v1/admin/todasAsUserExcluidas', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -282,7 +282,7 @@ function Relatorios() {
         }).catch((err) => console.log(err))
 
 
-        Axios.get('http://localhost:8080/api/v1/admin/todasAsOngsExcluidas', {
+        Axios.get('https://socieloo-back.up.railway.app/api/v1/admin/todasAsOngsExcluidas', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -363,7 +363,7 @@ function Usuarios() {
     const token = window.localStorage.getItem("token")
 
     useEffect(() => {
-        Axios.get('http://localhost:8080/api/v1/user', {
+        Axios.get('https://socieloo-back.up.railway.app/api/v1/user', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -386,7 +386,7 @@ function Usuarios() {
         ))
     }
     function Delete(id) {
-        Axios.delete(`http://localhost:8080/api/v1/admin/deletarUsuario/${id}`, {
+        Axios.delete(`https://socieloo-back.up.railway.app/api/v1/admin/deletarUsuario/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -459,11 +459,11 @@ function ONGs() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        Axios.get('http://localhost:8080/api/v1/ong')
+        Axios.get('https://socieloo-back.up.railway.app/api/v1/ong')
             .then((response) => {
                 setOngs(response.data)
             }).catch((err) => console.log(err))
-        Axios.get('http://localhost:8080/api/v1/ong/ongFavoritadas', {
+        Axios.get('https://socieloo-back.up.railway.app/api/v1/ong/ongFavoritadas', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -477,7 +477,7 @@ function ONGs() {
                 });
                 setFavoritas(data)
             }).catch((err) => console.log(err))
-        Axios.get('http://localhost:8080/api/v1/comentario', {
+        Axios.get('https://socieloo-back.up.railway.app/api/v1/comentario', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -501,7 +501,7 @@ function ONGs() {
         ))
     }
     function Delete(id) {
-        Axios.delete(`http://localhost:8080/api/v1/admin/deletarOng/${id}`, {
+        Axios.delete(`https://socieloo-back.up.railway.app/api/v1/admin/deletarOng/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -683,7 +683,7 @@ function Conta_Admin({data}) {
     }
     function Delete(e) {
         e.preventDefault()
-        Axios.delete(`http://localhost:8080/api/v1/admin/${id}` , {
+        Axios.delete(`https://socieloo-back.up.railway.app/api/v1/admin/${id}` , {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -701,7 +701,7 @@ function Conta_Admin({data}) {
 
     function Alterar(e){
         e.preventDefault();
-        Axios.put(`http://localhost:8080/api/v1/admin/${id}`, {
+        Axios.put(`https://socieloo-back.up.railway.app/api/v1/admin/${id}`, {
             id: id,
             nome: admin.nome,
             sobrenome: admin.sobrenome,

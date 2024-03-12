@@ -24,7 +24,7 @@ export default function Perfil_User() {
         if(id === null){
             navigate("/")
         }else{
-            Axios.get(`http://localhost:8080/api/v1/user/${id}`, {
+            Axios.get(`https://socieloo-back.up.railway.app/api/v1/user/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -72,7 +72,7 @@ function Editar_Perfil({data, id, token}){
     const handleClickEditar_Perfil = e =>{
         console.log(data);
         e.preventDefault()
-        Axios.put(`http://localhost:8080/api/v1/user/${id}`,{
+        Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${id}`,{
             id: data.id,
             login: data.login,
             dataCadastro: data.dataCadastro,
@@ -129,7 +129,7 @@ function Alterar_Email({ stepE, setEStep, data, id, token }) {
     const handleClickAlterarEmail = e =>{
         e.preventDefault()
         console.log(email);
-        Axios.put(`http://localhost:8080/api/v1/user/${id}`, {
+        Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${id}`, {
             login: email,
         }, {
             headers: {
@@ -217,7 +217,7 @@ function Alterar_Senha({ data, id, token}) {
                 return;
             } else {
                 setSenhaDiferente('');
-                Axios.put(`http://localhost:8080/api/v1/user/${id}`,{
+                Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${id}`,{
                     senha: senha,
                 }, {
                     headers: {
@@ -276,7 +276,7 @@ function Alterar_Senha({ data, id, token}) {
 
 function Deletar_Conta({data, id, token }) {
     function Delete() {
-        Axios.delete(`http://localhost:8080/api/v1/user/${id}`, {
+        Axios.delete(`https://socieloo-back.up.railway.app/api/v1/user/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

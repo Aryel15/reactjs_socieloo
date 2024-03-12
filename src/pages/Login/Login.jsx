@@ -30,7 +30,7 @@ export default function Login() {
     const handleClickCadastro = e => {
         e.preventDefault() 
  
-        Axios.post(`http://localhost:8080/api/v1/${login}/login`, {
+        Axios.post(`https://socieloo-back.up.railway.app/api/v1/${login}/login`, {
             senha: senha,
             login: email
         }).then((response) => {

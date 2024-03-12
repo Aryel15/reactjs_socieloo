@@ -69,7 +69,7 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
   )
   const [popUp, setPopUp] = useState("")
   function Cadastro(){
-        Axios.post("http://localhost:8080/api/v1/user", {
+        Axios.post("https://socieloo-back.up.railway.app/api/v1/user", {
           nome: cadastro.nome,
           sobrenome: cadastro.sobrenome,
           login: cadastro.login,
@@ -325,7 +325,7 @@ export function Etapa4({step, setStep, cadastro}) {
     if (codigo == codigoArmazenado) {
       console.log(cadastro)
       window.sessionStorage.removeItem("codigo")
-        Axios.post("http://localhost:8080/api/v1/user", {
+        Axios.post("https://socieloo-back.up.railway.app/api/v1/user", {
           nome: cadastro.nome,
           sobrenome: cadastro.sobrenome,
           login: cadastro.login,

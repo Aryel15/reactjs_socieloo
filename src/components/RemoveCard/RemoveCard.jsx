@@ -6,7 +6,7 @@ export default function RemoveCard(props) {
     const id = localStorage.getItem("id")
     const token = localStorage.getItem("token")
     function desFavoritar(idOng){
-        Axios.get(`http://localhost:8080/api/v1/user/${id}`,{
+        Axios.get(`https://socieloo-back.up.railway.app/api/v1/user/${id}`,{
             headers:{
                 Authorization: `Bearer ${token}`
             }
@@ -16,7 +16,7 @@ export default function RemoveCard(props) {
             favoritos.splice(favoritos.indexOf(parseInt(idOng)), 1);
             console.log(favoritos);
            
-            Axios.put(`http://localhost:8080/api/v1/user/${id}`, {
+            Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${id}`, {
                 favoritos: favoritos
             },{
                 headers:{

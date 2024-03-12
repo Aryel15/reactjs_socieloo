@@ -446,7 +446,7 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
         return;
       }
     
-      Axios.post("http://localhost:8080/api/v1/ong", {
+      Axios.post("https://socieloo-back.up.railway.app/api/v1/ong", {
         nome: cadastro.nome,
         cnae: cadastro.cnae,
         cnpj: cadastro.cnpj,
@@ -545,7 +545,7 @@ function ValidaEmail({ cadastro }) {
       if (codigo === codigoArmazenado) {
         console.log(cadastro)
         window.sessionStorage.removeItem("codigo")
-        Axios.post("http://localhost:8080/api/v1/ong", {
+        Axios.post("https://socieloo-back.up.railway.app/api/v1/ong", {
           nome: cadastro.nome,
           cnae: cadastro.cnae,
           cnpj: cadastro.cnpj,

@@ -25,11 +25,11 @@ export default function Perfil_Ong() {
         if (id === null) {
             navigate("/gerenciamento-ong")
         } else {
-            Axios.get(`http://localhost:8080/api/v1/ong/${id}`)
+            Axios.get(`https://socieloo-back.up.railway.app/api/v1/ong/${id}`)
                 .then((response) => {
                     setData(response.data);
                     console.log(response.data);
-                    Axios.get("http://localhost:8080/api/v1/ong/ongFavoritadas")
+                    Axios.get("https://socieloo-back.up.railway.app/api/v1/ong/ongFavoritadas")
                     .then((res) => {
                         const result = res.data.find(item => item[0] === response.data.nome);
                         setFavoritos(result[1])
@@ -109,7 +109,7 @@ function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
     const handleClickEditar_Perfil = e => {
 
         e.preventDefault()
-        Axios.put(`http://localhost:8080/api/v1/ong/${id}`, {
+        Axios.put(`https://socieloo-back.up.railway.app/api/v1/ong/${id}`, {
             nome: nome,
             telefone: telefone,
             descricao: descricao,
@@ -255,7 +255,7 @@ function Alterar_login({ stepE, setEStep, data, id }) {
     const handleClickAlterarlogin = e => {
         e.preventDefault()
         console.log(login);
-        Axios.put(`http://localhost:8080/api/v1/ong/${id}`, {
+        Axios.put(`https://socieloo-back.up.railway.app/api/v1/ong/${id}`, {
             nome: data.nome,
             telefone: data.telefone,
             descricao: data.descricao,
@@ -350,7 +350,7 @@ function Alterar_Senha({ stepE, setEStep, data, id }) {
                 return;
             } else {
                 setSenhaDiferente('');
-                Axios.put(`http://localhost:8080/api/v1/ong/${id}`, {
+                Axios.put(`https://socieloo-back.up.railway.app/api/v1/ong/${id}`, {
                     nome: data.nome,
                     telefone: data.telefone,
                     descricao: data.descricao,
@@ -427,7 +427,7 @@ function Deletar_Conta({ stepE, setEStep, data, id }) {
     const token = window.localStorage.getItem("token")
 
     function Delete() {
-        Axios.delete(`http://localhost:8080/api/v1/ong/${id}`, {
+        Axios.delete(`https://socieloo-back.up.railway.app/api/v1/ong/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

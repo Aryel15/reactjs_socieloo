@@ -55,7 +55,7 @@ export default function Cadastro_Admin() {
         return;
       } else {
         Axios.post(
-          `http://localhost:8080/api/v1/admin/${idAdmin}`,
+          `https://socieloo-back.up.railway.app/api/v1/admin/${idAdmin}`,
           {
             nome: cadastro.nome,
             sobrenome: cadastro.sobrenome,
