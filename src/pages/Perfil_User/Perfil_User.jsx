@@ -3,24 +3,32 @@ import Menu from '../../components/Menu/Menu'
 import Vlibras from '../../components/Vlibras/Vlibras'
 import './style.css'
 import Axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Perfil_User() {
     const [fotoPerfil, setFotoPerfil] = React.useState("../assets/camera.svg");
     const [data, setData] = useState()
     const [stepE, setEStep] = React.useState("Editar_Perfil");
     const id = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
+    const navigate = useNavigate()
+
     const editar = {
-        Editar_Perfil: <Editar_Perfil data={data} id={id}/>,
-        Alterar_Senha: <Alterar_Senha data={data} id={id} />,
-        Alterar_Email: <Alterar_Email data={data} id={id} />,
-        Deletar_Conta: <Deletar_Conta data={data} id={id}/>,
+        Editar_Perfil: <Editar_Perfil data={data} id={id} token={token}/>,
+        Alterar_Senha: <Alterar_Senha data={data} id={id} token={token} />,
+        Alterar_Email: <Alterar_Email data={data} id={id} token={token} />,
+        Deletar_Conta: <Deletar_Conta data={data} id={id} token={token}/>,
     }
 
     useEffect(() => {
         if(id === null){
-            window.location.pathname = "/"
+            navigate("/")
         }else{
-            Axios.get("https://socieloo-back.up.railway.app/api/v1/user/" + id)
+            Axios.get(`http://localhost:8080/api/v1/user/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             .then((response) => {
                 setData(response.data);
                 console.log(response.data);
@@ -35,27 +43,12 @@ export default function Perfil_User() {
                 <i class="fa-solid fa-user"></i>
                 <h1>{data?.nome} {data?.sobrenome}</h1>
             </div>
-           {/* <div class="container container-imgs">
-                <div class="circle">
-                    <img src={fotoPerfil} alt="Alterar Foto" class="fileImg" />
-                </div>
-                <div class="select-image">
-                    <p>Selecione uma imagem</p>
-                    <div class="images">
-                    <img src="../imgs/voluntario-img1.png" alt="Imagem 1" title="Imagem 1" onClick={() => setFotoPerfil("../imgs/voluntario-img1.png")}/>
-                    <img src="../imgs/voluntario-img2.png" alt="Imagem 2" title="Imagem 2" onClick={() =>setFotoPerfil("../imgs/voluntario-img2.png")}/>
-                    <img src="../imgs/voluntario-img3.png" alt="Imagem 3" title="Imagem 3" onClick={() =>setFotoPerfil("../imgs/voluntario-img3.png")}/>
-                    <img src="../imgs/voluntario-img4.png" alt="Imagem 4" title="Imagem 4" onClick={() =>setFotoPerfil("../imgs/voluntario-img4.png")}/>
-                    <img src="../imgs/voluntario-img5.png" alt="Imagem 5" title="Imagem 5" onClick={() =>setFotoPerfil("../imgs/voluntario-img5.png")}/>
-                </div>
-            </div>          
-            </div>*/}  
             <aside className="edit__options">
                 <ul className="options__itens">
-                    <li className={stepE === "Editar_Perfil" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Editar_Perfil")}><i className='bx bx-pencil'></i> Editar perfil</a></li>
-                    <li className={stepE === "Alterar_Senha" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Senha")}><i className='bx bxs-lock-alt'></i> Alterar senha</a></li>
-                    <li className={stepE === "Alterar_Email" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Email")}><i className='bx bxs-lock-alt'></i> Alterar email</a></li>
-                    <li className={stepE === "Deletar_Conta" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Deletar_Conta")}><i className='bx bxs-message-square-x'></i> Deletar conta</a></li>
+                    <li className={stepE === "Editar_Perfil" ? "select" : ""}><Link to="javascript:void(0);" className="options__item" onClick={() => setEStep("Editar_Perfil")}><i className='bx bx-pencil'></i> Editar perfil</Link></li>
+                    <li className={stepE === "Alterar_Senha" ? "select" : ""}><Link to="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Senha")}><i className='bx bxs-lock-alt'></i> Alterar senha</Link></li>
+                    <li className={stepE === "Alterar_Email" ? "select" : ""}><Link to="javascript:void(0);" className="options__item" onClick={() => setEStep("Alterar_Email")}><i className='bx bxs-lock-alt'></i> Alterar email</Link></li>
+                    <li className={stepE === "Deletar_Conta" ? "select" : ""}><Link to="javascript:void(0);" className="options__item" onClick={() => setEStep("Deletar_Conta")}><i className='bx bxs-message-square-x'></i> Deletar conta</Link></li>
                 </ul>
             </aside>
             <section className="edit__content"  id='conteudo'>
@@ -66,7 +59,7 @@ export default function Perfil_User() {
     </>
   )
 }
-function Editar_Perfil({data, id}){
+function Editar_Perfil({data, id, token}){
     useEffect(_=> {
         setAlterar({...alterar, nome: data?.nome||"", sobrenome: data?.sobrenome||""})
     },[data])
@@ -77,17 +70,26 @@ function Editar_Perfil({data, id}){
     })
 
     const handleClickEditar_Perfil = e =>{
-        
-        setPopUp(popBox);
+        console.log(data);
         e.preventDefault()
-        Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${id}`,{
+        Axios.put(`http://localhost:8080/api/v1/user/${id}`,{
+            id: data.id,
+            login: data.login,
+            dataCadastro: data.dataCadastro,
+            favoritos: data.favoritos,
+            role: data.role,
+            authorities: data.authorities,
             nome: alterar.nome,
             sobrenome: alterar.sobrenome
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         }).then((response) => {
+            setPopUp(popBox);
             setTimeout(() => {
                 console.log(response)
                 setPopUp("");
-                window.location.pathname = "/perfil"
             }, 2000); 
         }).catch((err) => console.log(err))
     }
@@ -120,21 +122,26 @@ function Editar_Perfil({data, id}){
         </>
     )
 }
-function Alterar_Email({ stepE, setEStep, data, id }) {
+function Alterar_Email({ stepE, setEStep, data, id, token }) {
     const [msg, setMsg] = useState("")
     const [email, setEmail] = useState("")
+    const navigate = useNavigate()
     const handleClickAlterarEmail = e =>{
-         setPopUp(popBox);
         e.preventDefault()
         console.log(email);
-        Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${id}`, {
-            email: email,
+        Axios.put(`http://localhost:8080/api/v1/user/${id}`, {
+            login: email,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         }).then((response) => {
-        
+            
+            setPopUp(popBox);
             console.log(response);
             setTimeout(() => {
                 setPopUp("")
-                window.location.pathname = "/perfil"
+                navigate("/perfil")
             }, 2000); 
 
         })
@@ -156,7 +163,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
                 <h2>Alterar Email</h2>
                 <p className="mensagem-as">{msg}</p>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value={data?.email} />
+                <input type="email" id="email" name="login" value={data?.login} />
                 <label for="newEmail">Email novo</label>
                 <input type="email" id="newEmail" name="newEmail" onChange={e => setEmail(e.target.value)}/>
                 <button type="submit" className="button-as">Alterar</button>
@@ -166,7 +173,7 @@ function Alterar_Email({ stepE, setEStep, data, id }) {
     )
 }
 
-function Alterar_Senha({ data, id}) {
+function Alterar_Senha({ data, id, token}) {
     
     const [msg, setMsg] = useState("")
     const [senhaErrada, setSenhaErrada] = useState("")
@@ -175,6 +182,7 @@ function Alterar_Senha({ data, id}) {
     const [senhaDiferente, setSenhaDiferente] = useState("")
     const [novaSenha, setNovaSenha] = useState("")
     const [senhaAtual, setSenhaAtual] = useState("")
+    const navigate = useNavigate()
 
     const senhaForte = (senha) => {
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
@@ -209,14 +217,18 @@ function Alterar_Senha({ data, id}) {
                 return;
             } else {
                 setSenhaDiferente('');
-                Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${id}`,{
+                Axios.put(`http://localhost:8080/api/v1/user/${id}`,{
                     senha: senha,
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 }).then((response) => {
                     console.log(response);
                     setPopUp(popBox);
                     setTimeout(() => {
                         setPopUp("");
-                        window.location.pathname = "/perfil"
+                        navigate("/perfil")
                     }, 2000); 
                 })
             }
@@ -253,7 +265,7 @@ function Alterar_Senha({ data, id}) {
                     <p className="senha-fraca">{senhaDiferente}</p>
                 </div>
 
-                <button type="submit" className="button-as" href="/perfil">Salvar alterações</button>
+                <button type="submit" className="button-as" to="/perfil">Salvar alterações</button>
 
             </form>
             
@@ -262,16 +274,20 @@ function Alterar_Senha({ data, id}) {
     )
 }
 
-function Deletar_Conta({data, id }) {
+function Deletar_Conta({data, id, token }) {
     function Delete() {
-        Axios.delete("https://socieloo-back.up.railway.app/api/v1/user/" + id)
+        Axios.delete(`http://localhost:8080/api/v1/user/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) => {
             setPopUp(popBox);
             console.log(response.data);        
             localStorage.removeItem("id");
             localStorage.removeItem("tipo");
             setTimeout(() => {
-                window.location.pathname = "/"
+                navigate("/")
             }, 2000); 
         })
 
@@ -297,10 +313,10 @@ function Deletar_Conta({data, id }) {
                 <h2>Deletar Conta</h2>
                 <p>Tem certeza que deseja deletar sua conta?</p>
                 <div className="buttons-delete">
-                    <a className="button-s" onClick={() => setDeletar(true)}>Sim</a>
-                    <a className="button-as" href="/perfil">Não</a>
+                    <Link className="button-s" onClick={() => setDeletar(true)}>Sim</Link>
+                    <Link className="button-as" to="/perfil">Não</Link>
                 </div>
-                {deletar === true ? <a className="button-as delete" onClick={Delete}>Deletar conta</a> : ""}
+                {deletar === true ? <Link className="button-as delete" onClick={Delete}>Deletar conta</Link> : ""}
             </form>
             {popUp}
         </>

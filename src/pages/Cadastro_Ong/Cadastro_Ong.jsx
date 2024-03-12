@@ -6,6 +6,7 @@ import Controle_Cadastros from '../../components/Controle_Cadastros/Controle_Cad
 import Vlibras from '../../components/Vlibras/Vlibras'
 import emailjs from "emailjs-com";
 import Axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function Cadastro_Ong() {
     const [step, setStep] = useState(0);
@@ -14,7 +15,7 @@ export default function Cadastro_Ong() {
       nome: '',
       cnae: '',
       cnpj: '',
-      email: '',
+      login: '',
       telefone: '',
       senha: '',
       regiao: '',
@@ -92,7 +93,7 @@ export function Etapa1({ step, setStep, cadastro, valorCadastro }) {
     const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
     const HandleClickAvançar = e =>{
         e.preventDefault()
-        if((cadastro.nome !== '') && (cadastro.email !== '') && (cadastro.telefone !== '') && (cadastro.cnpj !== '') && (cadastro.cnae !== '')){
+        if((cadastro.nome !== '') && (cadastro.login !== '') && (cadastro.telefone !== '') && (cadastro.cnpj !== '') && (cadastro.cnae !== '')){
           setStep(step + 1)
         }else{
           setMensagem(msg)
@@ -100,7 +101,7 @@ export function Etapa1({ step, setStep, cadastro, valorCadastro }) {
         }
     }
     const Valida = ()=>{
-        if((cadastro.nome !== '') && (cadastro.email !== '') && (cadastro.telefone !== '') && (cadastro.cnpj !== '') && (cadastro.cnae !== '')){
+        if((cadastro.nome !== '') && (cadastro.login !== '') && (cadastro.telefone !== '') && (cadastro.cnpj !== '') && (cadastro.cnae !== '')){
           return true;
         }else{
           return false;
@@ -118,7 +119,7 @@ export function Etapa1({ step, setStep, cadastro, valorCadastro }) {
                         <input type="text" id="nome" name="nome" value={cadastro?.nome} required placeholder="Socieloo" onChange={valorCadastro}/>
 
                         <label for="email">Email</label>
-                        <input type="text" id="email" name="email" value={cadastro?.email} required placeholder="noobmaster69@hotmail.com" onChange={valorCadastro}/>
+                        <input type="text" id="email" name="login" value={cadastro?.login} required placeholder="noobmaster69@hotmail.com" onChange={valorCadastro}/>
 
                         <label for="telefone">Telefone</label>
                         <input type="text" id="telefone" name="telefone" value={cadastro?.telefone} maxLength="12" required placeholder="+55 (11) 98765-4321" onChange={valorCadastro}/>
@@ -206,13 +207,13 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                       <textarea name="descricao" id="descricao" cols="30" rows="10" value={cadastro?.descricao} onChange={valorCadastro} ></textarea>
                   </form>
                   <div className="buttons-form2">
-                      <a href="javascript:void(0);" className="voltar" onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}>Voltar</a>
+                      <a href="javascript:void(0);" className="voltar" onClick={() => setStep(step - 1)}>Voltar</a>
                       <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Avançar</a>
                   </div>
               </div>
               <div className="section__radio">
                   <ul className="radio__group">
-                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() =>  setStep(step - 1)}/></li>
                       <li><input className="radio__input" name="process" id="radio-two" type='radio' checked/></li>
                       <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { Valida == true ? setStep(step + 1) : setMensagem(msg)}}/></li>
                       <li><input className="radio__input" name="process" id="radio-four" type='radio' onClick={() => { Valida == true ? setStep(step + 2) : setMensagem(msg)}}/></li>
@@ -251,8 +252,6 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
               endereco: response.data.logradouro, 
               bairro: response.data.bairro, 
               uf: response.data.uf})
-            console.log(cadastro);
-            console.log(dataCep.uf);
         })
         .catch((err) => console.log(err))
       }
@@ -295,14 +294,14 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                       </div>
                   </form>
                   <div className="buttons-form2">
-                      <a href="javascript:void(0);" className="voltar" onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}>Voltar</a>
+                      <a href="javascript:void(0);" className="voltar" onClick={() => setStep(step - 1)}>Voltar</a>
                       <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Avançar</a>
                   </div>
               </div>
               <div className="section__radio">
                   <ul className="radio__group">
-                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { Valida == true ? setStep(step - 2) : setMensagem(msg)}}/></li>
-                      <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => setStep(step - 2)}/></li>
+                      <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => setStep(step - 1)}/></li>
                       <li><input className="radio__input" name="process" id="radio-three" type='radio' checked/></li>
                       <li><input className="radio__input" name="process" id="radio-four" type='radio' onClick={() => { Valida == true ? setStep(step + 1) : setMensagem(msg)}}/></li>
                       <li><input className="radio__input" name="process" id="radio-five" type='radio' onClick={() => { Valida == true ? setStep(step + 2) : setMensagem(msg)}}/></li>
@@ -351,15 +350,15 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
                       </div>
                   </form>
                   <div className="buttons-form2">
-                      <a href="javascript:void(0);" className="voltar" onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}>Voltar</a>
+                      <a href="javascript:void(0);" className="voltar" onClick={() => setStep(step - 1)}>Voltar</a>
                       <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Avançar</a>
                   </div>
               </div>
               <div className="section__radio">
                   <ul className="radio__group">
-                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => { Valida == true ? setStep(step - 3) : setMensagem(msg)}}/></li>
-                      <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => { Valida == true ? setStep(step - 2) : setMensagem(msg)}}/></li>
-                      <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}/></li>
+                      <li><input className="radio__input" name="process" id="radio-one" type='radio'  onClick={() => setStep(step - 3)}/></li>
+                      <li><input className="radio__input" name="process" id="radio-two" type='radio' onClick={() => setStep(step - 2)}/></li>
+                      <li><input className="radio__input" name="process" id="radio-three" type='radio' onClick={() => setStep(step - 1)}/></li>
                       <li><input className="radio__input" name="process" id="radio-four" type='radio' checked/></li>
                       <li><input className="radio__input" name="process" id="radio-five" type='radio' onClick={() => { Valida == true ? setStep(step + 1) : setMensagem(msg)}}/></li>
                   </ul>
@@ -373,12 +372,15 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
     const [msgsenhaDiferente, setMsgSenhaDiferente] = useState("")
     const [mensagem, setMensagem] = useState('');
     const [senhaFraca, setSenhaFraca] = useState("")
+
+    const navigate = useNavigate()
+
     const msg = (<><i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos</>)
     const popBox = (
       <section className="popup">
         <div className="boxpopup">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-          <p>Preencha todos os campos!</p>
+          <i class="fa-solid fa-circle-check"></i>
+          <p>Sua ONG foi cadastrada com sucesso!</p>
           <div className="progress-bar"></div>
         </div>
       </section>
@@ -408,7 +410,7 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
       setMsgSenhaDiferente('');
       sessionStorage.setItem("codigo", codigo);
     
-      enviarEmail(cadastro.email, codigo)
+      enviarEmail(cadastro.login, codigo)
         .then(() => {
           setStep(step + 1);
         })
@@ -444,7 +446,36 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
         return;
       }
     
-      isCadastroValido();
+      Axios.post("http://localhost:8080/api/v1/ong", {
+        nome: cadastro.nome,
+        cnae: cadastro.cnae,
+        cnpj: cadastro.cnpj,
+        login: cadastro.login,
+        telefone: cadastro.telefone,
+        senha: cadastro.senha,
+        regiao: cadastro.regiao,
+        agencia: cadastro.agencia,
+        contaCorrente: cadastro.contaCorrente,
+        pix: cadastro.pix,
+        banco: cadastro.banco,
+        descricao: cadastro.descricao,
+        segmento: cadastro.segmento,
+        cep: cadastro.cep,
+        endereco: cadastro.endereco,
+        complemento: cadastro.complemento,
+      }).then((response) => {
+        setPopUp(popBox);
+        const { token, id } =  response.data
+        localStorage.removeItem("tipo")
+        localStorage.removeItem("id")
+        localStorage.removeItem("token")
+        localStorage.setItem("id", id)
+        localStorage.setItem("token", token)
+        localStorage.setItem("tipo", "ong");
+        setTimeout(() => {
+          navigate(`/ong/${id}`)
+        }, 2000); 
+      }).catch((err) => console.log(err))
     };
     const Termos = (
       <div className="termos-main">
@@ -473,7 +504,7 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
                   <label for="termos" onClick={() => setCheck(!check)}>Eu concordo com os <a href="javascript:void(0);" onClick={() => setPopTermos(Termos)}>termos e condições</a></label>
                 </div>
                 <div className="buttons-form2">
-                    <a href="javascript:void(0);" className="voltar" onClick={() => { Valida == true ? setStep(step - 1) : setMensagem(msg)}}>Voltar</a>
+                    <a href="javascript:void(0);" className="voltar" onClick={() => setStep(step - 1)}>Voltar</a>
                     <a href="javascript:void(0);" className="options__submit" onClick={HandleClickAvançar}>Finalizar Cadastro</a>
                 </div>
             </form>
@@ -514,11 +545,11 @@ function ValidaEmail({ cadastro }) {
       if (codigo === codigoArmazenado) {
         console.log(cadastro)
         window.sessionStorage.removeItem("codigo")
-        Axios.post("https://socieloo-back.up.railway.app/api/v1/ong", {
+        Axios.post("http://localhost:8080/api/v1/ong", {
           nome: cadastro.nome,
           cnae: cadastro.cnae,
           cnpj: cadastro.cnpj,
-          email: cadastro.email,
+          login: cadastro.login,
           telefone: cadastro.telefone,
           senha: cadastro.senha,
           regiao: cadastro.regiao,

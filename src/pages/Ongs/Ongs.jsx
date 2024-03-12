@@ -7,7 +7,7 @@ import Axios from 'axios';
 import { useParams } from 'react-router';
 
 export default function Ongs() {
-  const {tipo} = useParams()
+  const { tipo } = useParams()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(null)
   const [filter, setFilter] = useState({
@@ -25,7 +25,7 @@ export default function Ongs() {
           <span class="loader"></span>
       </div>
     ))
-    Axios.get("https://socieloo-back.up.railway.app/api/v1/ong")
+    Axios.get("http://localhost:8080/api/v1/ong")
       .then((response) => {
         setData(response.data);
         setLoading(null)
@@ -43,7 +43,7 @@ export default function Ongs() {
     }
     console.log(segmento);
 
-  }, [regiao, segmento])
+  }, [regiao, segmento, tipo])
 
 
   return (
@@ -60,7 +60,7 @@ export default function Ongs() {
                   (regiao === 'Todas' || ong.regiao.toLowerCase() === regiao.toLowerCase()) &&
                   (segmento === 'Todas' || ong.segmento.toLowerCase() === segmento.toLowerCase())
               ).map(ong => (
-                <Card titulo={ong.nome} regiao={ong.regiao} segmento={ong.segmento} link={`/ong/${ong.id}/`} id={ong.id} />
+                <Card titulo={ong.nome} regiao={ong.regiao} segmento={ong.segmento} link={`/ong/${ong.id}/`} id={ong.id} key={ong.id}/>
               ))
             }
           </div>

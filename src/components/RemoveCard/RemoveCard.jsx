@@ -1,17 +1,27 @@
 import './style.css'
 import Axios from 'axios';
+import { Link } from 'react-router-dom'
 
 export default function RemoveCard(props) {
     const id = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
     function desFavoritar(idOng){
-        Axios.get(`https://socieloo-back.up.railway.app/api/v1/user/${id}`)
+        Axios.get(`http://localhost:8080/api/v1/user/${id}`,{
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) =>{
             var favoritos = response.data.favoritos
             favoritos.splice(favoritos.indexOf(parseInt(idOng)), 1);
             console.log(favoritos);
            
-            Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${id}`, {
+            Axios.put(`http://localhost:8080/api/v1/user/${id}`, {
                 favoritos: favoritos
+            },{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
             })
             .then((response) =>{
                 console.log(favoritos);
@@ -27,16 +37,16 @@ export default function RemoveCard(props) {
                     <div class="card__remove" >
                         <img src="../assets/remove-icon.svg" alt="ícone de remoção do projeto" onClick={_ => desFavoritar(props.id)}/>
                     </div>
-                    <a href={props.link}>
+                    <Link to={props.link}>
                     <div className="img pa">
                         <img  src={`../../../imgs/icons/${props.segmento}.png`} alt="" />
                     </div>
                     <h2>{props.titulo}</h2>
                     <div>
-                        <a href={props.segmento} className="buttonR">{props.segmento}</a>
-                        <a href={props.regioes} className="buttonR">{props.regiao}</a>
+                        <Link to={props.segmento} className="buttonR">{props.segmento}</Link>
+                        <Link to={props.regioes} className="buttonR">{props.regiao}</Link>
                     </div>
-                    </a>
+                    </Link>
                 </div>
             
         </>

@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './style.css'
-import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Menu() {
     const tipo = localStorage.getItem("tipo")
     const id = localStorage.getItem("id")
+
+    const navigate = useNavigate()
 
     let logoSocieloo;
   
@@ -23,7 +25,7 @@ export default function Menu() {
         e.preventDefault()
         localStorage.removeItem("id");
         localStorage.removeItem("tipo");
-        window.location.pathname = "/login"
+        navigate("/login")
     }
     return (
         <>
@@ -31,17 +33,17 @@ export default function Menu() {
                 <ul id="atalhos">
                     <li className="atalho"><a href="#conteudo" accesskey="1" title="Ir para o conteúdo">Conteúdo[1]↓</a></li>
                     <li className="atalho"><a href="#menu" accesskey="2" title="Ir para o menu de navegação">Menu[2]↓</a></li>
-                    <li className="fonte"><a href="javascript:void(0)" id="ddiminuir" title="Diminuir fonte" onClick={fonte()}>A-</a></li>
-                    <li className="fonte"><a href="javascript:void(0)" id="aaumentar" title="Aumentar fonte" onClick={fonte()}>A+</a></li>
-                    <li className="contraste s"><a href="javascript:void(0);" id="ssemcontraste" title="Sem contraste">○</a></li>
-                    <li className="contraste c"><a href="javascript:void(0);" id="ccontraste" title="Contraste">●</a></li>
-                    <li id="pgacess"><a href="/acessibilidade" title="acessibilidade">Acessibilidade</a></li>
+                    <li className="fonte"><Link to="javascript:void(0)" id="ddiminuir" title="Diminuir fonte" onClick={fonte()}>A-</Link></li>
+                    <li className="fonte"><Link to="javascript:void(0)" id="aaumentar" title="Aumentar fonte" onClick={fonte()}>A+</Link></li>
+                    <li className="contraste s"><Link to="javascript:void(0);" id="ssemcontraste" title="Sem contraste">○</Link></li>
+                    <li className="contraste c"><Link to="javascript:void(0);" id="ccontraste" title="Contraste">●</Link></li>
+                    <li id="pgacess"><Link to="/acessibilidade" title="acessibilidade">Acessibilidade</Link></li>
                 </ul>
             </div>
             <nav>
-                <a href="/" accesskey="1">
+                <Link to="/" accesskey="1">
                     <img src={logoSocieloo} alt="Logo Socieloo nas cores preto e azul" title="Logo" />
-                </a>
+                </Link>
                 <label for="bt_menu"><img src={menuIcon} alt="menu" /></label>
                 <input type="checkbox" id="bt_menu" />
                 <ul id="menu">
@@ -49,13 +51,13 @@ export default function Menu() {
                         <a href="#" className="link" accesskey="2">
                             Segmentos▾
                             <ul>
-                                <li className="sublink"><a href="/ongs/Cidadania">Cidadania</a></li>
-                                <li className="sublink"><a href="/ongs/Cultura e Esporte">Cultura e Esportes</a></li>
-                                <li className="sublink"><a href="/ongs/Educação">Educação</a></li>
-                                <li className="sublink"><a href="/ongs/Gênero e Diversidade">Gênero e Diversidade</a></li>
-                                <li className="sublink"><a href="/ongs/Meio Ambiente">Meio Ambiente</a></li>
-                                <li className="sublink"><a href="/ongs/Proteção Animal">Proteção Animal</a></li>
-                                <li className="sublink"><a href="/ongs/Saúde">Saúde</a></li>
+                                <li className="sublink"><Link to="/ongs/Cidadania">Cidadania</Link></li>
+                                <li className="sublink"><Link to="/ongs/Cultura e Esporte">Cultura e Esportes</Link></li>
+                                <li className="sublink"><Link to="/ongs/Educação">Educação</Link></li>
+                                <li className="sublink"><Link to="/ongs/Gênero e Diversidade">Gênero e Diversidade</Link></li>
+                                <li className="sublink"><Link to="/ongs/Meio Ambiente">Meio Ambiente</Link></li>
+                                <li className="sublink"><Link to="/ongs/Proteção Animal">Proteção Animal</Link></li>
+                                <li className="sublink"><Link to="/ongs/Saúde">Saúde</Link></li>
                             </ul>
                         </a>
                     </li>
@@ -63,11 +65,11 @@ export default function Menu() {
                         <a href="#" className="link" accesskey="3">
                             Região▾
                             <ul>
-                                <li className="sublink"><a href="/ongs/Zona Leste">Zona Leste</a></li>
-                                <li className="sublink"><a href="/ongs/Zona Norte">Zona Norte</a></li>
-                                <li className="sublink"><a href="/ongs/Centro">Centro</a></li>
-                                <li className="sublink"><a href="/ongs/Zona Oeste">Zona Oeste</a></li>
-                                <li className="sublink"><a href="/ongs/Zona Sul">Zona Sul</a></li>
+                                <li className="sublink"><Link to="/ongs/Zona Leste">Zona Leste</Link></li>
+                                <li className="sublink"><Link to="/ongs/Zona Norte">Zona Norte</Link></li>
+                                <li className="sublink"><Link to="/ongs/Centro">Centro</Link></li>
+                                <li className="sublink"><Link to="/ongs/Zona Oeste">Zona Oeste</Link></li>
+                                <li className="sublink"><Link to="/ongs/Zona Sul">Zona Sul</Link></li>
                             </ul>
                         </a>
                     </li>
@@ -77,54 +79,54 @@ export default function Menu() {
                             <ul>
                                 <li className="atalho"><a href="#conteudo" accesskey="1" title="Ir para o conteúdo">Conteúdo[1]↓</a></li>
                                 <li className="atalho"><a href="#menu" accesskey="2" title="Ir para o menu de navegação">Menu[2]↓</a></li>
-                                <li className="sublink"><a href="javascript:void(0)" title="Ativar contraste" id="contraste"
+                                <li className="sublink"><Link to="javascript:void(0)" title="Ativar contraste" id="contraste"
                                     accesskey="c">Contraste
-                                    ◉</a></li>
-                                <li className="sublink"><a href="javascript:void(0)" title="Desativar contraste" id="sem-contraste"
+                                    ◉</Link></li>
+                                <li className="sublink"><Link to="javascript:void(0)" title="Desativar contraste" id="sem-contraste"
                                     accesskey="z">Sem
-                                    contraste ○</a></li>
-                                <li className="sublink"><a href="javascript:void(0)" id="aumentar" title="Aumentar fonte"
+                                    contraste ○</Link></li>
+                                <li className="sublink"><Link to="javascript:void(0)" id="aumentar" title="Aumentar fonte"
                                     accesskey="b">Aumentar fonte
-                                    +</a></li>
-                                <li className="sublink"><a href="javascript:void(0)" id="diminuir" title="Diminuir fonte"
+                                    +</Link></li>
+                                <li className="sublink"><Link to="javascript:void(0)" id="diminuir" title="Diminuir fonte"
                                     accesskey="s">Diminuir fonte
-                                    -</a></li>
-                                <li className="sublink"><a href="/acessibilidade"
-                                    title="Manual de acessibilidade">Acessibilidade</a></li>
+                                    -</Link></li>
+                                <li className="sublink"><Link to="/acessibilidade"
+                                    title="Manual de acessibilidade">Acessibilidade</Link></li>
                             </ul>
                         </a>
                     </li>
-                    <li className="links faq"><a className="link" href='/faq' accesskey="5">Dúvidas Frequentes</a></li>
+                    <li className="links faq"><Link className="link" to='/faq' accesskey="5">Dúvidas Frequentes</Link></li>
 
                     {
                         !tipo ?
                         <>
-                            <li className="links login"><a className="link" href='/login' accesskey="6">Fazer login</a></li>
-                            <li className="links botão"><a className="link" href='/cadastro-ong' accesskey="7">Cadastre-se</a></li>
+                            <li className="links login"><Link className="link" to='/login' accesskey="6">Fazer login</Link></li>
+                            <li className="links botão"><Link className="link" to='/cadastro-ong' accesskey="7">Cadastre-se</Link></li>
                         </> : ""
                     }
                     {
                         tipo == "ong" ? 
                         <>
                             <li className="links">
-                                <a href="" className='perfil link'><i class="fa-solid fa-user"></i>Minha Ong</a>
+                                <Link to="" className='perfil link'><i class="fa-solid fa-user"></i>Minha Ong</Link>
                                 <ul>
-                                    <li className="links"><a href={'/ong/'+id} accesskey="5">Minha Ong</a></li>
-                                    <li className="links"><a href='/gerenciamento-ong' accesskey="5">Editar Ong</a></li>
-                                        <li className="links"><a href='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                                    <li className="links"><Link to={'/ong/'+id} accesskey="5">Minha Ong</Link></li>
+                                    <li className="links"><Link to='/gerenciamento-ong' accesskey="5">Editar Ong</Link></li>
+                                        <li className="links"><Link to='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></Link></li>
                                 </ul>
                             </li>
                         </> : ""
                     }
                     {
-                        tipo == "usuario" ? 
+                        tipo == "user" ? 
                         <>
                             <li className="links">
-                                <a href="" className='perfil link'><i class="fa-solid fa-user"></i>Minha conta</a>
+                                <Link to="" className='perfil link'><i class="fa-solid fa-user"></i>Minha conta</Link>
                                 <ul>
-                                    <li className="links"><a href='/favoritos' accesskey="5">Meus favoritos</a></li>
-                                    <li className="links"><a href='/perfil' accesskey="5">Meu perfil</a></li>
-                                    <li className="links"><a href='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                                    <li className="links"><Link to='/favoritos' accesskey="5">Meus favoritos</Link></li>
+                                    <li className="links"><Link to='/perfil' accesskey="5">Meu perfil</Link></li>
+                                    <li className="links"><Link to='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></Link></li>
                                 </ul>
                             </li>
                         </> : ""
@@ -133,11 +135,11 @@ export default function Menu() {
                         tipo == "admin" ? 
                         <>
                             <li className="links">
-                                <a href="" className='perfil link'><i class="fa-solid fa-screwdriver-wrench"></i>Minha conta</a>
+                                <Link to="" className='perfil link'><i class="fa-solid fa-screwdriver-wrench"></i>Minha conta</Link>
                                 <ul>
-                                    <li className="links"><a href='/gerenciamento' accesskey="5">Meu perfil</a></li>
-                                    <li className="links"><a href='/cadastro-admin' accesskey="5">Novo cadastro</a></li>
-                                    <li className="links"><a href='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                                    <li className="links"><Link to='/gerenciamento' accesskey="5">Meu perfil</Link></li>
+                                    <li className="links"><Link to='/cadastro-admin' accesskey="5">Novo cadastro</Link></li>
+                                    <li className="links"><Link to='javascript:void(0)' className='sair' onClick={sair} accesskey="6">Sair <i class="fa-solid fa-right-from-bracket"></i></Link></li>
                                 </ul>
                             </li>
                         </> : ""
@@ -175,8 +177,8 @@ function contraste(caminho, contraste) {
 
     });
 
-    //<link rel=stylesheet href="contraste.css" type=text/css>
-    $("head").append("<link rel=stylesheet href=" + " " + link_css + " " + "type=text/css>");//altera a folha de estilo da página
+    //<link rel=stylesheet to="contraste.css" type=text/css>
+    $("head").append("<link rel=stylesheet to=" + " " + link_css + " " + "type=text/css>");//altera a folha de estilo da página
 
     function setCookie(value) {
         var data = new Date(); //new Date()cria um novo objeto de data com a data e hora atuais :
@@ -240,8 +242,8 @@ function contraste2(caminho, contraste) {
 
     });
 
-    //<link rel=stylesheet href="contraste.css" type=text/css>
-    $("head").append("<link rel=stylesheet href=" + " " + link_css + " " + "type=text/css>");//altera a folha de estilo da página
+    //<link rel=stylesheet to="contraste.css" type=text/css>
+    $("head").append("<link rel=stylesheet to=" + " " + link_css + " " + "type=text/css>");//altera a folha de estilo da página
 
     function setCookie(value) {
         var data = new Date(); //new Date()cria um novo objeto de data com a data e hora atuais :

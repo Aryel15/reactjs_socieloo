@@ -3,15 +3,23 @@ import './style.css'
 import Vlibras from '../../components/Vlibras/Vlibras'
 import Axios from 'axios'
 import Chart from 'react-google-charts'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Perfil_Admin() {
-    let id = localStorage.getItem("id");
-    let tipo = localStorage.getItem("tipo");
+    const id = localStorage.getItem("id");
+    const tipo = localStorage.getItem("tipo");
+    const token = localStorage.getItem("token");
+    const navigate = useNavigate()
+
     useEffect(() =>{
         if(tipo !== "admin"){
-            window.location.pathname = "/"
+            navigate("/")
         }else{
-            Axios.get("https://socieloo-back.up.railway.app/api/v1/admin/" + id)
+            Axios.get(`http://localhost:8080/api/v1/admin/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             .then((response) => {
                 setData(response.data);
                 console.log(response.data);
@@ -32,7 +40,8 @@ export default function Perfil_Admin() {
         e.preventDefault()
         localStorage.removeItem("id");
         localStorage.removeItem("tipo");
-        window.location.pathname = "/admin"
+        localStorage.removeItem("token");
+        navigate("/admin")
     }
 
     return (
@@ -46,10 +55,10 @@ export default function Perfil_Admin() {
                     </div>
                     <div className="day">
                         {today}
-                        <a href="/">Home</a>
-                        {tipo === 'admin' && id === 1 ? <a href="/cadastro-admin">Novo Cadastro</a>
+                        <Link to="/">Home</Link>
+                        {tipo === 'admin' && id === 1 ? <Link to="/cadastro-admin">Novo Cadastro</Link>
                          : null}
-                        <a href="javascript:void(0);" onClick={sair}>Sair</a>
+                        <Link to="javascript:void(0);" onClick={sair}>Sair</Link>
                     </div>
                 </div>
                 <section className="edit__conteiner-admin" id="conteudo" >
@@ -57,11 +66,11 @@ export default function Perfil_Admin() {
                     <aside className="edit__options-admin">
 
                         <ul className="options__itens-admin">
-                            <li className={stepE === "Relatorios" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Relatorios")}><i class="fa-regular fa-file"></i> Relatórios</a></li>
-                            <li className={stepE === "ONGs" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("ONGs")}><i class="fa-solid fa-shield-dog"></i> ONG'S</a></li>
-                            <li className={stepE === "Usuarios" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Usuarios")}><i class="fa-solid fa-users"></i> Usuários</a></li>
-                            <li hidden className={stepE === "Comentarios" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Comentarios")}><i className='bx bxs-message-square-x'></i> Comentários</a></li>
-                            <li className={stepE === "Conta_Admin" ? "select" : ""}><a href="javascript:void(0);" className="options__item" onClick={() => setEStep("Conta_Admin")}><i class="fa-solid fa-lock"></i> Conta de Admin</a></li>
+                            <li className={stepE === "Relatorios" ? "select" : ""}><Link to="javascript:void(0);" className="options__item" onClick={() => setEStep("Relatorios")}><i class="fa-regular fa-file"></i> Relatórios</Link></li>
+                            <li className={stepE === "ONGs" ? "select" : ""}><Link to="javascript:void(0);" className="options__item" onClick={() => setEStep("ONGs")}><i class="fa-solid fa-shield-dog"></i> ONG'S</Link></li>
+                            <li className={stepE === "Usuarios" ? "select" : ""}><Link to="javascript:void(0);" className="options__item" onClick={() => setEStep("Usuarios")}><i class="fa-solid fa-users"></i> Usuários</Link></li>
+                            <li hidden className={stepE === "Comentarios" ? "select" : ""}><Link to="javascript:void(0);" className="options__item" onClick={() => setEStep("Comentarios")}><i className='bx bxs-message-square-x'></i> Comentários</Link></li>
+                            <li className={stepE === "Conta_Admin" ? "select" : ""}><Link to="javascript:void(0);" className="options__item" onClick={() => setEStep("Conta_Admin")}><i class="fa-solid fa-lock"></i> Conta de Admin</Link></li>
                         </ul>
 
                     </aside>
@@ -93,6 +102,7 @@ function Relatorios() {
     const [loading6, setLoading6] = useState(null)
     const [loading7, setLoading7] = useState(null)
     const [loading8, setLoading8] = useState(null)
+    const token = localStorage.getItem("token");
     const data = [
         ["Mês", "Ong"],
     ];
@@ -113,7 +123,11 @@ function Relatorios() {
 
     useEffect(() => {
         //Ongs cadastradas no mês passado
-        Axios.get("https://socieloo-back.up.railway.app/api/v1/ong/cadastramentoOngMesPassado")
+        Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOngMesPassado", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) =>{
             setLoading7((
                 <div className="load">
@@ -125,7 +139,11 @@ function Relatorios() {
             setLoading7(null)
         })
         //Ongs cadastradas este mês
-        Axios.get("https://socieloo-back.up.railway.app/api/v1/ong/cadastramentoOng")
+        Axios.get("http://localhost:8080/api/v1/ong/cadastramentoOng", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) =>{
             data.push(["Este mês", parseInt(response.data)])
             setGraf3(<Chart chartType="BarChart" width="100%" height="400px" data={data?.slice(0, 3)} options={options} />)
@@ -133,7 +151,11 @@ function Relatorios() {
 
 
         //Usuários cadastradas no mês passado
-        Axios.get("https://socieloo-back.up.railway.app/api/v1/user/cadastramentoOngMesPassado")
+        Axios.get("http://localhost:8080/api/v1/user/cadastramentoOngMesPassado", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) =>{
             setLoading8((
                 <div className="load">
@@ -145,7 +167,11 @@ function Relatorios() {
             setLoading8(null)
         })
         //Usuários cadastradas este mês
-        Axios.get("https://socieloo-back.up.railway.app/api/v1/user/cadastramentoOng")
+        Axios.get("http://localhost:8080/api/v1/user/cadastramentoOng", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) =>{
             userdata.push(["Este mês", parseInt(response.data)])
             setGraf4(<Chart chartType="BarChart" width="100%" height="400px" data={userdata?.slice(0, 3)} options={options} />) 
@@ -158,7 +184,11 @@ function Relatorios() {
                         <span class="loader"></span>
                     </div>
                 ))
-                const response = await Axios.get(`https://socieloo-back.up.railway.app/api/v1/ong/buscaRegiao/${zona}`);
+                const response = await Axios.get(`http://localhost:8080/api/v1/ong/buscaRegiao/${zona}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 const ongs = response.data;
                 regioesRef.current.push([zona, ongs, cor]);
                 setGraf1(<Chart chartType="ColumnChart" width="100%" height="400px" options={optionsLegend} data={regioesRef.current.slice(0, 6)} />);
@@ -181,7 +211,11 @@ function Relatorios() {
                         <span class="loader"></span>
                     </div>
                 ))
-                const response = await Axios.get(`https://socieloo-back.up.railway.app/api/v1/ong/buscaSegmento/${segmento}`);
+                const response = await Axios.get(`http://localhost:8080/api/v1/ong/buscaSegmento/${segmento}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 const ongs = response.data;
                 segmentosRef.current.push([segmento, ongs, cor]);
                 const options = {
@@ -201,7 +235,11 @@ function Relatorios() {
         buscaSegmento('Proteção Animal');
         buscaSegmento('Saúde');
 
-        Axios.get('https://socieloo-back.up.railway.app/api/v1/user/todosUsuarios')
+        Axios.get('http://localhost:8080/api/v1/user/todosUsuarios', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) => {
             setLoading2((
                 <div className="load">
@@ -213,7 +251,11 @@ function Relatorios() {
         }).catch((err) => console.log(err))
 
 
-        Axios.get('https://socieloo-back.up.railway.app/api/v1/ong/todasAsOngs')
+        Axios.get('http://localhost:8080/api/v1/ong/todasAsOngs', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) => {
             setLoading1((
                 <div className="load">
@@ -224,7 +266,11 @@ function Relatorios() {
             setLoading1(null)
         }).catch((err) => console.log(err))
 
-        Axios.get('https://socieloo-back.up.railway.app/api/v1/admin/todasAsUserExcluidas')
+        Axios.get('http://localhost:8080/api/v1/admin/todasAsUserExcluidas', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) => {
             setLoading3((
                 <div className="load">
@@ -236,7 +282,11 @@ function Relatorios() {
         }).catch((err) => console.log(err))
 
 
-        Axios.get('https://socieloo-back.up.railway.app/api/v1/admin/todasAsOngsExcluidas')
+        Axios.get('http://localhost:8080/api/v1/admin/todasAsOngsExcluidas', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) => {
             setLoading4((
                 <div className="load">
@@ -310,10 +360,14 @@ function Usuarios() {
     const [users, setUsers] = useState()
     const [popUpq, setPopUpq] = useState()
     const [popUpDel, setPopUpDel] = useState()
-
+    const token = window.localStorage.getItem("token")
 
     useEffect(() => {
-        Axios.get('https://socieloo-back.up.railway.app/api/v1/user')
+        Axios.get('http://localhost:8080/api/v1/user', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then((response) => {
                 setUsers(response.data)
             }).catch((err) => console.log(err))
@@ -324,15 +378,19 @@ function Usuarios() {
                 <div className="boxpopup">
                     <b><p>Deseja deletar o usuário <em>{nome}</em>?</p></b>
                     <div className="btnsDel">
-                        <a className="cancelarDel" href="javascript:void(0);" onClick={() => setPopUpq("")}>Cancelar</a>
-                        <a className="Del" href="javascript:void(0);" onClick={() => { setPopUpq(""); Delete(id) }}>Desejo deletar</a>
+                        <Link className="cancelarDel" to="javascript:void(0);" onClick={() => setPopUpq("")}>Cancelar</Link>
+                        <Link className="Del" to="javascript:void(0);" onClick={() => { setPopUpq(""); Delete(id) }}>Desejo deletar</Link>
                     </div>
                 </div>
             </section>
         ))
     }
     function Delete(id) {
-        Axios.delete("https://socieloo-back.up.railway.app/api/v1/admin/deletarUsuario/" + id)
+        Axios.delete(`http://localhost:8080/api/v1/admin/deletarUsuario/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then((response) => {
                 console.log(response.data);
                 setPopUpDel((
@@ -346,7 +404,7 @@ function Usuarios() {
                 ))
                 setTimeout(() => {
                     setPopUpDel("");
-                    window.location.pathname = "/gerenciamento"
+                    navigate("/gerenciamento")
                 }, 2000);
             })
     }
@@ -356,9 +414,9 @@ function Usuarios() {
             <div className="buscar">
                 <input type="text" placeholder='Pesquise a ong por nome' />
                 <div className="search">
-                    <a href="javascript:void(0)">
+                    <Link to="javascript:void(0)">
                         <i className="fa-solid fa-magnifying-glass"></i>
-                    </a>
+                    </Link>
                 </div>
             </div>
             <section className='users'>
@@ -370,8 +428,8 @@ function Usuarios() {
                                 <p>{user.email}</p>
                             </div>
                             <div className="actions">
-                                {/*<a href="javascript:void(0);"><i class="fa-solid fa-eye"></i>Visualizar</a>*/}
-                                <a href="javascript:void(0);" onClick={() => Deletar(user.id, user.nome)}><i class="fa-solid fa-trash-can"></i>Excluir</a>
+                                {/*<Link to="javascript:void(0);"><i class="fa-solid fa-eye"></i>Visualizar</Link>*/}
+                                <Link to="javascript:void(0);" onClick={() => Deletar(user.id, user.nome)}><i class="fa-solid fa-trash-can"></i>Excluir</Link>
                             </div>
                         </div>
                     ))
@@ -396,13 +454,20 @@ function ONGs() {
     const [newText, setNewText] = useState("")
     const [userText, setUserText] = useState("")
     const idUser = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
+
+    const navigate = useNavigate()
 
     useEffect(() => {
-        Axios.get('https://socieloo-back.up.railway.app/api/v1/ong')
+        Axios.get('http://localhost:8080/api/v1/ong')
             .then((response) => {
                 setOngs(response.data)
             }).catch((err) => console.log(err))
-        Axios.get('https://socieloo-back.up.railway.app/api/v1/ong/ongFavoritadas')
+        Axios.get('http://localhost:8080/api/v1/ong/ongFavoritadas', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then((response) => {
                 const data = response.data.map((item) => {
                     return {
@@ -412,7 +477,11 @@ function ONGs() {
                 });
                 setFavoritas(data)
             }).catch((err) => console.log(err))
-        Axios.get('https://socieloo-back.up.railway.app/api/v1/comentario')
+        Axios.get('http://localhost:8080/api/v1/comentario', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) =>{
             setComentario(response.data)
         })
@@ -424,15 +493,19 @@ function ONGs() {
                 <div className="boxpopup">
                     <b><p>Deseja deletar a ong <em>{nome}</em>?</p></b>
                     <div className="btnsDel">
-                        <a className="cancelarDel" href="javascript:void(0);" onClick={() => setPopUpq("")}>Cancelar</a>
-                        <a className="Del" href="javascript:void(0);" onClick={() => { setPopUpq(""); Delete(id) }}>Desejo deletar</a>
+                        <Link className="cancelarDel" to="javascript:void(0);" onClick={() => setPopUpq("")}>Cancelar</Link>
+                        <Link className="Del" to="javascript:void(0);" onClick={() => { setPopUpq(""); Delete(id) }}>Desejo deletar</Link>
                     </div>
                 </div>
             </section>
         ))
     }
     function Delete(id) {
-        Axios.delete("https://socieloo-back.up.railway.app/api/v1/admin/deletarOng/" + id)
+        Axios.delete(`http://localhost:8080/api/v1/admin/deletarOng/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then((response) => {
                 console.log(response.data);
                 setPopUpDel((
@@ -446,7 +519,7 @@ function ONGs() {
                 ))
                 setTimeout(() => {
                     setPopUpDel("");
-                    window.location.pathname = "/gerenciamento"
+                    navigate("/gerenciamento")
                 }, 2000);
             })
     }
@@ -459,9 +532,9 @@ function ONGs() {
             <main className="ongs-admin">
                 <aside className="menu-ongs">
                     <ul className="options__itens-ongs">
-                        <li className={conteudo === "Todas" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Todas")}><i class="fa-solid fa-shield-dog"></i> Todas</a></li>
-                        <li className={conteudo === "Favoritos" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Favoritos")}><i class="fa-solid fa-heart"></i> Favoritos</a></li>
-                        <li className={conteudo === "Comentários" ? "select" : ""}><a href="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Comentários")}><i class="fa-regular fa-comment"></i>Comentários</a></li>
+                        <li className={conteudo === "Todas" ? "select" : ""}><Link to="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Todas")}><i class="fa-solid fa-shield-dog"></i> Todas</Link></li>
+                        <li className={conteudo === "Favoritos" ? "select" : ""}><Link to="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Favoritos")}><i class="fa-solid fa-heart"></i> Favoritos</Link></li>
+                        <li className={conteudo === "Comentários" ? "select" : ""}><Link to="javascript:void(0);" className="options__item-ongs" onClick={() => setConteudo("Comentários")}><i class="fa-regular fa-comment"></i>Comentários</Link></li>
                     </ul>
                 </aside>
                 <section className="ongs-aside">
@@ -472,11 +545,11 @@ function ONGs() {
                                 <div className="buscar">
                                     <input type="text" placeholder='Pesquise a ong por nome' onChange={e=> setNome(e.target.value)}/>
                                     <div className="search">
-                                        <a href="javascript:void(0)" onClick={handleClickSearch}>
+                                        <Link to="javascript:void(0)" onClick={handleClickSearch}>
                                             <i className="fa-solid fa-magnifying-glass"></i>
-                                        </a>
+                                        </Link>
                                     </div>
-                                    <a className='todas' href='javascript:void(0);' onClick={()=> setfilterNome('Todas')}>Todas</a>
+                                    <Link className='todas' to='javascript:void(0);' onClick={()=> setfilterNome('Todas')}>Todas</Link>
                                 </div>
                                 <section className='ongs'>
                                     {
@@ -493,8 +566,8 @@ function ONGs() {
                                                     </div>
                                                 </div>
                                                 <div className="actions">
-                                                    <a href={"/ong/" + ong.id}><i class="fa-solid fa-eye"></i>Visualizar</a>
-                                                    <a  href="javascript:void(0);" onClick={() => Deletar(ong.id, ong.nome)}><i class="fa-solid fa-trash-can"></i>Excluir</a>
+                                                    <Link to={"/ong/" + ong.id}><i class="fa-solid fa-eye"></i>Visualizar</Link>
+                                                    <Link  to="javascript:void(0);" onClick={() => Deletar(ong.id, ong.nome)}><i class="fa-solid fa-trash-can"></i>Excluir</Link>
                                                 </div>
                                             </div>
                                         ))
@@ -556,19 +629,20 @@ function Comentarios() {
     )
 }
 function Conta_Admin({data}) {
-    let id = localStorage.getItem("id");
+    const id = localStorage.getItem("id");
+    const token = localStorage.getItem("token");
 
     const [admin, setAdmin] = useState({
         nome: '',
         sobrenome: '',
-        email: '',
+        login: '',
         senha: ''
     })
     useEffect(() =>{
         setAdmin({...admin,
             nome: data?.nome||"",
             sobrenome: data?.sobrenome||"",
-            email: data?.email||""
+            login: data?.login||""
         })
     }, [])
     const popBox = (
@@ -600,8 +674,8 @@ function Conta_Admin({data}) {
                 <div className="boxpopup">
                     <b><p>Tem certeza que deseja deletar sua conta?</p></b>
                     <div className="btnsDel">
-                        <a className="cancelarDel" href="javascript:void(0);" onClick={() => setPopUpq("")}>Cancelar</a>
-                        <a className="Del" href="javascript:void(0);" onClick={() => { setPopUpq(""); Delete(e)}}>Desejo deletar</a>
+                        <Link className="cancelarDel" to="javascript:void(0);" onClick={() => setPopUpq("")}>Cancelar</Link>
+                        <Link className="Del" to="javascript:void(0);" onClick={() => { setPopUpq(""); Delete(e)}}>Desejo deletar</Link>
                     </div>
                 </div>
             </section>
@@ -609,30 +683,39 @@ function Conta_Admin({data}) {
     }
     function Delete(e) {
         e.preventDefault()
-        Axios.delete("https://socieloo-back.up.railway.app/api/v1/admin/" + id)
+        Axios.delete(`http://localhost:8080/api/v1/admin/${id}` , {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) => {
             setPopUp(popBox2);
             console.log(response.data);        
             localStorage.removeItem("id");
             localStorage.removeItem("tipo");
             setTimeout(() => {
-                window.location.pathname = "/"
+                navigate("/")
             }, 2000); 
         })
     }
 
     function Alterar(e){
         e.preventDefault();
-        Axios.put("https://socieloo-back.up.railway.app/api/v1/admin/"+ id, {
+        Axios.put(`http://localhost:8080/api/v1/admin/${id}`, {
+            id: id,
             nome: admin.nome,
             sobrenome: admin.sobrenome,
-            email: admin.email,
+            login: admin.login,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         }).then((response) => {
             console.log(response.data);
             setPopUp(popBox);
             setTimeout(() => {
               setPopUp("");
-                window.location.pathname = "/gerenciamento"
+                navigate("/gerenciamento")
             }, 2000);
         }).catch((err) => console.log(err))
     }
@@ -645,13 +728,13 @@ function Conta_Admin({data}) {
                 <label for="sobrenome">Sobrenome</label>
                 <input type="text" id="sobrenome" name="sobrenome" value={admin.sobrenome} onChange={valorAdmin}/>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value={admin.email} onChange={valorAdmin}/>
+                <input type="email" id="email" name="email" value={admin.login} onChange={valorAdmin}/>
                 <button type="submit" className="button-as button-ad">Alterar</button>
                 {popUp}
                 {popUpq}
             </form>  
             <br /><br /><br />  
-            <a href="javascript:void(0);" onClick={Deletar} className='mensagem'><i class="fa-solid fa-trash-can"></i> Deletar conta</a>
+            <Link to="javascript:void(0);" onClick={Deletar} className='mensagem'><i class="fa-solid fa-trash-can"></i> Deletar conta</Link>
         </>
     )
 }

@@ -1,5 +1,6 @@
 import "./style.css";
 import React, { useState } from "react";
+import { Link, useNavigate } from 'react-router-dom'
 import Menu from "../../components/Menu/Menu";
 import Vlibras from "../../components/Vlibras/Vlibras";
 import Axios from "axios";
@@ -8,6 +9,10 @@ export default function Cadastro_Admin() {
   const idAdmin = localStorage.getItem("id");
   const [mensagem, setMensagem] = useState("");
   const [senhaFraca, setSenhaFraca] = useState("");
+
+  const token = window.localStorage.getItem("token")
+  const navigate = useNavigate()
+
   const msg = (
     <>
       <i class="fa-solid fa-triangle-exclamation"></i>Preencha todos os campos
@@ -30,7 +35,7 @@ export default function Cadastro_Admin() {
   const [cadastro, setCadastro] = useState({
     nome: "",
     sobrenome: "",
-    email: "",
+    login: "",
     senha: "",
   });
   const valorCadastro = (e) => {
@@ -40,7 +45,7 @@ export default function Cadastro_Admin() {
     e.preventDefault();
     if (
       cadastro.nome !== "" &&
-      cadastro.email !== "" &&
+      cadastro.login !== "" &&
       cadastro.sobrenome !== "" &&
       cadastro.senha !== ""
     ) {
@@ -50,20 +55,25 @@ export default function Cadastro_Admin() {
         return;
       } else {
         Axios.post(
-          `https://socieloo-back.up.railway.app/api/v1/admin/${idAdmin}`,
+          `http://localhost:8080/api/v1/admin/${idAdmin}`,
           {
             nome: cadastro.nome,
             sobrenome: cadastro.sobrenome,
-            email: cadastro.email,
+            login: cadastro.login,
             senha: cadastro.senha,
           },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
         )
           .then((response) => {
             setPopUp(popBox);
             console.log(response.data);
             setTimeout(() => {
               setPopUp("");
-              window.location.pathname = "/gerenciamento";
+              navigate("/gerenciamento")
             }, 2000);
           })
           .catch((err) => console.log(err));
@@ -106,7 +116,7 @@ export default function Cadastro_Admin() {
                 <br />
                 <input
                   type="email"
-                  name="email"
+                  name="login"
                   id="email"
                   onChange={valorCadastro}
                 />

@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import Menu from '../../components/Menu/Menu';
 import Vlibras from '../../components/Vlibras/Vlibras';
 import Axios from 'axios';
+import { useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode';
 
 export default function Admin() {
     const [email, setEmail] = useState("")
@@ -10,18 +12,11 @@ export default function Admin() {
     const [error, setError] = useState(true)
     const [popUp, setPopUp] = useState("")
 
+    const navigate = useNavigate()
+
     const handleClickCadastro = e => {
         e.preventDefault() 
         const popBox = (
-            <section className="popup">
-              <div className="boxpopup">
-                <i class="fa-solid fa-circle-exclamation"></i>
-                <p>Você não é um administrador!</p>
-                <div className="progress-bar"></div>
-              </div>
-            </section>
-        )
-        const popBox2 = (
             <section className="popup">
               <div className="boxpopup">
                 <i class="fa-solid fa-circle-check"></i>
@@ -31,24 +26,20 @@ export default function Admin() {
             </section>
         )
  
-        Axios.post(`https://socieloo-back.up.railway.app/api/v1/login`, {
+        Axios.post(`http://localhost:8080/api/v1/admin/login`, {
             senha: senha,
-            email: email
+            login: email
         }).then((response) => {
-            if(response.data.role === "ADMIN"){
-                setPopUp(popBox2);
-                localStorage.removeItem("id")
-                const id = response.data.id
+            const { token } = response.data
+            if(token){
+                setPopUp(popBox);
+                const { id } = jwtDecode(token)
                 localStorage.setItem("id", id)
+                localStorage.setItem("token", token)
                 localStorage.setItem("tipo", "admin");
                 setTimeout(() => {
-                    window.location.pathname = "/gerenciamento"
+                    navigate("/gerenciamento")
                 }, 1000);
-            }else{
-                setPopUp(popBox);
-                setTimeout(() => {
-                    window.location.pathname = "/login"
-                }, 2000);
             }
         }, (err) => {
             setError(false)

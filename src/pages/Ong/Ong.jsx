@@ -10,6 +10,7 @@ export default function Ong() {
     const { id } = useParams()
     const idUser = localStorage.getItem("id")
     const tipo = localStorage.getItem("tipo")
+    const token = localStorage.getItem("token")
     const [ong, setOng] = useState(id != null ? true : false);
     const [data, setData] = useState()
     const [map, setMap] = useState(<p>...</p>)
@@ -17,12 +18,11 @@ export default function Ong() {
     const [favoritos, setFavoritos] = useState("")
 
     useEffect(() => {
-        console.log(id);
-        Axios.get("https://socieloo-back.up.railway.app/api/v1/ong/" + id)
+        Axios.get("http://localhost:8080/api/v1/ong/" + id)
             .then((response) => {
                 setOng(true)
                 setData(response.data)
-                Axios.get("https://socieloo-back.up.railway.app/api/v1/ong/ongFavoritadas")
+                Axios.get("http://localhost:8080/api/v1/ong/ongFavoritadas")
                 .then((res) => {
                     const result = res.data.find(item => item[0] === response.data.nome);
                     setFavoritos(result[1])
@@ -31,7 +31,11 @@ export default function Ong() {
                 setOng(false)
                 console.log(err);
             })
-            Axios.get(`https://socieloo-back.up.railway.app/api/v1/user/${idUser}`)
+            Axios.get(`http://localhost:8080/api/v1/user/${idUser}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             .then((response) =>{
                 var favoritos = response.data.favoritos
                 const ongFav = favoritos.find(element => element == id);
@@ -59,7 +63,11 @@ export default function Ong() {
         Avaliar: <Avaliar step={step} setStep={setStep} data={data} id={id} />,
     }
     function Favoritar(){
-        Axios.get(`https://socieloo-back.up.railway.app/api/v1/user/${idUser}`)
+        Axios.get(`http://localhost:8080/api/v1/user/${idUser}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) =>{
             var favoritos = response.data.favoritos
             const ongPage = favoritos.find(element => element == id);
@@ -73,8 +81,13 @@ export default function Ong() {
                 setFavorito(true)
             }
            
-            Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${idUser}`, {
+            Axios.put(`http://localhost:8080/api/v1/user/${idUser}`, {
+                ...response.data,
                 favoritos: favoritos
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
             .then((response) =>{
                 console.log(favoritos);
@@ -111,7 +124,7 @@ export default function Ong() {
                         <div className="btn_favoritar">
                             <label htmlFor="favorito" className="check">{favoritos} Favoritos<i class="fa-regular fa-heart"></i></label>
                         </div> 
-                        : tipo === 'usuario' ?
+                        : tipo === 'user' ?
                         <div className="btn_favoritar">
                             <input type="checkbox" name="favorito" id="favorito" checked={favorito}/>
                             <label htmlFor="favorito" className={favorito == true ? "check" : "notcheck"} onClick={Favoritar} ><i class="fa-regular fa-heart"></i>Favoritar</label>
@@ -149,7 +162,7 @@ function OngInfo({ ong, step, setStep, data, id, map }) {
                             <br />
                             <div className="bank">
                                 <span>Email:</span>
-                                <p>{data?.email}</p>
+                                <p>{data?.login}</p>
                             </div>
                             <br />
                             <div className="bank">
@@ -253,9 +266,10 @@ function Comentarios({ step, setStep, data, id }) {
     const [userText, setUserText] = useState("")
     const idUser = localStorage.getItem("id")
     const tipo = localStorage.getItem("tipo")
+    const token = localStorage.getItem("token")
 
     useEffect(() =>{
-        Axios.get('https://socieloo-back.up.railway.app/api/v1/comentario/todosComentarioOng/' + id)
+        Axios.get('http://localhost:8080/api/v1/comentario/todosComentarioOng/' + id)
         .then((response) =>{
             setComentario(response.data)
         })
@@ -265,7 +279,7 @@ function Comentarios({ step, setStep, data, id }) {
         e.preventDefault
         console.log(id);
         console.log(newText);
-/*         Axios.put('https://socieloo-back.up.railway.app/api/v1/comentario'+ id,{
+/*         Axios.put('http://localhost:8080/api/v1/comentario'+ id,{
             textoComentario: newText,
         }).then((response) => {
             console.log(response.data)
@@ -273,7 +287,11 @@ function Comentarios({ step, setStep, data, id }) {
         }) */
     }
     function Delete(id) {
-        Axios.delete("https://socieloo-back.up.railway.app/api/v1/user/deletaComentario/" + id)
+        Axios.delete("http://localhost:8080/api/v1/user/deletaComentario/" + id, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response) => {
             setPopUp(popBox);
             console.log(response.data);        
@@ -340,8 +358,14 @@ function Avaliar({ step, setStep, data, id }) {
     const [avaliacao, setAvaliacao] = useState()
     const idUser = localStorage.getItem("id")
     const tipo = localStorage.getItem("tipo")
+    const token = localStorage.getItem("token")
+
     useEffect(() =>{
-        Axios.get('https://socieloo-back.up.railway.app/api/v1/comentario/avaliacoes/'+ id)
+        Axios.get(`http://localhost:8080/api/v1/comentario/avaliacoes/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((response)=>{
             setAvaliacao(response.data[0])
         })
@@ -352,11 +376,15 @@ function Avaliar({ step, setStep, data, id }) {
     };
     function enviarComentario(e){
         e.preventDefault
-        Axios.post('https://socieloo-back.up.railway.app/api/v1/comentario',{
+        Axios.post('http://localhost:8080/api/v1/comentario',{
             ongId: id,
             usuarioId: idUser,
             textoComentario: text,
             avaliacao: rating,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         }).then((response) => {
             console.log(response.data)
             setStep("Comentarios")
@@ -385,7 +413,7 @@ function Avaliar({ step, setStep, data, id }) {
                     ))}
                 </ul>
             </main>
-            : tipo === "usuario" ?  
+            : tipo === "user" ?  
             <main className="main_content container">
                 <section className="section-seu-codigo container">
                     <div className="content">
@@ -397,7 +425,7 @@ function Avaliar({ step, setStep, data, id }) {
                                     
                                         <ul className="avaliacao">
                                         {[1, 2, 3, 4, 5].map((value) => (
-                                            <li className={value < rating ? "star-icon" : "star-icon ativo"} data-avaliacao="2" onClick={() => handleClick(value)}></li>
+                                            <li key={value} className={value < rating ? "star-icon" : "star-icon ativo"} data-avaliacao="2" onClick={() => handleClick(value)}></li>
                                         ))}
                                         </ul>
                                     </div>

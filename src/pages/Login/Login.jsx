@@ -3,6 +3,8 @@ import './style.css'
 import Menu from '../../components/Menu/Menu'
 import Vlibras from '../../components/Vlibras/Vlibras'
 import Axios from 'axios'
+import { jwtDecode } from 'jwt-decode'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Login() {
 
@@ -10,6 +12,9 @@ export default function Login() {
     const [senha, setSenha] = useState("")
     const [error, setError] = useState(true)
     const [popUp, setPopUp] = useState("")
+    const [login, setLogin] = useState("user")
+
+    const navigate = useNavigate()
 
     const popBox = (
         <section className="popup">
@@ -25,26 +30,26 @@ export default function Login() {
     const handleClickCadastro = e => {
         e.preventDefault() 
  
-        Axios.post(`https://socieloo-back.up.railway.app/api/v1/login`, {
+        Axios.post(`http://localhost:8080/api/v1/${login}/login`, {
             senha: senha,
-            email: email
+            login: email
         }).then((response) => {
             setPopUp(popBox)
-            const id = response.data.id
+            const { token } = response.data
+            const { id } = jwtDecode(token)
+            localStorage.removeItem("id")
+            localStorage.removeItem("tipo")
+            localStorage.removeItem("token")
             localStorage.setItem("id", id)
-            if(response.data.role === "ONG"){
-                localStorage.setItem("tipo", "ong");
+            localStorage.setItem("token", token)
+            localStorage.setItem("tipo", login);
+            if(login === "ong"){
                 setTimeout(() => {
-                    window.location.pathname = `/ong/${id}`
+                    navigate(`/ong/${id}`)
                 }, 1000);
-            }else if(response.data.role === "USUARIO") {
-                localStorage.setItem("tipo", "usuario");
+            }else if(login === "user") {
                 setTimeout(() => {
-                    window.location.pathname = "/"
-                }, 1000);
-            }else if(response.data.role === "ADMIN"){
-                setTimeout(() => {
-                    window.location.pathname = "/admin"
+                    navigate("/")
                 }, 1000);
             }
  
@@ -65,7 +70,7 @@ export default function Login() {
                             <div className="form__login">
                                 <form id="login" action="javascript:void(0)" onSubmit={handleClickCadastro}>
                                     <h2>Bem vindo!</h2>
-                                    <p>Faça login na sua conta</p>
+                                    <p>Faça login na sua conta de {login === "user" ? "usuário" : "ong"}</p>
                                     <br/>
                                     <label for="email">E-mail:</label><br />
                                     <input type="email" name="email" id="email" onChange={(e) => {
@@ -82,7 +87,7 @@ export default function Login() {
                                     <p className={error ? 'error' : 'show'}>Email ou senha inválidos</p>
                                     <input type="submit" value="Entrar" id="entrar" /><br />
                                     {/*<button id="google"><img src='./imgs/google.png' alt="" /> Entrar com o Google</button>*/}
-                                    <p className="cadastro-login">Não tem conta? <a href="/cadastro-ong">Cadastre-se</a></p>
+                                    <p className="cadastro-login">Não tem conta? <Link to={`/cadastro-${login === "ong" ? "ong" : "usuario"}`}>Cadastre-se</Link></p>
                                 </form>
                             </div>
                         </div>
@@ -90,6 +95,10 @@ export default function Login() {
                 }
                 <img src="../imgs/caixaDoacao.png" alt="" />
             {popUp}
+                <div className="logins">
+                    <div className={login == "user" ? "link ativado" : "link"}><span onClick={() => setLogin("user")}><i className="fa-solid fa-user"></i> Usuário</span><br /></div>
+                    <div className={login == "ong" ? "link ativado" : "link"}><span onClick={() => setLogin("ong")}><i className="fa-solid fa-handshake-angle"></i>Ong's</span><br /></div>
+                </div>
             </main>
             <Vlibras />
         </>
