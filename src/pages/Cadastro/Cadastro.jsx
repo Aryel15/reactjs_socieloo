@@ -187,7 +187,6 @@ function ValidaEmail({ cadastro }) {
     e.preventDefault()
     const codigoArmazenado = sessionStorage.getItem("codigo");
     if (codigo === codigoArmazenado) {
-      console.log(cadastro)
       window.sessionStorage.removeItem("codigo")
       Axios.post("https://socieloo-back.up.railway.app/api/v1/ong", {
         nome: cadastro.nome,

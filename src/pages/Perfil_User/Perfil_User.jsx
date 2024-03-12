@@ -31,7 +31,6 @@ export default function Perfil_User() {
             })
             .then((response) => {
                 setData(response.data);
-                console.log(response.data);
             })
         }
     }, []) 
@@ -70,7 +69,6 @@ function Editar_Perfil({data, id, token}){
     })
 
     const handleClickEditar_Perfil = e =>{
-        console.log(data);
         e.preventDefault()
         Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${id}`,{
             id: data.id,
@@ -88,7 +86,6 @@ function Editar_Perfil({data, id, token}){
         }).then((response) => {
             setPopUp(popBox);
             setTimeout(() => {
-                console.log(response)
                 setPopUp("");
             }, 2000); 
         }).catch((err) => console.log(err))
@@ -128,7 +125,6 @@ function Alterar_Email({ stepE, setEStep, data, id, token }) {
     const navigate = useNavigate()
     const handleClickAlterarEmail = e =>{
         e.preventDefault()
-        console.log(email);
         Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${id}`, {
             login: email,
         }, {
@@ -138,7 +134,6 @@ function Alterar_Email({ stepE, setEStep, data, id, token }) {
         }).then((response) => {
             
             setPopUp(popBox);
-            console.log(response);
             setTimeout(() => {
                 setPopUp("")
                 navigate("/perfil")
@@ -224,7 +219,6 @@ function Alterar_Senha({ data, id, token}) {
                         Authorization: `Bearer ${token}`
                     }
                 }).then((response) => {
-                    console.log(response);
                     setPopUp(popBox);
                     setTimeout(() => {
                         setPopUp("");
@@ -283,7 +277,6 @@ function Deletar_Conta({data, id, token }) {
         })
         .then((response) => {
             setPopUp(popBox);
-            console.log(response.data);        
             localStorage.removeItem("id");
             localStorage.removeItem("tipo");
             setTimeout(() => {

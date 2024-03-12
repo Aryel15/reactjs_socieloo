@@ -22,7 +22,6 @@ export default function Perfil_Admin() {
             })
             .then((response) => {
                 setData(response.data);
-                console.log(response.data);
             })
         }
     }, [])
@@ -392,7 +391,6 @@ function Usuarios() {
             }
         })
             .then((response) => {
-                console.log(response.data);
                 setPopUpDel((
                     <section className="popup">
                         <div className="boxpopup">
@@ -507,7 +505,6 @@ function ONGs() {
             }
         })
             .then((response) => {
-                console.log(response.data);
                 setPopUpDel((
                     <section className="popup">
                         <div className="boxpopup">
@@ -690,7 +687,6 @@ function Conta_Admin({data}) {
         })
         .then((response) => {
             setPopUp(popBox2);
-            console.log(response.data);        
             localStorage.removeItem("id");
             localStorage.removeItem("tipo");
             setTimeout(() => {
@@ -711,7 +707,6 @@ function Conta_Admin({data}) {
                 Authorization: `Bearer ${token}`
             }
         }).then((response) => {
-            console.log(response.data);
             setPopUp(popBox);
             setTimeout(() => {
               setPopUp("");

@@ -75,7 +75,6 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
           login: cadastro.login,
           senha: cadastro.senha,
         }).then((response) => {
-          console.log(response.data);
           const { id, token } = response.data
           localStorage.removeItem("tipo")
           localStorage.removeItem("id")
@@ -105,7 +104,6 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
         }
       }else{
         setMensagem(msg)
-        console.log(cadastro);
       }
   }
   const senhaForte = (senha) => {
@@ -157,7 +155,6 @@ export function Etapa1({step, setStep, cadastro, valorCadastro}){
         setStep(step + 1)
       }else{
         setMensagem(msg)
-        console.log(cadastro);
       }
   }
   return(
@@ -323,7 +320,6 @@ export function Etapa4({step, setStep, cadastro}) {
   const codigoArmazenado = sessionStorage.getItem("codigo");
   function handleClickCadastro(){
     if (codigo == codigoArmazenado) {
-      console.log(cadastro)
       window.sessionStorage.removeItem("codigo")
         Axios.post("https://socieloo-back.up.railway.app/api/v1/user", {
           nome: cadastro.nome,
@@ -331,7 +327,6 @@ export function Etapa4({step, setStep, cadastro}) {
           login: cadastro.login,
           senha: cadastro.senha,
         }).then((response) => {
-          console.log(response.data);
           localStorage.removeItem("tipo")
           localStorage.removeItem("id")
           localStorage.setItem("id", response.data.id);

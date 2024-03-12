@@ -41,7 +41,6 @@ export default function Ongs() {
       setRegiao(null)
       setSegmento(null)
     }
-    console.log(segmento);
 
   }, [regiao, segmento, tipo])
 

@@ -70,7 +70,6 @@ export default function Cadastro_Admin() {
         )
           .then((response) => {
             setPopUp(popBox);
-            console.log(response.data);
             setTimeout(() => {
               setPopUp("");
               navigate("/gerenciamento")
@@ -81,7 +80,6 @@ export default function Cadastro_Admin() {
     } else {
       setSenhaFraca("");
       setMensagem(msg);
-      console.log(cadastro);
     }
   };
   return (

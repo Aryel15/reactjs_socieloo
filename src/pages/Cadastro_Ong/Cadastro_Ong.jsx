@@ -97,7 +97,6 @@ export function Etapa1({ step, setStep, cadastro, valorCadastro }) {
           setStep(step + 1)
         }else{
           setMensagem(msg)
-          console.log(cadastro);
         }
     }
     const Valida = ()=>{
@@ -234,7 +233,6 @@ function Etapa2({ step, setStep, cadastro, valorCadastro }) {
               setStep(step + 1)
           }else{
             setMensagem(msg)
-            console.log(cadastro);
           }
       }
       const Valida = ()=>{
@@ -399,7 +397,6 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
       for (let campo in cadastro) {
         if (cadastro[campo] === '' || cadastro[campo] === null) {
           setPopUp(popBox);
-          console.log(cadastro);
           setTimeout(() => {
             setPopUp("");
           }, 2000); 
@@ -428,7 +425,6 @@ function Etapa5({ step, setStep, cadastro, senhaForte, valorCadastro, gerarCodig
       if (cadastro.senha === '' || senhaDiferente === '') {
         setMensagem(msg);
         console.log("não tem senha");
-        console.log(cadastro);
         return;
       }
     
@@ -543,7 +539,6 @@ function ValidaEmail({ cadastro }) {
       e.preventDefault()
       const codigoArmazenado = sessionStorage.getItem("codigo");
       if (codigo === codigoArmazenado) {
-        console.log(cadastro)
         window.sessionStorage.removeItem("codigo")
         Axios.post("https://socieloo-back.up.railway.app/api/v1/ong", {
           nome: cadastro.nome,
@@ -570,7 +565,6 @@ function ValidaEmail({ cadastro }) {
           localStorage.setItem("id", id);
           localStorage.setItem("tipo", "ong");
           setPopUp(popBox);
-          console.log(cadastro);
           setTimeout(() => {
             window.location.pathname = `/ong/${id}`
           }, 2000); 

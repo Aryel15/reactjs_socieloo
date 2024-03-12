@@ -28,12 +28,10 @@ export default function Perfil_Ong() {
             Axios.get(`https://socieloo-back.up.railway.app/api/v1/ong/${id}`)
                 .then((response) => {
                     setData(response.data);
-                    console.log(response.data);
                     Axios.get("https://socieloo-back.up.railway.app/api/v1/ong/ongFavoritadas")
                     .then((res) => {
                         const result = res.data.find(item => item[0] === response.data.nome);
                         setFavoritos(result[1])
-                        console.log(result[1]);
                         
                     })
                 })
@@ -132,7 +130,6 @@ function Editar_Perfil({ stepE, setEStep, data, id, favoritos }) {
             }
         }).then((response) => {
             setPopUp(popBox);
-            console.log(response);
             navigate("/gerenciamento-ong")
         }).catch((err) => console.log(err))
     }
@@ -254,7 +251,6 @@ function Alterar_login({ stepE, setEStep, data, id }) {
     )
     const handleClickAlterarlogin = e => {
         e.preventDefault()
-        console.log(login);
         Axios.put(`https://socieloo-back.up.railway.app/api/v1/ong/${id}`, {
             nome: data.nome,
             telefone: data.telefone,
@@ -278,7 +274,6 @@ function Alterar_login({ stepE, setEStep, data, id }) {
         }).then((response) => {
             
             setPopUp(popBox);
-            console.log(response);
             setTimeout(() => {
                 setPopUp("")
                 navigate("/gerenciamento-ong")
@@ -372,7 +367,6 @@ function Alterar_Senha({ stepE, setEStep, data, id }) {
                         Authorization: `Bearer ${token}`
                     }
                 }).then((response) => {
-                    console.log(response);
                     setPopUp(popBox);
                     setTimeout(() => {
                         setPopUp("");
@@ -434,7 +428,6 @@ function Deletar_Conta({ stepE, setEStep, data, id }) {
         })
             .then((response) => {
                 setPopUp(popBox);
-                console.log(response.data);
                 localStorage.removeItem("id");
                 localStorage.removeItem("tipo");
                 setTimeout(() => {

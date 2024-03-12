@@ -14,7 +14,6 @@ export default function RemoveCard(props) {
         .then((response) =>{
             var favoritos = response.data.favoritos
             favoritos.splice(favoritos.indexOf(parseInt(idOng)), 1);
-            console.log(favoritos);
            
             Axios.put(`https://socieloo-back.up.railway.app/api/v1/user/${id}`, {
                 favoritos: favoritos
@@ -24,8 +23,7 @@ export default function RemoveCard(props) {
                 }
             })
             .then((response) =>{
-                console.log(favoritos);
-                console.log(response.data);
+                console.log("Requisição feita");
             })
     
         })

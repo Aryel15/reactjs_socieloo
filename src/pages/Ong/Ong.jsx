@@ -73,11 +73,9 @@ export default function Ong() {
             const ongPage = favoritos.find(element => element == id);
             if (ongPage == id) {
                 favoritos.splice(favoritos.indexOf(parseInt(id)), 1);
-                console.log(favoritos);
                 setFavorito(false)
             }else{
                 favoritos.push(id)
-                console.log(favoritos);
                 setFavorito(true)
             }
            
@@ -90,8 +88,7 @@ export default function Ong() {
                 }
             })
             .then((response) =>{
-                console.log(favoritos);
-                console.log(response.data);
+                console.log("Requisição feita");
             })
     
         })
@@ -277,12 +274,9 @@ function Comentarios({ step, setStep, data, id }) {
     }, [])
     function Salvar(e, id){
         e.preventDefault
-        console.log(id);
-        console.log(newText);
 /*         Axios.put('https://socieloo-back.up.railway.app/api/v1/comentario'+ id,{
             textoComentario: newText,
         }).then((response) => {
-            console.log(response.data)
             setEditar(false)
         }) */
     }
@@ -294,7 +288,6 @@ function Comentarios({ step, setStep, data, id }) {
         })
         .then((response) => {
             setPopUp(popBox);
-            console.log(response.data);        
             setTimeout(() => {
                 window.location.reload();
             }, 2000); 
@@ -386,7 +379,6 @@ function Avaliar({ step, setStep, data, id }) {
                 Authorization: `Bearer ${token}`
             }
         }).then((response) => {
-            console.log(response.data)
             setStep("Comentarios")
         })
     }
